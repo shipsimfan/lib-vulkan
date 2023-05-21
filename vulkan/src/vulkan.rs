@@ -7,15 +7,26 @@ use crate::{
     get_instance_proc_addr, get_instance_proc_addr_opt, Loader, Result, VkExtensionProperties,
     VkInstance, VkInstanceCreateInfo, VkLayerProperties, VkResult, VkVersion,
 };
-use std::ptr::{null, null_mut};
+use native::NativeLoader;
+use std::{
+    ptr::{null, null_mut},
+    sync::Arc,
+};
 
-pub struct Vulkan<L: Loader> {
-    loader: L,
+pub struct Vulkan<L: Loader = NativeLoader> {
+    loader: Arc<L>,
 
     create_instance: VkCreateInstance,
     enumerate_instance_layer_properties: VkEnumerateInstanceLayerProperties,
     enumerate_instance_extension_properties: VkEnumerateInstanceExtensionProperties,
     enumerate_instance_version: Option<VkEnumerateInstanceVersion>,
+}
+
+impl Vulkan<NativeLoader> {
+    pub fn new_native() -> Result<Self> {
+        let loader = NativeLoader::new().ok_or(VkResult::ErrorIncompatibleDriver)?;
+        Self::new(loader)
+    }
 }
 
 impl<L: Loader> Vulkan<L> {
@@ -32,7 +43,7 @@ impl<L: Loader> Vulkan<L> {
             get_instance_proc_addr_opt!(loader, None, "vkEnumerateInstanceVersion");
 
         Ok(Vulkan {
-            loader,
+            loader: Arc::new(loader),
             create_instance,
             enumerate_instance_layer_properties,
             enumerate_instance_extension_properties,
@@ -40,10 +51,10 @@ impl<L: Loader> Vulkan<L> {
         })
     }
 
-    pub fn create_instance(&self, create_info: &VkInstanceCreateInfo) -> Result<VkInstance> {
+    pub fn create_instance(&self, create_info: &VkInstanceCreateInfo) -> Result<VkInstance<L>> {
         let mut vk_instance = None;
         match (self.create_instance)(create_info, null(), &mut vk_instance) {
-            VkResult::Success => VkInstance::new(vk_instance.unwrap(), &self.loader),
+            VkResult::Success => VkInstance::new(vk_instance.unwrap(), self.loader.clone()),
             result => Err(result),
         }
     }

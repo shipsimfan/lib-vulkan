@@ -13,17 +13,6 @@ macro_rules! assert_null_terminated {
     };
 }
 
-macro_rules! assert_null_terminated_list {
-    ($list: expr) => {
-        #[cfg(debug_assertions)]
-        {
-            for item in $list {
-                $crate::assert_null_terminated!(item)
-            }
-        }
-    };
-}
-
 macro_rules! get_instance_proc_addr_opt {
     ($loader: expr, $instance: expr, $name: literal) => {
         $loader
@@ -39,7 +28,4 @@ macro_rules! get_instance_proc_addr {
     };
 }
 
-pub(crate) use {
-    assert_null_terminated, assert_null_terminated_list, get_instance_proc_addr,
-    get_instance_proc_addr_opt,
-};
+pub(crate) use {assert_null_terminated, get_instance_proc_addr, get_instance_proc_addr_opt};

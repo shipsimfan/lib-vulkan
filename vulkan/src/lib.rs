@@ -13,12 +13,10 @@ pub use bindings::{
 };
 pub use instance::VkInstance;
 pub use loader::Loader;
+pub use native::NativeLoader;
 pub use version::{
     VkVersion, VK_API_VERSION_1_0, VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3,
     VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,
 };
-
-#[cfg(feature = "native_loader")]
-pub use native::NativeLoader;
 
 pub type Result<T> = std::result::Result<T, VkResult>;

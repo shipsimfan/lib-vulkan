@@ -1,7 +1,6 @@
 #[test]
 pub fn enumerate_layers() {
-    let loader = native::NativeLoader::new().unwrap();
-    let vulkan = vulkan::Vulkan::new(loader).unwrap();
+    let vulkan = vulkan::Vulkan::new_native().unwrap();
 
     match vulkan.enumerate_instance_version() {
         Ok(version) => println!("This system supports Vulkan {}", version),
