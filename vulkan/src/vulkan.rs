@@ -1,4 +1,5 @@
 use crate::{
+    assert_null_terminated,
     bindings::{
         VkCreateInstance, VkEnumerateInstanceExtensionProperties,
         VkEnumerateInstanceLayerProperties, VkEnumerateInstanceVersion,
@@ -77,6 +78,10 @@ impl<L: Loader> Vulkan<L> {
         &self,
         layer_name: Option<&str>,
     ) -> Result<Vec<VkExtensionProperties>> {
+        if let Some(layer_name) = layer_name {
+            assert_null_terminated!(layer_name);
+        }
+
         let p_layer_name = layer_name.map(|str| str.as_ptr()).unwrap_or(null());
 
         let mut count = 0;

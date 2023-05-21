@@ -1,7 +1,10 @@
 mod bindings;
 mod instance;
+mod macros;
 mod version;
 mod vulkan;
+
+pub(self) use macros::*;
 
 pub use crate::vulkan::Vulkan;
 pub use bindings::{

@@ -1,4 +1,4 @@
-use crate::{bindings::VkStructureType, VkVersion};
+use crate::{assert_null_terminated, bindings::VkStructureType, VkVersion};
 use std::{
     ffi::{c_void, CStr},
     marker::PhantomData,
@@ -25,6 +25,14 @@ impl<'a> VkApplicationInfo<'a> {
         engine_version: u32,
         api_version: VkVersion,
     ) -> Self {
+        if let Some(application_name) = application_name {
+            assert_null_terminated!(application_name);
+        }
+
+        if let Some(engine_name) = engine_name {
+            assert_null_terminated!(engine_name);
+        }
+
         VkApplicationInfo {
             s_type: VkStructureType::ApplicationInfo,
             p_next: None,

@@ -1,5 +1,5 @@
 use super::{VkApplicationInfo, VkInstanceCreateFlags};
-use crate::bindings::VkStructureType;
+use crate::{assert_null_terminated_list, bindings::VkStructureType};
 use std::{ffi::c_void, ptr::NonNull};
 
 #[repr(C)]
@@ -21,6 +21,9 @@ impl<'a> VkInstanceCreateInfo<'a> {
         enabled_layers: &'a [&'a str],
         enabled_extensions: &'a [&'a str],
     ) -> Self {
+        assert_null_terminated_list!(enabled_layers);
+        assert_null_terminated_list!(enabled_extensions);
+
         VkInstanceCreateInfo {
             s_type: VkStructureType::InstanceCreateInfo,
             p_next: None,
