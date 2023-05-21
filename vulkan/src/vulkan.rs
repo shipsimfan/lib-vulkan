@@ -1,6 +1,9 @@
 use crate::{
-    bindings::{VkEnumerateInstanceExtensionProperties, VkEnumerateInstanceLayerProperties},
-    Loader, Result, VkExtensionProperties, VkLayerProperties, VkResult,
+    bindings::{
+        VkEnumerateInstanceExtensionProperties, VkEnumerateInstanceLayerProperties,
+        VkEnumerateInstanceVersion,
+    },
+    Loader, Result, VkExtensionProperties, VkLayerProperties, VkResult, VkVersion,
 };
 use std::ptr::{null, null_mut};
 
@@ -9,6 +12,7 @@ pub struct Vulkan<L: Loader> {
 
     enumerate_instance_layer_properties: VkEnumerateInstanceLayerProperties,
     enumerate_instance_extension_properties: VkEnumerateInstanceExtensionProperties,
+    enumerate_instance_version: Option<VkEnumerateInstanceVersion>,
 }
 
 impl<L: Loader> Vulkan<L> {
@@ -25,10 +29,15 @@ impl<L: Loader> Vulkan<L> {
             )
         };
 
+        let enumerate_instance_version = loader
+            .get_instance_proc_addr(None, "vkEnumerateInstanceVersion\0")
+            .map(|function| unsafe { std::mem::transmute(function) });
+
         Some(Vulkan {
             _loader: loader,
             enumerate_instance_layer_properties,
             enumerate_instance_extension_properties,
+            enumerate_instance_version,
         })
     }
 
@@ -72,6 +81,18 @@ impl<L: Loader> Vulkan<L> {
                 Ok(layers)
             }
             result => Err(result),
+        }
+    }
+
+    pub fn enumerate_instance_version(&self) -> Result<VkVersion> {
+        if let Some(enumerate_instance_version) = self.enumerate_instance_version {
+            let mut version = VkVersion::new(0, 0, 0, 0);
+            match (enumerate_instance_version)(&mut version) {
+                VkResult::Success => Ok(version),
+                result => Err(result),
+            }
+        } else {
+            Err(VkResult::ErrorIncompatibleDriver)
         }
     }
 }

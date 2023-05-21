@@ -1,4 +1,4 @@
-use crate::{bindings::VkResult, VkExtensionProperties, VkLayerProperties};
+use crate::{bindings::VkResult, VkExtensionProperties, VkLayerProperties, VkVersion};
 
 pub type VkEnumerateInstanceLayerProperties = extern "system" fn(
     p_property_count: *mut u32,
@@ -10,3 +10,5 @@ pub type VkEnumerateInstanceExtensionProperties = extern "system" fn(
     p_property_count: *mut u32,
     p_properties: *mut VkExtensionProperties,
 ) -> VkResult;
+
+pub type VkEnumerateInstanceVersion = extern "system" fn(p_api_version: *mut VkVersion) -> VkResult;
