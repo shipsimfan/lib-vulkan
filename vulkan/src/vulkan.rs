@@ -4,13 +4,13 @@ use crate::{
         VkCreateInstance, VkEnumerateInstanceExtensionProperties,
         VkEnumerateInstanceLayerProperties, VkEnumerateInstanceVersion,
     },
-    Loader, Result, VkExtensionProperties, VkInstance, VkInstanceCreateInfo, VkLayerProperties,
-    VkResult, VkVersion,
+    get_instance_proc_addr, get_instance_proc_addr_opt, Loader, Result, VkExtensionProperties,
+    VkInstance, VkInstanceCreateInfo, VkLayerProperties, VkResult, VkVersion,
 };
 use std::ptr::{null, null_mut};
 
 pub struct Vulkan<L: Loader> {
-    _loader: L,
+    loader: L,
 
     create_instance: VkCreateInstance,
     enumerate_instance_layer_properties: VkEnumerateInstanceLayerProperties,
@@ -19,29 +19,20 @@ pub struct Vulkan<L: Loader> {
 }
 
 impl<L: Loader> Vulkan<L> {
-    pub fn new(loader: L) -> Option<Self> {
-        let create_instance = unsafe {
-            std::mem::transmute(loader.get_instance_proc_addr(None, "vkCreateInstance\0")?)
-        };
+    pub fn new(loader: L) -> Result<Self> {
+        let create_instance = get_instance_proc_addr!(loader, None, "vkCreateInstance")?;
 
-        let enumerate_instance_layer_properties = unsafe {
-            std::mem::transmute(
-                loader.get_instance_proc_addr(None, "vkEnumerateInstanceLayerProperties\0")?,
-            )
-        };
+        let enumerate_instance_layer_properties =
+            get_instance_proc_addr!(loader, None, "vkEnumerateInstanceLayerProperties")?;
 
-        let enumerate_instance_extension_properties = unsafe {
-            std::mem::transmute(
-                loader.get_instance_proc_addr(None, "vkEnumerateInstanceExtensionProperties\0")?,
-            )
-        };
+        let enumerate_instance_extension_properties =
+            get_instance_proc_addr!(loader, None, "vkEnumerateInstanceExtensionProperties")?;
 
-        let enumerate_instance_version = loader
-            .get_instance_proc_addr(None, "vkEnumerateInstanceVersion\0")
-            .map(|function| unsafe { std::mem::transmute(function) });
+        let enumerate_instance_version =
+            get_instance_proc_addr_opt!(loader, None, "vkEnumerateInstanceVersion");
 
-        Some(Vulkan {
-            _loader: loader,
+        Ok(Vulkan {
+            loader,
             create_instance,
             enumerate_instance_layer_properties,
             enumerate_instance_extension_properties,
@@ -52,7 +43,7 @@ impl<L: Loader> Vulkan<L> {
     pub fn create_instance(&self, create_info: &VkInstanceCreateInfo) -> Result<VkInstance> {
         let mut vk_instance = None;
         match (self.create_instance)(create_info, null(), &mut vk_instance) {
-            VkResult::Success => Ok(VkInstance::new(vk_instance.unwrap())),
+            VkResult::Success => VkInstance::new(vk_instance.unwrap(), &self.loader),
             result => Err(result),
         }
     }

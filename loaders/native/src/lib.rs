@@ -34,6 +34,7 @@ impl Loader for NativeLoader {
         instance: Option<NonNull<c_void>>,
         name: &str,
     ) -> Option<extern "system" fn()> {
+        debug_assert_eq!(name.as_bytes()[name.len() - 1], 0);
         (self.get_instance_proc_addr)(instance, name.as_ptr())
     }
 }
