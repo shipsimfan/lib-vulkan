@@ -1,17 +1,15 @@
-[package]
-name = "vulkan"
-version = "0.1.0"
-description = "Vulkan wrapper library"
-
-authors = { workspace = true }
-edition = { workspace = true }
-license = { workspace = true }
-repository = { workspace = true }
-
 [workspace]
+default-members = ["vulkan"]
+
+members = ["vulkan", "loader", "loaders/native"]
 
 [workspace.package]
 authors = ["Lance Hart <me@lancehart.ca>"]
 edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/shipsimfan/lib-vulkan"
+
+[workspace.dependencies]
+loader = { path = "loader" }
+
+native = { path = "loaders/native" }

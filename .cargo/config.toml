@@ -1,2 +1,2 @@
 [env]
-VK_LOADER_DEBUG = "all"
+VK_LOADER_DEBUG = "error,warn"
