@@ -1,4 +1,4 @@
-use crate::{bindings::VK_MAX_EXTENSION_NAME_SIZE, VkVersion};
+use crate::bindings::VK_MAX_EXTENSION_NAME_SIZE;
 
 #[repr(C)]
 pub struct VkExtensionProperties {

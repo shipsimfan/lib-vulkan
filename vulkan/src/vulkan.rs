@@ -1,15 +1,17 @@
 use crate::{
     bindings::{
-        VkEnumerateInstanceExtensionProperties, VkEnumerateInstanceLayerProperties,
-        VkEnumerateInstanceVersion,
+        VkCreateInstance, VkEnumerateInstanceExtensionProperties,
+        VkEnumerateInstanceLayerProperties, VkEnumerateInstanceVersion,
     },
-    Loader, Result, VkExtensionProperties, VkLayerProperties, VkResult, VkVersion,
+    Loader, Result, VkExtensionProperties, VkInstance, VkInstanceCreateInfo, VkLayerProperties,
+    VkResult, VkVersion,
 };
 use std::ptr::{null, null_mut};
 
 pub struct Vulkan<L: Loader> {
     _loader: L,
 
+    create_instance: VkCreateInstance,
     enumerate_instance_layer_properties: VkEnumerateInstanceLayerProperties,
     enumerate_instance_extension_properties: VkEnumerateInstanceExtensionProperties,
     enumerate_instance_version: Option<VkEnumerateInstanceVersion>,
@@ -17,6 +19,10 @@ pub struct Vulkan<L: Loader> {
 
 impl<L: Loader> Vulkan<L> {
     pub fn new(loader: L) -> Option<Self> {
+        let create_instance = unsafe {
+            std::mem::transmute(loader.get_instance_proc_addr(None, "vkCreateInstance\0")?)
+        };
+
         let enumerate_instance_layer_properties = unsafe {
             std::mem::transmute(
                 loader.get_instance_proc_addr(None, "vkEnumerateInstanceLayerProperties\0")?,
@@ -35,10 +41,19 @@ impl<L: Loader> Vulkan<L> {
 
         Some(Vulkan {
             _loader: loader,
+            create_instance,
             enumerate_instance_layer_properties,
             enumerate_instance_extension_properties,
             enumerate_instance_version,
         })
+    }
+
+    pub fn create_instance(&self, create_info: &VkInstanceCreateInfo) -> Result<VkInstance> {
+        let mut vk_instance = None;
+        match (self.create_instance)(create_info, null(), &mut vk_instance) {
+            VkResult::Success => Ok(VkInstance::new(vk_instance.unwrap())),
+            result => Err(result),
+        }
     }
 
     pub fn enumerate_instance_layer_properties(&self) -> Result<Vec<VkLayerProperties>> {

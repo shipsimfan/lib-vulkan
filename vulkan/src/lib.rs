@@ -1,9 +1,14 @@
 mod bindings;
+mod instance;
 mod version;
 mod vulkan;
 
 pub use crate::vulkan::Vulkan;
-pub use bindings::{VkExtensionProperties, VkLayerProperties, VkResult};
+pub use bindings::{
+    VkApplicationInfo, VkExtensionProperties, VkInstanceCreateFlagBits, VkInstanceCreateFlags,
+    VkInstanceCreateInfo, VkLayerProperties, VkResult,
+};
+pub use instance::VkInstance;
 pub use loader::Loader;
 pub use version::{
     VkVersion, VK_API_VERSION_1_0, VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3,
