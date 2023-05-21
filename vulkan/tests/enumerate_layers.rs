@@ -14,5 +14,28 @@ pub fn enumerate_layers() {
             layer.implementation_version(),
             layer.spec_version()
         );
+
+        let extensions = vulkan
+            .enumerate_instance_extension_properties(Some(layer.layer_name()))
+            .unwrap();
+        for extension in extensions {
+            println!(
+                "    Extension: {} v{}",
+                extension.extension_name(),
+                extension.spec_version()
+            );
+        }
+    }
+
+    let extensions = vulkan
+        .enumerate_instance_extension_properties(None)
+        .unwrap();
+    println!("\nFound {} base extensions:", extensions.len());
+    for extension in extensions {
+        println!(
+            "  Extension: {} v{}",
+            extension.extension_name(),
+            extension.spec_version()
+        )
     }
 }

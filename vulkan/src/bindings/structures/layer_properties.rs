@@ -4,7 +4,6 @@ use crate::{
 };
 
 #[repr(C)]
-#[derive(Clone)]
 pub struct VkLayerProperties {
     layer_name: [u8; VK_MAX_EXTENSION_NAME_SIZE],
     spec_version: VkVersion,
