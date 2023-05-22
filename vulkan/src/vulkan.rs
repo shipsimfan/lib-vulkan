@@ -51,7 +51,10 @@ impl<L: Loader> Vulkan<L> {
         })
     }
 
-    pub fn create_instance(&self, create_info: &VkInstanceCreateInfo) -> Result<VkInstance<L>> {
+    pub fn create_instance(
+        &self,
+        create_info: &VkInstanceCreateInfo,
+    ) -> Result<Arc<VkInstance<L>>> {
         let mut vk_instance = None;
         match (self.create_instance)(create_info, null(), &mut vk_instance) {
             VkResult::Success => VkInstance::new(vk_instance.unwrap(), self.loader.clone()),
