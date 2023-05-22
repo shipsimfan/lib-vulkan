@@ -8,7 +8,7 @@ use std::{ptr::NonNull, sync::Arc};
 
 pub struct VkInstance<L: Loader = NativeLoader> {
     inner: bindings::VkInstance,
-    _loader: Arc<L>,
+    loader: Arc<L>,
 
     // Direct instance functions
     destroy_instance: VkDestroyInstance,
@@ -34,7 +34,7 @@ impl<L: Loader> VkInstance<L> {
 
         Ok(Arc::new(VkInstance {
             inner,
-            _loader: loader,
+            loader,
 
             destroy_instance,
             enumerate_physical_devices,
@@ -83,6 +83,14 @@ impl<L: Loader> VkInstance<L> {
 
     pub(crate) fn physical_device_functions(&self) -> &VkPhysicalDeviceFunctions {
         &self.physical_device_functions
+    }
+
+    pub(crate) fn loader(&self) -> &Arc<L> {
+        &self.loader
+    }
+
+    pub(crate) fn inner(&self) -> bindings::VkInstance {
+        self.inner
     }
 }
 

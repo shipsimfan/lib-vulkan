@@ -90,6 +90,14 @@ impl<L: Loader> VkPhysicalDevice<L> {
             result => Err(result),
         }
     }
+
+    pub(crate) fn instance(&self) -> &Arc<VkInstance<L>> {
+        &self.instance
+    }
+
+    pub(crate) fn inner(&self) -> bindings::VkPhysicalDevice {
+        self.inner
+    }
 }
 
 impl VkPhysicalDeviceFunctions {

@@ -14,11 +14,11 @@ macro_rules! assert_null_terminated {
 }
 
 macro_rules! get_instance_proc_addr_opt {
-    ($loader: expr, $instance: expr, $name: literal) => {
+    ($loader: expr, $instance: expr, $name: literal) => {{
         $loader
             .get_instance_proc_addr($instance, concat!($name, "\0"))
             .map(|function| unsafe { std::mem::transmute(function) })
-    };
+    }};
 }
 
 macro_rules! get_instance_proc_addr {
