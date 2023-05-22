@@ -78,7 +78,7 @@ impl<L: Loader> VkPhysicalDevice<L> {
         queue_families
     }
 
-    pub fn create_device(&self, create_info: &VkDeviceCreateInfo) -> Result<VkDevice<L>> {
+    pub fn create_device(&self, create_info: &VkDeviceCreateInfo) -> Result<Arc<VkDevice<L>>> {
         let mut device = None;
         match (self.instance.physical_device_functions().create_device)(
             self.inner,

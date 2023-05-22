@@ -6,3 +6,4 @@ pub type VkDeviceSize = u64;
 pub type VkFlags = u32;
 pub type VkInstance = NonNull<c_void>;
 pub type VkPhysicalDevice = NonNull<c_void>;
+pub type VkQueue = NonNull<c_void>;
