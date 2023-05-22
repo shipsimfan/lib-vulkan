@@ -1,9 +1,0 @@
-[package]
-name = "loader"
-version = "0.1.0"
-description = "Common definition of a loader"
-
-authors = { workspace = true }
-edition = { workspace = true }
-license = { workspace = true }
-repository = { workspace = true }

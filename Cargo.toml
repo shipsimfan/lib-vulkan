@@ -1,15 +1,11 @@
-[workspace]
-default-members = ["vulkan"]
-
-members = ["vulkan", "loader", "loaders/native"]
-
-[workspace.package]
+[package]
+name = "vulkan"
+version = "0.0.0"
+description = "Vulkan wrapper library"
 authors = ["Lance Hart <me@lancehart.ca>"]
 edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/shipsimfan/lib-vulkan"
 
-[workspace.dependencies]
-loader = { path = "loader" }
-
-native = { path = "loaders/native" }
+[target.'cfg(windows)'.dependencies]
+win32 = { path = "../lib-win32" }

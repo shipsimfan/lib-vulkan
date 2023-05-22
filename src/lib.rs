@@ -1,6 +1,7 @@
 mod bindings;
 mod device;
 mod instance;
+mod loader;
 mod macros;
 mod physical_device;
 mod queue;
@@ -26,8 +27,7 @@ pub use bindings::{
 };
 pub use device::VkDevice;
 pub use instance::VkInstance;
-pub use loader::Loader;
-pub use native::NativeLoader;
+pub use loader::{Loader, NativeLoader};
 pub use physical_device::VkPhysicalDevice;
 pub use queue::VkQueue;
 pub use surface::VkSurfaceKHR;

@@ -1,7 +1,4 @@
-use loader::Loader;
-use native::NativeLoader;
-
-use crate::{bindings, VkDevice};
+use crate::{bindings, Loader, NativeLoader, VkDevice};
 use std::sync::Arc;
 
 pub struct VkQueue<L: Loader = NativeLoader> {

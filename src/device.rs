@@ -1,9 +1,7 @@
 use crate::{
     bindings::{self, VkDestroyDevice, VkGetDeviceQueue},
-    get_device_proc_addr, Result, VkInstance, VkQueue,
+    get_device_proc_addr, Loader, NativeLoader, Result, VkInstance, VkQueue,
 };
-use loader::Loader;
-use native::NativeLoader;
 use std::{ptr::NonNull, sync::Arc};
 
 pub struct VkDevice<L: Loader = NativeLoader> {

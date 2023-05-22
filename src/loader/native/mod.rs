@@ -1,4 +1,4 @@
-use loader::Loader;
+use super::Loader;
 use std::{ffi::c_void, ptr::NonNull};
 
 #[cfg(target_os = "windows")]

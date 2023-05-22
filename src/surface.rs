@@ -4,11 +4,9 @@ use crate::{
         VkGetPhysicalDeviceSurfaceFormatsKHR, VkGetPhysicalDeviceSurfacePresentModesKHR,
         VkGetPhysicalDeviceSurfaceSupportKHR,
     },
-    get_instance_proc_addr, Result, VkInstance, VkPhysicalDevice, VkPresentModeKHR, VkResult,
-    VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR,
+    get_instance_proc_addr, Loader, NativeLoader, Result, VkInstance, VkPhysicalDevice,
+    VkPresentModeKHR, VkResult, VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR,
 };
-use loader::Loader;
-use native::NativeLoader;
 use std::{ptr::NonNull, sync::Arc};
 
 pub struct VkSurfaceKHR<L: Loader = NativeLoader> {

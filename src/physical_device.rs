@@ -3,11 +3,9 @@ use crate::{
         self, VkCreateDevice, VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
         VkGetPhysicalDeviceQueueFamilyProperties, VkPhysicalDeviceProperties,
     },
-    get_instance_proc_addr, Result, VkDevice, VkDeviceCreateInfo, VkInstance,
+    get_instance_proc_addr, Loader, NativeLoader, Result, VkDevice, VkDeviceCreateInfo, VkInstance,
     VkPhysicalDeviceFeatures, VkQueueFamilyProperties, VkResult,
 };
-use loader::Loader;
-use native::NativeLoader;
 use std::{ptr::NonNull, sync::Arc};
 
 pub struct VkPhysicalDevice<L: Loader = NativeLoader> {

@@ -4,10 +4,10 @@ use crate::{
         VkCreateInstance, VkEnumerateInstanceExtensionProperties,
         VkEnumerateInstanceLayerProperties, VkEnumerateInstanceVersion,
     },
-    get_instance_proc_addr, get_instance_proc_addr_opt, Loader, Result, VkExtensionProperties,
-    VkInstance, VkInstanceCreateInfo, VkLayerProperties, VkResult, VkVersion,
+    get_instance_proc_addr, get_instance_proc_addr_opt, Loader, NativeLoader, Result,
+    VkExtensionProperties, VkInstance, VkInstanceCreateInfo, VkLayerProperties, VkResult,
+    VkVersion,
 };
-use native::NativeLoader;
 use std::{ptr::NonNull, sync::Arc};
 
 pub struct Vulkan<L: Loader = NativeLoader> {
