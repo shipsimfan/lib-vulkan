@@ -13,7 +13,7 @@ pub struct VkLayerProperties {
 
 impl VkLayerProperties {
     pub fn layer_name(&self) -> &str {
-        unsafe { std::str::from_utf8_unchecked(&self.layer_name) }
+        unsafe { std::str::from_utf8_unchecked(&self.layer_name) }.trim_matches('\0')
     }
 
     pub fn spec_version(&self) -> VkVersion {
@@ -25,6 +25,6 @@ impl VkLayerProperties {
     }
 
     pub fn description(&self) -> &str {
-        unsafe { std::str::from_utf8_unchecked(&self.description) }
+        unsafe { std::str::from_utf8_unchecked(&self.description) }.trim_matches('\0')
     }
 }

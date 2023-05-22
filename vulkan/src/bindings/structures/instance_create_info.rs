@@ -49,20 +49,20 @@ impl<'a> VkInstanceCreateInfo<'a> {
         self.p_application_info
     }
 
-    pub fn enabled_layers(&self) -> Option<&[&str]> {
+    pub fn enabled_layers(&self) -> Option<&[*const u8]> {
         self.pp_enabled_layers.map(|pp_enabled_layers| unsafe {
             std::slice::from_raw_parts(
-                pp_enabled_layers.as_ptr() as *const _,
+                pp_enabled_layers.as_ptr(),
                 self.enabled_layer_count as usize,
             )
         })
     }
 
-    pub fn enabled_extensions(&self) -> Option<&[&str]> {
+    pub fn enabled_extensions(&self) -> Option<&[*const u8]> {
         self.pp_enabled_extensions
             .map(|pp_enabled_extensions| unsafe {
                 std::slice::from_raw_parts(
-                    pp_enabled_extensions.as_ptr() as *const _,
+                    pp_enabled_extensions.as_ptr(),
                     self.enabled_extension_count as usize,
                 )
             })

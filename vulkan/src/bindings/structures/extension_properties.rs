@@ -8,7 +8,7 @@ pub struct VkExtensionProperties {
 
 impl VkExtensionProperties {
     pub fn extension_name(&self) -> &str {
-        unsafe { std::str::from_utf8_unchecked(&self.extension_name) }
+        unsafe { std::str::from_utf8_unchecked(&self.extension_name) }.trim_matches('\0')
     }
 
     pub fn spec_version(&self) -> u32 {
