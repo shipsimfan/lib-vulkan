@@ -1,4 +1,8 @@
 mod application_info;
+mod device_create_info;
+mod device_queue_create_flags;
+mod device_queue_create_info;
+mod device_queue_global_priority_create_info_khr;
 mod extension_properties;
 mod extent_3d;
 mod instance_create_flags;
@@ -13,6 +17,10 @@ mod queue_flags;
 mod sample_count_flags;
 
 pub use application_info::*;
+pub use device_create_info::*;
+pub use device_queue_create_flags::*;
+pub use device_queue_create_info::*;
+pub use device_queue_global_priority_create_info_khr::*;
 pub use extension_properties::*;
 pub use extent_3d::*;
 pub use instance_create_flags::*;

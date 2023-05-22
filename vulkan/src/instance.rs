@@ -1,5 +1,5 @@
 use crate::{
-    bindings::{self, VkDestroyInstance, VkEnumeratePhysicalDevices},
+    bindings::{self, VkDestroyInstance, VkEnumeratePhysicalDevices, VkGetDeviceProcAddr},
     get_instance_proc_addr, Result, VkPhysicalDevice, VkPhysicalDeviceFunctions, VkResult,
 };
 use loader::Loader;
@@ -14,6 +14,9 @@ pub struct VkInstance<L: Loader = NativeLoader> {
     destroy_instance: VkDestroyInstance,
     enumerate_physical_devices: VkEnumeratePhysicalDevices,
 
+    // Special device function
+    get_device_proc_addr: VkGetDeviceProcAddr,
+
     // Indirect instance functions
     physical_device_functions: VkPhysicalDeviceFunctions,
 }
@@ -24,6 +27,9 @@ impl<L: Loader> VkInstance<L> {
         let enumerate_physical_devices =
             get_instance_proc_addr!(loader, Some(inner), "vkEnumeratePhysicalDevices")?;
 
+        let get_device_proc_addr =
+            get_instance_proc_addr!(loader, Some(inner), "vkGetDeviceProcAddr")?;
+
         let physical_device_functions = VkPhysicalDeviceFunctions::get(inner, loader.as_ref())?;
 
         Ok(Arc::new(VkInstance {
@@ -32,6 +38,8 @@ impl<L: Loader> VkInstance<L> {
 
             destroy_instance,
             enumerate_physical_devices,
+
+            get_device_proc_addr,
 
             physical_device_functions,
         }))
@@ -67,6 +75,10 @@ impl<L: Loader> VkInstance<L> {
             }
             result => Err(result),
         }
+    }
+
+    pub(crate) fn get_device_proc_addr(&self) -> VkGetDeviceProcAddr {
+        self.get_device_proc_addr
     }
 
     pub(crate) fn physical_device_functions(&self) -> &VkPhysicalDeviceFunctions {

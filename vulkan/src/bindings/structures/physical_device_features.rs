@@ -60,7 +60,7 @@ pub struct VkPhysicalDeviceFeatures {
 }
 
 impl VkPhysicalDeviceFeatures {
-    pub(crate) const fn null() -> Self {
+    pub const fn default() -> Self {
         VkPhysicalDeviceFeatures {
             robust_buffer_access: 0,
             full_draw_index_uint32: 0,
@@ -117,6 +117,130 @@ impl VkPhysicalDeviceFeatures {
             sparse_residency_aliased: 0,
             variable_multisample_rate: 0,
             inherited_queries: 0,
+        }
+    }
+
+    pub const fn new(
+        robust_buffer_access: bool,
+        full_draw_index_uint32: bool,
+        image_cube_array: bool,
+        independent_blend: bool,
+        geometry_shader: bool,
+        tessellation_shader: bool,
+        sample_rate_shading: bool,
+        dual_src_blend: bool,
+        logic_op: bool,
+        multi_draw_indirect: bool,
+        draw_indirect_first_instance: bool,
+        depth_clamp: bool,
+        depth_bias_clamp: bool,
+        fill_mode_non_solid: bool,
+        depth_bounds: bool,
+        wide_lines: bool,
+        large_points: bool,
+        alpha_to_one: bool,
+        multi_viewport: bool,
+        sampler_anisotropy: bool,
+        texture_compression_etc2: bool,
+        texture_compression_astc_ldr: bool,
+        texture_compression_bc: bool,
+        occlusion_query_precise: bool,
+        pipeline_statistics_query: bool,
+        vertex_pipeline_stores_and_atomics: bool,
+        fragment_stores_and_atomics: bool,
+        shader_tessellation_and_geometry_point_size: bool,
+        shader_image_gather_extended: bool,
+        shader_storage_image_extended_formats: bool,
+        shader_storage_image_multisample: bool,
+        shader_storage_image_read_without_format: bool,
+        shader_storage_image_write_without_format: bool,
+        shader_uniform_buffer_array_dynamic_indexing: bool,
+        shader_sampled_image_array_dynamic_indexing: bool,
+        shader_storage_buffer_array_dynamic_indexing: bool,
+        shader_storage_image_array_dynamic_indexing: bool,
+        shader_clip_distance: bool,
+        shader_cull_distance: bool,
+        shader_float64: bool,
+        shader_int64: bool,
+        shader_int16: bool,
+        shader_resource_residency: bool,
+        shader_resource_min_lod: bool,
+        sparse_binding: bool,
+        sparse_residency_buffer: bool,
+        sparse_residency_image_2d: bool,
+        sparse_residency_image_3d: bool,
+        sparse_residency_2_samples: bool,
+        sparse_residency_4_samples: bool,
+        sparse_residency_8_samples: bool,
+        sparse_residency_16_samples: bool,
+        sparse_residency_aliased: bool,
+        variable_multisample_rate: bool,
+        inherited_queries: VkBool32,
+    ) -> Self {
+        VkPhysicalDeviceFeatures {
+            robust_buffer_access: robust_buffer_access as VkBool32,
+            full_draw_index_uint32: full_draw_index_uint32 as VkBool32,
+            image_cube_array: image_cube_array as VkBool32,
+            independent_blend: independent_blend as VkBool32,
+            geometry_shader: geometry_shader as VkBool32,
+            tessellation_shader: tessellation_shader as VkBool32,
+            sample_rate_shading: sample_rate_shading as VkBool32,
+            dual_src_blend: dual_src_blend as VkBool32,
+            logic_op: logic_op as VkBool32,
+            multi_draw_indirect: multi_draw_indirect as VkBool32,
+            draw_indirect_first_instance: draw_indirect_first_instance as VkBool32,
+            depth_clamp: depth_clamp as VkBool32,
+            depth_bias_clamp: depth_bias_clamp as VkBool32,
+            fill_mode_non_solid: fill_mode_non_solid as VkBool32,
+            depth_bounds: depth_bounds as VkBool32,
+            wide_lines: wide_lines as VkBool32,
+            large_points: large_points as VkBool32,
+            alpha_to_one: alpha_to_one as VkBool32,
+            multi_viewport: multi_viewport as VkBool32,
+            sampler_anisotropy: sampler_anisotropy as VkBool32,
+            texture_compression_etc2: texture_compression_etc2 as VkBool32,
+            texture_compression_astc_ldr: texture_compression_astc_ldr as VkBool32,
+            texture_compression_bc: texture_compression_bc as VkBool32,
+            occlusion_query_precise: occlusion_query_precise as VkBool32,
+            pipeline_statistics_query: pipeline_statistics_query as VkBool32,
+            vertex_pipeline_stores_and_atomics: vertex_pipeline_stores_and_atomics as VkBool32,
+            fragment_stores_and_atomics: fragment_stores_and_atomics as VkBool32,
+            shader_tessellation_and_geometry_point_size: shader_tessellation_and_geometry_point_size
+                as VkBool32,
+            shader_image_gather_extended: shader_image_gather_extended as VkBool32,
+            shader_storage_image_extended_formats: shader_storage_image_extended_formats
+                as VkBool32,
+            shader_storage_image_multisample: shader_storage_image_multisample as VkBool32,
+            shader_storage_image_read_without_format: shader_storage_image_read_without_format
+                as VkBool32,
+            shader_storage_image_write_without_format: shader_storage_image_write_without_format
+                as VkBool32,
+            shader_uniform_buffer_array_dynamic_indexing:
+                shader_uniform_buffer_array_dynamic_indexing as VkBool32,
+            shader_sampled_image_array_dynamic_indexing: shader_sampled_image_array_dynamic_indexing
+                as VkBool32,
+            shader_storage_buffer_array_dynamic_indexing:
+                shader_storage_buffer_array_dynamic_indexing as VkBool32,
+            shader_storage_image_array_dynamic_indexing: shader_storage_image_array_dynamic_indexing
+                as VkBool32,
+            shader_clip_distance: shader_clip_distance as VkBool32,
+            shader_cull_distance: shader_cull_distance as VkBool32,
+            shader_float64: shader_float64 as VkBool32,
+            shader_int64: shader_int64 as VkBool32,
+            shader_int16: shader_int16 as VkBool32,
+            shader_resource_residency: shader_resource_residency as VkBool32,
+            shader_resource_min_lod: shader_resource_min_lod as VkBool32,
+            sparse_binding: sparse_binding as VkBool32,
+            sparse_residency_buffer: sparse_residency_buffer as VkBool32,
+            sparse_residency_image_2d: sparse_residency_image_2d as VkBool32,
+            sparse_residency_image_3d: sparse_residency_image_3d as VkBool32,
+            sparse_residency_2_samples: sparse_residency_2_samples as VkBool32,
+            sparse_residency_4_samples: sparse_residency_4_samples as VkBool32,
+            sparse_residency_8_samples: sparse_residency_8_samples as VkBool32,
+            sparse_residency_16_samples: sparse_residency_16_samples as VkBool32,
+            sparse_residency_aliased: sparse_residency_aliased as VkBool32,
+            variable_multisample_rate: variable_multisample_rate as VkBool32,
+            inherited_queries: inherited_queries as VkBool32,
         }
     }
 
@@ -338,5 +462,260 @@ impl VkPhysicalDeviceFeatures {
 
     pub fn inherited_queries(&self) -> bool {
         self.inherited_queries != 0
+    }
+
+    pub fn set_robust_buffer_access(&mut self, robust_buffer_access: bool) {
+        self.robust_buffer_access = robust_buffer_access as VkBool32;
+    }
+
+    pub fn set_full_draw_index_uint32(&mut self, full_draw_index_uint32: bool) {
+        self.full_draw_index_uint32 = full_draw_index_uint32 as VkBool32;
+    }
+
+    pub fn set_image_cube_array(&mut self, image_cube_array: bool) {
+        self.image_cube_array = image_cube_array as VkBool32;
+    }
+
+    pub fn set_independent_blend(&mut self, independent_blend: bool) {
+        self.independent_blend = independent_blend as VkBool32;
+    }
+
+    pub fn set_geometry_shader(&mut self, geometry_shader: bool) {
+        self.geometry_shader = geometry_shader as VkBool32;
+    }
+
+    pub fn set_tessellation_shader(&mut self, tessellation_shader: bool) {
+        self.tessellation_shader = tessellation_shader as VkBool32;
+    }
+
+    pub fn set_sample_rate_shading(&mut self, sample_rate_shading: bool) {
+        self.sample_rate_shading = sample_rate_shading as VkBool32;
+    }
+
+    pub fn set_dual_src_blend(&mut self, dual_src_blend: bool) {
+        self.dual_src_blend = dual_src_blend as VkBool32;
+    }
+
+    pub fn set_logic_op(&mut self, logic_op: bool) {
+        self.logic_op = logic_op as VkBool32;
+    }
+
+    pub fn set_multi_draw_indirect(&mut self, multi_draw_indirect: bool) {
+        self.multi_draw_indirect = multi_draw_indirect as VkBool32;
+    }
+
+    pub fn set_draw_indirect_first_instance(&mut self, draw_indirect_first_instance: bool) {
+        self.draw_indirect_first_instance = draw_indirect_first_instance as VkBool32;
+    }
+
+    pub fn set_depth_clamp(&mut self, depth_clamp: bool) {
+        self.depth_clamp = depth_clamp as VkBool32;
+    }
+
+    pub fn set_depth_bias_clamp(&mut self, depth_bias_clamp: bool) {
+        self.depth_bias_clamp = depth_bias_clamp as VkBool32;
+    }
+
+    pub fn set_fill_mode_non_solid(&mut self, fill_mode_non_solid: bool) {
+        self.fill_mode_non_solid = fill_mode_non_solid as VkBool32;
+    }
+
+    pub fn set_depth_bounds(&mut self, depth_bounds: bool) {
+        self.depth_bounds = depth_bounds as VkBool32;
+    }
+
+    pub fn set_wide_lines(&mut self, wide_lines: bool) {
+        self.wide_lines = wide_lines as VkBool32;
+    }
+
+    pub fn set_large_points(&mut self, large_points: bool) {
+        self.large_points = large_points as VkBool32;
+    }
+
+    pub fn set_alpha_to_one(&mut self, alpha_to_one: bool) {
+        self.alpha_to_one = alpha_to_one as VkBool32;
+    }
+
+    pub fn set_multi_viewport(&mut self, multi_viewport: bool) {
+        self.multi_viewport = multi_viewport as VkBool32;
+    }
+
+    pub fn set_sampler_anisotropy(&mut self, sampler_anisotropy: bool) {
+        self.sampler_anisotropy = sampler_anisotropy as VkBool32;
+    }
+
+    pub fn set_texture_compression_etc2(&mut self, texture_compression_etc2: bool) {
+        self.texture_compression_etc2 = texture_compression_etc2 as VkBool32;
+    }
+
+    pub fn set_texture_compression_astc_ldr(&mut self, texture_compression_astc_ldr: bool) {
+        self.texture_compression_astc_ldr = texture_compression_astc_ldr as VkBool32;
+    }
+
+    pub fn set_texture_compression_bc(&mut self, texture_compression_bc: bool) {
+        self.texture_compression_bc = texture_compression_bc as VkBool32;
+    }
+
+    pub fn set_occlusion_query_precise(&mut self, occlusion_query_precise: bool) {
+        self.occlusion_query_precise = occlusion_query_precise as VkBool32;
+    }
+
+    pub fn set_pipeline_statistics_query(&mut self, pipeline_statistics_query: bool) {
+        self.pipeline_statistics_query = pipeline_statistics_query as VkBool32;
+    }
+
+    pub fn set_vertex_pipeline_stores_and_atomics(
+        &mut self,
+        vertex_pipeline_stores_and_atomics: bool,
+    ) {
+        self.vertex_pipeline_stores_and_atomics = vertex_pipeline_stores_and_atomics as VkBool32;
+    }
+
+    pub fn set_fragment_stores_and_atomics(&mut self, fragment_stores_and_atomics: bool) {
+        self.fragment_stores_and_atomics = fragment_stores_and_atomics as VkBool32;
+    }
+
+    pub fn set_shader_tessellation_and_geometry_point_size(
+        &mut self,
+        shader_tessellation_and_geometry_point_size: bool,
+    ) {
+        self.shader_tessellation_and_geometry_point_size =
+            shader_tessellation_and_geometry_point_size as VkBool32;
+    }
+
+    pub fn set_shader_image_gather_extended(&mut self, shader_image_gather_extended: bool) {
+        self.shader_image_gather_extended = shader_image_gather_extended as VkBool32;
+    }
+
+    pub fn set_shader_storage_image_extended_formats(
+        &mut self,
+        shader_storage_image_extended_formats: bool,
+    ) {
+        self.shader_storage_image_extended_formats =
+            shader_storage_image_extended_formats as VkBool32;
+    }
+
+    pub fn set_shader_storage_image_multisample(&mut self, shader_storage_image_multisample: bool) {
+        self.shader_storage_image_multisample = shader_storage_image_multisample as VkBool32;
+    }
+
+    pub fn set_shader_storage_image_read_without_format(
+        &mut self,
+        shader_storage_image_read_without_format: bool,
+    ) {
+        self.shader_storage_image_read_without_format =
+            shader_storage_image_read_without_format as VkBool32;
+    }
+
+    pub fn set_shader_storage_image_write_without_format(
+        &mut self,
+        shader_storage_image_write_without_format: bool,
+    ) {
+        self.shader_storage_image_write_without_format =
+            shader_storage_image_write_without_format as VkBool32;
+    }
+
+    pub fn set_shader_uniform_buffer_array_dynamic_indexing(
+        &mut self,
+        shader_uniform_buffer_array_dynamic_indexing: bool,
+    ) {
+        self.shader_uniform_buffer_array_dynamic_indexing =
+            shader_uniform_buffer_array_dynamic_indexing as VkBool32;
+    }
+
+    pub fn set_shader_sampled_image_array_dynamic_indexing(
+        &mut self,
+        shader_sampled_image_array_dynamic_indexing: bool,
+    ) {
+        self.shader_sampled_image_array_dynamic_indexing =
+            shader_sampled_image_array_dynamic_indexing as VkBool32;
+    }
+
+    pub fn set_shader_storage_buffer_array_dynamic_indexing(
+        &mut self,
+        shader_storage_buffer_array_dynamic_indexing: bool,
+    ) {
+        self.shader_storage_buffer_array_dynamic_indexing =
+            shader_storage_buffer_array_dynamic_indexing as VkBool32;
+    }
+
+    pub fn set_shader_storage_image_array_dynamic_indexing(
+        &mut self,
+        shader_storage_image_array_dynamic_indexing: bool,
+    ) {
+        self.shader_storage_image_array_dynamic_indexing =
+            shader_storage_image_array_dynamic_indexing as VkBool32;
+    }
+
+    pub fn set_shader_clip_distance(&mut self, shader_clip_distance: bool) {
+        self.shader_clip_distance = shader_clip_distance as VkBool32;
+    }
+
+    pub fn set_shader_cull_distance(&mut self, shader_cull_distance: bool) {
+        self.shader_cull_distance = shader_cull_distance as VkBool32;
+    }
+
+    pub fn set_shader_float64(&mut self, shader_float64: bool) {
+        self.shader_float64 = shader_float64 as VkBool32;
+    }
+
+    pub fn set_shader_int64(&mut self, shader_int64: bool) {
+        self.shader_int64 = shader_int64 as VkBool32;
+    }
+
+    pub fn set_shader_int16(&mut self, shader_int16: bool) {
+        self.shader_int16 = shader_int16 as VkBool32;
+    }
+
+    pub fn set_shader_resource_residency(&mut self, shader_resource_residency: bool) {
+        self.shader_resource_residency = shader_resource_residency as VkBool32;
+    }
+
+    pub fn set_shader_resource_min_lod(&mut self, shader_resource_min_lod: bool) {
+        self.shader_resource_min_lod = shader_resource_min_lod as VkBool32;
+    }
+
+    pub fn set_sparse_binding(&mut self, sparse_binding: bool) {
+        self.sparse_binding = sparse_binding as VkBool32;
+    }
+
+    pub fn set_sparse_residency_buffer(&mut self, sparse_residency_buffer: bool) {
+        self.sparse_residency_buffer = sparse_residency_buffer as VkBool32;
+    }
+
+    pub fn set_sparse_residency_image_2d(&mut self, sparse_residency_image_2d: bool) {
+        self.sparse_residency_image_2d = sparse_residency_image_2d as VkBool32;
+    }
+
+    pub fn set_sparse_residency_image_3d(&mut self, sparse_residency_image_3d: bool) {
+        self.sparse_residency_image_3d = sparse_residency_image_3d as VkBool32;
+    }
+
+    pub fn set_sparse_residency_2_samples(&mut self, sparse_residency_2_samples: bool) {
+        self.sparse_residency_2_samples = sparse_residency_2_samples as VkBool32;
+    }
+
+    pub fn set_sparse_residency_4_samples(&mut self, sparse_residency_4_samples: bool) {
+        self.sparse_residency_4_samples = sparse_residency_4_samples as VkBool32;
+    }
+
+    pub fn set_sparse_residency_8_samples(&mut self, sparse_residency_8_samples: bool) {
+        self.sparse_residency_8_samples = sparse_residency_8_samples as VkBool32;
+    }
+
+    pub fn set_sparse_residency_16_samples(&mut self, sparse_residency_16_samples: bool) {
+        self.sparse_residency_16_samples = sparse_residency_16_samples as VkBool32;
+    }
+
+    pub fn set_sparse_residency_aliased(&mut self, sparse_residency_aliased: bool) {
+        self.sparse_residency_aliased = sparse_residency_aliased as VkBool32;
+    }
+
+    pub fn set_variable_multisample_rate(&mut self, variable_multisample_rate: bool) {
+        self.variable_multisample_rate = variable_multisample_rate as VkBool32;
+    }
+
+    pub fn set_inherited_queries(&mut self, inherited_queries: bool) {
+        self.inherited_queries = inherited_queries as VkBool32;
     }
 }

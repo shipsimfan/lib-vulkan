@@ -28,4 +28,23 @@ macro_rules! get_instance_proc_addr {
     };
 }
 
-pub(crate) use {assert_null_terminated, get_instance_proc_addr, get_instance_proc_addr_opt};
+macro_rules! get_device_proc_addr_opt {
+    ($fn: ident, $device: expr, $name: literal) => {
+        ($fn)($device, unsafe {
+            std::ptr::NonNull::new_unchecked(concat!($name, "\0").as_ptr() as _)
+        })
+        .map(|function| unsafe { std::mem::transmute(function) })
+    };
+}
+
+macro_rules! get_device_proc_addr {
+    ($fn: ident, $device: expr, $name: literal) => {
+        $crate::get_device_proc_addr_opt!($fn, $device, $name)
+            .ok_or($crate::VkResult::ErrorIncompatibleDriver)
+    };
+}
+
+pub(crate) use {
+    assert_null_terminated, get_device_proc_addr, get_device_proc_addr_opt, get_instance_proc_addr,
+    get_instance_proc_addr_opt,
+};

@@ -1,8 +1,8 @@
 use crate::{
-    bindings::{VkPhysicalDevice, VkPhysicalDeviceProperties},
-    VkPhysicalDeviceFeatures, VkQueueFamilyProperties,
+    bindings::{VkDevice, VkPhysicalDevice, VkPhysicalDeviceProperties},
+    VkDeviceCreateInfo, VkPhysicalDeviceFeatures, VkQueueFamilyProperties, VkResult,
 };
-use std::ptr::NonNull;
+use std::{ffi::c_void, ptr::NonNull};
 
 pub type VkGetPhysicalDeviceProperties = extern "system" fn(
     physical_device: VkPhysicalDevice,
@@ -19,3 +19,10 @@ pub type VkGetPhysicalDeviceQueueFamilyProperties = extern "system" fn(
     p_queue_family_property_count: NonNull<u32>,
     p_queue_family_properties: Option<NonNull<VkQueueFamilyProperties>>,
 );
+
+pub type VkCreateDevice = extern "system" fn(
+    physical_device: VkPhysicalDevice,
+    p_create_info: NonNull<VkDeviceCreateInfo>,
+    p_allocator: Option<NonNull<c_void>>,
+    p_device: NonNull<Option<VkDevice>>,
+) -> VkResult;

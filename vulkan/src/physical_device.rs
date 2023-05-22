@@ -1,9 +1,10 @@
 use crate::{
     bindings::{
-        self, VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
+        self, VkCreateDevice, VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
         VkGetPhysicalDeviceQueueFamilyProperties, VkPhysicalDeviceProperties,
     },
-    get_instance_proc_addr, Result, VkInstance, VkPhysicalDeviceFeatures, VkQueueFamilyProperties,
+    get_instance_proc_addr, Result, VkDevice, VkDeviceCreateInfo, VkInstance,
+    VkPhysicalDeviceFeatures, VkQueueFamilyProperties, VkResult,
 };
 use loader::Loader;
 use native::NativeLoader;
@@ -18,6 +19,7 @@ pub(crate) struct VkPhysicalDeviceFunctions {
     get_physical_device_properties: VkGetPhysicalDeviceProperties,
     get_physical_device_features: VkGetPhysicalDeviceFeatures,
     get_physical_device_queue_family_properties: VkGetPhysicalDeviceQueueFamilyProperties,
+    create_device: VkCreateDevice,
 }
 
 impl<L: Loader> VkPhysicalDevice<L> {
@@ -37,7 +39,7 @@ impl<L: Loader> VkPhysicalDevice<L> {
     }
 
     pub fn get_features(&self) -> VkPhysicalDeviceFeatures {
-        let mut features = VkPhysicalDeviceFeatures::null();
+        let mut features = VkPhysicalDeviceFeatures::default();
         (self
             .instance
             .physical_device_functions()
@@ -75,6 +77,19 @@ impl<L: Loader> VkPhysicalDevice<L> {
         unsafe { queue_families.set_len(count as usize) };
         queue_families
     }
+
+    pub fn create_device(&self, create_info: &VkDeviceCreateInfo) -> Result<VkDevice<L>> {
+        let mut device = None;
+        match (self.instance.physical_device_functions().create_device)(
+            self.inner,
+            unsafe { NonNull::new_unchecked(create_info as *const _ as _) },
+            None,
+            unsafe { NonNull::new_unchecked(&mut device) },
+        ) {
+            VkResult::Success => VkDevice::new(device.unwrap(), self.instance.clone()),
+            result => Err(result),
+        }
+    }
 }
 
 impl VkPhysicalDeviceFunctions {
@@ -88,11 +103,13 @@ impl VkPhysicalDeviceFunctions {
             Some(instance),
             "vkGetPhysicalDeviceQueueFamilyProperties"
         )?;
+        let create_device = get_instance_proc_addr!(loader, Some(instance), "vkCreateDevice")?;
 
         Ok(VkPhysicalDeviceFunctions {
             get_physical_device_properties,
             get_physical_device_features,
             get_physical_device_queue_family_properties,
+            create_device,
         })
     }
 }
