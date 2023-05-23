@@ -1,6 +1,9 @@
 use super::{VkApplicationInfo, VkInstanceCreateFlags};
 use crate::bindings::VkStructureType;
-use std::{ffi::c_void, ptr::NonNull};
+use std::{
+    ffi::{c_char, c_void},
+    ptr::NonNull,
+};
 
 #[repr(C)]
 pub struct VkInstanceCreateInfo<'a> {
@@ -9,17 +12,17 @@ pub struct VkInstanceCreateInfo<'a> {
     flags: VkInstanceCreateFlags,
     p_application_info: Option<&'a VkApplicationInfo<'a>>,
     enabled_layer_count: u32,
-    pp_enabled_layers: Option<NonNull<*const u8>>,
+    pp_enabled_layers: Option<NonNull<*const c_char>>,
     enabled_extension_count: u32,
-    pp_enabled_extensions: Option<NonNull<*const u8>>,
+    pp_enabled_extensions: Option<NonNull<*const c_char>>,
 }
 
 impl<'a> VkInstanceCreateInfo<'a> {
     pub fn new(
         flags: VkInstanceCreateFlags,
         application_info: Option<&'a VkApplicationInfo<'a>>,
-        enabled_layers: &'a [*const u8],
-        enabled_extensions: &'a [*const u8],
+        enabled_layers: &'a [*const c_char],
+        enabled_extensions: &'a [*const c_char],
     ) -> Self {
         VkInstanceCreateInfo {
             s_type: VkStructureType::InstanceCreateInfo,
@@ -49,7 +52,7 @@ impl<'a> VkInstanceCreateInfo<'a> {
         self.p_application_info
     }
 
-    pub fn enabled_layers(&self) -> Option<&[*const u8]> {
+    pub fn enabled_layers(&self) -> Option<&[*const c_char]> {
         self.pp_enabled_layers.map(|pp_enabled_layers| unsafe {
             std::slice::from_raw_parts(
                 pp_enabled_layers.as_ptr(),
@@ -58,7 +61,7 @@ impl<'a> VkInstanceCreateInfo<'a> {
         })
     }
 
-    pub fn enabled_extensions(&self) -> Option<&[*const u8]> {
+    pub fn enabled_extensions(&self) -> Option<&[*const c_char]> {
         self.pp_enabled_extensions
             .map(|pp_enabled_extensions| unsafe {
                 std::slice::from_raw_parts(

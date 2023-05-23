@@ -2,7 +2,7 @@ use crate::{
     bindings::{self, VkDestroyDevice, VkGetDeviceQueue},
     get_device_proc_addr, Loader, NativeLoader, Result, VkInstance, VkQueue,
 };
-use std::{ptr::NonNull, sync::Arc};
+use std::sync::Arc;
 
 pub struct VkDevice<L: Loader = NativeLoader> {
     inner: bindings::VkDevice,
@@ -37,9 +37,7 @@ impl<L: Loader> VkDevice<L> {
         queue_index: u32,
     ) -> VkQueue<L> {
         let mut queue = None;
-        (self.get_device_queue)(self.inner, queue_family_index, queue_index, unsafe {
-            NonNull::new_unchecked(&mut queue)
-        });
+        (self.get_device_queue)(self.inner, queue_family_index, queue_index, &mut queue);
         VkQueue::new(queue.unwrap(), self.clone())
     }
 }

@@ -1,5 +1,6 @@
 use crate::bindings::VkFlags;
 
+#[non_exhaustive]
 #[repr(u32)]
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum VkImageUsageFlagBits {
@@ -11,18 +12,6 @@ pub enum VkImageUsageFlagBits {
     DepthStencilAttachment = 0x00000020,
     TransientAttachment = 0x00000040,
     InputAttachment = 0x00000080,
-    FragmentShadingRateAttachment = 0x00000100,
-    FragmentDensityMap = 0x00000200,
-    VideoDecodeDst = 0x00000400,
-    VideoDecodeSrc = 0x00000800,
-    VideoDecodeDPB = 0x00001000,
-    VideoEncodeDst = 0x00002000,
-    VideoEncodeSrc = 0x00004000,
-    VideoEncodeDPB = 0x00008000,
-    InvocationMask = 0x00040000,
-    AttachmentFeedbackLoop = 0x00080000,
-    SampleWeight = 0x00100000,
-    SampleBlockMatch = 0x00200000,
 }
 
 #[repr(transparent)]

@@ -1,3 +1,5 @@
+use std::ffi::CStr;
+
 use crate::{
     bindings::VK_MAX_PHYSICAL_DEVICE_NAME_SIZE, VkPhysicalDeviceLimits,
     VkPhysicalDeviceSparseProperties, VkPhysicalDeviceType, VkVersion, VK_UUID_SIZE,
@@ -51,8 +53,8 @@ impl VkPhysicalDeviceProperties {
         self.device_type
     }
 
-    pub fn device_name(&self) -> &str {
-        unsafe { std::str::from_utf8_unchecked(&self.device_name) }.trim_matches('\0')
+    pub fn device_name(&self) -> &CStr {
+        CStr::from_bytes_until_nul(&self.device_name).unwrap()
     }
 
     pub fn pipeline_cache_uuid(&self) -> &[u8; VK_UUID_SIZE] {

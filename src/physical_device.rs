@@ -30,9 +30,7 @@ impl<L: Loader> VkPhysicalDevice<L> {
         (self
             .instance
             .physical_device_functions()
-            .get_physical_device_properties)(self.inner, unsafe {
-            NonNull::new_unchecked(&mut properties)
-        });
+            .get_physical_device_properties)(self.inner, &mut properties);
         properties
     }
 
@@ -41,9 +39,7 @@ impl<L: Loader> VkPhysicalDevice<L> {
         (self
             .instance
             .physical_device_functions()
-            .get_physical_device_features)(self.inner, unsafe {
-            NonNull::new_unchecked(&mut features)
-        });
+            .get_physical_device_features)(self.inner, &mut features);
         features
     }
 
@@ -52,11 +48,7 @@ impl<L: Loader> VkPhysicalDevice<L> {
         (self
             .instance
             .physical_device_functions()
-            .get_physical_device_queue_family_properties)(
-            self.inner,
-            unsafe { NonNull::new_unchecked(&mut count) },
-            None,
-        );
+            .get_physical_device_queue_family_properties)(self.inner, &mut count, None);
 
         if count == 0 {
             return Vec::new();
@@ -68,7 +60,7 @@ impl<L: Loader> VkPhysicalDevice<L> {
             .physical_device_functions()
             .get_physical_device_queue_family_properties)(
             self.inner,
-            unsafe { NonNull::new_unchecked(&mut count) },
+            &mut count,
             Some(unsafe { NonNull::new_unchecked(queue_families.as_mut_ptr()) }),
         );
 
@@ -80,9 +72,9 @@ impl<L: Loader> VkPhysicalDevice<L> {
         let mut device = None;
         match (self.instance.physical_device_functions().create_device)(
             self.inner,
-            unsafe { NonNull::new_unchecked(create_info as *const _ as _) },
+            &create_info,
             None,
-            unsafe { NonNull::new_unchecked(&mut device) },
+            &mut device,
         ) {
             VkResult::Success => VkDevice::new(device.unwrap(), self.instance.clone()),
             result => Err(result),

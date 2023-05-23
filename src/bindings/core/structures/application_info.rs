@@ -1,6 +1,6 @@
-use crate::{assert_null_terminated, bindings::VkStructureType, VkVersion};
+use crate::{bindings::VkStructureType, VkVersion};
 use std::{
-    ffi::{c_void, CStr},
+    ffi::{c_char, c_void, CStr},
     marker::PhantomData,
     ptr::NonNull,
 };
@@ -9,9 +9,9 @@ use std::{
 pub struct VkApplicationInfo<'a> {
     s_type: VkStructureType,
     p_next: Option<NonNull<c_void>>,
-    p_application_name: Option<NonNull<u8>>,
+    p_application_name: Option<NonNull<c_char>>,
     application_version: u32,
-    p_engine_name: Option<NonNull<u8>>,
+    p_engine_name: Option<NonNull<c_char>>,
     engine_version: u32,
     api_version: VkVersion,
     phantom: PhantomData<&'a ()>,
@@ -19,20 +19,12 @@ pub struct VkApplicationInfo<'a> {
 
 impl<'a> VkApplicationInfo<'a> {
     pub fn new(
-        application_name: Option<&'a str>,
+        application_name: Option<&'a CStr>,
         application_version: u32,
-        engine_name: Option<&'a str>,
+        engine_name: Option<&'a CStr>,
         engine_version: u32,
         api_version: VkVersion,
     ) -> Self {
-        if let Some(application_name) = application_name {
-            assert_null_terminated!(application_name);
-        }
-
-        if let Some(engine_name) = engine_name {
-            assert_null_terminated!(engine_name);
-        }
-
         VkApplicationInfo {
             s_type: VkStructureType::ApplicationInfo,
             p_next: None,
@@ -49,11 +41,9 @@ impl<'a> VkApplicationInfo<'a> {
         }
     }
 
-    pub fn application_name(&self) -> Option<&str> {
+    pub fn application_name(&self) -> Option<&CStr> {
         self.p_application_name.map(|application_name| unsafe {
             CStr::from_ptr(application_name.as_ptr() as *const _)
-                .to_str()
-                .unwrap()
         })
     }
 
@@ -61,12 +51,9 @@ impl<'a> VkApplicationInfo<'a> {
         self.application_version
     }
 
-    pub fn engine_name(&self) -> Option<&str> {
-        self.p_engine_name.map(|engine_name| unsafe {
-            CStr::from_ptr(engine_name.as_ptr() as *const _)
-                .to_str()
-                .unwrap()
-        })
+    pub fn engine_name(&self) -> Option<&CStr> {
+        self.p_engine_name
+            .map(|engine_name| unsafe { CStr::from_ptr(engine_name.as_ptr() as *const _) })
     }
 
     pub fn engine_version(&self) -> u32 {

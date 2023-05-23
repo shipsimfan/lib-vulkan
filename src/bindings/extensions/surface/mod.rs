@@ -1,5 +1,6 @@
 mod color_space;
 mod composite_alpha_flags;
+mod constants;
 mod functions;
 mod present_mode;
 mod surface_capabilities;
@@ -9,6 +10,7 @@ mod types;
 
 pub use color_space::*;
 pub use composite_alpha_flags::*;
+pub use constants::*;
 pub use functions::*;
 pub use present_mode::*;
 pub use surface_capabilities::*;

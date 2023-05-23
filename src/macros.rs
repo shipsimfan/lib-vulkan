@@ -1,22 +1,10 @@
-macro_rules! assert_null_terminated {
-    ($string: expr) => {
-        #[cfg(debug_assertions)]
-        {
-            let string = $string;
-            debug_assert_eq!(
-                string.as_bytes()[string.len() - 1],
-                0,
-                "Passed string \"{}\" is not null terminated",
-                string
-            );
-        }
-    };
-}
-
 macro_rules! get_instance_proc_addr_opt {
     ($loader: expr, $instance: expr, $name: literal) => {{
         $loader
-            .get_instance_proc_addr($instance, concat!($name, "\0"))
+            .get_instance_proc_addr(
+                $instance,
+                std::ffi::CStr::from_bytes_with_nul(concat!($name, "\0").as_bytes()).unwrap(),
+            )
             .map(|function| unsafe { std::mem::transmute(function) })
     }};
 }
@@ -30,9 +18,12 @@ macro_rules! get_instance_proc_addr {
 
 macro_rules! get_device_proc_addr_opt {
     ($fn: ident, $device: expr, $name: literal) => {
-        ($fn)($device, unsafe {
-            std::ptr::NonNull::new_unchecked(concat!($name, "\0").as_ptr() as _)
-        })
+        ($fn)(
+            $device,
+            std::ffi::CStr::from_bytes_with_nul(concat!($name, "\0").as_bytes())
+                .unwrap()
+                .as_ptr(),
+        )
         .map(|function| unsafe { std::mem::transmute(function) })
     };
 }
@@ -45,6 +36,6 @@ macro_rules! get_device_proc_addr {
 }
 
 pub(crate) use {
-    assert_null_terminated, get_device_proc_addr, get_device_proc_addr_opt, get_instance_proc_addr,
+    get_device_proc_addr, get_device_proc_addr_opt, get_instance_proc_addr,
     get_instance_proc_addr_opt,
 };

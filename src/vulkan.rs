@@ -1,5 +1,4 @@
 use crate::{
-    assert_null_terminated,
     bindings::{
         VkCreateInstance, VkEnumerateInstanceExtensionProperties,
         VkEnumerateInstanceLayerProperties, VkEnumerateInstanceVersion,
@@ -8,7 +7,7 @@ use crate::{
     VkExtensionProperties, VkInstance, VkInstanceCreateInfo, VkLayerProperties, VkResult,
     VkVersion,
 };
-use std::{ptr::NonNull, sync::Arc};
+use std::{ffi::CStr, ptr::NonNull, sync::Arc};
 
 pub struct Vulkan<L: Loader = NativeLoader> {
     loader: Arc<L>,
@@ -53,29 +52,26 @@ impl<L: Loader> Vulkan<L> {
         create_info: &VkInstanceCreateInfo,
     ) -> Result<Arc<VkInstance<L>>> {
         let mut vk_instance = None;
-        match (self.create_instance)(
-            unsafe { NonNull::new_unchecked(create_info as *const _ as _) },
-            None,
-            unsafe { NonNull::new_unchecked(&mut vk_instance) },
-        ) {
-            VkResult::Success => VkInstance::new(vk_instance.unwrap(), self.loader.clone()),
+        match (self.create_instance)(create_info, None, &mut vk_instance) {
+            VkResult::Success => VkInstance::new(
+                vk_instance.unwrap(),
+                self.loader.clone(),
+                create_info.enabled_extensions(),
+            ),
             result => Err(result),
         }
     }
 
     pub fn enumerate_instance_layer_properties(&self) -> Result<Vec<VkLayerProperties>> {
         let mut count = 0;
-        match (self.enumerate_instance_layer_properties)(
-            unsafe { NonNull::new_unchecked(&mut count) },
-            None,
-        ) {
+        match (self.enumerate_instance_layer_properties)(&mut count, None) {
             VkResult::Success => {}
             result => return Err(result),
         }
 
         let mut layers = Vec::with_capacity(count as usize);
         match (self.enumerate_instance_layer_properties)(
-            unsafe { NonNull::new_unchecked(&mut count) },
+            &mut count,
             Some(unsafe { NonNull::new_unchecked(layers.as_mut_ptr()) }),
         ) {
             VkResult::Success | VkResult::Incomplete => {
@@ -88,19 +84,12 @@ impl<L: Loader> Vulkan<L> {
 
     pub fn enumerate_instance_extension_properties(
         &self,
-        layer_name: Option<&str>,
+        layer_name: Option<&CStr>,
     ) -> Result<Vec<VkExtensionProperties>> {
-        if let Some(layer_name) = layer_name {
-            assert_null_terminated!(layer_name);
-        }
-
-        let p_layer_name =
-            layer_name.map(|str| unsafe { NonNull::new_unchecked(str.as_ptr() as _) });
-
         let mut count = 0;
         match (self.enumerate_instance_extension_properties)(
-            p_layer_name,
-            unsafe { NonNull::new_unchecked(&mut count) },
+            layer_name.map(|layer_name| layer_name.as_ptr()),
+            &mut count,
             None,
         ) {
             VkResult::Success => {}
@@ -109,8 +98,8 @@ impl<L: Loader> Vulkan<L> {
 
         let mut layers = Vec::with_capacity(count as usize);
         match (self.enumerate_instance_extension_properties)(
-            p_layer_name,
-            unsafe { NonNull::new_unchecked(&mut count) },
+            layer_name.map(|layer_name| layer_name.as_ptr()),
+            &mut count,
             Some(unsafe { NonNull::new_unchecked(layers.as_mut_ptr()) }),
         ) {
             VkResult::Success | VkResult::Incomplete => {
@@ -124,7 +113,7 @@ impl<L: Loader> Vulkan<L> {
     pub fn enumerate_instance_version(&self) -> Result<VkVersion> {
         if let Some(enumerate_instance_version) = self.enumerate_instance_version {
             let mut version = VkVersion::new(0, 0, 0, 0);
-            match (enumerate_instance_version)(unsafe { NonNull::new_unchecked(&mut version) }) {
+            match (enumerate_instance_version)(&mut version) {
                 VkResult::Success => Ok(version),
                 result => Err(result),
             }

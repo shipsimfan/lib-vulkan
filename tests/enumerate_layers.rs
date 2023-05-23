@@ -16,19 +16,21 @@ pub fn enumerate_layers() {
     for layer in layers {
         println!(
             "  Layer: {} - {} (v{} for Vulkan {})",
-            layer.layer_name(),
-            layer.description(),
+            layer.layer_name().to_string_lossy(),
+            layer.description().to_string_lossy(),
             layer.implementation_version(),
             layer.spec_version()
         );
 
-        let extensions = vulkan
-            .enumerate_instance_extension_properties(Some(layer.layer_name()))
-            .unwrap();
+        let extensions =
+            match vulkan.enumerate_instance_extension_properties(Some(layer.layer_name())) {
+                Ok(extensions) => extensions,
+                Err(_) => continue,
+            };
         for extension in extensions {
             println!(
                 "    Extension: {} v{}",
-                extension.extension_name(),
+                extension.extension_name().to_string_lossy(),
                 extension.spec_version()
             );
         }
@@ -41,7 +43,7 @@ pub fn enumerate_layers() {
     for extension in extensions {
         println!(
             "  Extension: {} v{}",
-            extension.extension_name(),
+            extension.extension_name().to_string_lossy(),
             extension.spec_version()
         )
     }

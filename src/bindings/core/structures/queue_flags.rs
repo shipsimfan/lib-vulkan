@@ -1,5 +1,6 @@
 use crate::bindings::VkFlags;
 
+#[non_exhaustive]
 #[repr(u32)]
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum VkQueueFlagBits {
@@ -8,9 +9,6 @@ pub enum VkQueueFlagBits {
     Transfer = 0x00000004,
     SparseBinding = 0x00000008,
     Protected = 0x00000010,
-    VideoDecode = 0x00000020,
-    VideoEncode = 0x00000040,
-    OpticalFlow = 0x00000100,
 }
 
 #[repr(transparent)]

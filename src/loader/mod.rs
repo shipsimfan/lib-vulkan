@@ -1,4 +1,5 @@
-use std::{ffi::c_void, ptr::NonNull};
+use crate::bindings;
+use std::ffi::CStr;
 
 mod native;
 
@@ -7,7 +8,7 @@ pub use native::NativeLoader;
 pub trait Loader {
     fn get_instance_proc_addr(
         &self,
-        instance: Option<NonNull<c_void>>,
-        name: &str,
+        instance: Option<bindings::VkInstance>,
+        name: &CStr,
     ) -> Option<extern "system" fn()>;
 }

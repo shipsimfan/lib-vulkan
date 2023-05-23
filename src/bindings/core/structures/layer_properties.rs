@@ -2,6 +2,7 @@ use crate::{
     bindings::{VK_MAX_DESCRIPTION_SIZE, VK_MAX_EXTENSION_NAME_SIZE},
     VkVersion,
 };
+use std::ffi::CStr;
 
 #[repr(C)]
 pub struct VkLayerProperties {
@@ -12,8 +13,8 @@ pub struct VkLayerProperties {
 }
 
 impl VkLayerProperties {
-    pub fn layer_name(&self) -> &str {
-        unsafe { std::str::from_utf8_unchecked(&self.layer_name) }.trim_matches('\0')
+    pub fn layer_name(&self) -> &CStr {
+        CStr::from_bytes_until_nul(&self.layer_name).unwrap()
     }
 
     pub fn spec_version(&self) -> VkVersion {
@@ -24,7 +25,7 @@ impl VkLayerProperties {
         self.implementation_version
     }
 
-    pub fn description(&self) -> &str {
-        unsafe { std::str::from_utf8_unchecked(&self.description) }.trim_matches('\0')
+    pub fn description(&self) -> &CStr {
+        CStr::from_bytes_until_nul(&self.description).unwrap()
     }
 }

@@ -1,3 +1,7 @@
-use std::{ffi::c_void, ptr::NonNull};
+use std::ptr::NonNull;
 
-pub type VkSurfaceKHR = NonNull<c_void>;
+extern "system" {
+    pub type VkSurfaceKHRT;
+}
+
+pub type VkSurfaceKHR = NonNull<VkSurfaceKHRT>;

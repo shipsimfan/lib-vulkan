@@ -12,7 +12,9 @@ use std::{ptr::NonNull, sync::Arc};
 pub struct VkSurfaceKHR<L: Loader = NativeLoader> {
     inner: bindings::VkSurfaceKHR,
     instance: Arc<VkInstance<L>>,
+}
 
+pub(crate) struct VkSurfaceKHRFunctions {
     destroy_surface: VkDestroySurfaceKHR,
     get_physical_device_surface_capabilities: VkGetPhysicalDeviceSurfaceCapabilitiesKHR,
     get_physical_device_surface_formats: VkGetPhysicalDeviceSurfaceFormatsKHR,
@@ -22,55 +24,27 @@ pub struct VkSurfaceKHR<L: Loader = NativeLoader> {
 
 impl<L: Loader> VkSurfaceKHR<L> {
     pub(crate) fn new(inner: bindings::VkSurfaceKHR, instance: Arc<VkInstance<L>>) -> Result<Self> {
-        let destroy_surface = get_instance_proc_addr!(
-            instance.loader(),
-            Some(instance.inner()),
-            "vkDestroySurfaceKHR"
-        )?;
-        let get_physical_device_surface_capabilities = get_instance_proc_addr!(
-            instance.loader(),
-            Some(instance.inner()),
-            "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
-        )?;
-        let get_physical_device_surface_formats = get_instance_proc_addr!(
-            instance.loader(),
-            Some(instance.inner()),
-            "vkGetPhysicalDeviceSurfaceFormatsKHR"
-        )?;
-        let get_physical_device_surface_present_modes = get_instance_proc_addr!(
-            instance.loader(),
-            Some(instance.inner()),
-            "vkGetPhysicalDeviceSurfacePresentModesKHR"
-        )?;
-        let get_physical_device_surface_support = get_instance_proc_addr!(
-            instance.loader(),
-            Some(instance.inner()),
-            "vkGetPhysicalDeviceSurfaceSupportKHR"
-        )?;
-
-        Ok(VkSurfaceKHR {
-            inner,
-            instance,
-
-            destroy_surface,
-            get_physical_device_surface_capabilities,
-            get_physical_device_surface_formats,
-            get_physical_device_surface_present_modes,
-            get_physical_device_surface_support,
-        })
+        Ok(VkSurfaceKHR { inner, instance })
     }
 
     pub fn get_physical_device_surface_capabilities(
         &self,
         physical_device: &VkPhysicalDevice<L>,
     ) -> Result<VkSurfaceCapabilitiesKHR> {
-        assert_eq!(self.instance.inner(), physical_device.instance().inner());
+        assert_eq!(
+            Arc::as_ptr(&self.instance),
+            Arc::as_ptr(physical_device.instance())
+        );
 
         let mut surface_capabilities = VkSurfaceCapabilitiesKHR::null();
-        match (self.get_physical_device_surface_capabilities)(
+        match (self
+            .instance
+            .surface_functions()
+            .unwrap()
+            .get_physical_device_surface_capabilities)(
             physical_device.inner(),
             self.inner,
-            unsafe { NonNull::new_unchecked(&mut surface_capabilities) },
+            &mut surface_capabilities,
         ) {
             VkResult::Success => Ok(surface_capabilities),
             result => Err(result),
@@ -81,13 +55,20 @@ impl<L: Loader> VkSurfaceKHR<L> {
         &self,
         physical_device: &VkPhysicalDevice<L>,
     ) -> Result<Vec<VkSurfaceFormatKHR>> {
-        assert_eq!(self.instance.inner(), physical_device.instance().inner());
+        assert_eq!(
+            Arc::as_ptr(&self.instance),
+            Arc::as_ptr(physical_device.instance())
+        );
 
         let mut count = 0;
-        match (self.get_physical_device_surface_formats)(
+        match (self
+            .instance
+            .surface_functions()
+            .unwrap()
+            .get_physical_device_surface_formats)(
             physical_device.inner(),
             self.inner,
-            unsafe { NonNull::new_unchecked(&mut count) },
+            &mut count,
             None,
         ) {
             VkResult::Success => {}
@@ -95,10 +76,14 @@ impl<L: Loader> VkSurfaceKHR<L> {
         }
 
         let mut surface_formats = Vec::with_capacity(count as usize);
-        match (self.get_physical_device_surface_formats)(
+        match (self
+            .instance
+            .surface_functions()
+            .unwrap()
+            .get_physical_device_surface_formats)(
             physical_device.inner(),
             self.inner,
-            unsafe { NonNull::new_unchecked(&mut count) },
+            &mut count,
             Some(unsafe { NonNull::new_unchecked(surface_formats.as_mut_ptr()) }),
         ) {
             VkResult::Success | VkResult::Incomplete => {
@@ -113,13 +98,20 @@ impl<L: Loader> VkSurfaceKHR<L> {
         &self,
         physical_device: &VkPhysicalDevice<L>,
     ) -> Result<Vec<VkPresentModeKHR>> {
-        assert_eq!(self.instance.inner(), physical_device.instance().inner());
+        assert_eq!(
+            Arc::as_ptr(&self.instance),
+            Arc::as_ptr(physical_device.instance())
+        );
 
         let mut count = 0;
-        match (self.get_physical_device_surface_present_modes)(
+        match (self
+            .instance
+            .surface_functions()
+            .unwrap()
+            .get_physical_device_surface_present_modes)(
             physical_device.inner(),
             self.inner,
-            unsafe { NonNull::new_unchecked(&mut count) },
+            &mut count,
             None,
         ) {
             VkResult::Success => {}
@@ -127,10 +119,14 @@ impl<L: Loader> VkSurfaceKHR<L> {
         }
 
         let mut present_modes = Vec::with_capacity(count as usize);
-        match (self.get_physical_device_surface_present_modes)(
+        match (self
+            .instance
+            .surface_functions()
+            .unwrap()
+            .get_physical_device_surface_present_modes)(
             physical_device.inner(),
             self.inner,
-            unsafe { NonNull::new_unchecked(&mut count) },
+            &mut count,
             Some(unsafe { NonNull::new_unchecked(present_modes.as_mut_ptr()) }),
         ) {
             VkResult::Success | VkResult::Incomplete => {
@@ -146,12 +142,21 @@ impl<L: Loader> VkSurfaceKHR<L> {
         physical_device: &VkPhysicalDevice<L>,
         queue_family_index: u32,
     ) -> Result<bool> {
+        assert_eq!(
+            Arc::as_ptr(&self.instance),
+            Arc::as_ptr(physical_device.instance())
+        );
+
         let mut supported = 0;
-        match (self.get_physical_device_surface_support)(
+        match (self
+            .instance
+            .surface_functions()
+            .unwrap()
+            .get_physical_device_surface_support)(
             physical_device.inner(),
             queue_family_index,
             self.inner,
-            unsafe { NonNull::new_unchecked(&mut supported) },
+            &mut supported,
         ) {
             VkResult::Success => Ok(supported != 0),
             result => Err(result),
@@ -161,6 +166,45 @@ impl<L: Loader> VkSurfaceKHR<L> {
 
 impl<L: Loader> Drop for VkSurfaceKHR<L> {
     fn drop(&mut self) {
-        (self.destroy_surface)(self.instance.inner(), self.inner, None);
+        (self.instance.surface_functions().unwrap().destroy_surface)(
+            self.instance.inner(),
+            self.inner,
+            None,
+        );
+    }
+}
+
+impl VkSurfaceKHRFunctions {
+    pub(crate) fn get<L: Loader>(instance: bindings::VkInstance, loader: &L) -> Result<Self> {
+        let destroy_surface =
+            get_instance_proc_addr!(loader, Some(instance), "vkDestroySurfaceKHR")?;
+        let get_physical_device_surface_capabilities = get_instance_proc_addr!(
+            loader,
+            Some(instance),
+            "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
+        )?;
+        let get_physical_device_surface_formats = get_instance_proc_addr!(
+            loader,
+            Some(instance),
+            "vkGetPhysicalDeviceSurfaceFormatsKHR"
+        )?;
+        let get_physical_device_surface_present_modes = get_instance_proc_addr!(
+            loader,
+            Some(instance),
+            "vkGetPhysicalDeviceSurfacePresentModesKHR"
+        )?;
+        let get_physical_device_surface_support = get_instance_proc_addr!(
+            loader,
+            Some(instance),
+            "vkGetPhysicalDeviceSurfaceSupportKHR"
+        )?;
+
+        Ok(VkSurfaceKHRFunctions {
+            destroy_surface,
+            get_physical_device_surface_capabilities,
+            get_physical_device_surface_formats,
+            get_physical_device_surface_present_modes,
+            get_physical_device_surface_support,
+        })
     }
 }

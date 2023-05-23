@@ -1,5 +1,6 @@
 use crate::bindings::VkFlags;
 
+#[non_exhaustive]
 #[repr(u32)]
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum VkInstanceCreateFlagBits {

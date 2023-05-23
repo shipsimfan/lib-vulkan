@@ -1,3 +1,4 @@
+use std::ffi::CStr;
 use win32::{FarProc, HModule};
 
 pub struct Library(HModule);
@@ -9,9 +10,8 @@ impl Library {
             .map(|module| Library(module))
     }
 
-    pub fn get_proc_addr(&self, proc: &str) -> Option<FarProc> {
-        debug_assert_eq!(proc.as_bytes()[proc.len() - 1], 0);
-        win32::get_proc_address(self.0, proc.as_bytes()).ok()
+    pub fn get_proc_addr(&self, proc: &CStr) -> Option<FarProc> {
+        win32::get_proc_address(self.0, proc).ok()
     }
 }
 

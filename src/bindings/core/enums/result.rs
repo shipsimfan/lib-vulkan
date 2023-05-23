@@ -90,23 +90,6 @@ impl std::fmt::Display for VkResult {
                 ErrorFragmentation => "Fragmentation",
                 ErrorInvalidOpaqueCaptureAddress => "Invalid opaque capture address",
                 PipelineCompileRequired => "Pipeline compile required",
-                ErrorSurfaceLostKHR => "Surface lost",
-                ErrorNativeWindowInUseKHR => "Native window in use",
-                SuboptimalKHR => "Suboptimal",
-                ErrorOutOfDateKHR => "Out of date",
-                ErrorIncompatibleDisplayKHR => "Incompatible display",
-                ErrorImageUsageNotSupportedKHR => "Image usage not supported",
-                ErrorVideoPictureLayoutNotSupportedKHR => "Video picture layout not supported",
-                ErrorVideoProfileOperationNotSupportedKHR =>
-                    "Video profile operation not supported",
-                ErrorVideoProfileFormatNotSupportedKHR => "Video profile format not supported",
-                ErrorVideoProfileCodecNotSupportedKHR => "Video profile codec not supported",
-                ErrorVideoStdVersionNotSupportedKHR => "Video standard version not supported",
-                ErrorNotPermittedKHR => "Not permitted",
-                ThreadIdleKHR => "Thread idle",
-                ThreadDoneKHR => "Thread done",
-                OperationDeferredKHR => "Operation deferred",
-                OperationNotDeferredKHR => "Operation not deferred",
                 #[allow(unreachable_patterns)]
                 _ => return write!(f, "Unknown ({:#010X})", *self as u32),
             }

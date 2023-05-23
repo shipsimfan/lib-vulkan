@@ -16,6 +16,7 @@ mod physical_device_sparse_properties;
 mod queue_family_properties;
 mod queue_flags;
 mod sample_count_flags;
+mod version;
 
 pub use application_info::*;
 pub use device_create_info::*;
@@ -35,3 +36,4 @@ pub use physical_device_sparse_properties::*;
 pub use queue_family_properties::*;
 pub use queue_flags::*;
 pub use sample_count_flags::*;
+pub use version::*;

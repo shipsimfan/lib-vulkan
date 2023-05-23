@@ -1,4 +1,5 @@
 use crate::bindings::VK_MAX_EXTENSION_NAME_SIZE;
+use std::ffi::CStr;
 
 #[repr(C)]
 pub struct VkExtensionProperties {
@@ -7,8 +8,8 @@ pub struct VkExtensionProperties {
 }
 
 impl VkExtensionProperties {
-    pub fn extension_name(&self) -> &str {
-        unsafe { std::str::from_utf8_unchecked(&self.extension_name) }.trim_matches('\0')
+    pub fn extension_name(&self) -> &CStr {
+        CStr::from_bytes_until_nul(&self.extension_name).unwrap()
     }
 
     pub fn spec_version(&self) -> u32 {

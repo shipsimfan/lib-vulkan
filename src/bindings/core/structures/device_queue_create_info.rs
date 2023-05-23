@@ -1,21 +1,19 @@
-use crate::{
-    bindings::VkStructureType, VkDeviceQueueCreateFlags, VkDeviceQueueGlobalPriorityCreateInfoKHR,
-};
-use std::ptr::NonNull;
+use crate::{bindings::VkStructureType, VkDeviceQueueCreateFlags};
+use std::{ffi::c_void, marker::PhantomData, ptr::NonNull};
 
 #[repr(C)]
 pub struct VkDeviceQueueCreateInfo<'a> {
     s_type: VkStructureType,
-    p_next: Option<&'a VkDeviceQueueGlobalPriorityCreateInfoKHR>,
+    p_next: Option<NonNull<c_void>>,
     flags: VkDeviceQueueCreateFlags,
     queue_family_index: u32,
     queue_count: u32,
     p_queue_priorities: NonNull<f32>,
+    phantom: PhantomData<&'a ()>,
 }
 
 impl<'a> VkDeviceQueueCreateInfo<'a> {
     pub fn new(
-        next: Option<&'a VkDeviceQueueGlobalPriorityCreateInfoKHR>,
         flags: VkDeviceQueueCreateFlags,
         queue_family_index: u32,
         queue_priorities: &'a [f32],
@@ -27,16 +25,13 @@ impl<'a> VkDeviceQueueCreateInfo<'a> {
 
         VkDeviceQueueCreateInfo {
             s_type: VkStructureType::DeviceQueueCreateInfo,
-            p_next: next,
+            p_next: None,
             flags,
             queue_family_index,
             queue_count: queue_priorities.len() as u32,
             p_queue_priorities: unsafe { NonNull::new_unchecked(queue_priorities.as_ptr() as _) },
+            phantom: PhantomData,
         }
-    }
-
-    pub fn next(&self) -> Option<&VkDeviceQueueGlobalPriorityCreateInfoKHR> {
-        self.p_next
     }
 
     pub fn flags(&self) -> VkDeviceQueueCreateFlags {
