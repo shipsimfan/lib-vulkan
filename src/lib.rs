@@ -34,7 +34,9 @@ pub use bindings::{
     VkSampleCountFlagBits, VkSampleCountFlags, VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR,
     VkSurfaceTransformFlagBitsKHR, VkSurfaceTransformFlagsKHR, VkVersion, VK_API_VERSION_1_0,
     VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION,
-    VK_HEADER_VERSION_COMPLETE, VK_UUID_SIZE,
+    VK_HEADER_VERSION_COMPLETE, VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME,
+    VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION, VK_KHR_SURFACE_EXTENSION_NAME,
+    VK_KHR_SURFACE_SPEC_VERSION, VK_UUID_SIZE,
 };
 
 pub type Result<T> = std::result::Result<T, VkResult>;
