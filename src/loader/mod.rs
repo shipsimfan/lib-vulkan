@@ -1,14 +1,10 @@
-use crate::bindings;
-use std::ffi::CStr;
+use crate::VkInstance;
 
 mod native;
 
 pub use native::NativeLoader;
 
 pub trait Loader {
-    fn get_instance_proc_addr(
-        &self,
-        instance: Option<bindings::VkInstance>,
-        name: &CStr,
-    ) -> Option<extern "system" fn()>;
+    fn get_instance_proc_addr(&self, instance: Option<VkInstance>, name: &str)
+        -> Option<*const ()>;
 }

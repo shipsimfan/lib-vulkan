@@ -1,5 +1,5 @@
 mod core;
-mod extensions;
 
-pub use self::core::*;
-pub use extensions::*;
+pub use self::core::{VkInstance, VkResult};
+
+pub(crate) use self::core::*;

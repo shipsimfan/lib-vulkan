@@ -1,6 +1,6 @@
 use super::Loader;
-use crate::bindings;
-use std::ffi::{c_char, CStr};
+use crate::VkInstance;
+use std::ffi::{c_char, CStr, CString};
 
 #[cfg(target_os = "windows")]
 mod windows;
@@ -11,9 +11,9 @@ use windows as os;
 pub struct NativeLoader {
     _library: os::Library,
     get_instance_proc_addr: extern "system" fn(
-        instance: Option<bindings::VkInstance>,
+        instance: Option<VkInstance>,
         p_name: *const c_char,
-    ) -> Option<extern "system" fn()>,
+    ) -> Option<*const ()>,
 }
 
 impl NativeLoader {
@@ -36,9 +36,11 @@ impl NativeLoader {
 impl Loader for NativeLoader {
     fn get_instance_proc_addr(
         &self,
-        instance: Option<bindings::VkInstance>,
-        name: &CStr,
-    ) -> Option<extern "system" fn()> {
+        instance: Option<VkInstance>,
+        name: &str,
+    ) -> Option<*const ()> {
+        let name = CString::new(name).unwrap();
+
         (self.get_instance_proc_addr)(instance, name.as_ptr())
     }
 }

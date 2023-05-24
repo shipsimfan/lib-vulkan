@@ -1,11 +1,5 @@
-mod constants;
-mod enums;
-mod functions;
-mod structures;
-mod types;
+mod instance;
+mod result;
 
-pub use constants::*;
-pub use enums::*;
-pub use functions::*;
-pub use structures::*;
-pub use types::*;
+pub use instance::VkInstance;
+pub use result::VkResult;
