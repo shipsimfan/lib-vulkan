@@ -219,6 +219,14 @@ pub enum VkStructureType {
     PhysicalDeviceMaintenance4Properties = 1000413001,
     DeviceBufferMemoryRequirements = 1000413002,
     DeviceImageMemoryRequirements = 1000413003,
+    SwapchainCreateInfo = 1000001000,
+    SwapchainPresentInfo = 1000001001,
+    DeviceGroupPresentCapabilities = 1000060007,
+    ImageSwapchainCreateInfo = 1000060008,
+    BindImageMemorySwapchainInfo = 1000060009,
+    AcquireNextImageInfo = 1000060010,
+    DevicegroupPresentInfo = 1000060011,
+    DeviceGroupSwapchainCreateInfo = 1000060012,
 
     #[cfg(target_os = "windows")]
     Win32SurfaceCreateInfo = 1000009000,

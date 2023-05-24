@@ -1,6 +1,7 @@
 use crate::{VkColorSpaceKHR, VkFormat};
 
 #[repr(C)]
+#[derive(Clone)]
 pub struct VkSurfaceFormatKHR {
     format: VkFormat,
     color_space: VkColorSpaceKHR,

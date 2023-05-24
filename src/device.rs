@@ -1,26 +1,39 @@
 use crate::{
     bindings::{self, VkDestroyDevice, VkGetDeviceQueue},
-    get_device_proc_addr, Loader, NativeLoader, Result, VkInstance, VkQueue,
+    get_device_proc_addr,
+    swapchain::VkSwapchainKHRFunctions,
+    Loader, NativeLoader, Result, VkInstance, VkQueue, VkResult, VkSwapchainCreateInfoKHR,
+    VkSwapchainKHR,
 };
 use std::sync::Arc;
 
 pub struct VkDevice<L: Loader = NativeLoader> {
     inner: bindings::VkDevice,
+    #[allow(unused)]
     instance: Arc<VkInstance<L>>,
 
     destroy_device: VkDestroyDevice,
     get_device_queue: VkGetDeviceQueue,
+
+    swapchain_functions: Option<VkSwapchainKHRFunctions>,
 }
 
 impl<L: Loader> VkDevice<L> {
     pub(crate) fn new(
         inner: bindings::VkDevice,
         instance: Arc<VkInstance<L>>,
+        swapchain_enabled: bool,
     ) -> Result<Arc<Self>> {
         let get_proc_addr = instance.get_device_proc_addr();
 
         let destroy_device = get_device_proc_addr!(get_proc_addr, inner, "vkDestroyDevice")?;
         let get_device_queue = get_device_proc_addr!(get_proc_addr, inner, "vkGetDeviceQueue")?;
+
+        let swapchain_functions = if swapchain_enabled {
+            Some(VkSwapchainKHRFunctions::get(get_proc_addr, inner)?)
+        } else {
+            None
+        };
 
         Ok(Arc::new(VkDevice {
             inner,
@@ -28,6 +41,8 @@ impl<L: Loader> VkDevice<L> {
 
             destroy_device,
             get_device_queue,
+
+            swapchain_functions,
         }))
     }
 
@@ -39,6 +54,30 @@ impl<L: Loader> VkDevice<L> {
         let mut queue = None;
         (self.get_device_queue)(self.inner, queue_family_index, queue_index, &mut queue);
         VkQueue::new(queue.unwrap(), self.clone())
+    }
+
+    pub fn create_swapchain(
+        self: &Arc<Self>,
+        create_info: &VkSwapchainCreateInfoKHR,
+    ) -> Result<VkSwapchainKHR<L>> {
+        let mut swapchain = None;
+        match (self.swapchain_functions.as_ref().unwrap().create_swapchain)(
+            self.inner,
+            create_info,
+            None,
+            &mut swapchain,
+        ) {
+            VkResult::Success => Ok(VkSwapchainKHR::new(swapchain.unwrap(), self.clone())),
+            result => Err(result),
+        }
+    }
+
+    pub(crate) fn inner(&self) -> bindings::VkDevice {
+        self.inner
+    }
+
+    pub(crate) fn swapchain_functions(&self) -> Option<&VkSwapchainKHRFunctions> {
+        self.swapchain_functions.as_ref()
     }
 }
 

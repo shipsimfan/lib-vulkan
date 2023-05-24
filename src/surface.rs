@@ -170,6 +170,10 @@ impl<L: Loader> VkSurfaceKHR<L> {
             result => Err(result),
         }
     }
+
+    pub(crate) fn inner(&self) -> bindings::VkSurfaceKHR {
+        self.inner
+    }
 }
 
 impl<L: Loader> Drop for VkSurfaceKHR<L> {

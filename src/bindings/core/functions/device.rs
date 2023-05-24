@@ -1,4 +1,7 @@
-use crate::bindings::{VkDevice, VkQueue};
+use crate::{
+    bindings::{VkDevice, VkPhysicalDevice, VkQueue},
+    VkExtensionProperties, VkResult,
+};
 use std::{
     ffi::{c_char, c_void},
     ptr::NonNull,
@@ -16,3 +19,10 @@ pub type VkGetDeviceQueue = extern "system" fn(
     queue_index: u32,
     p_queue: &mut Option<VkQueue>,
 );
+
+pub type VkEnumerateDeviceExtensionProperties = extern "system" fn(
+    physical_device: VkPhysicalDevice,
+    p_layer_name: *const c_char,
+    p_property_count: &mut u32,
+    p_properties: Option<NonNull<VkExtensionProperties>>,
+) -> VkResult;

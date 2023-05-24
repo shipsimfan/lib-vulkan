@@ -8,6 +8,8 @@ pub enum VkResult {
     EventSet = 3,
     EventReset = 4,
     Incomplete = 5,
+    Suboptimal = 1000001003,
+    PipelineCompileRequired = 1000297000,
     ErrorOutOfHostMemory = -1,
     ErrorOutOfDeviceMemory = -2,
     ErrorInitializationFailed = -3,
@@ -23,11 +25,11 @@ pub enum VkResult {
     ErrorUnknown = -13,
     ErrorSurfaceLost = -1000000000,
     ErrorNativeWindowInUse = -1000000001,
+    ErrorOutOfDate = -1000001004,
     ErrorOutOfPoolMemory = -1000069000,
     ErrorInvalidExternalHandle = -1000072003,
     ErrorFragmentation = -1000161000,
     ErrorInvalidOpaqueCaptureAddress = -1000257000,
-    PipelineCompileRequired = 1000297000,
 }
 
 impl VkResult {
@@ -58,6 +60,8 @@ impl std::fmt::Display for VkResult {
                 EventSet => "Event set",
                 EventReset => "Event reset",
                 Incomplete => "Incomplete",
+                Suboptimal => "Suboptimal",
+                PipelineCompileRequired => "Pipeline compile required",
                 ErrorOutOfHostMemory => "Out of host memory",
                 ErrorOutOfDeviceMemory => "Out of device memory",
                 ErrorInitializationFailed => "Initialization failed",
@@ -71,11 +75,13 @@ impl std::fmt::Display for VkResult {
                 ErrorFormatNotSupported => "Format not supported",
                 ErrorFragmentedPool => "Fragmented pool",
                 ErrorUnknown => "Unknown",
+                ErrorSurfaceLost => "Surface lost",
+                ErrorNativeWindowInUse => "Native window in use",
+                ErrorOutOfDate => "Out of date",
                 ErrorOutOfPoolMemory => "Out of pool memory",
                 ErrorInvalidExternalHandle => "Invalid external handle",
                 ErrorFragmentation => "Fragmentation",
                 ErrorInvalidOpaqueCaptureAddress => "Invalid opaque capture address",
-                PipelineCompileRequired => "Pipeline compile required",
                 #[allow(unreachable_patterns)]
                 _ => return write!(f, "Unknown ({:#010X})", *self as u32),
             }

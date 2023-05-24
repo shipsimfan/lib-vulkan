@@ -1,12 +1,18 @@
 use crate::{
     bindings::{
-        self, VkCreateDevice, VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
-        VkGetPhysicalDeviceQueueFamilyProperties, VkPhysicalDeviceProperties,
+        self, VkCreateDevice, VkEnumerateDeviceExtensionProperties, VkGetPhysicalDeviceFeatures,
+        VkGetPhysicalDeviceProperties, VkGetPhysicalDeviceQueueFamilyProperties,
+        VkPhysicalDeviceProperties,
     },
-    get_instance_proc_addr, Loader, NativeLoader, Result, VkDevice, VkDeviceCreateInfo, VkInstance,
-    VkPhysicalDeviceFeatures, VkQueueFamilyProperties, VkResult,
+    get_instance_proc_addr, Loader, NativeLoader, Result, VkDevice, VkDeviceCreateInfo,
+    VkExtensionProperties, VkInstance, VkPhysicalDeviceFeatures, VkQueueFamilyProperties, VkResult,
+    VK_KHR_SWAPCHAIN_EXTENSION_NAME,
 };
-use std::{ptr::NonNull, sync::Arc};
+use std::{
+    ffi::CStr,
+    ptr::{null, NonNull},
+    sync::Arc,
+};
 
 pub struct VkPhysicalDevice<L: Loader = NativeLoader> {
     inner: bindings::VkPhysicalDevice,
@@ -17,6 +23,7 @@ pub(crate) struct VkPhysicalDeviceFunctions {
     get_physical_device_properties: VkGetPhysicalDeviceProperties,
     get_physical_device_features: VkGetPhysicalDeviceFeatures,
     get_physical_device_queue_family_properties: VkGetPhysicalDeviceQueueFamilyProperties,
+    enumerate_device_extension_properties: VkEnumerateDeviceExtensionProperties,
     create_device: VkCreateDevice,
 }
 
@@ -69,6 +76,18 @@ impl<L: Loader> VkPhysicalDevice<L> {
     }
 
     pub fn create_device(&self, create_info: &VkDeviceCreateInfo) -> Result<Arc<VkDevice<L>>> {
+        let mut swapchain_enabled = false;
+        if let Some(extensions) = create_info.enabled_extensions() {
+            for extension in extensions {
+                let extension = unsafe { CStr::from_ptr(*extension) };
+
+                if extension == VK_KHR_SWAPCHAIN_EXTENSION_NAME {
+                    swapchain_enabled = true;
+                    break;
+                }
+            }
+        }
+
         let mut device = None;
         match (self.instance.physical_device_functions().create_device)(
             self.inner,
@@ -76,7 +95,9 @@ impl<L: Loader> VkPhysicalDevice<L> {
             None,
             &mut device,
         ) {
-            VkResult::Success => VkDevice::new(device.unwrap(), self.instance.clone()),
+            VkResult::Success => {
+                VkDevice::new(device.unwrap(), self.instance.clone(), swapchain_enabled)
+            }
             result => Err(result),
         }
     }
@@ -88,6 +109,46 @@ impl<L: Loader> VkPhysicalDevice<L> {
             .unwrap()
             .get_physical_device_win32_presentation_support)(self.inner, queue_family_index)
             != 0
+    }
+
+    pub fn enumerate_device_extension_properties(
+        &self,
+        layer_name: Option<&CStr>,
+    ) -> Result<Vec<VkExtensionProperties>> {
+        let mut count = 0;
+        match (self
+            .instance()
+            .physical_device_functions()
+            .enumerate_device_extension_properties)(
+            self.inner,
+            layer_name
+                .map(|layer_name| layer_name.as_ptr())
+                .unwrap_or(null()),
+            &mut count,
+            None,
+        ) {
+            VkResult::Success => {}
+            result => return Err(result),
+        }
+
+        let mut extensions = Vec::with_capacity(count as usize);
+        match (self
+            .instance
+            .physical_device_functions()
+            .enumerate_device_extension_properties)(
+            self.inner,
+            layer_name
+                .map(|layer_name| layer_name.as_ptr())
+                .unwrap_or(null()),
+            &mut count,
+            Some(unsafe { NonNull::new_unchecked(extensions.as_mut_ptr()) }),
+        ) {
+            VkResult::Success | VkResult::Incomplete => {
+                unsafe { extensions.set_len(count as usize) };
+                Ok(extensions)
+            }
+            result => Err(result),
+        }
     }
 
     pub(crate) fn instance(&self) -> &Arc<VkInstance<L>> {
@@ -111,11 +172,17 @@ impl VkPhysicalDeviceFunctions {
             "vkGetPhysicalDeviceQueueFamilyProperties"
         )?;
         let create_device = get_instance_proc_addr!(loader, Some(instance), "vkCreateDevice")?;
+        let enumerate_device_extension_properties = get_instance_proc_addr!(
+            loader,
+            Some(instance),
+            "vkEnumerateDeviceExtensionProperties"
+        )?;
 
         Ok(VkPhysicalDeviceFunctions {
             get_physical_device_properties,
             get_physical_device_features,
             get_physical_device_queue_family_properties,
+            enumerate_device_extension_properties,
             create_device,
         })
     }
