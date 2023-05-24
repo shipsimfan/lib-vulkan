@@ -1,9 +1,10 @@
 use crate::{
     bindings::{
         self, VkAcquireNextImageKHR, VkCreateSwapchainKHR, VkDestroySwapchainKHR,
-        VkGetDeviceProcAddr, VkGetSwapchainImagesKHR, VkImage, VkQueuePresentKHR,
+        VkGetDeviceProcAddr, VkGetSwapchainImagesKHR, VkQueuePresentKHR,
     },
-    get_device_proc_addr, Loader, NativeLoader, Result, VkDevice, VkFence, VkResult, VkSemaphore,
+    get_device_proc_addr, Loader, NativeLoader, Result, VkDevice, VkFence, VkImage, VkResult,
+    VkSemaphore,
 };
 use std::{ptr::NonNull, sync::Arc};
 
@@ -50,7 +51,7 @@ impl<L: Loader> VkSwapchainKHR<L> {
         }
     }
 
-    pub fn get_swapchain_images(&self) -> Result<Vec<VkImage>> {
+    pub fn get_swapchain_images(&self) -> Result<Vec<VkImage<L>>> {
         let mut count = 0;
         match (self
             .device
@@ -75,7 +76,10 @@ impl<L: Loader> VkSwapchainKHR<L> {
         ) {
             VkResult::Success | VkResult::Incomplete => {
                 unsafe { images.set_len(count as usize) };
-                Ok(images)
+                Ok(images
+                    .into_iter()
+                    .map(|image| VkImage::new(image, self.device.clone()))
+                    .collect())
             }
             result => Err(result),
         }

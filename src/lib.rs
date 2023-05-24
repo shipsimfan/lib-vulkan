@@ -3,6 +3,8 @@
 
 mod device;
 mod fence;
+mod image;
+mod image_view;
 mod instance;
 mod loader;
 mod macros;
@@ -25,6 +27,8 @@ pub(self) use surface::VkWin32SurfaceKHRFunctions;
 pub use crate::vulkan::Vulkan;
 pub use device::VkDevice;
 pub use fence::VkFence;
+pub use image::VkImage;
+pub use image_view::VkImageView;
 pub use instance::VkInstance;
 pub use loader::{Loader, NativeLoader};
 pub use physical_device::VkPhysicalDevice;
@@ -34,14 +38,16 @@ pub use surface::VkSurfaceKHR;
 pub use swapchain::VkSwapchainKHR;
 
 pub use bindings::{
-    VkApplicationInfo, VkColorSpaceKHR, VkCompositeAlphaFlagBitsKHR, VkCompositeAlphaFlagsKHR,
-    VkDeviceCreateInfo, VkDeviceQueueCreateFlagBits, VkDeviceQueueCreateFlags,
-    VkDeviceQueueCreateInfo, VkExtensionProperties, VkExtent2D, VkExtent3D, VkFormat, VkImage,
-    VkImageLayout, VkImageUsageFlagBits, VkImageUsageFlags, VkInstanceCreateFlagBits,
-    VkInstanceCreateFlags, VkInstanceCreateInfo, VkLayerProperties, VkOffset2D,
-    VkPhysicalDeviceFeatures, VkPhysicalDeviceLimits, VkPhysicalDeviceProperties,
-    VkPhysicalDeviceSparseProperties, VkPhysicalDeviceType, VkPresentModeKHR,
-    VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags, VkRect2D, VkResult,
+    VkApplicationInfo, VkColorSpaceKHR, VkComponentMapping, VkComponentSwizzle,
+    VkCompositeAlphaFlagBitsKHR, VkCompositeAlphaFlagsKHR, VkDeviceCreateInfo,
+    VkDeviceQueueCreateFlagBits, VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo,
+    VkExtensionProperties, VkExtent2D, VkExtent3D, VkFormat, VkImageAspectFlagBits,
+    VkImageAspectFlags, VkImageLayout, VkImageSubresourceRange, VkImageUsageFlagBits,
+    VkImageUsageFlags, VkImageViewCreateFlagBits, VkImageViewCreateFlags, VkImageViewCreateInfo,
+    VkImageViewType, VkInstanceCreateFlagBits, VkInstanceCreateFlags, VkInstanceCreateInfo,
+    VkLayerProperties, VkOffset2D, VkPhysicalDeviceFeatures, VkPhysicalDeviceLimits,
+    VkPhysicalDeviceProperties, VkPhysicalDeviceSparseProperties, VkPhysicalDeviceType,
+    VkPresentModeKHR, VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags, VkRect2D, VkResult,
     VkSampleCountFlagBits, VkSampleCountFlags, VkSharingMode, VkSurfaceCapabilitiesKHR,
     VkSurfaceFormatKHR, VkSurfaceTransformFlagBitsKHR, VkSurfaceTransformFlagsKHR,
     VkSwapchainCreateFlagsKHR, VkSwapchainCreateInfoKHR, VkVersion, VK_API_VERSION_1_0,

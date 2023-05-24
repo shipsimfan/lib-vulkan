@@ -1,9 +1,10 @@
 use crate::{
     bindings::{self, VkDestroyDevice, VkGetDeviceQueue},
     get_device_proc_addr,
+    image_view::VkImageViewFunctions,
     swapchain::VkSwapchainKHRFunctions,
-    Loader, NativeLoader, Result, VkInstance, VkQueue, VkResult, VkSwapchainCreateInfoKHR,
-    VkSwapchainKHR,
+    Loader, NativeLoader, Result, VkImageView, VkImageViewCreateInfo, VkInstance, VkQueue,
+    VkResult, VkSwapchainCreateInfoKHR, VkSwapchainKHR,
 };
 use std::sync::Arc;
 
@@ -15,6 +16,7 @@ pub struct VkDevice<L: Loader = NativeLoader> {
     destroy_device: VkDestroyDevice,
     get_device_queue: VkGetDeviceQueue,
 
+    image_view_functions: VkImageViewFunctions,
     swapchain_functions: Option<VkSwapchainKHRFunctions>,
 }
 
@@ -29,6 +31,7 @@ impl<L: Loader> VkDevice<L> {
         let destroy_device = get_device_proc_addr!(get_proc_addr, inner, "vkDestroyDevice")?;
         let get_device_queue = get_device_proc_addr!(get_proc_addr, inner, "vkGetDeviceQueue")?;
 
+        let image_view_functions = VkImageViewFunctions::get(get_proc_addr, inner)?;
         let swapchain_functions = if swapchain_enabled {
             Some(VkSwapchainKHRFunctions::get(get_proc_addr, inner)?)
         } else {
@@ -42,6 +45,7 @@ impl<L: Loader> VkDevice<L> {
             destroy_device,
             get_device_queue,
 
+            image_view_functions,
             swapchain_functions,
         }))
     }
@@ -54,6 +58,22 @@ impl<L: Loader> VkDevice<L> {
         let mut queue = None;
         (self.get_device_queue)(self.inner, queue_family_index, queue_index, &mut queue);
         VkQueue::new(queue.unwrap(), self.clone())
+    }
+
+    pub fn create_image_view(
+        self: &Arc<Self>,
+        create_info: &VkImageViewCreateInfo,
+    ) -> Result<VkImageView<L>> {
+        let mut view = None;
+        match (self.image_view_functions.create_image_view)(
+            self.inner,
+            create_info,
+            None,
+            &mut view,
+        ) {
+            VkResult::Success => Ok(VkImageView::new(view.unwrap(), self.clone())),
+            result => Err(result),
+        }
     }
 
     pub fn create_swapchain(
@@ -74,6 +94,10 @@ impl<L: Loader> VkDevice<L> {
 
     pub(crate) fn inner(&self) -> bindings::VkDevice {
         self.inner
+    }
+
+    pub(crate) fn image_view_functions(&self) -> &VkImageViewFunctions {
+        &self.image_view_functions
     }
 
     pub(crate) fn swapchain_functions(&self) -> Option<&VkSwapchainKHRFunctions> {
