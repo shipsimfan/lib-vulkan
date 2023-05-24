@@ -14,6 +14,10 @@ pub mod bindings;
 
 pub(self) use macros::*;
 pub(self) use physical_device::VkPhysicalDeviceFunctions;
+pub(self) use surface::VkSurfaceKHRFunctions;
+
+#[cfg(target_os = "windows")]
+pub(self) use surface::VkWin32SurfaceKHRFunctions;
 
 pub use crate::vulkan::Vulkan;
 pub use device::VkDevice;
@@ -37,6 +41,12 @@ pub use bindings::{
     VK_HEADER_VERSION_COMPLETE, VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME,
     VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION, VK_KHR_SURFACE_EXTENSION_NAME,
     VK_KHR_SURFACE_SPEC_VERSION, VK_UUID_SIZE,
+};
+
+#[cfg(target_os = "windows")]
+pub use bindings::{
+    VkWin32SurfaceCreateInfoKHR, VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
+    VK_KHR_WIN32_SURFACE_SPEC_VERSION,
 };
 
 pub type Result<T> = std::result::Result<T, VkResult>;

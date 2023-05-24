@@ -1,8 +1,9 @@
 use crate::{
     bindings::{
-        self, VkDestroySurfaceKHR, VkGetPhysicalDeviceSurfaceCapabilitiesKHR,
-        VkGetPhysicalDeviceSurfaceFormatsKHR, VkGetPhysicalDeviceSurfacePresentModesKHR,
-        VkGetPhysicalDeviceSurfaceSupportKHR,
+        self, VkCreateWin32SurfaceKHR, VkDestroySurfaceKHR,
+        VkGetPhysicalDeviceSurfaceCapabilitiesKHR, VkGetPhysicalDeviceSurfaceFormatsKHR,
+        VkGetPhysicalDeviceSurfacePresentModesKHR, VkGetPhysicalDeviceSurfaceSupportKHR,
+        VkGetPhysicalDeviceWin32PresentationSupportKHR,
     },
     get_instance_proc_addr, Loader, NativeLoader, Result, VkInstance, VkPhysicalDevice,
     VkPresentModeKHR, VkResult, VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR,
@@ -20,6 +21,13 @@ pub(crate) struct VkSurfaceKHRFunctions {
     get_physical_device_surface_formats: VkGetPhysicalDeviceSurfaceFormatsKHR,
     get_physical_device_surface_present_modes: VkGetPhysicalDeviceSurfacePresentModesKHR,
     get_physical_device_surface_support: VkGetPhysicalDeviceSurfaceSupportKHR,
+}
+
+#[cfg(target_os = "windows")]
+pub(crate) struct VkWin32SurfaceKHRFunctions {
+    pub(crate) create_win32_surface: VkCreateWin32SurfaceKHR,
+    pub(crate) get_physical_device_win32_presentation_support:
+        VkGetPhysicalDeviceWin32PresentationSupportKHR,
 }
 
 impl<L: Loader> VkSurfaceKHR<L> {
@@ -205,6 +213,24 @@ impl VkSurfaceKHRFunctions {
             get_physical_device_surface_formats,
             get_physical_device_surface_present_modes,
             get_physical_device_surface_support,
+        })
+    }
+}
+
+#[cfg(target_os = "windows")]
+impl VkWin32SurfaceKHRFunctions {
+    pub(crate) fn get<L: Loader>(instance: bindings::VkInstance, loader: &L) -> Result<Self> {
+        let create_win32_surface =
+            get_instance_proc_addr!(loader, Some(instance), "vkCreateWin32SurfaceKHR")?;
+        let get_physical_device_win32_presentation_support = get_instance_proc_addr!(
+            loader,
+            Some(instance),
+            "vkGetPhysicalDeviceWin32PresentationSupportKHR"
+        )?;
+
+        Ok(VkWin32SurfaceKHRFunctions {
+            create_win32_surface,
+            get_physical_device_win32_presentation_support,
         })
     }
 }

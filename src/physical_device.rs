@@ -81,6 +81,15 @@ impl<L: Loader> VkPhysicalDevice<L> {
         }
     }
 
+    pub fn get_physical_device_win32_presentation_support(&self, queue_family_index: u32) -> bool {
+        (self
+            .instance
+            .win32_surface_functions()
+            .unwrap()
+            .get_physical_device_win32_presentation_support)(self.inner, queue_family_index)
+            != 0
+    }
+
     pub(crate) fn instance(&self) -> &Arc<VkInstance<L>> {
         &self.instance
     }

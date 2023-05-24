@@ -219,4 +219,7 @@ pub enum VkStructureType {
     PhysicalDeviceMaintenance4Properties = 1000413001,
     DeviceBufferMemoryRequirements = 1000413002,
     DeviceImageMemoryRequirements = 1000413003,
+
+    #[cfg(target_os = "windows")]
+    Win32SurfaceCreateInfo = 1000009000,
 }

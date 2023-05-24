@@ -3,10 +3,12 @@ use crate::{
         self, VkDestroyInstance, VkEnumeratePhysicalDevices, VkGetDeviceProcAddr,
         VK_KHR_SURFACE_EXTENSION_NAME,
     },
-    get_instance_proc_addr,
-    surface::VkSurfaceKHRFunctions,
-    Loader, NativeLoader, Result, VkPhysicalDevice, VkPhysicalDeviceFunctions, VkResult,
+    get_instance_proc_addr, Loader, NativeLoader, Result, VkPhysicalDevice,
+    VkPhysicalDeviceFunctions, VkResult, VkSurfaceKHR, VkSurfaceKHRFunctions,
+    VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
 };
+#[cfg(target_os = "windows")]
+use crate::{VkWin32SurfaceCreateInfoKHR, VkWin32SurfaceKHRFunctions};
 use std::{
     ffi::{c_char, CStr},
     ptr::NonNull,
@@ -28,6 +30,9 @@ pub struct VkInstance<L: Loader = NativeLoader> {
     // Indirect instance functions
     physical_device_functions: VkPhysicalDeviceFunctions,
     surface_functions: Option<VkSurfaceKHRFunctions>,
+
+    #[cfg(target_os = "windows")]
+    win32_surface_functions: Option<VkWin32SurfaceKHRFunctions>,
 }
 
 impl<L: Loader> VkInstance<L> {
@@ -47,13 +52,22 @@ impl<L: Loader> VkInstance<L> {
         let physical_device_functions = VkPhysicalDeviceFunctions::get(inner, loader.as_ref())?;
 
         // Get extension functions
+        #[cfg(target_os = "windows")]
+        let mut win32_surface_functions = None;
         let mut surface_functions = None;
+
         if let Some(extensions) = extensions {
             for extension in extensions {
                 let extension = unsafe { CStr::from_ptr(*extension) };
 
                 if extension == VK_KHR_SURFACE_EXTENSION_NAME {
                     surface_functions = Some(VkSurfaceKHRFunctions::get(inner, loader.as_ref())?);
+                } else {
+                    #[cfg(target_os = "windows")]
+                    if extension == VK_KHR_WIN32_SURFACE_EXTENSION_NAME {
+                        win32_surface_functions =
+                            Some(VkWin32SurfaceKHRFunctions::get(inner, loader.as_ref())?);
+                    }
                 }
             }
         }
@@ -69,6 +83,9 @@ impl<L: Loader> VkInstance<L> {
 
             physical_device_functions,
             surface_functions,
+
+            #[cfg(target_os = "windows")]
+            win32_surface_functions,
         }))
     }
 
@@ -100,6 +117,23 @@ impl<L: Loader> VkInstance<L> {
         }
     }
 
+    #[cfg(target_os = "windows")]
+    pub fn create_win32_surface(
+        self: &Arc<Self>,
+        create_info: &VkWin32SurfaceCreateInfoKHR,
+    ) -> Result<VkSurfaceKHR<L>> {
+        let mut surface = None;
+        match (self
+            .win32_surface_functions
+            .as_ref()
+            .unwrap()
+            .create_win32_surface)(self.inner, create_info, None, &mut surface)
+        {
+            VkResult::Success => VkSurfaceKHR::new(surface.unwrap(), self.clone()),
+            result => Err(result),
+        }
+    }
+
     pub(crate) fn get_device_proc_addr(&self) -> VkGetDeviceProcAddr {
         self.get_device_proc_addr
     }
@@ -110,6 +144,11 @@ impl<L: Loader> VkInstance<L> {
 
     pub(crate) fn surface_functions(&self) -> Option<&VkSurfaceKHRFunctions> {
         self.surface_functions.as_ref()
+    }
+
+    #[cfg(target_os = "windows")]
+    pub(crate) fn win32_surface_functions(&self) -> Option<&VkWin32SurfaceKHRFunctions> {
+        self.win32_surface_functions.as_ref()
     }
 
     pub(crate) fn inner(&self) -> bindings::VkInstance {
