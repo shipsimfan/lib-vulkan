@@ -1,6 +1,7 @@
 use crate::{
-    Library, Loader, NativeLoader, PhysicalDevice, Result, VkApplicationInfo, VkCreateInstance,
-    VkInstance, VkInstanceCreateInfo, VkResult, VkStructureType,
+    Library, Loader, NativeLoader, PhysicalDevice, PhysicalDeviceFunctions, Result,
+    VkApplicationInfo, VkCreateInstance, VkInstance, VkInstanceCreateInfo, VkResult,
+    VkStructureType,
 };
 use functions::InstanceFunctions;
 use std::{
@@ -22,6 +23,8 @@ pub struct Instance<L: Loader = NativeLoader> {
     library: Arc<Library<L>>,
 
     functions: InstanceFunctions,
+
+    physical_device_functions: PhysicalDeviceFunctions,
 }
 
 impl<L: Loader> Instance<L> {
@@ -113,12 +116,15 @@ impl<L: Loader> Instance<L> {
 
         // Create the instance
         let functions = InstanceFunctions::load(library.loader(), handle)?;
+        let physical_device_functions = PhysicalDeviceFunctions::load(library.loader(), handle)?;
 
         Ok(Arc::new(Instance {
             handle,
             library,
 
             functions,
+
+            physical_device_functions,
         }))
     }
 
@@ -147,6 +153,10 @@ impl<L: Loader> Instance<L> {
                 result => return Err(result),
             }
         }
+    }
+
+    pub(crate) fn physical_device_functions(&self) -> &PhysicalDeviceFunctions {
+        &self.physical_device_functions
     }
 }
 

@@ -9,16 +9,21 @@ mod loader;
 mod physical_device;
 
 pub use bindings::{
-    VkInstance, VkInstanceCreateFlagBits, VkInstanceCreateFlags, VkResult, VkVersion,
-    VK_API_VERSION_1_0, VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3,
-    VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,
+    VkInstance, VkInstanceCreateFlagBits, VkInstanceCreateFlags, VkPhysicalDeviceType, VkResult,
+    VkSampleCountFlagBits, VkSampleCountFlags, VkVersion, VK_API_VERSION_1_0, VK_API_VERSION_1_1,
+    VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,
+    VK_UUID_SIZE,
 };
 pub use common::{ExtensionProperties, LayerProperties};
 pub use instance::{ApplicationInfo, Instance, InstanceCreateInfo};
 pub use library::Library;
 pub use loader::{Loader, NativeLoader};
-pub use physical_device::PhysicalDevice;
+pub use physical_device::{
+    PhysicalDevice, PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
+    PhysicalDeviceSparseProperties,
+};
 
 pub(crate) use bindings::*;
+pub(crate) use physical_device::PhysicalDeviceFunctions;
 
 pub type Result<T> = std::result::Result<T, VkResult>;

@@ -1,0 +1,136 @@
+use crate::VkPhysicalDeviceFeatures;
+
+pub struct PhysicalDeviceFeatures {
+    pub robust_buffer_access: bool,
+    pub full_draw_index_uint_32: bool,
+    pub image_cube_array: bool,
+    pub independent_blend: bool,
+    pub geometry_shader: bool,
+    pub tessellation_shader: bool,
+    pub sample_rate_shading: bool,
+    pub dual_src_blend: bool,
+    pub logic_op: bool,
+    pub multi_draw_indirect: bool,
+    pub draw_indirect_first_instance: bool,
+    pub depth_clamp: bool,
+    pub depth_bias_clamp: bool,
+    pub fill_mode_non_solid: bool,
+    pub depth_bounds: bool,
+    pub wide_lines: bool,
+    pub large_points: bool,
+    pub alpha_to_one: bool,
+    pub multi_viewport: bool,
+    pub sampler_anisotropy: bool,
+    pub texture_compression_etc_2: bool,
+    pub texture_compression_astc_ldr: bool,
+    pub texture_compression_bc: bool,
+    pub occlusion_query_precise: bool,
+    pub pipeline_statistics_query: bool,
+    pub vertex_pipeline_stores_and_atomics: bool,
+    pub fragment_stores_and_atomics: bool,
+    pub shader_tessellation_and_geometry_point_size: bool,
+    pub shader_image_gather_extended: bool,
+    pub shader_storage_image_extended_formats: bool,
+    pub shader_storage_image_multisample: bool,
+    pub shader_storage_image_read_without_format: bool,
+    pub shader_storage_image_write_without_format: bool,
+    pub shader_uniform_buffer_array_dynamic_indexing: bool,
+    pub shader_sampled_image_array_dynamic_indexing: bool,
+    pub shader_storage_buffer_array_dynamic_indexing: bool,
+    pub shader_storage_image_array_dynamic_indexing: bool,
+    pub shader_clip_distance: bool,
+    pub shader_cull_distance: bool,
+    pub shader_float_64: bool,
+    pub shader_int_64: bool,
+    pub shader_int_16: bool,
+    pub shader_resource_residency: bool,
+    pub shader_resource_min_lod: bool,
+    pub sparse_binding: bool,
+    pub sparse_residency_buffer: bool,
+    pub sparse_residency_image_2d: bool,
+    pub sparse_residency_image_3d: bool,
+    pub sparse_residency_2_samples: bool,
+    pub sparse_residency_4_samples: bool,
+    pub sparse_residency_8_samples: bool,
+    pub sparse_residency_16_samples: bool,
+    pub sparse_residency_aliased: bool,
+    pub variable_multisample_rate: bool,
+    pub inherited_queries: bool,
+}
+
+impl From<VkPhysicalDeviceFeatures> for PhysicalDeviceFeatures {
+    fn from(features: VkPhysicalDeviceFeatures) -> Self {
+        PhysicalDeviceFeatures {
+            robust_buffer_access: features.robust_buffer_access != 0,
+            full_draw_index_uint_32: features.full_draw_index_uint_32 != 0,
+            image_cube_array: features.image_cube_array != 0,
+            independent_blend: features.independent_blend != 0,
+            geometry_shader: features.geometry_shader != 0,
+            tessellation_shader: features.tessellation_shader != 0,
+            sample_rate_shading: features.sample_rate_shading != 0,
+            dual_src_blend: features.dual_src_blend != 0,
+            logic_op: features.logic_op != 0,
+            multi_draw_indirect: features.multi_draw_indirect != 0,
+            draw_indirect_first_instance: features.draw_indirect_first_instance != 0,
+            depth_clamp: features.depth_clamp != 0,
+            depth_bias_clamp: features.depth_bias_clamp != 0,
+            fill_mode_non_solid: features.fill_mode_non_solid != 0,
+            depth_bounds: features.depth_bounds != 0,
+            wide_lines: features.wide_lines != 0,
+            large_points: features.large_points != 0,
+            alpha_to_one: features.alpha_to_one != 0,
+            multi_viewport: features.multi_viewport != 0,
+            sampler_anisotropy: features.sampler_anisotropy != 0,
+            texture_compression_etc_2: features.texture_compression_etc_2 != 0,
+            texture_compression_astc_ldr: features.texture_compression_astc_ldr != 0,
+            texture_compression_bc: features.texture_compression_bc != 0,
+            occlusion_query_precise: features.occlusion_query_precise != 0,
+            pipeline_statistics_query: features.pipeline_statistics_query != 0,
+            vertex_pipeline_stores_and_atomics: features.vertex_pipeline_stores_and_atomics != 0,
+            fragment_stores_and_atomics: features.fragment_stores_and_atomics != 0,
+            shader_tessellation_and_geometry_point_size: features
+                .shader_tessellation_and_geometry_point_size
+                != 0,
+            shader_image_gather_extended: features.shader_image_gather_extended != 0,
+            shader_storage_image_extended_formats: features.shader_storage_image_extended_formats
+                != 0,
+            shader_storage_image_multisample: features.shader_storage_image_multisample != 0,
+            shader_storage_image_read_without_format: features
+                .shader_storage_image_read_without_format
+                != 0,
+            shader_storage_image_write_without_format: features
+                .shader_storage_image_write_without_format
+                != 0,
+            shader_uniform_buffer_array_dynamic_indexing: features
+                .shader_uniform_buffer_array_dynamic_indexing
+                != 0,
+            shader_sampled_image_array_dynamic_indexing: features
+                .shader_sampled_image_array_dynamic_indexing
+                != 0,
+            shader_storage_buffer_array_dynamic_indexing: features
+                .shader_storage_buffer_array_dynamic_indexing
+                != 0,
+            shader_storage_image_array_dynamic_indexing: features
+                .shader_storage_image_array_dynamic_indexing
+                != 0,
+            shader_clip_distance: features.shader_clip_distance != 0,
+            shader_cull_distance: features.shader_cull_distance != 0,
+            shader_float_64: features.shader_float_64 != 0,
+            shader_int_64: features.shader_int_64 != 0,
+            shader_int_16: features.shader_int_16 != 0,
+            shader_resource_residency: features.shader_resource_residency != 0,
+            shader_resource_min_lod: features.shader_resource_min_lod != 0,
+            sparse_binding: features.sparse_binding != 0,
+            sparse_residency_buffer: features.sparse_residency_buffer != 0,
+            sparse_residency_image_2d: features.sparse_residency_image_2d != 0,
+            sparse_residency_image_3d: features.sparse_residency_image_3d != 0,
+            sparse_residency_2_samples: features.sparse_residency_2_samples != 0,
+            sparse_residency_4_samples: features.sparse_residency_4_samples != 0,
+            sparse_residency_8_samples: features.sparse_residency_8_samples != 0,
+            sparse_residency_16_samples: features.sparse_residency_16_samples != 0,
+            sparse_residency_aliased: features.sparse_residency_aliased != 0,
+            variable_multisample_rate: features.variable_multisample_rate != 0,
+            inherited_queries: features.inherited_queries != 0,
+        }
+    }
+}
