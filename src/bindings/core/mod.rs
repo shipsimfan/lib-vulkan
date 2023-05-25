@@ -4,6 +4,7 @@ mod extension_properties;
 mod global_functions;
 mod instance;
 mod layer_properties;
+mod physical_device;
 mod result;
 mod structure_type;
 mod types;
@@ -27,7 +28,10 @@ pub(crate) use extension_properties::VkExtensionProperties;
 pub(crate) use global_functions::{
     VkCreateInstance, VkEnumerateInstanceExtensionProperties, VkEnumerateInstanceLayerProperties,
 };
-pub(crate) use instance::{VkApplicationInfo, VkDestroyInstance, VkInstanceCreateInfo};
+pub(crate) use instance::{
+    VkApplicationInfo, VkDestroyInstance, VkEnumeratePhysicalDevice, VkInstanceCreateInfo,
+};
 pub(crate) use layer_properties::VkLayerProperties;
+pub(crate) use physical_device::VkPhysicalDevice;
 pub(crate) use structure_type::VkStructureType;
 pub(crate) use types::VkFlags;

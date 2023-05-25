@@ -1,9 +1,13 @@
 use crate::{
-    Library, Loader, NativeLoader, Result, VkApplicationInfo, VkCreateInstance, VkInstance,
-    VkInstanceCreateInfo, VkResult, VkStructureType,
+    Library, Loader, NativeLoader, PhysicalDevice, Result, VkApplicationInfo, VkCreateInstance,
+    VkInstance, VkInstanceCreateInfo, VkResult, VkStructureType,
 };
 use functions::InstanceFunctions;
-use std::{ffi::CString, ptr::null, sync::Arc};
+use std::{
+    ffi::CString,
+    ptr::{null, null_mut},
+    sync::Arc,
+};
 
 mod application_info;
 mod create_info;
@@ -116,6 +120,33 @@ impl<L: Loader> Instance<L> {
 
             functions,
         }))
+    }
+
+    pub fn enumerate_physical_devices(self: &Arc<Self>) -> Result<Vec<PhysicalDevice<L>>> {
+        let mut count = 0;
+        match (self.functions.enumerate_physical_devices)(self.handle, &mut count, null_mut()) {
+            VkResult::Success => {}
+            result => return Err(result),
+        }
+
+        let mut physical_devices = Vec::with_capacity(count as usize);
+        loop {
+            match (self.functions.enumerate_physical_devices)(
+                self.handle,
+                &mut count,
+                physical_devices.as_mut_ptr(),
+            ) {
+                VkResult::Success => {
+                    unsafe { physical_devices.set_len(count as usize) };
+                    return Ok(physical_devices
+                        .into_iter()
+                        .map(|physical_device| PhysicalDevice::new(physical_device, self.clone()))
+                        .collect());
+                }
+                VkResult::Incomplete => physical_devices.reserve(count as usize),
+                result => return Err(result),
+            }
+        }
     }
 }
 

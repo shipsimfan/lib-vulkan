@@ -6,6 +6,7 @@ mod common;
 mod instance;
 mod library;
 mod loader;
+mod physical_device;
 
 pub use bindings::{
     VkInstance, VkInstanceCreateFlagBits, VkInstanceCreateFlags, VkResult, VkVersion,
@@ -16,6 +17,7 @@ pub use common::{ExtensionProperties, LayerProperties};
 pub use instance::{ApplicationInfo, Instance, InstanceCreateInfo};
 pub use library::Library;
 pub use loader::{Loader, NativeLoader};
+pub use physical_device::PhysicalDevice;
 
 pub(crate) use bindings::*;
 
