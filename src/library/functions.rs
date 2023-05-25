@@ -1,7 +1,12 @@
-use crate::{Loader, Result, VkCreateInstance, VkResult};
+use crate::{
+    Loader, Result, VkCreateInstance, VkEnumerateInstanceExtensionProperties,
+    VkEnumerateInstanceLayerProperties, VkResult,
+};
 
 pub(super) struct LibraryFunctions {
     pub(super) create_instance: VkCreateInstance,
+    pub(super) enumerate_extension_properties: VkEnumerateInstanceExtensionProperties,
+    pub(super) enumerate_layer_properties: VkEnumerateInstanceLayerProperties,
 }
 
 macro_rules! load_function {
@@ -16,7 +21,15 @@ macro_rules! load_function {
 impl LibraryFunctions {
     pub(super) fn load<L: Loader>(loader: &L) -> Result<Self> {
         let create_instance = load_function!(loader, "vkCreateInstance")?;
+        let enumerate_extension_properties =
+            load_function!(loader, "vkEnumerateInstanceExtensionProperties")?;
+        let enumerate_layer_properties =
+            load_function!(loader, "vkEnumerateInstanceLayerProperties")?;
 
-        Ok(LibraryFunctions { create_instance })
+        Ok(LibraryFunctions {
+            create_instance,
+            enumerate_extension_properties,
+            enumerate_layer_properties,
+        })
     }
 }

@@ -1,13 +1,9 @@
 use crate::{
-    ExtensionProperties, Library, Loader, NativeLoader, Result, VkApplicationInfo,
-    VkCreateInstance, VkInstance, VkInstanceCreateInfo, VkResult, VkStructureType,
+    Library, Loader, NativeLoader, Result, VkApplicationInfo, VkCreateInstance, VkInstance,
+    VkInstanceCreateInfo, VkResult, VkStructureType,
 };
 use functions::InstanceFunctions;
-use std::{
-    ffi::{CStr, CString},
-    ptr::{null, null_mut},
-    sync::Arc,
-};
+use std::{ffi::CString, ptr::null, sync::Arc};
 
 mod application_info;
 mod create_info;
@@ -120,51 +116,6 @@ impl<L: Loader> Instance<L> {
 
             functions,
         }))
-    }
-
-    pub fn enumerate_extension_properties(
-        &self,
-        layer_name: Option<&str>,
-    ) -> Result<Vec<ExtensionProperties>> {
-        let layer_name = layer_name.map(|name| CString::new(name).unwrap());
-        let p_layer_name = layer_name
-            .as_ref()
-            .map(|name| name.as_ptr())
-            .unwrap_or(null());
-
-        let mut count = 0;
-        match (self.functions.enumerate_extension_properties)(p_layer_name, &mut count, null_mut())
-        {
-            VkResult::Success => {}
-            result => return Err(result),
-        }
-
-        let mut extensions = Vec::with_capacity(count as usize);
-        loop {
-            match (self.functions.enumerate_extension_properties)(
-                p_layer_name,
-                &mut count,
-                extensions.as_mut_ptr(),
-            ) {
-                VkResult::Success => {
-                    unsafe { extensions.set_len(count as usize) };
-                    return Ok(extensions
-                        .into_iter()
-                        .map(|extension| ExtensionProperties {
-                            name: CStr::from_bytes_until_nul(&extension.extension_name)
-                                .unwrap()
-                                .to_string_lossy()
-                                .to_string(),
-                            spec_version: extension.spec_version.into(),
-                        })
-                        .collect());
-                }
-                VkResult::Incomplete => {
-                    extensions.reserve(count as usize);
-                }
-                result => return Err(result),
-            }
-        }
     }
 }
 

@@ -3,6 +3,7 @@ mod constants;
 mod extension_properties;
 mod global_functions;
 mod instance;
+mod layer_properties;
 mod result;
 mod structure_type;
 mod types;
@@ -21,12 +22,12 @@ pub(crate) use allocation_callbacks::{
     VkInternalAllocationType, VkInternalFreeNotification, VkReallocationFunction,
     VkSystemAllocationScope,
 };
-pub(crate) use constants::VK_MAX_EXTENSION_NAME_SIZE;
+pub(crate) use constants::{VK_MAX_DESCRIPTION_SIZE, VK_MAX_EXTENSION_NAME_SIZE};
 pub(crate) use extension_properties::VkExtensionProperties;
-pub(crate) use global_functions::VkCreateInstance;
-pub(crate) use instance::{
-    VkApplicationInfo, VkDestroyInstance, VkEnumerateInstanceExtensionProperties,
-    VkInstanceCreateInfo,
+pub(crate) use global_functions::{
+    VkCreateInstance, VkEnumerateInstanceExtensionProperties, VkEnumerateInstanceLayerProperties,
 };
+pub(crate) use instance::{VkApplicationInfo, VkDestroyInstance, VkInstanceCreateInfo};
+pub(crate) use layer_properties::VkLayerProperties;
 pub(crate) use structure_type::VkStructureType;
 pub(crate) use types::VkFlags;
