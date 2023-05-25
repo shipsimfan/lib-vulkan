@@ -1,11 +1,11 @@
-use crate::{VkVersion, VK_API_VERSION_1_0};
+use crate::{Version, VK_API_VERSION_1_0};
 
 pub struct ApplicationInfo {
     pub name: Option<String>,
-    pub version: Option<VkVersion>,
+    pub version: Option<Version>,
     pub engine_name: Option<String>,
-    pub engine_version: Option<VkVersion>,
-    pub api_version: VkVersion,
+    pub engine_version: Option<Version>,
+    pub api_version: Version,
 }
 
 impl Default for ApplicationInfo {

@@ -1,4 +1,4 @@
-use crate::{bindings::VkPhysicalDevice, VkAllocationCallbacks, VkInstance, VkResult};
+use crate::{VkAllocationCallbacks, VkInstance, VkPhysicalDevice, VkResult};
 
 pub(crate) type VkDestroyInstance =
     extern "system" fn(instance: VkInstance, p_allocator: *const VkAllocationCallbacks);

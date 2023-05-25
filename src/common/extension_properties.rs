@@ -1,6 +1,6 @@
-use crate::VkVersion;
+use crate::Version;
 
 pub struct ExtensionProperties {
     pub name: String,
-    pub spec_version: VkVersion,
+    pub spec_version: Version,
 }

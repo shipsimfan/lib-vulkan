@@ -9,10 +9,13 @@ mod loader;
 mod physical_device;
 
 pub use bindings::{
-    VkInstance, VkInstanceCreateFlagBits, VkInstanceCreateFlags, VkPhysicalDeviceType, VkResult,
-    VkSampleCountFlagBits, VkSampleCountFlags, VkVersion, VK_API_VERSION_1_0, VK_API_VERSION_1_1,
-    VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,
-    VK_UUID_SIZE,
+    VkExtent3D as Extent3D, VkInstance, VkInstanceCreateFlagBits as InstanceCreateFlagBits,
+    VkInstanceCreateFlags as InstanceCreateFlags, VkPhysicalDeviceType as PhysicalDeviceType,
+    VkQueueFamilyProperties as QueueFamilyProperties, VkQueueFlagBits as QueueFlagBits,
+    VkQueueFlags as QueueFlags, VkResult, VkSampleCountFlagBits as SampleCountFlagBits,
+    VkSampleCountFlags as SampleCountFlags, VkVersion as Version, VK_API_VERSION_1_0,
+    VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION,
+    VK_HEADER_VERSION_COMPLETE, VK_UUID_SIZE,
 };
 pub use common::{ExtensionProperties, LayerProperties};
 pub use instance::{ApplicationInfo, Instance, InstanceCreateInfo};

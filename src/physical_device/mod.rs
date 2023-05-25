@@ -1,8 +1,8 @@
 use crate::{
-    Instance, Loader, NativeLoader, VkPhysicalDevice, VkPhysicalDeviceFeatures,
-    VkPhysicalDeviceProperties,
+    Instance, Loader, NativeLoader, QueueFamilyProperties, VkPhysicalDevice,
+    VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties,
 };
-use std::sync::Arc;
+use std::{ptr::null_mut, sync::Arc};
 
 mod features;
 mod functions;
@@ -37,5 +37,26 @@ impl<L: Loader> PhysicalDevice<L> {
         let mut properties = VkPhysicalDeviceProperties::default();
         (self.instance.physical_device_functions().get_properties)(self.handle, &mut properties);
         properties.into()
+    }
+
+    pub fn get_queue_family_properties(&self) -> Vec<QueueFamilyProperties> {
+        let mut count = 0;
+        (self
+            .instance
+            .physical_device_functions()
+            .get_queue_family_properties)(self.handle, &mut count, null_mut());
+
+        let mut queue_family_properties = Vec::with_capacity(count as usize);
+        (self
+            .instance
+            .physical_device_functions()
+            .get_queue_family_properties)(
+            self.handle,
+            &mut count,
+            queue_family_properties.as_mut_ptr(),
+        );
+
+        unsafe { queue_family_properties.set_len(count as usize) };
+        queue_family_properties
     }
 }

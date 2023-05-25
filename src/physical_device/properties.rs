@@ -1,6 +1,6 @@
 use crate::{
-    PhysicalDeviceLimits, PhysicalDeviceSparseProperties, VkPhysicalDeviceProperties,
-    VkPhysicalDeviceType, VK_UUID_SIZE,
+    PhysicalDeviceLimits, PhysicalDeviceSparseProperties, PhysicalDeviceType,
+    VkPhysicalDeviceProperties, VK_UUID_SIZE,
 };
 use std::ffi::CStr;
 
@@ -9,7 +9,7 @@ pub struct PhysicalDeviceProperties {
     pub driver_version: u32,
     pub vendor_id: u32,
     pub device_id: u32,
-    pub device_type: VkPhysicalDeviceType,
+    pub device_type: PhysicalDeviceType,
     pub device_name: String,
     pub pipelane_chache_uuid: [u8; VK_UUID_SIZE],
     pub limits: PhysicalDeviceLimits,
