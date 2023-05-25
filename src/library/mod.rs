@@ -1,9 +1,13 @@
-use crate::{Loader, NativeLoader, Result, VkResult};
+use crate::{Instance, InstanceCreateInfo, Loader, NativeLoader, Result, VkResult};
+use functions::LibraryFunctions;
 use std::sync::Arc;
 
+mod functions;
+
 pub struct Library<L: Loader = NativeLoader> {
-    #[allow(unused)]
     loader: L,
+
+    functions: LibraryFunctions,
 }
 
 impl Library {
@@ -15,6 +19,19 @@ impl Library {
 
 impl<L: Loader> Library<L> {
     pub fn new(loader: L) -> Result<Arc<Self>> {
-        Ok(Arc::new(Library { loader }))
+        let functions = LibraryFunctions::load(&loader)?;
+
+        Ok(Arc::new(Library { loader, functions }))
+    }
+
+    pub fn create_instance(
+        self: Arc<Self>,
+        create_info: InstanceCreateInfo,
+    ) -> Result<Arc<Instance<L>>> {
+        Instance::create_instance(create_info, self.functions.create_instance, self)
+    }
+
+    pub(crate) fn loader(&self) -> &L {
+        &self.loader
     }
 }

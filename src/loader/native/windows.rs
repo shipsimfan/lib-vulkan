@@ -1,5 +1,5 @@
-use std::ffi::CStr;
-use win32::{FarProc, HModule};
+use std::ffi::CString;
+use win32::HModule;
 
 pub struct Library(HModule);
 
@@ -10,8 +10,11 @@ impl Library {
             .map(|module| Library(module))
     }
 
-    pub fn get_proc_addr(&self, proc: &CStr) -> Option<FarProc> {
-        win32::get_proc_address(self.0, proc).ok()
+    pub fn get_proc_addr(&self, proc: &str) -> Option<*const ()> {
+        let proc = CString::new(proc).unwrap();
+        win32::get_proc_address(self.0, &proc)
+            .ok()
+            .map(|function| function as *const ())
     }
 }
 

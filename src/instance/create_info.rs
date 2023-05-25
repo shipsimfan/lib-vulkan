@@ -1,20 +1,19 @@
-use crate::VkStructureType;
-use std::ffi::c_void;
+use crate::{ApplicationInfo, VkInstanceCreateFlags};
 
-#[repr(C)]
-pub(crate) struct VkInstanceCreateInfo {
-    s_type: VkStructureType,
-    p_next: *const c_void,
-    flags: VkInstanceCreateFlags,
-    p_application_info: VkApplicationInfo,
+pub struct InstanceCreateInfo {
+    pub flags: VkInstanceCreateFlags,
+    pub application_info: Option<ApplicationInfo>,
+    pub enabled_layers: Vec<String>,
+    pub enabled_extensions: Vec<String>,
 }
 
-pub struct InstanceCreateInfo {}
-
-impl InstanceCreateInfo {
-    pub(super) fn into_vk(self) -> VkInstanceCreateInfo {
-        VkInstanceCreateInfo {
-            s_type: VkStructureType::InstanceCreateInfo,
+impl Default for InstanceCreateInfo {
+    fn default() -> Self {
+        InstanceCreateInfo {
+            flags: VkInstanceCreateFlags::default(),
+            application_info: None,
+            enabled_layers: Vec::new(),
+            enabled_extensions: Vec::new(),
         }
     }
 }

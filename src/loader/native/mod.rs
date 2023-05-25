@@ -1,6 +1,9 @@
 use super::Loader;
 use crate::VkInstance;
-use std::ffi::{c_char, CStr, CString};
+use std::{
+    ffi::{c_char, CString},
+    ptr::null,
+};
 
 #[cfg(target_os = "windows")]
 mod windows;
@@ -13,22 +16,19 @@ pub struct NativeLoader {
     get_instance_proc_addr: extern "system" fn(
         instance: Option<VkInstance>,
         p_name: *const c_char,
-    ) -> Option<*const ()>,
+    ) -> Option<extern "system" fn()>,
 }
 
 impl NativeLoader {
     pub fn new() -> Option<Self> {
         let library = os::Library::open(&win32::string_to_utf16!("vulkan-1"))?;
-        let get_instance_proc_addr =
-            unsafe {
-                std::mem::transmute(library.get_proc_addr(
-                    CStr::from_bytes_with_nul(b"vkGetInstanceProcAddr\0").unwrap(),
-                )?)
-            };
+        let get_instance_proc_addr = library.get_proc_addr("vkGetInstanceProcAddr")?;
+
+        assert_ne!(get_instance_proc_addr, null());
 
         Some(NativeLoader {
             _library: library,
-            get_instance_proc_addr,
+            get_instance_proc_addr: unsafe { std::mem::transmute(get_instance_proc_addr) },
         })
     }
 }
@@ -40,7 +40,6 @@ impl Loader for NativeLoader {
         name: &str,
     ) -> Option<*const ()> {
         let name = CString::new(name).unwrap();
-
-        (self.get_instance_proc_addr)(instance, name.as_ptr())
+        (self.get_instance_proc_addr)(instance, name.as_ptr()).map(|f| f as _)
     }
 }
