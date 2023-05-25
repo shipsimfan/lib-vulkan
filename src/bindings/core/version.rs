@@ -56,3 +56,9 @@ impl std::fmt::Display for VkVersion {
         write!(f, "{}.{}.{}", self.major(), self.minor(), self.patch())
     }
 }
+
+impl From<u32> for VkVersion {
+    fn from(value: u32) -> Self {
+        VkVersion(value)
+    }
+}

@@ -1,3 +1,3 @@
-mod structure_type;
+mod extension_properties;
 
-pub(crate) use structure_type::VkStructureType;
+pub use extension_properties::ExtensionProperties;

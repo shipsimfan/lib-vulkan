@@ -1,4 +1,6 @@
 mod allocation_callbacks;
+mod constants;
+mod extension_properties;
 mod global_functions;
 mod instance;
 mod result;
@@ -19,7 +21,12 @@ pub(crate) use allocation_callbacks::{
     VkInternalAllocationType, VkInternalFreeNotification, VkReallocationFunction,
     VkSystemAllocationScope,
 };
-pub(crate) use global_functions::{VkCreateInstance, VkDestroyInstance};
-pub(crate) use instance::{VkApplicationInfo, VkInstanceCreateInfo};
+pub(crate) use constants::VK_MAX_EXTENSION_NAME_SIZE;
+pub(crate) use extension_properties::VkExtensionProperties;
+pub(crate) use global_functions::VkCreateInstance;
+pub(crate) use instance::{
+    VkApplicationInfo, VkDestroyInstance, VkEnumerateInstanceExtensionProperties,
+    VkInstanceCreateInfo,
+};
 pub(crate) use structure_type::VkStructureType;
 pub(crate) use types::VkFlags;
