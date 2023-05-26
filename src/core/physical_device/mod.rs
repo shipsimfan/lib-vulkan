@@ -1,8 +1,13 @@
 use crate::{
-    Device, DeviceCreateInfo, Instance, Loader, NativeLoader, QueueFamilyProperties, Result,
-    Surface, VkPhysicalDevice, VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties, VkResult,
+    Device, DeviceCreateInfo, ExtensionProperties, Instance, Loader, NativeLoader,
+    QueueFamilyProperties, Result, Surface, VkPhysicalDevice, VkPhysicalDeviceFeatures,
+    VkPhysicalDeviceProperties, VkResult,
 };
-use std::{ptr::null_mut, sync::Arc};
+use std::{
+    ffi::{CStr, CString},
+    ptr::{null, null_mut},
+    sync::Arc,
+};
 
 mod features;
 mod functions;
@@ -86,6 +91,59 @@ impl<L: Loader> PhysicalDevice<L> {
         ) {
             VkResult::Success => Ok(result != 0),
             result => Err(result),
+        }
+    }
+
+    pub fn enumerate_extension_properties(
+        &self,
+        layer_name: Option<&str>,
+    ) -> Result<Vec<ExtensionProperties>> {
+        let layer_name = layer_name.map(|name| CString::new(name).unwrap());
+        let p_layer_name = layer_name
+            .as_ref()
+            .map(|name| name.as_ptr())
+            .unwrap_or(null());
+
+        let mut count = 0;
+        match (self
+            .instance
+            .physical_device_functions()
+            .enumerate_extension_properties)(
+            self.handle, p_layer_name, &mut count, null_mut()
+        ) {
+            VkResult::Success => {}
+            result => return Err(result),
+        }
+
+        let mut extensions = Vec::with_capacity(count as usize);
+        loop {
+            match (self
+                .instance
+                .physical_device_functions()
+                .enumerate_extension_properties)(
+                self.handle,
+                p_layer_name,
+                &mut count,
+                extensions.as_mut_ptr(),
+            ) {
+                VkResult::Success => {
+                    unsafe { extensions.set_len(count as usize) };
+                    return Ok(extensions
+                        .into_iter()
+                        .map(|extension| ExtensionProperties {
+                            name: CStr::from_bytes_until_nul(&extension.extension_name)
+                                .unwrap()
+                                .to_string_lossy()
+                                .to_string(),
+                            spec_version: extension.spec_version.into(),
+                        })
+                        .collect());
+                }
+                VkResult::Incomplete => {
+                    extensions.reserve(count as usize);
+                }
+                result => return Err(result),
+            }
         }
     }
 }

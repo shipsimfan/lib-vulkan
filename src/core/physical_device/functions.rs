@@ -1,10 +1,12 @@
 use crate::{
-    Loader, Result, VkCreateDevice, VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
+    Loader, Result, VkCreateDevice, VkEnumerateDeviceExtensionProperties,
+    VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
     VkGetPhysicalDeviceQueueFamilyProperties, VkInstance,
 };
 
 pub(crate) struct PhysicalDeviceFunctions {
     pub(super) create_device: VkCreateDevice,
+    pub(super) enumerate_extension_properties: VkEnumerateDeviceExtensionProperties,
     pub(super) get_features: VkGetPhysicalDeviceFeatures,
     pub(super) get_properties: VkGetPhysicalDeviceProperties,
     pub(super) get_queue_family_properties: VkGetPhysicalDeviceQueueFamilyProperties,
@@ -22,6 +24,8 @@ macro_rules! load_function {
 impl PhysicalDeviceFunctions {
     pub(crate) fn load<L: Loader>(loader: &L, instance: VkInstance) -> Result<Self> {
         let create_device = load_function!(loader, instance, "vkCreateDevice")?;
+        let enumerate_extension_properties =
+            load_function!(loader, instance, "vkEnumerateDeviceExtensionProperties")?;
         let get_features = load_function!(loader, instance, "vkGetPhysicalDeviceFeatures")?;
         let get_properties = load_function!(loader, instance, "vkGetPhysicalDeviceProperties")?;
         let get_queue_family_properties =
@@ -29,6 +33,7 @@ impl PhysicalDeviceFunctions {
 
         Ok(PhysicalDeviceFunctions {
             create_device,
+            enumerate_extension_properties,
             get_features,
             get_properties,
             get_queue_family_properties,
