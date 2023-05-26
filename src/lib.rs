@@ -14,10 +14,11 @@ pub use self::core::{
     PhysicalDeviceLimits, PhysicalDeviceProperties, PhysicalDeviceSparseProperties, Queue,
 };
 pub use bindings::{
-    VkExtent3D as Extent3D, VkInstance, VkPhysicalDeviceType as PhysicalDeviceType,
-    VkQueueFamilyProperties as QueueFamilyProperties, VkQueueFlagBits as QueueFlagBits,
-    VkQueueFlags as QueueFlags, VkResult, VkSampleCountFlagBits as SampleCountFlagBits,
-    VkSampleCountFlags as SampleCountFlags, VkVersion as Version, VK_API_VERSION_1_0,
+    VkColorSpaceKHR as ColorSpace, VkExtent3D as Extent3D, VkFormat as Format, VkInstance,
+    VkPhysicalDeviceType as PhysicalDeviceType, VkQueueFamilyProperties as QueueFamilyProperties,
+    VkQueueFlagBits as QueueFlagBits, VkQueueFlags as QueueFlags, VkResult,
+    VkSampleCountFlagBits as SampleCountFlagBits, VkSampleCountFlags as SampleCountFlags,
+    VkSurfaceFormatKHR as SurfaceFormat, VkVersion as Version, VK_API_VERSION_1_0,
     VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION,
     VK_HEADER_VERSION_COMPLETE, VK_UUID_SIZE,
 };

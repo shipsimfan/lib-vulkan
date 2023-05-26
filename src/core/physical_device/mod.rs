@@ -1,7 +1,7 @@
 use crate::{
     Device, DeviceCreateInfo, ExtensionProperties, Instance, Loader, NativeLoader,
-    QueueFamilyProperties, Result, Surface, VkPhysicalDevice, VkPhysicalDeviceFeatures,
-    VkPhysicalDeviceProperties, VkResult,
+    QueueFamilyProperties, Result, Surface, SurfaceFormat, VkPhysicalDevice,
+    VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties, VkResult,
 };
 use std::{
     ffi::{CStr, CString},
@@ -74,26 +74,6 @@ impl<L: Loader> PhysicalDevice<L> {
         queue_family_properties
     }
 
-    pub fn get_surface_support(
-        &self,
-        queue_family_index: u32,
-        surface: &Surface<L>,
-    ) -> Result<bool> {
-        let mut result = 0;
-        match (self
-            .instance
-            .surface_functions()
-            .get_physical_device_surface_support)(
-            self.handle,
-            queue_family_index,
-            surface.handle(),
-            &mut result,
-        ) {
-            VkResult::Success => Ok(result != 0),
-            result => Err(result),
-        }
-    }
-
     pub fn enumerate_extension_properties(
         &self,
         layer_name: Option<&str>,
@@ -144,6 +124,64 @@ impl<L: Loader> PhysicalDevice<L> {
                 }
                 result => return Err(result),
             }
+        }
+    }
+
+    pub fn get_surface_formats(&self, surface: &Surface<L>) -> Result<Vec<SurfaceFormat>> {
+        let mut count = 0;
+        match (self
+            .instance
+            .surface_functions()
+            .get_physical_device_surface_formats)(
+            self.handle,
+            surface.handle(),
+            &mut count,
+            null_mut(),
+        ) {
+            VkResult::Success => {}
+            result => return Err(result),
+        }
+
+        let mut extensions = Vec::with_capacity(count as usize);
+        loop {
+            match (self
+                .instance
+                .surface_functions()
+                .get_physical_device_surface_formats)(
+                self.handle,
+                surface.handle(),
+                &mut count,
+                extensions.as_mut_ptr(),
+            ) {
+                VkResult::Success => {
+                    unsafe { extensions.set_len(count as usize) };
+                    return Ok(extensions);
+                }
+                VkResult::Incomplete => {
+                    extensions.reserve(count as usize);
+                }
+                result => return Err(result),
+            }
+        }
+    }
+
+    pub fn get_surface_support(
+        &self,
+        queue_family_index: u32,
+        surface: &Surface<L>,
+    ) -> Result<bool> {
+        let mut result = 0;
+        match (self
+            .instance
+            .surface_functions()
+            .get_physical_device_surface_support)(
+            self.handle,
+            queue_family_index,
+            surface.handle(),
+            &mut result,
+        ) {
+            VkResult::Success => Ok(result != 0),
+            result => Err(result),
         }
     }
 }

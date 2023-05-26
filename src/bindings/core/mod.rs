@@ -3,6 +3,7 @@ mod constants;
 mod device;
 mod extension_properties;
 mod extent_3d;
+mod format;
 mod global_functions;
 mod instance;
 mod layer_properties;
@@ -15,6 +16,7 @@ mod version;
 
 pub use constants::VK_UUID_SIZE;
 pub use extent_3d::VkExtent3D;
+pub use format::VkFormat;
 pub use instance::VkInstance;
 pub use physical_device::{
     VkPhysicalDeviceType, VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags,
