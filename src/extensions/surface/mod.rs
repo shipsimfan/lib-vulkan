@@ -14,6 +14,10 @@ impl<L: Loader> Surface<L> {
     pub(crate) fn new(handle: VkSurfaceKHR, instance: Arc<Instance<L>>) -> Self {
         Surface { handle, instance }
     }
+
+    pub(crate) fn handle(&self) -> VkSurfaceKHR {
+        self.handle
+    }
 }
 
 impl<L: Loader> Drop for Surface<L> {

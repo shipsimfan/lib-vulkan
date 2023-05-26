@@ -1,6 +1,6 @@
 use crate::{
     Device, DeviceCreateInfo, Instance, Loader, NativeLoader, QueueFamilyProperties, Result,
-    VkPhysicalDevice, VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties,
+    Surface, VkPhysicalDevice, VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties, VkResult,
 };
 use std::{ptr::null_mut, sync::Arc};
 
@@ -67,5 +67,25 @@ impl<L: Loader> PhysicalDevice<L> {
 
         unsafe { queue_family_properties.set_len(count as usize) };
         queue_family_properties
+    }
+
+    pub fn get_surface_support(
+        &self,
+        queue_family_index: u32,
+        surface: &Surface<L>,
+    ) -> Result<bool> {
+        let mut result = 0;
+        match (self
+            .instance
+            .surface_functions()
+            .get_physical_device_surface_support)(
+            self.handle,
+            queue_family_index,
+            surface.handle(),
+            &mut result,
+        ) {
+            VkResult::Success => Ok(result != 0),
+            result => Err(result),
+        }
     }
 }
