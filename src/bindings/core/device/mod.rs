@@ -7,7 +7,7 @@ mod queue_create_info;
 
 pub(crate) use create_flags::VkDeviceCreateFlags;
 pub(crate) use create_info::VkDeviceCreateInfo;
-pub(crate) use functions::VkDestroyDevice;
+pub(crate) use functions::{VkDestroyDevice, VkGetDeviceQueue};
 pub(crate) use handle::VkDevice;
 pub(crate) use queue_create_flags::VkDeviceQueueCreateFlags;
 pub(crate) use queue_create_info::VkDeviceQueueCreateInfo;

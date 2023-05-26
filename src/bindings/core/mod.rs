@@ -7,6 +7,7 @@ mod global_functions;
 mod instance;
 mod layer_properties;
 mod physical_device;
+mod queue;
 mod result;
 mod structure_type;
 mod types;
@@ -36,7 +37,7 @@ pub(crate) use constants::{
 };
 pub(crate) use device::{
     VkDestroyDevice, VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
-    VkDeviceQueueCreateInfo,
+    VkDeviceQueueCreateInfo, VkGetDeviceQueue,
 };
 pub(crate) use extension_properties::VkExtensionProperties;
 pub(crate) use global_functions::{
@@ -52,5 +53,6 @@ pub(crate) use physical_device::{
     VkGetPhysicalDeviceQueueFamilyProperties, VkPhysicalDevice, VkPhysicalDeviceFeatures,
     VkPhysicalDeviceLimits, VkPhysicalDeviceProperties, VkPhysicalDeviceSparseProperties,
 };
+pub(crate) use queue::VkQueue;
 pub(crate) use structure_type::VkStructureType;
 pub(crate) use types::{VkBool32, VkDeviceSize, VkFlags};

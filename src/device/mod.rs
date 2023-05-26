@@ -1,5 +1,5 @@
 use crate::{
-    Instance, Loader, NativeLoader, Result, VkCreateDevice, VkDevice, VkDeviceCreateFlags,
+    Instance, Loader, NativeLoader, Queue, Result, VkCreateDevice, VkDevice, VkDeviceCreateFlags,
     VkDeviceCreateInfo, VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo, VkPhysicalDevice,
     VkResult, VkStructureType,
 };
@@ -94,6 +94,12 @@ impl<L: Loader> Device<L> {
 
             functions,
         }))
+    }
+
+    pub fn get_queue(self: &Arc<Self>, queue_family_index: u32, queue_index: u32) -> Queue<L> {
+        let mut handle = None;
+        (self.functions.get_queue)(self.handle, queue_family_index, queue_index, &mut handle);
+        Queue::new(handle.unwrap(), self.clone())
     }
 }
 

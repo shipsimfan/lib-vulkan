@@ -8,6 +8,7 @@ mod instance;
 mod library;
 mod loader;
 mod physical_device;
+mod queue;
 
 pub use bindings::{
     VkExtent3D as Extent3D, VkInstance, VkPhysicalDeviceType as PhysicalDeviceType,
@@ -26,6 +27,7 @@ pub use physical_device::{
     PhysicalDevice, PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
     PhysicalDeviceSparseProperties,
 };
+pub use queue::Queue;
 
 pub(crate) use bindings::*;
 pub(crate) use physical_device::PhysicalDeviceFunctions;
