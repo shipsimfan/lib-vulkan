@@ -1,8 +1,11 @@
-use crate::{Loader, Result, VkDestroyInstance, VkEnumeratePhysicalDevice, VkInstance, VkResult};
+use crate::{
+    Loader, Result, VkDestroyInstance, VkEnumeratePhysicalDevice, VkGetDeviceProcAddr, VkInstance,
+};
 
 pub(super) struct InstanceFunctions {
     pub(super) destroy_instance: VkDestroyInstance,
     pub(super) enumerate_physical_devices: VkEnumeratePhysicalDevice,
+    pub(super) get_device_proc_addr: VkGetDeviceProcAddr,
 }
 
 macro_rules! load_function {
@@ -10,7 +13,7 @@ macro_rules! load_function {
         $loader
             .get_instance_proc_addr(Some($instance), $name)
             .map(|function| unsafe { std::mem::transmute(function) })
-            .ok_or(VkResult::IncompatibleDriver)
+            .ok_or(crate::VkResult::IncompatibleDriver)
     };
 }
 
@@ -19,10 +22,12 @@ impl InstanceFunctions {
         let destroy_instance = load_function!(loader, instance, "vkDestroyInstance")?;
         let enumerate_physical_devices =
             load_function!(loader, instance, "vkEnumeratePhysicalDevices")?;
+        let get_device_proc_addr = load_function!(loader, instance, "vkGetDeviceProcAddr")?;
 
         Ok(InstanceFunctions {
             destroy_instance,
             enumerate_physical_devices,
+            get_device_proc_addr,
         })
     }
 }

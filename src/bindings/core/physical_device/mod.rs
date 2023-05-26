@@ -16,7 +16,7 @@ pub use sample_count_flags::{VkSampleCountFlagBits, VkSampleCountFlags};
 
 pub(crate) use features::VkPhysicalDeviceFeatures;
 pub(crate) use functions::{
-    VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
+    VkCreateDevice, VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
     VkGetPhysicalDeviceQueueFamilyProperties,
 };
 pub(crate) use handle::VkPhysicalDevice;

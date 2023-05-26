@@ -1,7 +1,7 @@
 use crate::{
-    Library, Loader, NativeLoader, PhysicalDevice, PhysicalDeviceFunctions, Result,
-    VkApplicationInfo, VkCreateInstance, VkInstance, VkInstanceCreateInfo, VkResult,
-    VkStructureType,
+    bindings::VkDevice, Library, Loader, NativeLoader, PhysicalDevice, PhysicalDeviceFunctions,
+    Result, VkApplicationInfo, VkCreateInstance, VkInstance, VkInstanceCreateFlags,
+    VkInstanceCreateInfo, VkResult, VkStructureType,
 };
 use functions::InstanceFunctions;
 use std::{
@@ -88,7 +88,7 @@ impl<L: Loader> Instance<L> {
         let create_info = VkInstanceCreateInfo {
             s_type: VkStructureType::InstanceCreateInfo,
             p_next: null(),
-            flags: create_info.flags,
+            flags: VkInstanceCreateFlags::default(),
             p_application_info: application_info
                 .as_ref()
                 .map(|application_info| application_info as *const _)
@@ -157,6 +157,11 @@ impl<L: Loader> Instance<L> {
 
     pub(crate) fn physical_device_functions(&self) -> &PhysicalDeviceFunctions {
         &self.physical_device_functions
+    }
+
+    pub(crate) fn get_device_proc_addr(&self, device: VkDevice, name: &str) -> Option<*const ()> {
+        let name = CString::new(name).unwrap();
+        (self.functions.get_device_proc_addr)(device, name.as_ptr()).map(|f| f as _)
     }
 }
 

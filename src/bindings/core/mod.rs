@@ -1,5 +1,6 @@
 mod allocation_callbacks;
 mod constants;
+mod device;
 mod extension_properties;
 mod extent_3d;
 mod global_functions;
@@ -13,7 +14,7 @@ mod version;
 
 pub use constants::VK_UUID_SIZE;
 pub use extent_3d::VkExtent3D;
-pub use instance::{VkInstance, VkInstanceCreateFlagBits, VkInstanceCreateFlags};
+pub use instance::VkInstance;
 pub use physical_device::{
     VkPhysicalDeviceType, VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags,
     VkSampleCountFlagBits, VkSampleCountFlags,
@@ -33,16 +34,21 @@ pub(crate) use allocation_callbacks::{
 pub(crate) use constants::{
     VK_MAX_DESCRIPTION_SIZE, VK_MAX_EXTENSION_NAME_SIZE, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE,
 };
+pub(crate) use device::{
+    VkDestroyDevice, VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
+    VkDeviceQueueCreateInfo,
+};
 pub(crate) use extension_properties::VkExtensionProperties;
 pub(crate) use global_functions::{
     VkCreateInstance, VkEnumerateInstanceExtensionProperties, VkEnumerateInstanceLayerProperties,
 };
 pub(crate) use instance::{
-    VkApplicationInfo, VkDestroyInstance, VkEnumeratePhysicalDevice, VkInstanceCreateInfo,
+    VkApplicationInfo, VkDestroyInstance, VkEnumeratePhysicalDevice, VkGetDeviceProcAddr,
+    VkInstanceCreateFlags, VkInstanceCreateInfo,
 };
 pub(crate) use layer_properties::VkLayerProperties;
 pub(crate) use physical_device::{
-    VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
+    VkCreateDevice, VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
     VkGetPhysicalDeviceQueueFamilyProperties, VkPhysicalDevice, VkPhysicalDeviceFeatures,
     VkPhysicalDeviceLimits, VkPhysicalDeviceProperties, VkPhysicalDeviceSparseProperties,
 };

@@ -1,6 +1,6 @@
 use crate::{
-    Instance, Loader, NativeLoader, QueueFamilyProperties, VkPhysicalDevice,
-    VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties,
+    Device, DeviceCreateInfo, Instance, Loader, NativeLoader, QueueFamilyProperties, Result,
+    VkPhysicalDevice, VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties,
 };
 use std::{ptr::null_mut, sync::Arc};
 
@@ -25,6 +25,15 @@ pub struct PhysicalDevice<L: Loader = NativeLoader> {
 impl<L: Loader> PhysicalDevice<L> {
     pub(crate) fn new(handle: VkPhysicalDevice, instance: Arc<Instance<L>>) -> Self {
         PhysicalDevice { handle, instance }
+    }
+
+    pub fn create_device(&self, create_info: DeviceCreateInfo) -> Result<Arc<Device<L>>> {
+        Device::create_device(
+            self.handle,
+            self.instance.clone(),
+            self.instance.physical_device_functions().create_device,
+            create_info,
+        )
     }
 
     pub fn get_features(&self) -> PhysicalDeviceFeatures {

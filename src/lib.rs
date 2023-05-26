@@ -3,14 +3,14 @@
 
 mod bindings;
 mod common;
+mod device;
 mod instance;
 mod library;
 mod loader;
 mod physical_device;
 
 pub use bindings::{
-    VkExtent3D as Extent3D, VkInstance, VkInstanceCreateFlagBits as InstanceCreateFlagBits,
-    VkInstanceCreateFlags as InstanceCreateFlags, VkPhysicalDeviceType as PhysicalDeviceType,
+    VkExtent3D as Extent3D, VkInstance, VkPhysicalDeviceType as PhysicalDeviceType,
     VkQueueFamilyProperties as QueueFamilyProperties, VkQueueFlagBits as QueueFlagBits,
     VkQueueFlags as QueueFlags, VkResult, VkSampleCountFlagBits as SampleCountFlagBits,
     VkSampleCountFlags as SampleCountFlags, VkVersion as Version, VK_API_VERSION_1_0,
@@ -18,6 +18,7 @@ pub use bindings::{
     VK_HEADER_VERSION_COMPLETE, VK_UUID_SIZE,
 };
 pub use common::{ExtensionProperties, LayerProperties};
+pub use device::{Device, DeviceCreateInfo, DeviceQueueCreateInfo};
 pub use instance::{ApplicationInfo, Instance, InstanceCreateInfo};
 pub use library::Library;
 pub use loader::{Loader, NativeLoader};

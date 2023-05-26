@@ -134,3 +134,78 @@ impl From<VkPhysicalDeviceFeatures> for PhysicalDeviceFeatures {
         }
     }
 }
+
+impl Into<VkPhysicalDeviceFeatures> for PhysicalDeviceFeatures {
+    fn into(self) -> VkPhysicalDeviceFeatures {
+        VkPhysicalDeviceFeatures {
+            robust_buffer_access: self.robust_buffer_access as _,
+            full_draw_index_uint_32: self.full_draw_index_uint_32 as _,
+            image_cube_array: self.image_cube_array as _,
+            independent_blend: self.independent_blend as _,
+            geometry_shader: self.geometry_shader as _,
+            tessellation_shader: self.tessellation_shader as _,
+            sample_rate_shading: self.sample_rate_shading as _,
+            dual_src_blend: self.dual_src_blend as _,
+            logic_op: self.logic_op as _,
+            multi_draw_indirect: self.multi_draw_indirect as _,
+            draw_indirect_first_instance: self.draw_indirect_first_instance as _,
+            depth_clamp: self.depth_clamp as _,
+            depth_bias_clamp: self.depth_bias_clamp as _,
+            fill_mode_non_solid: self.fill_mode_non_solid as _,
+            depth_bounds: self.depth_bounds as _,
+            wide_lines: self.wide_lines as _,
+            large_points: self.large_points as _,
+            alpha_to_one: self.alpha_to_one as _,
+            multi_viewport: self.multi_viewport as _,
+            sampler_anisotropy: self.sampler_anisotropy as _,
+            texture_compression_etc_2: self.texture_compression_etc_2 as _,
+            texture_compression_astc_ldr: self.texture_compression_astc_ldr as _,
+            texture_compression_bc: self.texture_compression_bc as _,
+            occlusion_query_precise: self.occlusion_query_precise as _,
+            pipeline_statistics_query: self.pipeline_statistics_query as _,
+            vertex_pipeline_stores_and_atomics: self.vertex_pipeline_stores_and_atomics as _,
+            fragment_stores_and_atomics: self.fragment_stores_and_atomics as _,
+            shader_tessellation_and_geometry_point_size: self
+                .shader_tessellation_and_geometry_point_size
+                as _,
+            shader_image_gather_extended: self.shader_image_gather_extended as _,
+            shader_storage_image_extended_formats: self.shader_storage_image_extended_formats as _,
+            shader_storage_image_multisample: self.shader_storage_image_multisample as _,
+            shader_storage_image_read_without_format: self.shader_storage_image_read_without_format
+                as _,
+            shader_storage_image_write_without_format: self
+                .shader_storage_image_write_without_format
+                as _,
+            shader_uniform_buffer_array_dynamic_indexing: self
+                .shader_uniform_buffer_array_dynamic_indexing
+                as _,
+            shader_sampled_image_array_dynamic_indexing: self
+                .shader_sampled_image_array_dynamic_indexing
+                as _,
+            shader_storage_buffer_array_dynamic_indexing: self
+                .shader_storage_buffer_array_dynamic_indexing
+                as _,
+            shader_storage_image_array_dynamic_indexing: self
+                .shader_storage_image_array_dynamic_indexing
+                as _,
+            shader_clip_distance: self.shader_clip_distance as _,
+            shader_cull_distance: self.shader_cull_distance as _,
+            shader_float_64: self.shader_float_64 as _,
+            shader_int_64: self.shader_int_64 as _,
+            shader_int_16: self.shader_int_16 as _,
+            shader_resource_residency: self.shader_resource_residency as _,
+            shader_resource_min_lod: self.shader_resource_min_lod as _,
+            sparse_binding: self.sparse_binding as _,
+            sparse_residency_buffer: self.sparse_residency_buffer as _,
+            sparse_residency_image_2d: self.sparse_residency_image_2d as _,
+            sparse_residency_image_3d: self.sparse_residency_image_3d as _,
+            sparse_residency_2_samples: self.sparse_residency_2_samples as _,
+            sparse_residency_4_samples: self.sparse_residency_4_samples as _,
+            sparse_residency_8_samples: self.sparse_residency_8_samples as _,
+            sparse_residency_16_samples: self.sparse_residency_16_samples as _,
+            sparse_residency_aliased: self.sparse_residency_aliased as _,
+            variable_multisample_rate: self.variable_multisample_rate as _,
+            inherited_queries: self.inherited_queries as _,
+        }
+    }
+}
