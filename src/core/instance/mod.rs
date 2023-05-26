@@ -1,8 +1,10 @@
 use crate::{
-    bindings::VkDevice, Library, Loader, NativeLoader, PhysicalDevice, PhysicalDeviceFunctions,
-    Result, VkApplicationInfo, VkCreateInstance, VkInstance, VkInstanceCreateFlags,
+    opt_cstring_as_ptr, opt_version_as_u32, string_vec_to_cstring_vec, Library, Loader,
+    NativeLoader, PhysicalDevice, PhysicalDeviceFunctions, Result, Surface, SurfaceFunctions,
+    VkApplicationInfo, VkCreateInstance, VkDevice, VkInstance, VkInstanceCreateFlags,
     VkInstanceCreateInfo, VkResult, VkStructureType,
 };
+use child_functions::ChildFunctions;
 use functions::InstanceFunctions;
 use std::{
     ffi::CString,
@@ -11,6 +13,7 @@ use std::{
 };
 
 mod application_info;
+mod child_functions;
 mod create_info;
 mod functions;
 
@@ -24,7 +27,7 @@ pub struct Instance<L: Loader = NativeLoader> {
 
     functions: InstanceFunctions,
 
-    physical_device_functions: PhysicalDeviceFunctions,
+    child_functions: ChildFunctions,
 }
 
 impl<L: Loader> Instance<L> {
@@ -47,45 +50,21 @@ impl<L: Loader> Instance<L> {
             VkApplicationInfo {
                 s_type: VkStructureType::ApplicationInfo,
                 p_next: null(),
-                p_application_name: application_name
-                    .as_ref()
-                    .map(|name| name.as_ptr())
-                    .unwrap_or(null()),
-                application_version: application_info
-                    .version
-                    .map(|version| version.as_u32())
-                    .unwrap_or(0),
-                p_engine_name: engine_name
-                    .as_ref()
-                    .map(|name| name.as_ptr())
-                    .unwrap_or(null()),
-                engine_version: application_info
-                    .engine_version
-                    .map(|version| version.as_u32())
-                    .unwrap_or(0),
+                p_application_name: opt_cstring_as_ptr!(application_name),
+                application_version: opt_version_as_u32!(application_info.version),
+                p_engine_name: opt_cstring_as_ptr!(engine_name),
+                engine_version: opt_version_as_u32!(application_info.engine_version),
                 api_version: application_info.api_version.as_u32(),
             }
         });
 
         // Prepare the create info
-        let enabled_layers: Vec<_> = create_info
-            .enabled_layers
-            .into_iter()
-            .map(|layer| CString::new(layer).unwrap())
-            .collect();
-        let enabled_layer_ptrs: Vec<_> =
-            enabled_layers.iter().map(|layer| layer.as_ptr()).collect();
-        let enabled_extensions: Vec<_> = create_info
-            .enabled_extensions
-            .into_iter()
-            .map(|extension| CString::new(extension).unwrap())
-            .collect();
-        let enabled_extension_ptrs: Vec<_> = enabled_extensions
-            .iter()
-            .map(|extension| extension.as_ptr())
-            .collect();
+        let (enabled_layers, enabled_layer_ptrs) =
+            string_vec_to_cstring_vec!(create_info.enabled_layers);
+        let (enabled_extensions, enabled_extension_ptrs) =
+            string_vec_to_cstring_vec!(create_info.enabled_extensions.clone());
 
-        let create_info = VkInstanceCreateInfo {
+        let vk_create_info = VkInstanceCreateInfo {
             s_type: VkStructureType::InstanceCreateInfo,
             p_next: null(),
             flags: VkInstanceCreateFlags::default(),
@@ -109,22 +88,22 @@ impl<L: Loader> Instance<L> {
 
         // Call vkCreateInstance function
         let mut handle = None;
-        let handle = match (create_instance)(&create_info, null(), &mut handle) {
+        let handle = match (create_instance)(&vk_create_info, null(), &mut handle) {
             VkResult::Success => handle.unwrap(),
             result => return Err(result),
         };
 
         // Create the instance
         let functions = InstanceFunctions::load(library.loader(), handle)?;
-        let physical_device_functions = PhysicalDeviceFunctions::load(library.loader(), handle)?;
+        let child_functions =
+            ChildFunctions::load(library.loader(), handle, &create_info.enabled_extensions)?;
 
         Ok(Arc::new(Instance {
             handle,
             library,
 
             functions,
-
-            physical_device_functions,
+            child_functions,
         }))
     }
 
@@ -155,13 +134,37 @@ impl<L: Loader> Instance<L> {
         }
     }
 
+    #[cfg(target_os = "windows")]
+    pub fn create_win32_surface(
+        self: &Arc<Self>,
+        create_info: crate::Win32SurfaceCreateInfo,
+    ) -> Result<Surface<L>> {
+        crate::create_win32_surface(self.clone(), create_info)
+    }
+
     pub(crate) fn physical_device_functions(&self) -> &PhysicalDeviceFunctions {
-        &self.physical_device_functions
+        &self.child_functions.physical_device
+    }
+
+    pub(crate) fn surface_functions(&self) -> &SurfaceFunctions {
+        self.child_functions.surface_functions.as_ref().unwrap()
+    }
+
+    #[cfg(target_os = "windows")]
+    pub(crate) fn win32_surface_functions(&self) -> &crate::Win32SurfaceFunctions {
+        self.child_functions
+            .win32_surface_functions
+            .as_ref()
+            .unwrap()
     }
 
     pub(crate) fn get_device_proc_addr(&self, device: VkDevice, name: &str) -> Option<*const ()> {
         let name = CString::new(name).unwrap();
         (self.functions.get_device_proc_addr)(device, name.as_ptr()).map(|f| f as _)
+    }
+
+    pub(crate) fn handle(&self) -> VkInstance {
+        self.handle
     }
 }
 

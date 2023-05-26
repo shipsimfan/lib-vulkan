@@ -1,4 +1,5 @@
 mod core;
+mod extensions;
 
 pub use self::core::{
     VkExtent3D, VkInstance, VkPhysicalDeviceType, VkQueueFamilyProperties, VkQueueFlagBits,
@@ -8,3 +9,4 @@ pub use self::core::{
 };
 
 pub(crate) use self::core::*;
+pub(crate) use extensions::*;

@@ -1,10 +1,10 @@
 use crate::{
-    Instance, Loader, NativeLoader, Queue, Result, VkCreateDevice, VkDevice, VkDeviceCreateFlags,
-    VkDeviceCreateInfo, VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo, VkPhysicalDevice,
-    VkResult, VkStructureType,
+    string_vec_to_cstring_vec, Instance, Loader, NativeLoader, Queue, Result, VkCreateDevice,
+    VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
+    VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
 };
 use functions::DeviceFunctions;
-use std::{ffi::CString, ptr::null, sync::Arc};
+use std::{ptr::null, sync::Arc};
 
 mod create_info;
 mod functions;
@@ -15,6 +15,7 @@ pub use queue_create_info::DeviceQueueCreateInfo;
 
 pub struct Device<L: Loader = NativeLoader> {
     handle: VkDevice,
+    #[allow(unused)]
     instance: Arc<Instance<L>>,
 
     functions: DeviceFunctions,
@@ -27,7 +28,7 @@ impl<L: Loader> Device<L> {
         create_device: VkCreateDevice,
         create_info: DeviceCreateInfo,
     ) -> Result<Arc<Self>> {
-        // Prepare the create info
+        // Prepare the queue create infos
         let queue_create_infos: Vec<_> = create_info
             .queue_create_infos
             .iter()
@@ -41,23 +42,11 @@ impl<L: Loader> Device<L> {
             })
             .collect();
 
-        let enabled_layers: Vec<_> = create_info
-            .enabled_layers
-            .into_iter()
-            .map(|layer| CString::new(layer).unwrap())
-            .collect();
-        let enabled_layer_ptrs: Vec<_> =
-            enabled_layers.iter().map(|layer| layer.as_ptr()).collect();
-        let enabled_extensions: Vec<_> = create_info
-            .enabled_extensions
-            .into_iter()
-            .map(|extension| CString::new(extension).unwrap())
-            .collect();
-        let enabled_extension_ptrs: Vec<_> = enabled_extensions
-            .iter()
-            .map(|extension| extension.as_ptr())
-            .collect();
-
+        // Prepare the create info
+        let (enabled_layers, enabled_layer_ptrs) =
+            string_vec_to_cstring_vec!(create_info.enabled_layers);
+        let (enabled_extensions, enabled_extension_ptrs) =
+            string_vec_to_cstring_vec!(create_info.enabled_extensions);
         let enabled_features = create_info
             .enabled_features
             .map(|enabled_features| enabled_features.into());

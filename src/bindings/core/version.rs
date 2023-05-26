@@ -10,6 +10,14 @@ pub const VK_API_VERSION_1_3: VkVersion = VkVersion::new(0, 1, 3, 0);
 pub const VK_HEADER_VERSION: u16 = 250;
 pub const VK_HEADER_VERSION_COMPLETE: VkVersion = VkVersion::new(0, 1, 3, VK_HEADER_VERSION);
 
+macro_rules! opt_version_as_u32 {
+    ($version: expr) => {
+        $version.map(|version| version.as_u32()).unwrap_or(0)
+    };
+}
+
+pub(crate) use opt_version_as_u32;
+
 impl VkVersion {
     pub const fn new(variant: u8, major: u8, minor: u16, patch: u16) -> Self {
         VkVersion(

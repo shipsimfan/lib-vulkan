@@ -14,12 +14,9 @@ pub use queue_flags::{VkQueueFlagBits, VkQueueFlags};
 pub use r#type::VkPhysicalDeviceType;
 pub use sample_count_flags::{VkSampleCountFlagBits, VkSampleCountFlags};
 
-pub(crate) use features::VkPhysicalDeviceFeatures;
-pub(crate) use functions::{
-    VkCreateDevice, VkGetPhysicalDeviceFeatures, VkGetPhysicalDeviceProperties,
-    VkGetPhysicalDeviceQueueFamilyProperties,
-};
+pub(crate) use features::*;
+pub(crate) use functions::*;
 pub(crate) use handle::VkPhysicalDevice;
-pub(crate) use limits::VkPhysicalDeviceLimits;
-pub(crate) use properties::VkPhysicalDeviceProperties;
-pub(crate) use sparse_properties::VkPhysicalDeviceSparseProperties;
+pub(crate) use limits::*;
+pub(crate) use properties::*;
+pub(crate) use sparse_properties::*;
