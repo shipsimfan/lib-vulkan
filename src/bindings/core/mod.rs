@@ -12,6 +12,7 @@ mod layer_properties;
 mod physical_device;
 mod queue;
 mod result;
+mod sharing_mode;
 mod structure_type;
 mod types;
 mod version;
@@ -27,6 +28,7 @@ pub use physical_device::{
     VkSampleCountFlagBits, VkSampleCountFlags,
 };
 pub use result::VkResult;
+pub use sharing_mode::VkSharingMode;
 pub use version::{
     VkVersion, VK_API_VERSION_1_0, VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3,
     VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,

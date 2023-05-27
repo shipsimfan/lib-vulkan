@@ -1,11 +1,14 @@
 use crate::{
-    string_vec_to_cstring_vec, Instance, Loader, NativeLoader, Queue, Result, VkCreateDevice,
-    VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
-    VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
+    string_vec_to_cstring_vec, Instance, Loader, NativeLoader, Queue, Result, Swapchain,
+    SwapchainCreateInfo, SwapchainFunctions, VkCreateDevice, VkDevice, VkDeviceCreateFlags,
+    VkDeviceCreateInfo, VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo, VkPhysicalDevice,
+    VkResult, VkStructureType,
 };
+use child_functions::ChildFunctions;
 use functions::DeviceFunctions;
 use std::{ptr::null, sync::Arc};
 
+mod child_functions;
 mod create_info;
 mod functions;
 mod queue_create_info;
@@ -19,6 +22,7 @@ pub struct Device<L: Loader = NativeLoader> {
     instance: Arc<Instance<L>>,
 
     functions: DeviceFunctions,
+    child_functions: ChildFunctions,
 }
 
 impl<L: Loader> Device<L> {
@@ -46,12 +50,12 @@ impl<L: Loader> Device<L> {
         let (enabled_layers, enabled_layer_ptrs) =
             string_vec_to_cstring_vec!(create_info.enabled_layers);
         let (enabled_extensions, enabled_extension_ptrs) =
-            string_vec_to_cstring_vec!(create_info.enabled_extensions);
+            string_vec_to_cstring_vec!(create_info.enabled_extensions.clone());
         let enabled_features = create_info
             .enabled_features
             .map(|enabled_features| enabled_features.into());
 
-        let create_info = VkDeviceCreateInfo {
+        let vk_create_info = VkDeviceCreateInfo {
             s_type: VkStructureType::DeviceCreateInfo,
             p_next: null(),
             flags: VkDeviceCreateFlags::default(),
@@ -69,19 +73,22 @@ impl<L: Loader> Device<L> {
 
         // Call the vkCreateDevice function
         let mut handle = None;
-        let handle = match (create_device)(physical_device, &create_info, null(), &mut handle) {
+        let handle = match (create_device)(physical_device, &vk_create_info, null(), &mut handle) {
             VkResult::Success => handle.unwrap(),
             result => return Err(result),
         };
 
         // Create the device
         let functions = DeviceFunctions::load(&instance, handle)?;
+        let child_functions =
+            ChildFunctions::load(&instance, handle, &create_info.enabled_extensions)?;
 
         Ok(Arc::new(Device {
             handle,
             instance,
 
             functions,
+            child_functions,
         }))
     }
 
@@ -89,6 +96,21 @@ impl<L: Loader> Device<L> {
         let mut handle = None;
         (self.functions.get_queue)(self.handle, queue_family_index, queue_index, &mut handle);
         Queue::new(handle.unwrap(), self.clone())
+    }
+
+    pub fn create_swapchain(
+        self: &Arc<Self>,
+        create_info: SwapchainCreateInfo,
+    ) -> Result<Swapchain<L>> {
+        Swapchain::create_swapchain(self.clone(), create_info)
+    }
+
+    pub(crate) fn swapchain_functions(&self) -> &SwapchainFunctions {
+        self.child_functions.swapchain_functions.as_ref().unwrap()
+    }
+
+    pub(crate) fn handle(&self) -> VkDevice {
+        self.handle
     }
 }
 

@@ -1,4 +1,4 @@
-use crate::bindings::VkFlags;
+use crate::VkFlags;
 
 #[non_exhaustive]
 #[repr(u32)]

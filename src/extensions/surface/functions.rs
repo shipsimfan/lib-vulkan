@@ -1,6 +1,6 @@
 use crate::{
-    bindings::VkGetPhysicalDeviceSurfacePresentModesKHR, Loader, Result, VkDestroySurfaceKHR,
-    VkGetPhysicalDeviceSurfaceCapabilities, VkGetPhysicalDeviceSurfaceFormatsKHR,
+    Loader, Result, VkDestroySurfaceKHR, VkGetPhysicalDeviceSurfaceCapabilities,
+    VkGetPhysicalDeviceSurfaceFormatsKHR, VkGetPhysicalDeviceSurfacePresentModesKHR,
     VkGetPhysicalDeviceSurfaceSupportKHR, VkInstance,
 };
 

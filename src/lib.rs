@@ -21,15 +21,15 @@ pub use bindings::{
     VkPresentModeKHR as PresentMode, VkQueueFamilyProperties as QueueFamilyProperties,
     VkQueueFlagBits as QueueFlagBits, VkQueueFlags as QueueFlags, VkResult,
     VkSampleCountFlagBits as SampleCountFlagBits, VkSampleCountFlags as SampleCountFlags,
-    VkSurfaceCapabilitiesKHR as SurfaceCapabilities, VkSurfaceFormatKHR as SurfaceFormat,
-    VkSurfaceTransformFlagBitsKHR as SurfaceTransformFlagBits,
+    VkSharingMode as SharingMode, VkSurfaceCapabilitiesKHR as SurfaceCapabilities,
+    VkSurfaceFormatKHR as SurfaceFormat, VkSurfaceTransformFlagBitsKHR as SurfaceTransformFlagBits,
     VkSurfaceTransformFlagsKHR as SurfaceTransformFlags, VkVersion as Version, VK_API_VERSION_1_0,
     VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION,
     VK_HEADER_VERSION_COMPLETE, VK_UUID_SIZE,
 };
-pub use extensions::Surface;
 #[cfg(target_os = "windows")]
 pub use extensions::Win32SurfaceCreateInfo;
+pub use extensions::{Surface, Swapchain, SwapchainCreateInfo};
 pub use library::Library;
 pub use loader::{Loader, NativeLoader};
 

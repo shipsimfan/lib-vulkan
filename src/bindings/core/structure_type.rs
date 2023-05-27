@@ -5,6 +5,7 @@ pub(crate) enum VkStructureType {
     InstanceCreateInfo = 1,
     DeviceQueueCreateInfo = 2,
     DeviceCreateInfo = 3,
+    SwapchainCreateInfo = 1000001000,
     #[cfg(target_os = "windows")]
     Win32SurfaceCreateInfo = 1000009000,
 }
