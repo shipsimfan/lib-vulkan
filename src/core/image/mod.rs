@@ -7,7 +7,15 @@ pub struct Image<L: Loader = NativeLoader> {
 }
 
 impl<L: Loader> Image<L> {
-    pub(crate) fn new(handle: VkImage, swapchain: Arc<Swapchain<L>>) -> Self {
-        Image { handle, swapchain }
+    pub(crate) fn new(handle: VkImage, swapchain: Arc<Swapchain<L>>) -> Arc<Self> {
+        Arc::new(Image { handle, swapchain })
+    }
+
+    pub(crate) fn handle(&self) -> VkImage {
+        self.handle
+    }
+
+    pub(crate) fn swapchain(&self) -> &Swapchain<L> {
+        &self.swapchain
     }
 }

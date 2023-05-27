@@ -59,7 +59,7 @@ impl<L: Loader> Swapchain<L> {
         Ok(Arc::new(Swapchain { handle, device }))
     }
 
-    pub fn get_images(self: &Arc<Self>) -> Result<Vec<Image<L>>> {
+    pub fn get_images(self: &Arc<Self>) -> Result<Vec<Arc<Image<L>>>> {
         let mut count = 0;
         match (self.device.swapchain_functions().get_swapchain_images)(
             self.device.handle(),
@@ -92,6 +92,10 @@ impl<L: Loader> Swapchain<L> {
                 result => return Err(result),
             }
         }
+    }
+
+    pub(crate) fn device(&self) -> &Device<L> {
+        &self.device
     }
 }
 

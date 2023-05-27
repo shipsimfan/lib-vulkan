@@ -1,8 +1,8 @@
 use crate::{
-    string_vec_to_cstring_vec, Instance, Loader, NativeLoader, Queue, Result, Swapchain,
-    SwapchainCreateInfo, SwapchainFunctions, VkCreateDevice, VkDevice, VkDeviceCreateFlags,
-    VkDeviceCreateInfo, VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo, VkPhysicalDevice,
-    VkResult, VkStructureType,
+    string_vec_to_cstring_vec, ImageView, ImageViewCreateInfo, ImageViewFunctions, Instance,
+    Loader, NativeLoader, Queue, Result, Swapchain, SwapchainCreateInfo, SwapchainFunctions,
+    VkCreateDevice, VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
+    VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
 };
 use child_functions::ChildFunctions;
 use functions::DeviceFunctions;
@@ -103,6 +103,14 @@ impl<L: Loader> Device<L> {
         create_info: SwapchainCreateInfo,
     ) -> Result<Arc<Swapchain<L>>> {
         Swapchain::create_swapchain(self.clone(), create_info)
+    }
+
+    pub fn create_image_view(&self, create_info: ImageViewCreateInfo<L>) -> Result<ImageView<L>> {
+        ImageView::create_image_view(self, create_info)
+    }
+
+    pub(crate) fn image_view_functions(&self) -> &ImageViewFunctions {
+        &self.child_functions.image_view_functions
     }
 
     pub(crate) fn swapchain_functions(&self) -> &SwapchainFunctions {

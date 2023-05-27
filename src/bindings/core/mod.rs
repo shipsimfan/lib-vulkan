@@ -1,4 +1,6 @@
 mod allocation_callbacks;
+mod component_mapping;
+mod component_swizzle;
 mod constants;
 mod device;
 mod extension_properties;
@@ -7,7 +9,7 @@ mod extent_3d;
 mod format;
 mod global_functions;
 mod image;
-mod image_usage_flags;
+mod image_view;
 mod instance;
 mod layer_properties;
 mod physical_device;
@@ -18,11 +20,17 @@ mod structure_type;
 mod types;
 mod version;
 
+pub use component_mapping::VkComponentMapping;
+pub use component_swizzle::VkComponentSwizzle;
 pub use constants::VK_UUID_SIZE;
 pub use extent_2d::VkExtent2D;
 pub use extent_3d::VkExtent3D;
 pub use format::VkFormat;
-pub use image_usage_flags::{VkImageUsageFlagBits, VkImageUsageFlags};
+pub use image::{
+    VkImageAspectFlagBits, VkImageAspectFlags, VkImageSubresourceRange, VkImageUsageFlagBits,
+    VkImageUsageFlags,
+};
+pub use image_view::VkImageViewType;
 pub use instance::VkInstance;
 pub use physical_device::{
     VkPhysicalDeviceType, VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags,
@@ -41,6 +49,7 @@ pub(crate) use device::*;
 pub(crate) use extension_properties::*;
 pub(crate) use global_functions::*;
 pub(crate) use image::*;
+pub(crate) use image_view::*;
 pub(crate) use instance::*;
 pub(crate) use layer_properties::*;
 pub(crate) use physical_device::*;

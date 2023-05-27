@@ -10,14 +10,18 @@ mod loader;
 
 pub use self::core::{
     ApplicationInfo, Device, DeviceCreateInfo, DeviceQueueCreateInfo, ExtensionProperties, Image,
-    Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice, PhysicalDeviceFeatures,
-    PhysicalDeviceLimits, PhysicalDeviceProperties, PhysicalDeviceSparseProperties, Queue,
+    ImageView, ImageViewCreateInfo, Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice,
+    PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
+    PhysicalDeviceSparseProperties, Queue,
 };
 pub use bindings::{
-    VkColorSpaceKHR as ColorSpace, VkCompositeAlphaFlagBitsKHR as CompositeAlphaFlagBits,
+    VkColorSpaceKHR as ColorSpace, VkComponentMapping as ComponentMapping,
+    VkComponentSwizzle as ComponentSwizzle, VkCompositeAlphaFlagBitsKHR as CompositeAlphaFlagBits,
     VkCompositeAlphaFlagsKHR as CompositeAlphaFlags, VkExtent2D as Extent2D,
-    VkExtent3D as Extent3D, VkFormat as Format, VkImageUsageFlagBits as ImageUsageFlagBits,
-    VkImageUsageFlags as ImageUsageFlags, VkInstance, VkPhysicalDeviceType as PhysicalDeviceType,
+    VkExtent3D as Extent3D, VkFormat as Format, VkImageAspectFlagBits as ImageAspectFlagBits,
+    VkImageAspectFlags as ImageAspectFlags, VkImageSubresourceRange as ImageSubresourceRange,
+    VkImageUsageFlagBits as ImageUsageFlagBits, VkImageUsageFlags as ImageUsageFlags,
+    VkImageViewType as ImageViewType, VkInstance, VkPhysicalDeviceType as PhysicalDeviceType,
     VkPresentModeKHR as PresentMode, VkQueueFamilyProperties as QueueFamilyProperties,
     VkQueueFlagBits as QueueFlagBits, VkQueueFlags as QueueFlags, VkResult,
     VkSampleCountFlagBits as SampleCountFlagBits, VkSampleCountFlags as SampleCountFlags,

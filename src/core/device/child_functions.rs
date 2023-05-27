@@ -1,6 +1,8 @@
-use crate::{Instance, Loader, Result, SwapchainFunctions, VkDevice};
+use crate::{ImageViewFunctions, Instance, Loader, Result, SwapchainFunctions, VkDevice};
 
 pub(super) struct ChildFunctions {
+    pub(super) image_view_functions: ImageViewFunctions,
+
     pub(super) swapchain_functions: Option<SwapchainFunctions>,
 }
 
@@ -10,6 +12,8 @@ impl ChildFunctions {
         device: VkDevice,
         extension_list: &[String],
     ) -> Result<Self> {
+        let image_view_functions = ImageViewFunctions::load(instance, device)?;
+
         let mut swapchain_functions = None;
 
         for extension in extension_list {
@@ -22,6 +26,8 @@ impl ChildFunctions {
         }
 
         Ok(ChildFunctions {
+            image_view_functions,
+
             swapchain_functions,
         })
     }

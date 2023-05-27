@@ -1,6 +1,7 @@
 mod device;
 mod extension_properties;
 mod image;
+mod image_view;
 mod instance;
 mod layer_properties;
 mod physical_device;
@@ -9,6 +10,7 @@ mod queue;
 pub use device::{Device, DeviceCreateInfo, DeviceQueueCreateInfo};
 pub use extension_properties::ExtensionProperties;
 pub use image::Image;
+pub use image_view::{ImageView, ImageViewCreateInfo};
 pub use instance::{ApplicationInfo, Instance, InstanceCreateInfo};
 pub use layer_properties::LayerProperties;
 pub use physical_device::{
@@ -17,4 +19,5 @@ pub use physical_device::{
 };
 pub use queue::Queue;
 
+pub(crate) use image_view::*;
 pub(crate) use physical_device::*;
