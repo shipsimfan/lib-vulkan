@@ -9,7 +9,7 @@ mod library;
 mod loader;
 
 pub use self::core::{
-    ApplicationInfo, Device, DeviceCreateInfo, DeviceQueueCreateInfo, ExtensionProperties,
+    ApplicationInfo, Device, DeviceCreateInfo, DeviceQueueCreateInfo, ExtensionProperties, Image,
     Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice, PhysicalDeviceFeatures,
     PhysicalDeviceLimits, PhysicalDeviceProperties, PhysicalDeviceSparseProperties, Queue,
 };

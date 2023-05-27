@@ -1,8 +1,11 @@
 use crate::{
-    Device, Loader, NativeLoader, Result, VkBool32, VkResult, VkStructureType,
+    Device, Image, Loader, NativeLoader, Result, VkBool32, VkResult, VkStructureType,
     VkSwapchainCreateFlagsKHR, VkSwapchainCreateInfoKHR, VkSwapchainKHR,
 };
-use std::{ptr::null, sync::Arc};
+use std::{
+    ptr::{null, null_mut},
+    sync::Arc,
+};
 
 mod create_info;
 mod functions;
@@ -20,7 +23,7 @@ impl<L: Loader> Swapchain<L> {
     pub(crate) fn create_swapchain(
         device: Arc<Device<L>>,
         create_info: SwapchainCreateInfo,
-    ) -> Result<Self> {
+    ) -> Result<Arc<Self>> {
         let create_swapchain = device.swapchain_functions().create_swapchain;
 
         let create_info = VkSwapchainCreateInfoKHR {
@@ -53,7 +56,42 @@ impl<L: Loader> Swapchain<L> {
             result => return Err(result),
         };
 
-        Ok(Swapchain { handle, device })
+        Ok(Arc::new(Swapchain { handle, device }))
+    }
+
+    pub fn get_images(self: &Arc<Self>) -> Result<Vec<Image<L>>> {
+        let mut count = 0;
+        match (self.device.swapchain_functions().get_swapchain_images)(
+            self.device.handle(),
+            self.handle,
+            &mut count,
+            null_mut(),
+        ) {
+            VkResult::Success => {}
+            result => return Err(result),
+        }
+
+        let mut images = Vec::with_capacity(count as usize);
+        loop {
+            match (self.device.swapchain_functions().get_swapchain_images)(
+                self.device.handle(),
+                self.handle,
+                &mut count,
+                images.as_mut_ptr(),
+            ) {
+                VkResult::Success => {
+                    unsafe { images.set_len(count as usize) };
+                    return Ok(images
+                        .into_iter()
+                        .map(|image| Image::new(image, self.clone()))
+                        .collect());
+                }
+                VkResult::Incomplete => {
+                    images.reserve(count as usize);
+                }
+                result => return Err(result),
+            }
+        }
     }
 }
 

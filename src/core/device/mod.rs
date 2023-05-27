@@ -101,7 +101,7 @@ impl<L: Loader> Device<L> {
     pub fn create_swapchain(
         self: &Arc<Self>,
         create_info: SwapchainCreateInfo,
-    ) -> Result<Swapchain<L>> {
+    ) -> Result<Arc<Swapchain<L>>> {
         Swapchain::create_swapchain(self.clone(), create_info)
     }
 
