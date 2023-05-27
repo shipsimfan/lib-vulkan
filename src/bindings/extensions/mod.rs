@@ -3,7 +3,7 @@ mod surface;
 mod win32_surface;
 
 pub use surface::{
-    VkColorSpaceKHR, VkCompositeAlphaFlagBitsKHR, VkCompositeAlphaFlagsKHR,
+    VkColorSpaceKHR, VkCompositeAlphaFlagBitsKHR, VkCompositeAlphaFlagsKHR, VkPresentModeKHR,
     VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR, VkSurfaceTransformFlagBitsKHR,
     VkSurfaceTransformFlagsKHR,
 };

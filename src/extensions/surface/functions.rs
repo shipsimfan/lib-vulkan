@@ -1,12 +1,14 @@
 use crate::{
-    Loader, Result, VkDestroySurfaceKHR, VkGetPhysicalDeviceSurfaceCapabilities,
-    VkGetPhysicalDeviceSurfaceFormatsKHR, VkGetPhysicalDeviceSurfaceSupportKHR, VkInstance,
+    bindings::VkGetPhysicalDeviceSurfacePresentModesKHR, Loader, Result, VkDestroySurfaceKHR,
+    VkGetPhysicalDeviceSurfaceCapabilities, VkGetPhysicalDeviceSurfaceFormatsKHR,
+    VkGetPhysicalDeviceSurfaceSupportKHR, VkInstance,
 };
 
 pub(crate) struct SurfaceFunctions {
     pub(super) destroy_surface: VkDestroySurfaceKHR,
     pub(crate) get_physical_device_surface_capabilities: VkGetPhysicalDeviceSurfaceCapabilities,
     pub(crate) get_physical_device_surface_formats: VkGetPhysicalDeviceSurfaceFormatsKHR,
+    pub(crate) get_physical_device_surface_present_modes: VkGetPhysicalDeviceSurfacePresentModesKHR,
     pub(crate) get_physical_device_surface_support: VkGetPhysicalDeviceSurfaceSupportKHR,
 }
 
@@ -29,6 +31,11 @@ impl SurfaceFunctions {
         )?;
         let get_physical_device_surface_formats =
             load_function!(loader, instance, "vkGetPhysicalDeviceSurfaceFormatsKHR")?;
+        let get_physical_device_surface_present_modes = load_function!(
+            loader,
+            instance,
+            "vkGetPhysicalDeviceSurfacePresentModesKHR"
+        )?;
         let get_physical_device_surface_support =
             load_function!(loader, instance, "vkGetPhysicalDeviceSurfaceSupportKHR")?;
 
@@ -36,6 +43,7 @@ impl SurfaceFunctions {
             destroy_surface,
             get_physical_device_surface_capabilities,
             get_physical_device_surface_formats,
+            get_physical_device_surface_present_modes,
             get_physical_device_surface_support,
         })
     }

@@ -1,5 +1,5 @@
 use crate::{
-    Device, DeviceCreateInfo, ExtensionProperties, Instance, Loader, NativeLoader,
+    Device, DeviceCreateInfo, ExtensionProperties, Instance, Loader, NativeLoader, PresentMode,
     QueueFamilyProperties, Result, Surface, SurfaceCapabilities, SurfaceFormat, VkPhysicalDevice,
     VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties, VkResult,
 };
@@ -174,6 +174,44 @@ impl<L: Loader> PhysicalDevice<L> {
                 }
                 VkResult::Incomplete => {
                     extensions.reserve(count as usize);
+                }
+                result => return Err(result),
+            }
+        }
+    }
+
+    pub fn get_surface_present_modes(&self, surface: &Surface<L>) -> Result<Vec<PresentMode>> {
+        let mut count = 0;
+        match (self
+            .instance
+            .surface_functions()
+            .get_physical_device_surface_present_modes)(
+            self.handle,
+            surface.handle(),
+            &mut count,
+            null_mut(),
+        ) {
+            VkResult::Success => {}
+            result => return Err(result),
+        }
+
+        let mut present_modes = Vec::with_capacity(count as usize);
+        loop {
+            match (self
+                .instance
+                .surface_functions()
+                .get_physical_device_surface_present_modes)(
+                self.handle,
+                surface.handle(),
+                &mut count,
+                present_modes.as_mut_ptr(),
+            ) {
+                VkResult::Success => {
+                    unsafe { present_modes.set_len(count as usize) };
+                    return Ok(present_modes);
+                }
+                VkResult::Incomplete => {
+                    present_modes.reserve(count as usize);
                 }
                 result => return Err(result),
             }

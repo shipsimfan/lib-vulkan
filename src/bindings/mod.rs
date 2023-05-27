@@ -9,7 +9,7 @@ pub use self::core::{
     VK_UUID_SIZE,
 };
 pub use extensions::{
-    VkColorSpaceKHR, VkCompositeAlphaFlagBitsKHR, VkCompositeAlphaFlagsKHR,
+    VkColorSpaceKHR, VkCompositeAlphaFlagBitsKHR, VkCompositeAlphaFlagsKHR, VkPresentModeKHR,
     VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR, VkSurfaceTransformFlagBitsKHR,
     VkSurfaceTransformFlagsKHR,
 };
