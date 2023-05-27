@@ -1,10 +1,11 @@
 use crate::{
-    Loader, Result, VkDestroySurfaceKHR, VkGetPhysicalDeviceSurfaceFormatsKHR,
-    VkGetPhysicalDeviceSurfaceSupportKHR, VkInstance,
+    Loader, Result, VkDestroySurfaceKHR, VkGetPhysicalDeviceSurfaceCapabilities,
+    VkGetPhysicalDeviceSurfaceFormatsKHR, VkGetPhysicalDeviceSurfaceSupportKHR, VkInstance,
 };
 
 pub(crate) struct SurfaceFunctions {
     pub(super) destroy_surface: VkDestroySurfaceKHR,
+    pub(crate) get_physical_device_surface_capabilities: VkGetPhysicalDeviceSurfaceCapabilities,
     pub(crate) get_physical_device_surface_formats: VkGetPhysicalDeviceSurfaceFormatsKHR,
     pub(crate) get_physical_device_surface_support: VkGetPhysicalDeviceSurfaceSupportKHR,
 }
@@ -21,13 +22,19 @@ macro_rules! load_function {
 impl SurfaceFunctions {
     pub(crate) fn load<L: Loader>(loader: &L, instance: VkInstance) -> Result<Self> {
         let destroy_surface = load_function!(loader, instance, "vkDestroySurfaceKHR")?;
+        let get_physical_device_surface_capabilities = load_function!(
+            loader,
+            instance,
+            "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
+        )?;
         let get_physical_device_surface_formats =
-            load_function!(loader, instance, "vkGetPhysicalDeviceSurfaceFormats")?;
+            load_function!(loader, instance, "vkGetPhysicalDeviceSurfaceFormatsKHR")?;
         let get_physical_device_surface_support =
             load_function!(loader, instance, "vkGetPhysicalDeviceSurfaceSupportKHR")?;
 
         Ok(SurfaceFunctions {
             destroy_surface,
+            get_physical_device_surface_capabilities,
             get_physical_device_surface_formats,
             get_physical_device_surface_support,
         })

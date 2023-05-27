@@ -1,6 +1,6 @@
 use crate::{
     Device, DeviceCreateInfo, ExtensionProperties, Instance, Loader, NativeLoader,
-    QueueFamilyProperties, Result, Surface, SurfaceFormat, VkPhysicalDevice,
+    QueueFamilyProperties, Result, Surface, SurfaceCapabilities, SurfaceFormat, VkPhysicalDevice,
     VkPhysicalDeviceFeatures, VkPhysicalDeviceProperties, VkResult,
 };
 use std::{
@@ -124,6 +124,21 @@ impl<L: Loader> PhysicalDevice<L> {
                 }
                 result => return Err(result),
             }
+        }
+    }
+
+    pub fn get_surface_capabilities(&self, surface: &Surface<L>) -> Result<SurfaceCapabilities> {
+        let mut surface_capabilites = SurfaceCapabilities::default();
+        match (self
+            .instance
+            .surface_functions()
+            .get_physical_device_surface_capabilities)(
+            self.handle,
+            surface.handle(),
+            &mut surface_capabilites,
+        ) {
+            VkResult::Success => Ok(surface_capabilites),
+            result => Err(result),
         }
     }
 

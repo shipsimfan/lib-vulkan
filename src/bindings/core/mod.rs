@@ -2,9 +2,11 @@ mod allocation_callbacks;
 mod constants;
 mod device;
 mod extension_properties;
+mod extent_2d;
 mod extent_3d;
 mod format;
 mod global_functions;
+mod image_usage_flags;
 mod instance;
 mod layer_properties;
 mod physical_device;
@@ -15,8 +17,10 @@ mod types;
 mod version;
 
 pub use constants::VK_UUID_SIZE;
+pub use extent_2d::VkExtent2D;
 pub use extent_3d::VkExtent3D;
 pub use format::VkFormat;
+pub use image_usage_flags::{VkImageUsageFlagBits, VkImageUsageFlags};
 pub use instance::VkInstance;
 pub use physical_device::{
     VkPhysicalDeviceType, VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags,

@@ -1,6 +1,6 @@
 use crate::{
-    VkAllocationCallbacks, VkBool32, VkInstance, VkPhysicalDevice, VkResult, VkSurfaceFormatKHR,
-    VkSurfaceKHR,
+    VkAllocationCallbacks, VkBool32, VkInstance, VkPhysicalDevice, VkResult,
+    VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR, VkSurfaceKHR,
 };
 
 pub(crate) type VkDestroySurfaceKHR = extern "system" fn(
@@ -8,6 +8,12 @@ pub(crate) type VkDestroySurfaceKHR = extern "system" fn(
     surface: VkSurfaceKHR,
     p_allocator: *const VkAllocationCallbacks,
 );
+
+pub(crate) type VkGetPhysicalDeviceSurfaceCapabilities = extern "system" fn(
+    physical_device: VkPhysicalDevice,
+    surface: VkSurfaceKHR,
+    p_surface_capabilities: *mut VkSurfaceCapabilitiesKHR,
+) -> VkResult;
 
 pub(crate) type VkGetPhysicalDeviceSurfaceFormatsKHR = extern "system" fn(
     physical_device: VkPhysicalDevice,

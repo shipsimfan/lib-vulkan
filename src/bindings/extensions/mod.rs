@@ -2,7 +2,11 @@ mod surface;
 #[cfg(target_os = "windows")]
 mod win32_surface;
 
-pub use surface::{VkColorSpaceKHR, VkSurfaceFormatKHR};
+pub use surface::{
+    VkColorSpaceKHR, VkCompositeAlphaFlagBitsKHR, VkCompositeAlphaFlagsKHR,
+    VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR, VkSurfaceTransformFlagBitsKHR,
+    VkSurfaceTransformFlagsKHR,
+};
 
 pub(crate) use surface::*;
 #[cfg(target_os = "windows")]
