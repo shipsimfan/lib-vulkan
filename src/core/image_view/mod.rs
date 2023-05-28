@@ -17,10 +17,7 @@ pub struct ImageView<L: Loader = NativeLoader> {
 }
 
 impl<L: Loader> ImageView<L> {
-    pub(crate) fn create_image_view(
-        device: &Device<L>,
-        create_info: ImageViewCreateInfo<L>,
-    ) -> Result<Self> {
+    pub(crate) fn create(device: &Device<L>, create_info: ImageViewCreateInfo<L>) -> Result<Self> {
         let create_image_view = device.image_view_functions().create_image_view;
 
         let vk_create_info = VkImageViewCreateInfo {

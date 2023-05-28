@@ -6,6 +6,7 @@ mod instance;
 mod layer_properties;
 mod physical_device;
 mod queue;
+mod shader_module;
 
 pub use device::{Device, DeviceCreateInfo, DeviceQueueCreateInfo};
 pub use extension_properties::ExtensionProperties;
@@ -18,6 +19,8 @@ pub use physical_device::{
     PhysicalDeviceSparseProperties,
 };
 pub use queue::Queue;
+pub use shader_module::ShaderModule;
 
 pub(crate) use image_view::*;
 pub(crate) use physical_device::*;
+pub(crate) use shader_module::*;

@@ -33,7 +33,7 @@ impl<L: Loader> PhysicalDevice<L> {
     }
 
     pub fn create_device(&self, create_info: DeviceCreateInfo) -> Result<Arc<Device<L>>> {
-        Device::create_device(
+        Device::create(
             self.handle,
             self.instance.clone(),
             self.instance.physical_device_functions().create_device,

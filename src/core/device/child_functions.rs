@@ -1,7 +1,11 @@
-use crate::{ImageViewFunctions, Instance, Loader, Result, SwapchainFunctions, VkDevice};
+use crate::{
+    ImageViewFunctions, Instance, Loader, Result, ShaderModuleFunctions, SwapchainFunctions,
+    VkDevice,
+};
 
 pub(super) struct ChildFunctions {
     pub(super) image_view_functions: ImageViewFunctions,
+    pub(super) shader_module_functions: ShaderModuleFunctions,
 
     pub(super) swapchain_functions: Option<SwapchainFunctions>,
 }
@@ -13,6 +17,7 @@ impl ChildFunctions {
         extension_list: &[String],
     ) -> Result<Self> {
         let image_view_functions = ImageViewFunctions::load(instance, device)?;
+        let shader_module_functions = ShaderModuleFunctions::load(instance, device)?;
 
         let mut swapchain_functions = None;
 
@@ -27,6 +32,7 @@ impl ChildFunctions {
 
         Ok(ChildFunctions {
             image_view_functions,
+            shader_module_functions,
 
             swapchain_functions,
         })

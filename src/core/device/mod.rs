@@ -1,8 +1,9 @@
 use crate::{
     string_vec_to_cstring_vec, ImageView, ImageViewCreateInfo, ImageViewFunctions, Instance,
-    Loader, NativeLoader, Queue, Result, Swapchain, SwapchainCreateInfo, SwapchainFunctions,
-    VkCreateDevice, VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
-    VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
+    Loader, NativeLoader, Queue, Result, ShaderModule, ShaderModuleFunctions, Swapchain,
+    SwapchainCreateInfo, SwapchainFunctions, VkCreateDevice, VkDevice, VkDeviceCreateFlags,
+    VkDeviceCreateInfo, VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo, VkPhysicalDevice,
+    VkResult, VkStructureType,
 };
 use child_functions::ChildFunctions;
 use functions::DeviceFunctions;
@@ -26,7 +27,7 @@ pub struct Device<L: Loader = NativeLoader> {
 }
 
 impl<L: Loader> Device<L> {
-    pub(crate) fn create_device(
+    pub(crate) fn create(
         physical_device: VkPhysicalDevice,
         instance: Arc<Instance<L>>,
         create_device: VkCreateDevice,
@@ -102,15 +103,23 @@ impl<L: Loader> Device<L> {
         self: &Arc<Self>,
         create_info: SwapchainCreateInfo,
     ) -> Result<Arc<Swapchain<L>>> {
-        Swapchain::create_swapchain(self.clone(), create_info)
+        Swapchain::create(self.clone(), create_info)
     }
 
     pub fn create_image_view(&self, create_info: ImageViewCreateInfo<L>) -> Result<ImageView<L>> {
-        ImageView::create_image_view(self, create_info)
+        ImageView::create(self, create_info)
+    }
+
+    pub fn create_shader_module(self: &Arc<Self>, code: &[u8]) -> Result<ShaderModule<L>> {
+        ShaderModule::create(self.clone(), code)
     }
 
     pub(crate) fn image_view_functions(&self) -> &ImageViewFunctions {
         &self.child_functions.image_view_functions
+    }
+
+    pub(crate) fn shader_module_functions(&self) -> &ShaderModuleFunctions {
+        &self.child_functions.shader_module_functions
     }
 
     pub(crate) fn swapchain_functions(&self) -> &SwapchainFunctions {

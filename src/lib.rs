@@ -12,7 +12,7 @@ pub use self::core::{
     ApplicationInfo, Device, DeviceCreateInfo, DeviceQueueCreateInfo, ExtensionProperties, Image,
     ImageView, ImageViewCreateInfo, Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice,
     PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
-    PhysicalDeviceSparseProperties, Queue,
+    PhysicalDeviceSparseProperties, Queue, ShaderModule,
 };
 pub use bindings::{
     VkColorSpaceKHR as ColorSpace, VkComponentMapping as ComponentMapping,

@@ -20,7 +20,7 @@ pub struct Swapchain<L: Loader = NativeLoader> {
 }
 
 impl<L: Loader> Swapchain<L> {
-    pub(crate) fn create_swapchain(
+    pub(crate) fn create(
         device: Arc<Device<L>>,
         create_info: SwapchainCreateInfo,
     ) -> Result<Arc<Self>> {
