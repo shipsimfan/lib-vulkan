@@ -12,7 +12,7 @@ pub use self::core::{
     ApplicationInfo, Device, DeviceCreateInfo, DeviceQueueCreateInfo, ExtensionProperties, Image,
     ImageView, ImageViewCreateInfo, Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice,
     PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
-    PhysicalDeviceSparseProperties, Queue, ShaderModule,
+    PhysicalDeviceSparseProperties, PipelineShaderStageCreateInfo, Queue, ShaderModule,
 };
 pub use bindings::{
     VkColorSpaceKHR as ColorSpace, VkComponentMapping as ComponentMapping,
@@ -25,8 +25,10 @@ pub use bindings::{
     VkPresentModeKHR as PresentMode, VkQueueFamilyProperties as QueueFamilyProperties,
     VkQueueFlagBits as QueueFlagBits, VkQueueFlags as QueueFlags, VkResult,
     VkSampleCountFlagBits as SampleCountFlagBits, VkSampleCountFlags as SampleCountFlags,
-    VkSharingMode as SharingMode, VkSurfaceCapabilitiesKHR as SurfaceCapabilities,
-    VkSurfaceFormatKHR as SurfaceFormat, VkSurfaceTransformFlagBitsKHR as SurfaceTransformFlagBits,
+    VkShaderStageFlagBits as ShaderStageFlagBits, VkShaderStageFlags as ShaderStageFlags,
+    VkSharingMode as SharingMode, VkSpecializationMapEntry as SpecializationMapEntry,
+    VkSurfaceCapabilitiesKHR as SurfaceCapabilities, VkSurfaceFormatKHR as SurfaceFormat,
+    VkSurfaceTransformFlagBitsKHR as SurfaceTransformFlagBits,
     VkSurfaceTransformFlagsKHR as SurfaceTransformFlags, VkVersion as Version, VK_API_VERSION_1_0,
     VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION,
     VK_HEADER_VERSION_COMPLETE, VK_UUID_SIZE,

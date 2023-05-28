@@ -5,6 +5,7 @@ mod image_view;
 mod instance;
 mod layer_properties;
 mod physical_device;
+mod pipeline;
 mod queue;
 mod shader_module;
 
@@ -18,6 +19,7 @@ pub use physical_device::{
     PhysicalDevice, PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
     PhysicalDeviceSparseProperties,
 };
+pub use pipeline::PipelineShaderStageCreateInfo;
 pub use queue::Queue;
 pub use shader_module::ShaderModule;
 

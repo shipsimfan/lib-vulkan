@@ -7,6 +7,7 @@ pub(crate) enum VkStructureType {
     DeviceCreateInfo = 3,
     ImageViewCreateInfo = 15,
     ShaderModuleCreateInfo = 16,
+    PipelineShaderStageCreateInfo = 18,
     SwapchainCreateInfo = 1000001000,
     #[cfg(target_os = "windows")]
     Win32SurfaceCreateInfo = 1000009000,

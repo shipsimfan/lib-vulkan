@@ -13,10 +13,13 @@ mod image_view;
 mod instance;
 mod layer_properties;
 mod physical_device;
+mod pipeline;
 mod queue;
 mod result;
 mod shader_module;
 mod sharing_mode;
+mod specialization_info;
+mod specialization_map_entry;
 mod structure_type;
 mod types;
 mod version;
@@ -37,8 +40,10 @@ pub use physical_device::{
     VkPhysicalDeviceType, VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags,
     VkSampleCountFlagBits, VkSampleCountFlags,
 };
+pub use pipeline::{VkShaderStageFlagBits, VkShaderStageFlags};
 pub use result::VkResult;
 pub use sharing_mode::VkSharingMode;
+pub use specialization_map_entry::VkSpecializationMapEntry;
 pub use version::{
     VkVersion, VK_API_VERSION_1_0, VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3,
     VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,
@@ -54,8 +59,10 @@ pub(crate) use image_view::*;
 pub(crate) use instance::*;
 pub(crate) use layer_properties::*;
 pub(crate) use physical_device::*;
+pub(crate) use pipeline::*;
 pub(crate) use queue::*;
 pub(crate) use shader_module::*;
+pub(crate) use specialization_info::*;
 pub(crate) use structure_type::*;
 pub(crate) use types::*;
 pub(crate) use version::*;
