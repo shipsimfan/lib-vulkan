@@ -2,7 +2,7 @@ mod core;
 mod extensions;
 
 pub use self::core::{
-    VkComponentMapping, VkComponentSwizzle, VkExtent2D, VkExtent3D, VkFormat,
+    VkComponentMapping, VkComponentSwizzle, VkDynamicState, VkExtent2D, VkExtent3D, VkFormat,
     VkImageAspectFlagBits, VkImageAspectFlags, VkImageSubresourceRange, VkImageUsageFlagBits,
     VkImageUsageFlags, VkImageViewType, VkInstance, VkPhysicalDeviceType, VkQueueFamilyProperties,
     VkQueueFlagBits, VkQueueFlags, VkResult, VkSampleCountFlagBits, VkSampleCountFlags,

@@ -40,7 +40,7 @@ pub use physical_device::{
     VkPhysicalDeviceType, VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags,
     VkSampleCountFlagBits, VkSampleCountFlags,
 };
-pub use pipeline::{VkShaderStageFlagBits, VkShaderStageFlags};
+pub use pipeline::{VkDynamicState, VkShaderStageFlagBits, VkShaderStageFlags};
 pub use result::VkResult;
 pub use sharing_mode::VkSharingMode;
 pub use specialization_map_entry::VkSpecializationMapEntry;
