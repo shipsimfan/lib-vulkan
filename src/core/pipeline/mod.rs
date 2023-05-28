@@ -1,3 +1,5 @@
 mod shader_stage_create_info;
+mod vertex_input_state_create_info;
 
 pub use shader_stage_create_info::PipelineShaderStageCreateInfo;
+pub use vertex_input_state_create_info::VertexInputStateCreateInfo;

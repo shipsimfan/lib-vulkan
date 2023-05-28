@@ -13,6 +13,7 @@ pub use self::core::{
     ImageView, ImageViewCreateInfo, Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice,
     PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
     PhysicalDeviceSparseProperties, PipelineShaderStageCreateInfo, Queue, ShaderModule,
+    VertexInputStateCreateInfo,
 };
 pub use bindings::{
     VkColorSpaceKHR as ColorSpace, VkComponentMapping as ComponentMapping,
@@ -30,9 +31,12 @@ pub use bindings::{
     VkSpecializationMapEntry as SpecializationMapEntry,
     VkSurfaceCapabilitiesKHR as SurfaceCapabilities, VkSurfaceFormatKHR as SurfaceFormat,
     VkSurfaceTransformFlagBitsKHR as SurfaceTransformFlagBits,
-    VkSurfaceTransformFlagsKHR as SurfaceTransformFlags, VkVersion as Version, VK_API_VERSION_1_0,
-    VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION,
-    VK_HEADER_VERSION_COMPLETE, VK_UUID_SIZE,
+    VkSurfaceTransformFlagsKHR as SurfaceTransformFlags, VkVersion as Version,
+    VkVertexInputAttributeDescription as VertexInputAttributeDescription,
+    VkVertexInputBindingDescription as VertexInputBindingDescription,
+    VkVertexInputRate as VertexInputRate, VK_API_VERSION_1_0, VK_API_VERSION_1_1,
+    VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,
+    VK_UUID_SIZE,
 };
 #[cfg(target_os = "windows")]
 pub use extensions::Win32SurfaceCreateInfo;
