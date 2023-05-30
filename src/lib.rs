@@ -13,10 +13,10 @@ pub use self::core::{
     ImageView, ImageViewCreateInfo, Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice,
     PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
     PhysicalDeviceSparseProperties, PipelineColorBlendAttachmentState,
-    PipelineInputAssemblyStateCreateInfo, PipelineMultisampleStateCreateInfo,
-    PipelineRasterizationStateCreateInfo, PipelineShaderStageCreateInfo,
-    PipelineVertexInputStateCreateInfo, PipelineViewportState, PipelineViewportStateCreateInfo,
-    Queue, ShaderModule,
+    PipelineColorBlendStateCreateInfo, PipelineInputAssemblyStateCreateInfo,
+    PipelineMultisampleStateCreateInfo, PipelineRasterizationStateCreateInfo,
+    PipelineShaderStageCreateInfo, PipelineVertexInputStateCreateInfo, PipelineViewportState,
+    PipelineViewportStateCreateInfo, Queue, ShaderModule,
 };
 pub use bindings::{
     VkBlendFactor as BlendFactor, VkBlendOp as BlendOp,
@@ -30,7 +30,7 @@ pub use bindings::{
     VkImageAspectFlagBits as ImageAspectFlagBits, VkImageAspectFlags as ImageAspectFlags,
     VkImageSubresourceRange as ImageSubresourceRange, VkImageUsageFlagBits as ImageUsageFlagBits,
     VkImageUsageFlags as ImageUsageFlags, VkImageViewType as ImageViewType, VkInstance,
-    VkOffset2D as Offset2D, VkPhysicalDeviceType as PhysicalDeviceType,
+    VkLogicOp as LogicOp, VkOffset2D as Offset2D, VkPhysicalDeviceType as PhysicalDeviceType,
     VkPolygonMode as PolygonMode, VkPresentModeKHR as PresentMode,
     VkPrimitiveTopology as PrimitiveTopology, VkQueueFamilyProperties as QueueFamilyProperties,
     VkQueueFlagBits as QueueFlagBits, VkQueueFlags as QueueFlags, VkRect2D as Rect2D, VkResult,

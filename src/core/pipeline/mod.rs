@@ -1,4 +1,5 @@
 mod color_blend_attachment_state;
+mod color_blend_state_crate_info;
 mod input_assembly_state_create_info;
 mod multisample_state_create_info;
 mod rasterization_state_create_info;
@@ -7,6 +8,7 @@ mod vertex_input_state_create_info;
 mod viewport_state_create_info;
 
 pub use color_blend_attachment_state::PipelineColorBlendAttachmentState;
+pub use color_blend_state_crate_info::PipelineColorBlendStateCreateInfo;
 pub use input_assembly_state_create_info::PipelineInputAssemblyStateCreateInfo;
 pub use multisample_state_create_info::PipelineMultisampleStateCreateInfo;
 pub use rasterization_state_create_info::PipelineRasterizationStateCreateInfo;

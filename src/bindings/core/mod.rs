@@ -52,7 +52,7 @@ pub use physical_device::{
 };
 pub use pipeline::{
     VkBlendFactor, VkBlendOp, VkColorComponentFlagBits, VkColorComponentFlags, VkDynamicState,
-    VkShaderStageFlagBits, VkShaderStageFlags, VkVertexInputAttributeDescription,
+    VkLogicOp, VkShaderStageFlagBits, VkShaderStageFlags, VkVertexInputAttributeDescription,
     VkVertexInputBindingDescription, VkVertexInputRate,
 };
 pub use polygon_mode::VkPolygonMode;
