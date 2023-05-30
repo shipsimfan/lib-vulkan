@@ -2,11 +2,13 @@ mod allocation_callbacks;
 mod component_mapping;
 mod component_swizzle;
 mod constants;
+mod cull_mode;
 mod device;
 mod extension_properties;
 mod extent_2d;
 mod extent_3d;
 mod format;
+mod front_face;
 mod global_functions;
 mod image;
 mod image_view;
@@ -15,6 +17,7 @@ mod layer_properties;
 mod offset_2d;
 mod physical_device;
 mod pipeline;
+mod polygon_mode;
 mod primitive_topology;
 mod queue;
 mod rect_2d;
@@ -31,9 +34,11 @@ mod viewport;
 pub use component_mapping::VkComponentMapping;
 pub use component_swizzle::VkComponentSwizzle;
 pub use constants::VK_UUID_SIZE;
+pub use cull_mode::{VkCullModeFlagBits, VkCullModeFlags};
 pub use extent_2d::VkExtent2D;
 pub use extent_3d::VkExtent3D;
 pub use format::VkFormat;
+pub use front_face::VkFrontFace;
 pub use image::{
     VkImageAspectFlagBits, VkImageAspectFlags, VkImageSubresourceRange, VkImageUsageFlagBits,
     VkImageUsageFlags,
@@ -49,6 +54,7 @@ pub use pipeline::{
     VkDynamicState, VkShaderStageFlagBits, VkShaderStageFlags, VkVertexInputAttributeDescription,
     VkVertexInputBindingDescription, VkVertexInputRate,
 };
+pub use polygon_mode::VkPolygonMode;
 pub use primitive_topology::VkPrimitiveTopology;
 pub use rect_2d::VkRect2D;
 pub use result::VkResult;
