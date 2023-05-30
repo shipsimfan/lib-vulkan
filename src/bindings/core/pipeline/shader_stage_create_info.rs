@@ -5,11 +5,11 @@ use crate::{
 use std::ffi::{c_char, c_void};
 
 pub(crate) struct VkPipelineShaderStageCreateInfo {
-    s_type: VkStructureType,
-    p_next: *const c_void,
-    flags: VkPipelineShaderStageCreateFlags,
-    stage: VkShaderStageFlagBits,
-    module: VkShaderModule,
-    p_name: *const c_char,
-    p_specialization_info: *const VkSpecializationInfo,
+    pub(crate) s_type: VkStructureType,
+    pub(crate) p_next: *const c_void,
+    pub(crate) flags: VkPipelineShaderStageCreateFlags,
+    pub(crate) stage: VkShaderStageFlagBits,
+    pub(crate) module: VkShaderModule,
+    pub(crate) p_name: *const c_char,
+    pub(crate) p_specialization_info: *const VkSpecializationInfo,
 }

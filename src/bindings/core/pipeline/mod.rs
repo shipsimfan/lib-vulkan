@@ -11,6 +11,8 @@ mod vertex_input_binding_description;
 mod vertex_input_rate;
 mod vertex_input_state_create_flags;
 mod vertex_input_state_create_info;
+mod viewport_state_create_flags;
+mod viewport_state_create_info;
 
 pub use dynamic_state::VkDynamicState;
 pub use shader_stage_flags::{VkShaderStageFlagBits, VkShaderStageFlags};
@@ -26,3 +28,5 @@ pub(crate) use shader_stage_create_flags::*;
 pub(crate) use shader_stage_create_info::*;
 pub(crate) use vertex_input_state_create_flags::*;
 pub(crate) use vertex_input_state_create_info::*;
+pub(crate) use viewport_state_create_flags::*;
+pub(crate) use viewport_state_create_info::*;

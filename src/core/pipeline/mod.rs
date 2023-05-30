@@ -1,7 +1,9 @@
 mod input_assembly_state_create_info;
 mod shader_stage_create_info;
 mod vertex_input_state_create_info;
+mod viewport_state_create_info;
 
 pub use input_assembly_state_create_info::PipelineInputAssemblyStateCreateInfo;
 pub use shader_stage_create_info::PipelineShaderStageCreateInfo;
 pub use vertex_input_state_create_info::PipelineVertexInputStateCreateInfo;
+pub use viewport_state_create_info::{PipelineViewportState, PipelineViewportStateCreateInfo};

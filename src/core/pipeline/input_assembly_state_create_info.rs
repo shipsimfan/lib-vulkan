@@ -1,8 +1,8 @@
 use crate::PrimitiveTopology;
 
 pub struct PipelineInputAssemblyStateCreateInfo {
-    topology: PrimitiveTopology,
-    primitive_restart_enabled: bool,
+    pub topology: PrimitiveTopology,
+    pub primitive_restart_enabled: bool,
 }
 
 impl Default for PipelineInputAssemblyStateCreateInfo {

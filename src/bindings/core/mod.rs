@@ -12,10 +12,12 @@ mod image;
 mod image_view;
 mod instance;
 mod layer_properties;
+mod offset_2d;
 mod physical_device;
 mod pipeline;
 mod primitive_topology;
 mod queue;
+mod rect_2d;
 mod result;
 mod shader_module;
 mod sharing_mode;
@@ -24,6 +26,7 @@ mod specialization_map_entry;
 mod structure_type;
 mod types;
 mod version;
+mod viewport;
 
 pub use component_mapping::VkComponentMapping;
 pub use component_swizzle::VkComponentSwizzle;
@@ -37,6 +40,7 @@ pub use image::{
 };
 pub use image_view::VkImageViewType;
 pub use instance::VkInstance;
+pub use offset_2d::VkOffset2D;
 pub use physical_device::{
     VkPhysicalDeviceType, VkQueueFamilyProperties, VkQueueFlagBits, VkQueueFlags,
     VkSampleCountFlagBits, VkSampleCountFlags,
@@ -46,6 +50,7 @@ pub use pipeline::{
     VkVertexInputBindingDescription, VkVertexInputRate,
 };
 pub use primitive_topology::VkPrimitiveTopology;
+pub use rect_2d::VkRect2D;
 pub use result::VkResult;
 pub use sharing_mode::VkSharingMode;
 pub use specialization_map_entry::VkSpecializationMapEntry;
@@ -53,6 +58,7 @@ pub use version::{
     VkVersion, VK_API_VERSION_1_0, VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3,
     VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,
 };
+pub use viewport::VkViewport;
 
 pub(crate) use allocation_callbacks::*;
 pub(crate) use constants::*;

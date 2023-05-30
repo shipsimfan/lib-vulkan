@@ -21,7 +21,7 @@ pub use physical_device::{
 };
 pub use pipeline::{
     PipelineInputAssemblyStateCreateInfo, PipelineShaderStageCreateInfo,
-    PipelineVertexInputStateCreateInfo,
+    PipelineVertexInputStateCreateInfo, PipelineViewportState, PipelineViewportStateCreateInfo,
 };
 pub use queue::Queue;
 pub use shader_module::ShaderModule;

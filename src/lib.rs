@@ -13,7 +13,8 @@ pub use self::core::{
     ImageView, ImageViewCreateInfo, Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice,
     PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
     PhysicalDeviceSparseProperties, PipelineInputAssemblyStateCreateInfo,
-    PipelineShaderStageCreateInfo, PipelineVertexInputStateCreateInfo, Queue, ShaderModule,
+    PipelineShaderStageCreateInfo, PipelineVertexInputStateCreateInfo, PipelineViewportState,
+    PipelineViewportStateCreateInfo, Queue, ShaderModule,
 };
 pub use bindings::{
     VkColorSpaceKHR as ColorSpace, VkComponentMapping as ComponentMapping,
@@ -23,9 +24,10 @@ pub use bindings::{
     VkImageAspectFlagBits as ImageAspectFlagBits, VkImageAspectFlags as ImageAspectFlags,
     VkImageSubresourceRange as ImageSubresourceRange, VkImageUsageFlagBits as ImageUsageFlagBits,
     VkImageUsageFlags as ImageUsageFlags, VkImageViewType as ImageViewType, VkInstance,
-    VkPhysicalDeviceType as PhysicalDeviceType, VkPresentModeKHR as PresentMode,
-    VkPrimitiveTopology as PrimitiveTopology, VkQueueFamilyProperties as QueueFamilyProperties,
-    VkQueueFlagBits as QueueFlagBits, VkQueueFlags as QueueFlags, VkResult,
+    VkOffset2D as Offset2D, VkPhysicalDeviceType as PhysicalDeviceType,
+    VkPresentModeKHR as PresentMode, VkPrimitiveTopology as PrimitiveTopology,
+    VkQueueFamilyProperties as QueueFamilyProperties, VkQueueFlagBits as QueueFlagBits,
+    VkQueueFlags as QueueFlags, VkRect2D as Rect2D, VkResult,
     VkSampleCountFlagBits as SampleCountFlagBits, VkSampleCountFlags as SampleCountFlags,
     VkShaderStageFlagBits as ShaderStageFlagBits, VkShaderStageFlags as ShaderStageFlags,
     VkSharingMode as SharingMode, VkSpecializationMapEntry as SpecializationMapEntry,
@@ -34,9 +36,9 @@ pub use bindings::{
     VkSurfaceTransformFlagsKHR as SurfaceTransformFlags, VkVersion as Version,
     VkVertexInputAttributeDescription as VertexInputAttributeDescription,
     VkVertexInputBindingDescription as VertexInputBindingDescription,
-    VkVertexInputRate as VertexInputRate, VK_API_VERSION_1_0, VK_API_VERSION_1_1,
-    VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION, VK_HEADER_VERSION_COMPLETE,
-    VK_UUID_SIZE,
+    VkVertexInputRate as VertexInputRate, VkViewport as Viewport, VK_API_VERSION_1_0,
+    VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3, VK_HEADER_VERSION,
+    VK_HEADER_VERSION_COMPLETE, VK_UUID_SIZE,
 };
 #[cfg(target_os = "windows")]
 pub use extensions::Win32SurfaceCreateInfo;
