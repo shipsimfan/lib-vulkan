@@ -13,9 +13,9 @@ pub use self::core::{
     ImageView, ImageViewCreateInfo, Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice,
     PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
     PhysicalDeviceSparseProperties, PipelineInputAssemblyStateCreateInfo,
-    PipelineRasterizationStateCreateInfo, PipelineShaderStageCreateInfo,
-    PipelineVertexInputStateCreateInfo, PipelineViewportState, PipelineViewportStateCreateInfo,
-    Queue, ShaderModule,
+    PipelineMultisampleStateCreateInfo, PipelineRasterizationStateCreateInfo,
+    PipelineShaderStageCreateInfo, PipelineVertexInputStateCreateInfo, PipelineViewportState,
+    PipelineViewportStateCreateInfo, Queue, ShaderModule,
 };
 pub use bindings::{
     VkColorSpaceKHR as ColorSpace, VkComponentMapping as ComponentMapping,
