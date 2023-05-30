@@ -3,6 +3,7 @@ mod component_mapping;
 mod component_swizzle;
 mod constants;
 mod cull_mode;
+mod descriptor_set_layout;
 mod device;
 mod extension_properties;
 mod extent_2d;
@@ -17,6 +18,7 @@ mod layer_properties;
 mod offset_2d;
 mod physical_device;
 mod pipeline;
+mod pipeline_layout;
 mod polygon_mode;
 mod primitive_topology;
 mod queue;
@@ -55,6 +57,7 @@ pub use pipeline::{
     VkLogicOp, VkShaderStageFlagBits, VkShaderStageFlags, VkVertexInputAttributeDescription,
     VkVertexInputBindingDescription, VkVertexInputRate,
 };
+pub use pipeline_layout::VkPushConstantRange;
 pub use polygon_mode::VkPolygonMode;
 pub use primitive_topology::VkPrimitiveTopology;
 pub use rect_2d::VkRect2D;
@@ -69,6 +72,7 @@ pub use viewport::VkViewport;
 
 pub(crate) use allocation_callbacks::*;
 pub(crate) use constants::*;
+pub(crate) use descriptor_set_layout::*;
 pub(crate) use device::*;
 pub(crate) use extension_properties::*;
 pub(crate) use global_functions::*;
@@ -78,6 +82,7 @@ pub(crate) use instance::*;
 pub(crate) use layer_properties::*;
 pub(crate) use physical_device::*;
 pub(crate) use pipeline::*;
+pub(crate) use pipeline_layout::*;
 pub(crate) use queue::*;
 pub(crate) use shader_module::*;
 pub(crate) use specialization_info::*;

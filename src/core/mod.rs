@@ -6,6 +6,7 @@ mod instance;
 mod layer_properties;
 mod physical_device;
 mod pipeline;
+mod pipeline_layout;
 mod queue;
 mod shader_module;
 
@@ -25,9 +26,11 @@ pub use pipeline::{
     PipelineRasterizationStateCreateInfo, PipelineShaderStageCreateInfo,
     PipelineVertexInputStateCreateInfo, PipelineViewportState, PipelineViewportStateCreateInfo,
 };
+pub use pipeline_layout::{PipelineLayout, PipelineLayoutCreateInfo};
 pub use queue::Queue;
 pub use shader_module::ShaderModule;
 
 pub(crate) use image_view::*;
 pub(crate) use physical_device::*;
+pub(crate) use pipeline_layout::*;
 pub(crate) use shader_module::*;
