@@ -2,8 +2,9 @@ mod core;
 mod extensions;
 
 pub use self::core::{
-    VkComponentMapping, VkComponentSwizzle, VkCullModeFlagBits, VkCullModeFlags, VkDynamicState,
-    VkExtent2D, VkExtent3D, VkFormat, VkFrontFace, VkImageAspectFlagBits, VkImageAspectFlags,
+    VkBlendFactor, VkBlendOp, VkColorComponentFlagBits, VkColorComponentFlags, VkComponentMapping,
+    VkComponentSwizzle, VkCullModeFlagBits, VkCullModeFlags, VkDynamicState, VkExtent2D,
+    VkExtent3D, VkFormat, VkFrontFace, VkImageAspectFlagBits, VkImageAspectFlags,
     VkImageSubresourceRange, VkImageUsageFlagBits, VkImageUsageFlags, VkImageViewType, VkInstance,
     VkOffset2D, VkPhysicalDeviceType, VkPolygonMode, VkPrimitiveTopology, VkQueueFamilyProperties,
     VkQueueFlagBits, VkQueueFlags, VkRect2D, VkResult, VkSampleCountFlagBits, VkSampleCountFlags,

@@ -51,7 +51,8 @@ pub use physical_device::{
     VkSampleCountFlagBits, VkSampleCountFlags,
 };
 pub use pipeline::{
-    VkDynamicState, VkShaderStageFlagBits, VkShaderStageFlags, VkVertexInputAttributeDescription,
+    VkBlendFactor, VkBlendOp, VkColorComponentFlagBits, VkColorComponentFlags, VkDynamicState,
+    VkShaderStageFlagBits, VkShaderStageFlags, VkVertexInputAttributeDescription,
     VkVertexInputBindingDescription, VkVertexInputRate,
 };
 pub use polygon_mode::VkPolygonMode;

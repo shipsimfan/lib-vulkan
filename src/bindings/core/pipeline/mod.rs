@@ -1,3 +1,7 @@
+mod blend_factor;
+mod blend_op;
+mod color_blend_attachment_state;
+mod color_component_flags;
 mod dynamic_state;
 mod dynamic_state_create_flags;
 mod dynamic_state_create_info;
@@ -18,12 +22,16 @@ mod vertex_input_state_create_info;
 mod viewport_state_create_flags;
 mod viewport_state_create_info;
 
+pub use blend_factor::VkBlendFactor;
+pub use blend_op::VkBlendOp;
+pub use color_component_flags::{VkColorComponentFlagBits, VkColorComponentFlags};
 pub use dynamic_state::VkDynamicState;
 pub use shader_stage_flags::{VkShaderStageFlagBits, VkShaderStageFlags};
 pub use vertex_input_attribute_description::VkVertexInputAttributeDescription;
 pub use vertex_input_binding_description::VkVertexInputBindingDescription;
 pub use vertex_input_rate::VkVertexInputRate;
 
+pub(crate) use color_blend_attachment_state::*;
 pub(crate) use dynamic_state_create_flags::*;
 pub(crate) use dynamic_state_create_info::*;
 pub(crate) use input_assembly_state_create_flags::*;
