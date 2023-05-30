@@ -14,6 +14,7 @@ mod instance;
 mod layer_properties;
 mod physical_device;
 mod pipeline;
+mod primitive_topology;
 mod queue;
 mod result;
 mod shader_module;
@@ -44,6 +45,7 @@ pub use pipeline::{
     VkDynamicState, VkShaderStageFlagBits, VkShaderStageFlags, VkVertexInputAttributeDescription,
     VkVertexInputBindingDescription, VkVertexInputRate,
 };
+pub use primitive_topology::VkPrimitiveTopology;
 pub use result::VkResult;
 pub use sharing_mode::VkSharingMode;
 pub use specialization_map_entry::VkSpecializationMapEntry;

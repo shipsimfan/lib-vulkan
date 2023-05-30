@@ -19,7 +19,10 @@ pub use physical_device::{
     PhysicalDevice, PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
     PhysicalDeviceSparseProperties,
 };
-pub use pipeline::{PipelineShaderStageCreateInfo, VertexInputStateCreateInfo};
+pub use pipeline::{
+    PipelineInputAssemblyStateCreateInfo, PipelineShaderStageCreateInfo,
+    PipelineVertexInputStateCreateInfo,
+};
 pub use queue::Queue;
 pub use shader_module::ShaderModule;
 

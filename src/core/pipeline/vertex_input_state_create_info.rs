@@ -1,6 +1,6 @@
 use crate::{VertexInputAttributeDescription, VertexInputBindingDescription};
 
-pub struct VertexInputStateCreateInfo {
+pub struct PipelineVertexInputStateCreateInfo {
     pub bindings: Vec<VertexInputBindingDescription>,
     pub attributes: Vec<VertexInputAttributeDescription>,
 }
