@@ -20,6 +20,7 @@ pub(crate) enum VkStructureType {
     GraphicsPipelineCreateInfo = 28,
     ComputePipelineCreateInfo = 29,
     PipelineLayoutCreateInfo = 30,
+    FramebufferCreateInfo = 37,
     RenderPassCreateInfo = 38,
     SwapchainCreateInfo = 1000001000,
     #[cfg(target_os = "windows")]

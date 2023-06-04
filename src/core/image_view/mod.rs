@@ -43,6 +43,10 @@ impl<L: Loader> ImageView<L> {
             image: create_info.image,
         })
     }
+
+    pub(crate) fn handle(&self) -> VkImageView {
+        self.handle
+    }
 }
 
 impl<L: Loader> Drop for ImageView<L> {

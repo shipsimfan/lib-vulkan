@@ -10,16 +10,16 @@ mod loader;
 
 pub use self::core::{
     ApplicationInfo, Device, DeviceCreateInfo, DeviceQueueCreateInfo, ExtensionProperties,
-    GraphicsPipelineCreateInfo, Image, ImageView, ImageViewCreateInfo, Instance,
-    InstanceCreateInfo, LayerProperties, PhysicalDevice, PhysicalDeviceFeatures,
-    PhysicalDeviceLimits, PhysicalDeviceProperties, PhysicalDeviceSparseProperties, Pipeline,
-    PipelineColorBlendAttachmentState, PipelineColorBlendStateCreateInfo,
-    PipelineDepthStencilStateCreateInfo, PipelineInputAssemblyStateCreateInfo, PipelineLayout,
-    PipelineLayoutCreateInfo, PipelineMultisampleStateCreateInfo,
-    PipelineRasterizationStateCreateInfo, PipelineShaderStageCreateInfo,
-    PipelineTessellationStateCreateInfo, PipelineVertexInputStateCreateInfo, PipelineViewportState,
-    PipelineViewportStateCreateInfo, Queue, RenderPass, RenderPassCreateInfo, ShaderModule,
-    SubpassDescription,
+    Framebuffer, FramebufferCreateInfo, GraphicsPipelineCreateInfo, Image, ImageView,
+    ImageViewCreateInfo, Instance, InstanceCreateInfo, LayerProperties, PhysicalDevice,
+    PhysicalDeviceFeatures, PhysicalDeviceLimits, PhysicalDeviceProperties,
+    PhysicalDeviceSparseProperties, Pipeline, PipelineColorBlendAttachmentState,
+    PipelineColorBlendStateCreateInfo, PipelineDepthStencilStateCreateInfo,
+    PipelineInputAssemblyStateCreateInfo, PipelineLayout, PipelineLayoutCreateInfo,
+    PipelineMultisampleStateCreateInfo, PipelineRasterizationStateCreateInfo,
+    PipelineShaderStageCreateInfo, PipelineTessellationStateCreateInfo,
+    PipelineVertexInputStateCreateInfo, PipelineViewportState, PipelineViewportStateCreateInfo,
+    Queue, RenderPass, RenderPassCreateInfo, ShaderModule, SubpassDescription,
 };
 pub use bindings::{
     VkAccessFlagBits as AccessFlagBits, VkAccessFlags as AccessFlags,

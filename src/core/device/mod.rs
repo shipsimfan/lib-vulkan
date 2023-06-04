@@ -1,11 +1,11 @@
 use crate::{
-    string_vec_to_cstring_vec, GraphicsPipelineCreateInfo, ImageView, ImageViewCreateInfo,
-    ImageViewFunctions, Instance, Loader, NativeLoader, Pipeline, PipelineFunctions,
-    PipelineLayout, PipelineLayoutCreateInfo, PipelineLayoutFunctions, Queue, RenderPass,
-    RenderPassCreateInfo, RenderPassFunctions, Result, ShaderModule, ShaderModuleFunctions,
-    Swapchain, SwapchainCreateInfo, SwapchainFunctions, VkCreateDevice, VkDevice,
-    VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo,
-    VkPhysicalDevice, VkResult, VkStructureType,
+    string_vec_to_cstring_vec, Framebuffer, FramebufferCreateInfo, FramebufferFunctions,
+    GraphicsPipelineCreateInfo, ImageView, ImageViewCreateInfo, ImageViewFunctions, Instance,
+    Loader, NativeLoader, Pipeline, PipelineFunctions, PipelineLayout, PipelineLayoutCreateInfo,
+    PipelineLayoutFunctions, Queue, RenderPass, RenderPassCreateInfo, RenderPassFunctions, Result,
+    ShaderModule, ShaderModuleFunctions, Swapchain, SwapchainCreateInfo, SwapchainFunctions,
+    VkCreateDevice, VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
+    VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
 };
 use child_functions::ChildFunctions;
 use functions::DeviceFunctions;
@@ -108,6 +108,13 @@ impl<L: Loader> Device<L> {
         Swapchain::create(self.clone(), create_info)
     }
 
+    pub fn create_framebuffer(
+        self: &Arc<Self>,
+        create_info: FramebufferCreateInfo<L>,
+    ) -> Result<Framebuffer<L>> {
+        Framebuffer::create(self.clone(), create_info)
+    }
+
     pub fn create_image_view(&self, create_info: ImageViewCreateInfo<L>) -> Result<ImageView<L>> {
         ImageView::create(self, create_info)
     }
@@ -135,6 +142,10 @@ impl<L: Loader> Device<L> {
 
     pub fn create_shader_module(self: &Arc<Self>, code: &[u8]) -> Result<Arc<ShaderModule<L>>> {
         ShaderModule::create(self.clone(), code)
+    }
+
+    pub(crate) fn framebuffer_functions(&self) -> &FramebufferFunctions {
+        &self.child_functions.framebuffer_functions
     }
 
     pub(crate) fn image_view_functions(&self) -> &ImageViewFunctions {

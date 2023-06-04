@@ -1,5 +1,6 @@
 mod device;
 mod extension_properties;
+mod framebuffer;
 mod image;
 mod image_view;
 mod instance;
@@ -13,6 +14,7 @@ mod shader_module;
 
 pub use device::{Device, DeviceCreateInfo, DeviceQueueCreateInfo};
 pub use extension_properties::ExtensionProperties;
+pub use framebuffer::{Framebuffer, FramebufferCreateInfo};
 pub use image::Image;
 pub use image_view::{ImageView, ImageViewCreateInfo};
 pub use instance::{ApplicationInfo, Instance, InstanceCreateInfo};
@@ -34,6 +36,7 @@ pub use queue::Queue;
 pub use render_pass::{RenderPass, RenderPassCreateInfo, SubpassDescription};
 pub use shader_module::ShaderModule;
 
+pub(crate) use framebuffer::*;
 pub(crate) use image_view::*;
 pub(crate) use physical_device::*;
 pub(crate) use pipeline::*;
