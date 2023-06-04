@@ -1,10 +1,11 @@
 use crate::{
-    ImageViewFunctions, Instance, Loader, PipelineLayoutFunctions, RenderPassFunctions, Result,
-    ShaderModuleFunctions, SwapchainFunctions, VkDevice,
+    ImageViewFunctions, Instance, Loader, PipelineFunctions, PipelineLayoutFunctions,
+    RenderPassFunctions, Result, ShaderModuleFunctions, SwapchainFunctions, VkDevice,
 };
 
 pub(super) struct ChildFunctions {
     pub(super) image_view_functions: ImageViewFunctions,
+    pub(super) pipeline_functions: PipelineFunctions,
     pub(super) pipeline_layout_functions: PipelineLayoutFunctions,
     pub(super) render_pass_functions: RenderPassFunctions,
     pub(super) shader_module_functions: ShaderModuleFunctions,
@@ -19,6 +20,7 @@ impl ChildFunctions {
         extension_list: &[String],
     ) -> Result<Self> {
         let image_view_functions = ImageViewFunctions::load(instance, device)?;
+        let pipeline_functions = PipelineFunctions::load(instance, device)?;
         let pipeline_layout_functions = PipelineLayoutFunctions::load(instance, device)?;
         let render_pass_functions = RenderPassFunctions::load(instance, device)?;
         let shader_module_functions = ShaderModuleFunctions::load(instance, device)?;
@@ -36,6 +38,7 @@ impl ChildFunctions {
 
         Ok(ChildFunctions {
             image_view_functions,
+            pipeline_functions,
             pipeline_layout_functions,
             render_pass_functions,
             shader_module_functions,

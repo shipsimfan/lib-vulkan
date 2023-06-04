@@ -20,7 +20,7 @@ impl<L: Loader> PipelineLayout<L> {
     pub(crate) fn create(
         device: Arc<Device<L>>,
         create_info: PipelineLayoutCreateInfo,
-    ) -> Result<Self> {
+    ) -> Result<Arc<Self>> {
         let create_info = VkPipelineLayoutCreateInfo {
             s_type: VkStructureType::PipelineLayoutCreateInfo,
             p_next: null(),
@@ -46,7 +46,11 @@ impl<L: Loader> PipelineLayout<L> {
             result => return Err(result),
         };
 
-        Ok(PipelineLayout { handle, device })
+        Ok(Arc::new(PipelineLayout { handle, device }))
+    }
+
+    pub(crate) fn handle(&self) -> VkPipelineLayout {
+        self.handle
     }
 }
 
@@ -56,5 +60,14 @@ impl<L: Loader> Drop for PipelineLayout<L> {
             .device
             .pipeline_layout_functions()
             .destroy_pipeline_layout)(self.device.handle(), self.handle, null());
+    }
+}
+
+impl<L: Loader> Clone for PipelineLayout<L> {
+    fn clone(&self) -> Self {
+        PipelineLayout {
+            handle: self.handle,
+            device: self.device.clone(),
+        }
     }
 }

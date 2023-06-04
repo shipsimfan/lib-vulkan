@@ -14,7 +14,7 @@ pub struct ShaderModule<L: Loader = NativeLoader> {
 }
 
 impl<L: Loader> ShaderModule<L> {
-    pub(crate) fn create(device: Arc<Device<L>>, code: &[u8]) -> Result<Self> {
+    pub(crate) fn create(device: Arc<Device<L>>, code: &[u8]) -> Result<Arc<Self>> {
         let create_shader_module = device.shader_module_functions().create_shader_module;
 
         let create_info = VkShaderModuleCreateInfo {
@@ -32,7 +32,11 @@ impl<L: Loader> ShaderModule<L> {
                 result => return Err(result),
             };
 
-        Ok(ShaderModule { handle, device })
+        Ok(Arc::new(ShaderModule { handle, device }))
+    }
+
+    pub(crate) fn handle(&self) -> VkShaderModule {
+        self.handle
     }
 }
 

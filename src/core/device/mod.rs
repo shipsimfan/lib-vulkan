@@ -1,10 +1,11 @@
 use crate::{
-    string_vec_to_cstring_vec, ImageView, ImageViewCreateInfo, ImageViewFunctions, Instance,
-    Loader, NativeLoader, PipelineLayout, PipelineLayoutCreateInfo, PipelineLayoutFunctions, Queue,
-    RenderPass, RenderPassCreateInfo, RenderPassFunctions, Result, ShaderModule,
-    ShaderModuleFunctions, Swapchain, SwapchainCreateInfo, SwapchainFunctions, VkCreateDevice,
-    VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
-    VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
+    string_vec_to_cstring_vec, GraphicsPipelineCreateInfo, ImageView, ImageViewCreateInfo,
+    ImageViewFunctions, Instance, Loader, NativeLoader, Pipeline, PipelineFunctions,
+    PipelineLayout, PipelineLayoutCreateInfo, PipelineLayoutFunctions, Queue, RenderPass,
+    RenderPassCreateInfo, RenderPassFunctions, Result, ShaderModule, ShaderModuleFunctions,
+    Swapchain, SwapchainCreateInfo, SwapchainFunctions, VkCreateDevice, VkDevice,
+    VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo,
+    VkPhysicalDevice, VkResult, VkStructureType,
 };
 use child_functions::ChildFunctions;
 use functions::DeviceFunctions;
@@ -111,26 +112,37 @@ impl<L: Loader> Device<L> {
         ImageView::create(self, create_info)
     }
 
+    pub fn create_pipeline(
+        self: &Arc<Self>,
+        create_info: GraphicsPipelineCreateInfo<L>,
+    ) -> Result<Pipeline<L>> {
+        Pipeline::create(self.clone(), create_info)
+    }
+
     pub fn create_pipeline_layout(
         self: &Arc<Self>,
         create_info: PipelineLayoutCreateInfo,
-    ) -> Result<PipelineLayout<L>> {
+    ) -> Result<Arc<PipelineLayout<L>>> {
         PipelineLayout::create(self.clone(), create_info)
     }
 
     pub fn create_render_pass(
         self: &Arc<Self>,
         create_info: RenderPassCreateInfo,
-    ) -> Result<RenderPass<L>> {
+    ) -> Result<Arc<RenderPass<L>>> {
         RenderPass::create(self.clone(), create_info)
     }
 
-    pub fn create_shader_module(self: &Arc<Self>, code: &[u8]) -> Result<ShaderModule<L>> {
+    pub fn create_shader_module(self: &Arc<Self>, code: &[u8]) -> Result<Arc<ShaderModule<L>>> {
         ShaderModule::create(self.clone(), code)
     }
 
     pub(crate) fn image_view_functions(&self) -> &ImageViewFunctions {
         &self.child_functions.image_view_functions
+    }
+
+    pub(crate) fn pipeline_functions(&self) -> &PipelineFunctions {
+        &self.child_functions.pipeline_functions
     }
 
     pub(crate) fn pipeline_layout_functions(&self) -> &PipelineLayoutFunctions {

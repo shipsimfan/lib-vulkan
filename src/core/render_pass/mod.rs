@@ -19,7 +19,7 @@ impl<L: Loader> RenderPass<L> {
     pub(crate) fn create(
         device: Arc<Device<L>>,
         create_info: RenderPassCreateInfo,
-    ) -> Result<Self> {
+    ) -> Result<Arc<Self>> {
         let (create_info, _subpasses) = create_info.into_binding();
 
         let mut handle = None;
@@ -33,7 +33,11 @@ impl<L: Loader> RenderPass<L> {
             result => return Err(result),
         };
 
-        Ok(RenderPass { handle, device })
+        Ok(Arc::new(RenderPass { handle, device }))
+    }
+
+    pub(crate) fn handle(&self) -> VkRenderPass {
+        self.handle
     }
 }
 

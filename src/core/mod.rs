@@ -22,10 +22,12 @@ pub use physical_device::{
     PhysicalDeviceSparseProperties,
 };
 pub use pipeline::{
-    PipelineColorBlendAttachmentState, PipelineColorBlendStateCreateInfo,
+    GraphicsPipelineCreateInfo, Pipeline, PipelineColorBlendAttachmentState,
+    PipelineColorBlendStateCreateInfo, PipelineDepthStencilStateCreateInfo,
     PipelineInputAssemblyStateCreateInfo, PipelineMultisampleStateCreateInfo,
     PipelineRasterizationStateCreateInfo, PipelineShaderStageCreateInfo,
-    PipelineVertexInputStateCreateInfo, PipelineViewportState, PipelineViewportStateCreateInfo,
+    PipelineTessellationStateCreateInfo, PipelineVertexInputStateCreateInfo, PipelineViewportState,
+    PipelineViewportStateCreateInfo,
 };
 pub use pipeline_layout::{PipelineLayout, PipelineLayoutCreateInfo};
 pub use queue::Queue;
@@ -34,6 +36,7 @@ pub use shader_module::ShaderModule;
 
 pub(crate) use image_view::*;
 pub(crate) use physical_device::*;
+pub(crate) use pipeline::*;
 pub(crate) use pipeline_layout::*;
 pub(crate) use render_pass::*;
 pub(crate) use shader_module::*;

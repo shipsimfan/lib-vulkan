@@ -3,6 +3,7 @@ mod allocation_callbacks;
 mod attachment;
 mod blend;
 mod color_component_flags;
+mod compare_op;
 mod component;
 mod constants;
 mod cull_mode;
@@ -23,6 +24,7 @@ mod logic_op;
 mod offset_2d;
 mod physical_device;
 mod pipeline;
+mod pipeline_cache;
 mod pipeline_layout;
 mod polygon_mode;
 mod primitive_topology;
@@ -36,6 +38,7 @@ mod shader_module;
 mod sharing_mode;
 mod specialization_info;
 mod specialization_map_entry;
+mod stencil;
 mod structure_type;
 mod subpass;
 mod types;
@@ -50,6 +53,7 @@ pub use attachment::{
 };
 pub use blend::{VkBlendFactor, VkBlendOp};
 pub use color_component_flags::{VkColorComponentFlagBits, VkColorComponentFlags};
+pub use compare_op::VkCompareOp;
 pub use component::{VkComponentMapping, VkComponentSwizzle};
 pub use constants::VK_UUID_SIZE;
 pub use cull_mode::{VkCullModeFlagBits, VkCullModeFlags};
@@ -68,8 +72,8 @@ pub use logic_op::VkLogicOp;
 pub use offset_2d::VkOffset2D;
 pub use physical_device::VkPhysicalDeviceType;
 pub use pipeline::{
-    VkDynamicState, VkPipelineBindPoint, VkPipelineStageFlagBits, VkPipelineStageFlags,
-    VkShaderStageFlagBits, VkShaderStageFlags,
+    VkDynamicState, VkPipelineBindPoint, VkPipelineCreateFlagBits, VkPipelineCreateFlags,
+    VkPipelineStageFlagBits, VkPipelineStageFlags, VkShaderStageFlagBits, VkShaderStageFlags,
 };
 pub use polygon_mode::VkPolygonMode;
 pub use primitive_topology::VkPrimitiveTopology;
@@ -80,6 +84,7 @@ pub use result::VkResult;
 pub use sample_count_flags::{VkSampleCountFlagBits, VkSampleCountFlags};
 pub use sharing_mode::VkSharingMode;
 pub use specialization_map_entry::VkSpecializationMapEntry;
+pub use stencil::{VkStencilOp, VkStencilOpState};
 pub use subpass::VkSubpassDependency;
 pub use version::{
     VkVersion, VK_API_VERSION_1_0, VK_API_VERSION_1_1, VK_API_VERSION_1_2, VK_API_VERSION_1_3,
@@ -102,6 +107,7 @@ pub(crate) use instance::*;
 pub(crate) use layer_properties::*;
 pub(crate) use physical_device::*;
 pub(crate) use pipeline::*;
+pub(crate) use pipeline_cache::*;
 pub(crate) use pipeline_layout::*;
 pub(crate) use queue::*;
 pub(crate) use render_pass::*;
