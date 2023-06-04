@@ -1,9 +1,10 @@
 use crate::{
     string_vec_to_cstring_vec, ImageView, ImageViewCreateInfo, ImageViewFunctions, Instance,
     Loader, NativeLoader, PipelineLayout, PipelineLayoutCreateInfo, PipelineLayoutFunctions, Queue,
-    Result, ShaderModule, ShaderModuleFunctions, Swapchain, SwapchainCreateInfo,
-    SwapchainFunctions, VkCreateDevice, VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo,
-    VkDeviceQueueCreateFlags, VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
+    RenderPass, RenderPassCreateInfo, RenderPassFunctions, Result, ShaderModule,
+    ShaderModuleFunctions, Swapchain, SwapchainCreateInfo, SwapchainFunctions, VkCreateDevice,
+    VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
+    VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
 };
 use child_functions::ChildFunctions;
 use functions::DeviceFunctions;
@@ -117,6 +118,13 @@ impl<L: Loader> Device<L> {
         PipelineLayout::create(self.clone(), create_info)
     }
 
+    pub fn create_render_pass(
+        self: &Arc<Self>,
+        create_info: RenderPassCreateInfo,
+    ) -> Result<RenderPass<L>> {
+        RenderPass::create(self.clone(), create_info)
+    }
+
     pub fn create_shader_module(self: &Arc<Self>, code: &[u8]) -> Result<ShaderModule<L>> {
         ShaderModule::create(self.clone(), code)
     }
@@ -127,6 +135,10 @@ impl<L: Loader> Device<L> {
 
     pub(crate) fn pipeline_layout_functions(&self) -> &PipelineLayoutFunctions {
         &self.child_functions.pipeline_layout_functions
+    }
+
+    pub(crate) fn render_pass_functions(&self) -> &RenderPassFunctions {
+        &self.child_functions.render_pass_functions
     }
 
     pub(crate) fn shader_module_functions(&self) -> &ShaderModuleFunctions {

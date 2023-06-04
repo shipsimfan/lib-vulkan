@@ -16,6 +16,7 @@ pub(crate) enum VkStructureType {
     PipelineColorBlendStateCreateInfo = 26,
     PipelineDynamicStateCreateInfo = 27,
     PipelineLayoutCreateInfo = 30,
+    RenderPassCreateInfo = 38,
     SwapchainCreateInfo = 1000001000,
     #[cfg(target_os = "windows")]
     Win32SurfaceCreateInfo = 1000009000,
