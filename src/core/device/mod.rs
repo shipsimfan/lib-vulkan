@@ -1,10 +1,11 @@
 use crate::{
-    string_vec_to_cstring_vec, Framebuffer, FramebufferCreateInfo, FramebufferFunctions,
-    GraphicsPipelineCreateInfo, ImageView, ImageViewCreateInfo, ImageViewFunctions, Instance,
-    Loader, NativeLoader, Pipeline, PipelineFunctions, PipelineLayout, PipelineLayoutCreateInfo,
-    PipelineLayoutFunctions, Queue, RenderPass, RenderPassCreateInfo, RenderPassFunctions, Result,
-    ShaderModule, ShaderModuleFunctions, Swapchain, SwapchainCreateInfo, SwapchainFunctions,
-    VkCreateDevice, VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
+    string_vec_to_cstring_vec, CommandPool, CommandPoolCreateInfo, CommandPoolFunctions,
+    Framebuffer, FramebufferCreateInfo, FramebufferFunctions, GraphicsPipelineCreateInfo,
+    ImageView, ImageViewCreateInfo, ImageViewFunctions, Instance, Loader, NativeLoader, Pipeline,
+    PipelineFunctions, PipelineLayout, PipelineLayoutCreateInfo, PipelineLayoutFunctions, Queue,
+    RenderPass, RenderPassCreateInfo, RenderPassFunctions, Result, ShaderModule,
+    ShaderModuleFunctions, Swapchain, SwapchainCreateInfo, SwapchainFunctions, VkCreateDevice,
+    VkDevice, VkDeviceCreateFlags, VkDeviceCreateInfo, VkDeviceQueueCreateFlags,
     VkDeviceQueueCreateInfo, VkPhysicalDevice, VkResult, VkStructureType,
 };
 use child_functions::ChildFunctions;
@@ -108,6 +109,13 @@ impl<L: Loader> Device<L> {
         Swapchain::create(self.clone(), create_info)
     }
 
+    pub fn create_command_pool(
+        self: &Arc<Self>,
+        create_info: CommandPoolCreateInfo,
+    ) -> Result<CommandPool<L>> {
+        CommandPool::create(self.clone(), create_info)
+    }
+
     pub fn create_framebuffer(
         self: &Arc<Self>,
         create_info: FramebufferCreateInfo<L>,
@@ -142,6 +150,10 @@ impl<L: Loader> Device<L> {
 
     pub fn create_shader_module(self: &Arc<Self>, code: &[u8]) -> Result<Arc<ShaderModule<L>>> {
         ShaderModule::create(self.clone(), code)
+    }
+
+    pub(crate) fn command_pool_functions(&self) -> &CommandPoolFunctions {
+        &self.child_functions.command_pool_functions
     }
 
     pub(crate) fn framebuffer_functions(&self) -> &FramebufferFunctions {

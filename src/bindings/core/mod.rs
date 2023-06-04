@@ -3,6 +3,7 @@ mod allocation_callbacks;
 mod attachment;
 mod blend;
 mod color_component_flags;
+mod command_pool;
 mod compare_op;
 mod component;
 mod constants;
@@ -97,6 +98,7 @@ pub use vertex_input::{
 pub use viewport::VkViewport;
 
 pub(crate) use allocation_callbacks::*;
+pub(crate) use command_pool::*;
 pub(crate) use constants::*;
 pub(crate) use descriptor_set_layout::*;
 pub(crate) use device::*;

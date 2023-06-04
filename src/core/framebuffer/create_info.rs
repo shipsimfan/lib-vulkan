@@ -1,6 +1,6 @@
 use crate::{
-    bindings::{VkFramebufferCreateFlags, VkFramebufferCreateInfo, VkImageView, VkStructureType},
-    ImageView, Loader, NativeLoader, RenderPass,
+    ImageView, Loader, NativeLoader, RenderPass, VkFramebufferCreateFlags, VkFramebufferCreateInfo,
+    VkImageView, VkStructureType,
 };
 use std::{ptr::null, sync::Arc};
 

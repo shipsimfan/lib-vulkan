@@ -1,3 +1,4 @@
+mod command_pool;
 mod device;
 mod extension_properties;
 mod framebuffer;
@@ -12,6 +13,7 @@ mod queue;
 mod render_pass;
 mod shader_module;
 
+pub use command_pool::{CommandPool, CommandPoolCreateInfo};
 pub use device::{Device, DeviceCreateInfo, DeviceQueueCreateInfo};
 pub use extension_properties::ExtensionProperties;
 pub use framebuffer::{Framebuffer, FramebufferCreateInfo};
@@ -36,6 +38,7 @@ pub use queue::Queue;
 pub use render_pass::{RenderPass, RenderPassCreateInfo, SubpassDescription};
 pub use shader_module::ShaderModule;
 
+pub(crate) use command_pool::*;
 pub(crate) use framebuffer::*;
 pub(crate) use image_view::*;
 pub(crate) use physical_device::*;
