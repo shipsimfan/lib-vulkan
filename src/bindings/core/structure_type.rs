@@ -23,6 +23,7 @@ pub(crate) enum VkStructureType {
     FramebufferCreateInfo = 37,
     RenderPassCreateInfo = 38,
     CommandPoolCreateInfo = 39,
+    CommandBufferAllocateInfo = 40,
     SwapchainCreateInfo = 1000001000,
     #[cfg(target_os = "windows")]
     Win32SurfaceCreateInfo = 1000009000,

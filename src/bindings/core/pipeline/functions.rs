@@ -3,7 +3,7 @@ use crate::{
     VkResult,
 };
 
-pub(crate) type VkCreateGraphicsPipeline = extern "system" fn(
+pub(crate) type VkCreateGraphicsPipelines = extern "system" fn(
     device: VkDevice,
     pipeline_cache: Option<VkPipelineCache>,
     create_info_count: u32,

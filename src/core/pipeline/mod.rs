@@ -1,5 +1,7 @@
 use crate::{
-    Device, Loader, NativeLoader, PipelineLayout, RenderPass, Result, VkPipeline, VkResult,
+    Device, Loader, NativeLoader, PipelineLayout, RenderPass, Result, VkGraphicsPipelineCreateInfo,
+    VkPipeline, VkPipelineDynamicStateCreateFlags, VkPipelineDynamicStateCreateInfo, VkResult,
+    VkStructureType,
 };
 use std::{ptr::null, sync::Arc};
 
@@ -42,10 +44,113 @@ impl<L: Loader> Pipeline<L> {
         device: Arc<Device<L>>,
         create_info: GraphicsPipelineCreateInfo<L>,
     ) -> Result<Self> {
-        let vk_create_info = create_info.into_binding();
+        let mut strings = Vec::with_capacity(create_info.stages.len());
+        let stages: Vec<_> = create_info
+            .stages
+            .iter()
+            .map(|stage| {
+                let (stage, string) = stage.into_binding();
+                strings.push(string);
+                stage
+            })
+            .collect();
+
+        let vertex_input_state = create_info
+            .vertex_input_state
+            .as_ref()
+            .map(|vertex_input_state| vertex_input_state.into_binding());
+        let input_assembly_state = create_info
+            .input_assembly_state
+            .as_ref()
+            .map(|input_assembly_state| input_assembly_state.into_binding());
+        let tessellation_state = create_info
+            .tessellation_state
+            .as_ref()
+            .map(|tessellation_state| tessellation_state.into_binding());
+        let viewport_state = create_info
+            .viewport_state
+            .as_ref()
+            .map(|viewport_state| viewport_state.into_binding());
+        let rasterization_state = create_info
+            .rasterization_state
+            .as_ref()
+            .map(|rasterization_state| rasterization_state.into_binding());
+        let multisample_state = create_info
+            .multisample_state
+            .as_ref()
+            .map(|multisample_state| multisample_state.into_binding());
+        let depth_stencil_state = create_info
+            .depth_stencil_state
+            .as_ref()
+            .map(|depth_stencil_state| depth_stencil_state.into_binding());
+        let color_blend_state = create_info
+            .color_blend_state
+            .as_ref()
+            .map(|color_blend_state| color_blend_state.into_binding());
+        let dynamic_state = VkPipelineDynamicStateCreateInfo {
+            s_type: VkStructureType::PipelineDynamicStateCreateInfo,
+            p_next: null(),
+            flags: VkPipelineDynamicStateCreateFlags::default(),
+            dynamic_state_count: create_info.dynamic_state.len() as u32,
+            p_dynamic_states: if create_info.dynamic_state.len() == 0 {
+                null()
+            } else {
+                create_info.dynamic_state.as_ptr()
+            },
+        };
+
+        let vk_create_info = VkGraphicsPipelineCreateInfo {
+            s_type: VkStructureType::GraphicsPipelineCreateInfo,
+            p_next: null(),
+            flags: create_info.flags,
+            stage_count: stages.len() as u32,
+            p_stages: if stages.len() == 0 {
+                null()
+            } else {
+                stages.as_ptr()
+            },
+            p_vertex_input_state: vertex_input_state
+                .as_ref()
+                .map(|vertex_input_state| vertex_input_state as *const _)
+                .unwrap_or(null()),
+            p_input_assembly_state: input_assembly_state
+                .as_ref()
+                .map(|input_assembly_state| input_assembly_state as *const _)
+                .unwrap_or(null()),
+            p_tessellation_state: tessellation_state
+                .as_ref()
+                .map(|tessellation_state| tessellation_state as *const _)
+                .unwrap_or(null()),
+            p_viewport_state: viewport_state
+                .as_ref()
+                .map(|viewport_state| viewport_state as *const _)
+                .unwrap_or(null()),
+            p_rasterization_state: rasterization_state
+                .as_ref()
+                .map(|rasterization_state| rasterization_state as *const _)
+                .unwrap_or(null()),
+            p_multisample_state: multisample_state
+                .as_ref()
+                .map(|multisample_state| multisample_state as *const _)
+                .unwrap_or(null()),
+            p_depth_stencil_state: depth_stencil_state
+                .as_ref()
+                .map(|depth_stencil_state| depth_stencil_state as *const _)
+                .unwrap_or(null()),
+            p_color_blend_state: color_blend_state
+                .as_ref()
+                .map(|color_blend_state| &color_blend_state.0 as *const _)
+                .unwrap_or(null()),
+            p_dynamic_state: &dynamic_state,
+            layout: create_info.layout.handle(),
+            render_pass: create_info.render_pass.handle(),
+            subpass: create_info.subpass,
+            base_pipeline_handle: None,
+            base_pipeline_index: 0,
+        };
 
         let mut handle = Vec::with_capacity(1);
-        let handle = match (device.pipeline_functions().create_pipeline)(
+        let handle = match (device.pipeline_functions().create_pipelines)(
             device.handle(),
             None,
             1,

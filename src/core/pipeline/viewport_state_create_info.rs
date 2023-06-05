@@ -39,7 +39,7 @@ impl PipelineViewportStateCreateInfo {
 impl<T> PipelineViewportState<T> {
     pub(self) fn len(&self) -> u32 {
         match self {
-            Self::Dynamic(_) => 0,
+            Self::Dynamic(count) => *count,
             Self::Static(value) => value.len() as u32,
         }
     }

@@ -9,7 +9,7 @@ mod library;
 mod loader;
 
 pub use self::core::{
-    ApplicationInfo, CommandPool, CommandPoolCreateInfo, Device, DeviceCreateInfo,
+    ApplicationInfo, CommandBuffer, CommandPool, CommandPoolCreateInfo, Device, DeviceCreateInfo,
     DeviceQueueCreateInfo, ExtensionProperties, Framebuffer, FramebufferCreateInfo,
     GraphicsPipelineCreateInfo, Image, ImageView, ImageViewCreateInfo, Instance,
     InstanceCreateInfo, LayerProperties, PhysicalDevice, PhysicalDeviceFeatures,
@@ -31,8 +31,9 @@ pub use bindings::{
     VkAttachmentStoreOp as AttachmentStoreOp, VkBlendFactor as BlendFactor, VkBlendOp as BlendOp,
     VkColorComponentFlagBits as ColorComponentFlagBits,
     VkColorComponentFlags as ColorComponentFlags, VkColorSpaceKHR as ColorSpace,
-    VkCompareOp as CompareOp, VkComponentMapping as ComponentMapping,
-    VkComponentSwizzle as ComponentSwizzle, VkCompositeAlphaFlagBitsKHR as CompositeAlphaFlagBits,
+    VkCommandBufferLevel as CommandBufferLevel, VkCompareOp as CompareOp,
+    VkComponentMapping as ComponentMapping, VkComponentSwizzle as ComponentSwizzle,
+    VkCompositeAlphaFlagBitsKHR as CompositeAlphaFlagBits,
     VkCompositeAlphaFlagsKHR as CompositeAlphaFlags, VkCullModeFlagBits as CullModeFlagBits,
     VkCullModeFlags as CullModeFlags, VkDependencyFlagBits as DependencyFlagBits,
     VkDependencyFlags as DependencyFlags, VkDynamicState as DynamicState, VkExtent2D as Extent2D,

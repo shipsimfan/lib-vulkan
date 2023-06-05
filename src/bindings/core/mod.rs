@@ -3,6 +3,7 @@ mod allocation_callbacks;
 mod attachment;
 mod blend;
 mod color_component_flags;
+mod command_buffer;
 mod command_pool;
 mod compare_op;
 mod component;
@@ -55,6 +56,7 @@ pub use attachment::{
 };
 pub use blend::{VkBlendFactor, VkBlendOp};
 pub use color_component_flags::{VkColorComponentFlagBits, VkColorComponentFlags};
+pub use command_buffer::VkCommandBufferLevel;
 pub use compare_op::VkCompareOp;
 pub use component::{VkComponentMapping, VkComponentSwizzle};
 pub use constants::VK_UUID_SIZE;
@@ -98,6 +100,7 @@ pub use vertex_input::{
 pub use viewport::VkViewport;
 
 pub(crate) use allocation_callbacks::*;
+pub(crate) use command_buffer::*;
 pub(crate) use command_pool::*;
 pub(crate) use constants::*;
 pub(crate) use descriptor_set_layout::*;

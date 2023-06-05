@@ -112,7 +112,7 @@ impl<L: Loader> Device<L> {
     pub fn create_command_pool(
         self: &Arc<Self>,
         create_info: CommandPoolCreateInfo,
-    ) -> Result<CommandPool<L>> {
+    ) -> Result<Arc<CommandPool<L>>> {
         CommandPool::create(self.clone(), create_info)
     }
 

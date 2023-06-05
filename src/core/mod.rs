@@ -1,3 +1,4 @@
+mod command_buffer;
 mod command_pool;
 mod device;
 mod extension_properties;
@@ -13,6 +14,7 @@ mod queue;
 mod render_pass;
 mod shader_module;
 
+pub use command_buffer::CommandBuffer;
 pub use command_pool::{CommandPool, CommandPoolCreateInfo};
 pub use device::{Device, DeviceCreateInfo, DeviceQueueCreateInfo};
 pub use extension_properties::ExtensionProperties;
