@@ -1,3 +1,3 @@
 mod enumerate_instance_version;
 
-pub use enumerate_instance_version::{vkEnumerateInstanceVersion, VkEnumerateInstanceVersion};
+pub use enumerate_instance_version::VkEnumerateInstanceVersion;
