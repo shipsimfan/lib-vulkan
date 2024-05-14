@@ -2,6 +2,7 @@ use crate::VkResult;
 
 /// Query instance-level version before instance creation
 ///
+/// # Parameters
 ///  * `api_version` is a pointer to a [`u32`], which is the version of Vulkan supported by
 ///    instance-level functionality. This must be a valid pointer to a [`u32`] value.
 ///
@@ -11,4 +12,4 @@ use crate::VkResult;
 ///
 /// On failure, this command returns
 ///  * [`VkResult::VkErrorOutOfHostMemory`]
-pub type VkEnumerateInstanceVersion = extern "C" fn(api_version: *mut u32) -> VkResult;
+pub type VkEnumerateInstanceVersion = extern "system" fn(api_version: *mut u32) -> VkResult;
