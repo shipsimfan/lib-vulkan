@@ -103,7 +103,7 @@ fn get_device_paths(device_key: RegistryKey) -> Vec<u16> {
         return Vec::new();
     }
 
-    let mut raw_paths: Vec<u16> = vec![0; cb_data as usize];
+    let mut raw_paths: Vec<u16> = vec![0; cb_data as usize / std::mem::size_of::<u16>()];
     let status = unsafe {
         RegGetValue(
             device_key.inner(),
@@ -119,6 +119,6 @@ fn get_device_paths(device_key: RegistryKey) -> Vec<u16> {
         return Vec::new();
     }
 
-    unsafe { raw_paths.set_len(cb_data as usize) };
+    unsafe { raw_paths.set_len(cb_data as usize / std::mem::size_of::<u16>()) };
     raw_paths
 }

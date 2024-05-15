@@ -5,8 +5,10 @@ use win32::{
 };
 
 mod child_iter;
+mod value_iter;
 
 pub(super) use child_iter::RegistryKeyChildIter;
+pub(super) use value_iter::RegistryKeyValueIter;
 
 /// An opened Windows registry key
 pub(super) struct RegistryKey(HKEY);
@@ -45,9 +47,14 @@ impl RegistryKey {
         Some(RegistryKey(key))
     }
 
-    /// Gets an iterator over the child keys of this iterator
+    /// Gets an iterator over the child keys of this key
     pub(super) fn children(&self) -> RegistryKeyChildIter {
         RegistryKeyChildIter::new(self)
+    }
+
+    /// Gets an iterator over the values of this key
+    pub(super) fn values(&self) -> RegistryKeyValueIter {
+        RegistryKeyValueIter::new(self)
     }
 
     pub(super) fn inner(&self) -> HKEY {
