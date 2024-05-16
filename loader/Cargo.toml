@@ -9,5 +9,8 @@ license.workspace = true
 repository.workspace = true
 publish.workspace = true
 
+[dependencies]
+json = { git = "https://github.com/shipsimfan/lib-json", branch = "lib-data-format" }
+
 [target.'cfg(windows)'.dependencies]
 win32.git = "https://github.com/shipsimfan/lib-win32"

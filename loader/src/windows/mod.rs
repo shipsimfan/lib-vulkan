@@ -1,19 +1,21 @@
-mod driver;
-mod error;
-mod paths;
+use manifest::Manifest;
 
-pub use error::LoadError;
+mod driver;
+mod manifest;
+mod paths;
 
 pub(crate) use driver::Driver;
 
 /// Loads all of the Vulkan drivers on a Windows system
-pub(crate) fn load_drivers() -> Result<Vec<Driver>, LoadError> {
+pub(crate) fn load_drivers() -> Vec<Driver> {
     let paths = paths::get_driver_manifest_paths();
 
-    println!("Vulkan driver manifests:");
+    let mut manifests = Vec::new();
     for path in paths {
-        println!(" - {}", path.display());
+        if let Some(manifest) = Manifest::read(&path) {
+            manifests.push(manifest);
+        }
     }
 
-    Ok(Vec::new())
+    Vec::new()
 }

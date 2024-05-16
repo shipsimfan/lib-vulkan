@@ -15,14 +15,11 @@ mod windows;
 use windows as os;
 
 pub use driver::Driver;
-pub use os::LoadError;
 
 /// Loads all the Vulkan drivers in the system
-pub fn load_drivers() -> Result<Vec<Driver>, LoadError> {
-    os::load_drivers().map(|drivers| {
-        drivers
-            .into_iter()
-            .map(|driver| Driver::new(driver))
-            .collect()
-    })
+pub fn load_drivers() -> Vec<Driver> {
+    os::load_drivers()
+        .into_iter()
+        .map(|driver| Driver::new(driver))
+        .collect()
 }
