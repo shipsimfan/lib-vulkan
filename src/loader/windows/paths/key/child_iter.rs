@@ -2,7 +2,7 @@ use super::RegistryKey;
 use std::ptr::null_mut;
 use win32::{RegEnumKeyEx, DWORD, ERROR_SUCCESS};
 
-pub(in crate::windows::paths) struct RegistryKeyChildIter<'a> {
+pub(in crate::loader::windows::paths) struct RegistryKeyChildIter<'a> {
     key: &'a RegistryKey,
     index: u32,
 }

@@ -15,4 +15,4 @@ pub use enumerations::*;
 pub use functions::*;
 pub use types::*;
 
-pub use vulkan_loader as loader;
+pub mod loader;

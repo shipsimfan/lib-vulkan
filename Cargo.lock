@@ -19,13 +19,6 @@ dependencies = [
 name = "vulkan"
 version = "0.1.0"
 dependencies = [
- "vulkan-loader",
-]
-
-[[package]]
-name = "vulkan-loader"
-version = "0.1.0"
-dependencies = [
  "json",
  "win32",
 ]

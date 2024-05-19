@@ -4,7 +4,7 @@ mod driver;
 mod manifest;
 mod paths;
 
-pub(crate) use driver::Driver;
+pub(super) use driver::Driver;
 
 /// Loads all of the Vulkan drivers on a Windows system
 pub(crate) fn load_drivers() -> Vec<Driver> {
@@ -12,7 +12,7 @@ pub(crate) fn load_drivers() -> Vec<Driver> {
 
     assert!(paths.len() > 0);
 
-    let mut driver_paths = Vec::new();
+    let mut driver_paths = Vec::with_capacity(paths.len());
     for path in paths {
         if let Some(manifest) = Manifest::read(&path) {
             if let Some(arch) = manifest.icd.library_arch {
@@ -25,9 +25,12 @@ pub(crate) fn load_drivers() -> Vec<Driver> {
         }
     }
 
+    let mut drivers = Vec::with_capacity(driver_paths.len());
     for driver_path in driver_paths {
-        println!("Driver at {}", driver_path.display());
+        if let Ok(driver) = Driver::open(&driver_path) {
+            drivers.push(driver);
+        }
     }
 
-    Vec::new()
+    drivers
 }

@@ -1,4 +1,4 @@
-use crate::os;
+use super::os;
 
 /// A loaded Vulkan driver
 pub struct Driver(os::Driver);

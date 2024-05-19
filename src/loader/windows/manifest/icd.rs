@@ -3,7 +3,7 @@ use json::data_format::{Converter, Deserialize, DeserializeError, Deserializer, 
 
 /// The description of the driver library
 #[derive(Debug)]
-pub(in crate::windows) struct ICD {
+pub(in crate::loader::windows) struct ICD {
     /// The path to the library itself
     pub library_path: String,
 

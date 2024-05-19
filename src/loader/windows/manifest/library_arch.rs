@@ -2,7 +2,7 @@ use json::data_format::{Converter, Deserialize, DeserializeError, Deserializer};
 
 /// The architecture the library was built for
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
-pub(in crate::windows) enum LibraryArch {
+pub(in crate::loader::windows) enum LibraryArch {
     /// 32-bits
     _32,
 
@@ -22,7 +22,7 @@ const CURRENT_ARCH: LibraryArch = LibraryArch::_64;
 
 impl LibraryArch {
     /// Checks if the library was built for the architecture this is running on
-    pub(in crate::windows) fn is_valid(self) -> bool {
+    pub(in crate::loader::windows) fn is_valid(self) -> bool {
         self == CURRENT_ARCH
     }
 }
