@@ -1,4 +1,5 @@
 use manifest::Manifest;
+use std::path::Path;
 
 mod driver;
 mod manifest;
@@ -21,16 +22,27 @@ pub(crate) fn load_drivers() -> Vec<Driver> {
                 }
             }
 
-            driver_paths.push(path.join(manifest.icd.library_path));
+            driver_paths.push(
+                path.parent()
+                    .unwrap_or(&Path::new(""))
+                    .join(manifest.icd.library_path),
+            );
         }
     }
 
     let mut drivers = Vec::with_capacity(driver_paths.len());
     for driver_path in driver_paths {
-        if let Ok(driver) = Driver::open(&driver_path) {
+        if let Some(driver) = Driver::open(&driver_path) {
             drivers.push(driver);
         }
     }
 
     drivers
+}
+
+/// Converts `s` to a UTF-16 encoded array with a trailing null
+fn str_to_utf16(s: &str) -> Vec<u16> {
+    let mut result: Vec<_> = s.encode_utf16().collect();
+    result.push(0);
+    result
 }

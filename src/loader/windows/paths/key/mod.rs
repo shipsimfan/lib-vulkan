@@ -1,3 +1,4 @@
+use crate::loader::windows::str_to_utf16;
 use std::ptr::null_mut;
 use win32::{
     RegCloseKey, RegOpenKeyEx, ERROR_SUCCESS, HKEY, HKEY_LOCAL_MACHINE, KEY_ENUMERATE_SUB_KEYS,
@@ -12,13 +13,6 @@ pub(super) use value_iter::RegistryKeyValueIter;
 
 /// An opened Windows registry key
 pub(super) struct RegistryKey(HKEY);
-
-/// Converts `s` to a UTF-16 encoded array with a trailing null
-fn str_to_utf16(s: &str) -> Vec<u16> {
-    let mut result: Vec<_> = s.encode_utf16().collect();
-    result.push(0);
-    result
-}
 
 impl RegistryKey {
     /// Opens to open the `path` key in the Windows registry

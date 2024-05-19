@@ -1,5 +1,5 @@
 use crate::{VkInstance, VkVoidFunction};
-use std::ffi::c_char;
+use std::ffi::{c_char, CStr};
 
 // rustdoc imports
 #[allow(unused_imports)]
@@ -37,4 +37,8 @@ use std::ptr::{null, null_mut};
 /// | instance                          | available device extension dispatchable command for `instance` | fp           |
 /// | any other case not covered above  | any other case, not covered above                              | [`null`]     |
 pub type VkGetInstanceProcAddr =
-    extern "system" fn(instance: VkInstance, name: *const c_char) -> VkVoidFunction;
+    extern "system" fn(instance: VkInstance, name: *const c_char) -> Option<VkVoidFunction>;
+
+/// The name of [`VkGetInstanceProcAddr`]
+pub const VK_GET_INSTANCE_PROC_ADDR: &CStr =
+    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetInstanceProcAddr\0") };
