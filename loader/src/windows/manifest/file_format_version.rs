@@ -1,8 +1,12 @@
 use json::data_format::{Converter, Deserialize, DeserializeError, Deserializer};
 
+/// The version of the file format the manifest is using
 #[derive(Debug)]
 pub(in crate::windows) enum FileFormatVersion {
+    /// Version 1.0.0
     _1_0_0,
+
+    /// Version 1.0.1
     _1_0_1,
 }
 

@@ -1,11 +1,21 @@
 use super::LibraryArch;
 use json::data_format::{Converter, Deserialize, DeserializeError, Deserializer, MapDeserializer};
 
+/// The description of the driver library
 #[derive(Debug)]
 pub(in crate::windows) struct ICD {
+    /// The path to the library itself
     pub library_path: String,
+
+    /// The archictecture the library was built for
     pub library_arch: Option<LibraryArch>,
+
+    /// The Vulkan version the library supports
+    #[allow(unused)]
     pub api_version: String,
+
+    /// Is the library a portability driver?
+    #[allow(unused)]
     pub is_portability_driver: Option<bool>,
 }
 

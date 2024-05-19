@@ -12,13 +12,21 @@ pub(crate) fn load_drivers() -> Vec<Driver> {
 
     assert!(paths.len() > 0);
 
-    let mut manifests = Vec::new();
+    let mut driver_paths = Vec::new();
     for path in paths {
         if let Some(manifest) = Manifest::read(&path) {
-            println!("{}:", path.display());
-            println!("  {:?}", manifest);
-            manifests.push((path, manifest));
+            if let Some(arch) = manifest.icd.library_arch {
+                if !arch.is_valid() {
+                    continue;
+                }
+            }
+
+            driver_paths.push(path.join(manifest.icd.library_path));
         }
+    }
+
+    for driver_path in driver_paths {
+        println!("Driver at {}", driver_path.display());
     }
 
     Vec::new()

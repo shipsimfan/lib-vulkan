@@ -12,6 +12,7 @@ mod library_arch;
 #[derive(Debug)]
 pub(super) struct Manifest {
     /// The version of the manifest file
+    #[allow(unused)]
     pub file_format_version: FileFormatVersion,
 
     /// The description of the driver
