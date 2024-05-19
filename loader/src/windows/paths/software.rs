@@ -13,7 +13,7 @@ pub(super) fn get_driver_manifest_paths() -> Vec<PathBuf> {
     };
 
     let mut paths = Vec::new();
-    for (value, r#type) in root_key.values() {
+    for (mut value, r#type) in root_key.values() {
         if r#type != REG_DWORD {
             continue;
         }
@@ -34,6 +34,8 @@ pub(super) fn get_driver_manifest_paths() -> Vec<PathBuf> {
         if status != ERROR_SUCCESS || dword_value != 0 {
             continue;
         }
+
+        value.pop();
 
         paths.push(PathBuf::from_str(&String::from_utf16_lossy(&value)).unwrap());
     }

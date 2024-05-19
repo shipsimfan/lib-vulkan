@@ -79,7 +79,9 @@ fn check_device(device_key: RegistryKey) -> Vec<PathBuf> {
             break;
         }
 
-        paths.push(PathBuf::from(&String::from_utf16_lossy(&raw_paths)));
+        paths.push(PathBuf::from(
+            String::from_utf16_lossy(&raw_paths[start..i]).trim(),
+        ));
         start = i + 1;
     }
 

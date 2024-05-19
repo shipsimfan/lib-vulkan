@@ -1,6 +1,7 @@
 use super::LibraryArch;
-use json::data_format::{Converter, Deserialize, Error};
+use json::data_format::{Converter, Deserialize, DeserializeError, Deserializer, MapDeserializer};
 
+#[derive(Debug)]
 pub(in crate::windows) struct ICD {
     pub library_path: String,
     pub library_arch: Option<LibraryArch>,
@@ -11,9 +12,7 @@ pub(in crate::windows) struct ICD {
 struct ICDConverter;
 
 impl<'de> Deserialize<'de> for ICD {
-    fn deserialize<D: json::data_format::Deserializer<'de>>(
-        deserializer: D,
-    ) -> Result<Self, D::Error> {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         deserializer.deserialize_map(ICDConverter)
     }
 }
@@ -25,17 +24,14 @@ impl<'de> Converter<'de> for ICDConverter {
         write!(f, "an ICD object")
     }
 
-    fn convert_map<M: json::data_format::MapDeserializer<'de>>(
-        self,
-        mut map: M,
-    ) -> Result<Self::Value, M::Error> {
+    fn convert_map<M: MapDeserializer<'de>>(self, mut map: M) -> Result<Self::Value, M::Error> {
         let mut library_path = None;
         let mut library_arch = None;
         let mut api_version = None;
         let mut is_portability_driver = None;
 
-        while let Some(key) = map.next_key::<&str>()? {
-            match key {
+        while let Some(key) = map.next_key::<std::borrow::Cow<'de, str>>()? {
+            match key.as_ref() {
                 "library_path" => match library_path {
                     Some(_) => return Err(M::Error::duplicate_field("library_path")),
                     None => library_path = Some(map.next_value()?),

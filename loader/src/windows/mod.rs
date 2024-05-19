@@ -10,10 +10,14 @@ pub(crate) use driver::Driver;
 pub(crate) fn load_drivers() -> Vec<Driver> {
     let paths = paths::get_driver_manifest_paths();
 
+    assert!(paths.len() > 0);
+
     let mut manifests = Vec::new();
     for path in paths {
         if let Some(manifest) = Manifest::read(&path) {
-            manifests.push(manifest);
+            println!("{}:", path.display());
+            println!("  {:?}", manifest);
+            manifests.push((path, manifest));
         }
     }
 
