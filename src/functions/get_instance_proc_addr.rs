@@ -3,6 +3,8 @@ use std::ffi::{c_char, CStr};
 
 // rustdoc imports
 #[allow(unused_imports)]
+use crate::VK_VERSION_1_0;
+#[allow(unused_imports)]
 use std::ptr::{null, null_mut};
 
 /// Return a function pointer for a command
@@ -36,6 +38,8 @@ use std::ptr::{null, null_mut};
 /// | instance                          | enabled instance extension dispatchable command for `instance` | fp           |
 /// | instance                          | available device extension dispatchable command for `instance` | fp           |
 /// | any other case not covered above  | any other case, not covered above                              | [`null`]     |
+///
+/// Provided by [`VK_VERSION_1_0`]
 pub type VkGetInstanceProcAddr =
     extern "system" fn(instance: VkInstance, name: *const c_char) -> Option<VkVoidFunction>;
 

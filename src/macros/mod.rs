@@ -1,1 +1,10 @@
+mod api_version_major;
+mod api_version_minor;
+mod api_version_patch;
+mod api_version_variant;
 mod define_handle;
+mod make_api_version;
+mod make_version;
+mod version_major;
+mod version_minor;
+mod version_patch;

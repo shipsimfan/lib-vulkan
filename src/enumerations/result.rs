@@ -1,3 +1,7 @@
+// rustdoc imports
+#[allow(unused_imports)]
+use crate::{VK_VERSION_1_0, VK_VERSION_1_1, VK_VERSION_1_2, VK_VERSION_1_3};
+
 /// Vulkan command return codes
 ///
 /// While the core Vulkan API is not designed to capture incorrect usage, some circumstances still
@@ -30,6 +34,8 @@
 /// such commands, the implementation will defer reporting the error until a specified point. For
 /// commands that record into command buffers (`vkCmd*`) runtime errors are reported by
 /// [`VkEndCommandBuffer`].
+///
+/// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[non_exhaustive]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
