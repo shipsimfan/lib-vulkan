@@ -22,17 +22,18 @@ pub(crate) fn load_drivers() -> Vec<Driver> {
                 }
             }
 
-            driver_paths.push(
+            driver_paths.push((
                 path.parent()
                     .unwrap_or(&Path::new(""))
                     .join(manifest.icd.library_path),
-            );
+                manifest.icd.api_version,
+            ));
         }
     }
 
     let mut drivers = Vec::with_capacity(driver_paths.len());
-    for driver_path in driver_paths {
-        if let Some(driver) = Driver::open(&driver_path) {
+    for (driver_path, api_version) in driver_paths {
+        if let Some(driver) = Driver::open(&driver_path, api_version) {
             drivers.push(driver);
         }
     }

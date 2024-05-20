@@ -37,4 +37,9 @@ impl Driver {
     ) -> Option<extern "system" fn()> {
         (self.get_instance_proc_addr)(instance, name.as_ptr())
     }
+
+    /// Gets the reported driver API version
+    pub fn get_api_version(&self) -> &str {
+        self.os.get_api_version()
+    }
 }

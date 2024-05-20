@@ -15,6 +15,9 @@ pub(in crate::loader) struct Driver {
     /// The function to get other function pointers from
     icd_get_instance_proc_addr:
         extern "system" fn(instance: VkInstance, name: *const c_char) -> Option<VkVoidFunction>,
+
+    /// The reported driver API version
+    api_version: String,
 }
 
 /// A open Windows library
@@ -25,7 +28,7 @@ const VK_ICD_GET_INSTANCE_PROC_ADDR: &CStr =
 
 impl Driver {
     /// Attempts to open the [`Driver`] located at `path`
-    pub(super) fn open(path: &Path) -> Option<Self> {
+    pub(super) fn open(path: &Path, api_version: String) -> Option<Self> {
         let library = Win32Library::open(path).unwrap();
 
         let icd_get_instance_proc_addr = unsafe {
@@ -35,6 +38,7 @@ impl Driver {
         Some(Driver {
             library,
             icd_get_instance_proc_addr,
+            api_version,
         })
     }
 
@@ -44,6 +48,11 @@ impl Driver {
         name: &CStr,
     ) -> Option<VkVoidFunction> {
         (self.icd_get_instance_proc_addr)(null_mut(), name.as_ptr())
+    }
+
+    /// Gets the reported driver API version
+    pub fn get_api_version(&self) -> &str {
+        &self.api_version
     }
 }
 
