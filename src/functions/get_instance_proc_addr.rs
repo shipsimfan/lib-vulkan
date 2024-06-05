@@ -46,3 +46,12 @@ pub type VkGetInstanceProcAddr =
 /// The name of [`VkGetInstanceProcAddr`]
 pub const VK_GET_INSTANCE_PROC_ADDR: &CStr =
     unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetInstanceProcAddr\0") };
+
+#[link(name = "vulkan-1")]
+extern "system" {
+    /// Linked version of [`VkGetInstanceProcAddr`]
+    pub fn vkGetInstanceProcAddr(
+        instance: VkInstance,
+        name: *const c_char,
+    ) -> Option<VkVoidFunction>;
+}

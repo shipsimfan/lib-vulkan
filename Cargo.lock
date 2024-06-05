@@ -3,27 +3,5 @@
 version = 3
 
 [[package]]
-name = "data-format"
-version = "0.1.0"
-source = "git+https://github.com/shipsimfan/lib-data-format#cdb296acd905db7fab72fd5ec02ebe73263cccb7"
-
-[[package]]
-name = "json"
-version = "2.0.0"
-source = "git+https://github.com/shipsimfan/lib-json?branch=lib-data-format#9004ff515b5b6a7cb6d07f23fbb75ec7ea1ac87a"
-dependencies = [
- "data-format",
-]
-
-[[package]]
 name = "vulkan"
 version = "0.1.0"
-dependencies = [
- "json",
- "win32",
-]
-
-[[package]]
-name = "win32"
-version = "0.1.0"
-source = "git+https://github.com/shipsimfan/lib-win32#2f63cbb65ae9262cd039333d644270b83e0e1089"

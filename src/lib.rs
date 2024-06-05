@@ -16,5 +16,3 @@ pub use constants::*;
 pub use enumerations::*;
 pub use functions::*;
 pub use types::*;
-
-pub mod loader;

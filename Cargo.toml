@@ -7,9 +7,3 @@ edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/shipsimfan/lib-vulkan"
 publish = false
-
-[dependencies]
-json = { git = "https://github.com/shipsimfan/lib-json", branch = "lib-data-format" }
-
-[target.'cfg(windows)'.dependencies]
-win32.git = "https://github.com/shipsimfan/lib-win32"
