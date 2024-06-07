@@ -10,9 +10,9 @@ use std::ptr::{null, null_mut};
 /// Return a function pointer for a command
 ///
 /// # Parameters
-///  * `instance` is the instance that the function pointer will be compatible with, or
+///  - `instance` is the instance that the function pointer will be compatible with, or
 ///    [`null_mut`] for commands not dependent on any instance.
-///  * `name` is the name of the command to obtain.
+///  - `name` is the name of the command to obtain.
 ///
 /// # Description
 /// [`VkGetInstanceProcAddr`] itself is obtained in a platform- and loader- specific manner.
