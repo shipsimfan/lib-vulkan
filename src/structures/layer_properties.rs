@@ -29,3 +29,14 @@ pub struct VkLayerProperties {
     /// identify the layer.
     pub description: [c_char; VK_MAX_DESCRIPTION_SIZE],
 }
+
+impl Default for VkLayerProperties {
+    fn default() -> Self {
+        VkLayerProperties {
+            layer_name: [0; VK_MAX_EXTENSION_NAME_SIZE],
+            spec_version: 0,
+            implementation_version: 0,
+            description: [0; VK_MAX_DESCRIPTION_SIZE],
+        }
+    }
+}

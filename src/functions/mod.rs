@@ -1,8 +1,10 @@
+mod create_instance;
 mod enumerate_instance_extensions_properties;
 mod enumerate_instance_layer_properties;
 mod enumerate_instance_version;
 mod get_instance_proc_addr;
 
+pub use create_instance::{VkCreateInstance, VK_CREATE_INSTANCE};
 pub use enumerate_instance_extensions_properties::{
     VkEnumerateInstanceExtensionProperties, VK_ENUMERATE_INSTANCE_EXTENSION_PROPERTIES,
 };
