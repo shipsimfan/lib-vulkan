@@ -1,5 +1,9 @@
 use crate::vk_define_handle;
 
+// rustdoc imports
+#[allow(unused_imports)]
+use crate::VK_VERSION_1_0;
+
 vk_define_handle!(
     /// Opaque handle to an instance object
     ///
@@ -8,5 +12,7 @@ vk_define_handle!(
     /// allows the application to pass information about itself to the implementation.
     ///
     /// Instances are represented by [`VkInstance`] handles.
+    ///
+    /// Provided by [`VK_VERSION_1_0`]
     VkInstance
 );

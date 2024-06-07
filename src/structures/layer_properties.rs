@@ -1,7 +1,13 @@
 use crate::{VK_MAX_DESCRIPTION_SIZE, VK_MAX_EXTENSION_NAME_SIZE};
 use std::ffi::c_char;
 
+// rustdoc imports
+#[allow(unused_imports)]
+use crate::VK_VERSION_1_0;
+
 /// Structure specifying layer properties
+///
+/// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkLayerProperties {
