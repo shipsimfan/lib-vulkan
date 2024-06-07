@@ -3,6 +3,8 @@ use std::ffi::{c_char, CStr};
 
 // rustdoc imports
 #[allow(unused_imports)]
+use crate::VK_VERSION_1_0;
+#[allow(unused_imports)]
 use std::ptr::{null, null_mut};
 
 /// Returns up to requested number of global extension properties
@@ -37,6 +39,18 @@ use std::ptr::{null, null_mut};
 /// Implementations must not advertise any pair of extensions that cannot be enabled together due
 /// to behavioral differences, or any extension that cannot be enabled against the advertised
 /// version.
+/// 
+/// # Return Codes
+/// On success, this command returns:
+///  - [`VkResult::VkSuccess`]
+///  - [`VkResult::VkIncomplete`]
+///
+/// On failure, this command returns:
+///  - [`VkResult::VkErrorOutOfHostMemory`]
+///  - [`VkResult::VkErrorOutOfDeviceMemory`]
+///  - [`VkResult::VkErrorLayerNotPresent`]
+///
+/// Provided by [`VK_VERSION_1_0`]
 pub type VkEnumerateInstanceExtensionProperties = extern "system" fn(
     layer_name: *const c_char,
     property_count: *mut u32,

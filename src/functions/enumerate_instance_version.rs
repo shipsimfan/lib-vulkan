@@ -12,10 +12,10 @@ use crate::VK_VERSION_1_1;
 ///    instance-level functionality. This must be a valid pointer to a [`u32`] value.
 ///
 /// # Return Codes
-/// On success, this command returns
+/// On success, this command returns:
 ///  - [`VkResult::VkSuccess`]
 ///
-/// On failure, this command returns
+/// On failure, this command returns:
 ///  - [`VkResult::VkErrorOutOfHostMemory`]
 ///
 /// Provided by [`VK_VERSION_1_1`]

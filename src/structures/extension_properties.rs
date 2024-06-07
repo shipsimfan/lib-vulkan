@@ -5,7 +5,7 @@ use std::ffi::c_char;
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkExtensionProperties {
-    /// `extension_name` is an array of [`VK_MAX_EXTENSION_NAME_SIZE`] char containing a
+    /// `extension_name` is an array of [`VK_MAX_EXTENSION_NAME_SIZE`] [`c_char`] containing a
     /// null-terminated UTF-8 string which is the name of the extension.
     pub extension_name: [c_char; VK_MAX_EXTENSION_NAME_SIZE],
 
