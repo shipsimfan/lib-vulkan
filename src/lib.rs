@@ -7,6 +7,9 @@
 #![warn(rustdoc::broken_intra_doc_links)]
 #![feature(c_size_t)]
 
+pub mod khr_surface;
+
 mod core;
 
 pub use core::*;
+pub use khr_surface::*;
