@@ -142,19 +142,19 @@ pub enum VkResult {
     /// A surface is no longer available.
     ///
     /// Provided by [`khr_surface`]
-    VkErrorSurfaceLostKhr = -1000000000,
+    VkErrorSurfaceLostKHR = -1000000000,
 
     /// The requested window is already in use by Vulkan or another API in a manner which prevents
     /// it from being used again.
     ///
     /// Provided by [`khr_surface`]
-    VkErrorNativeWindowInUseKhr = -1000000001,
+    VkErrorNativeWindowInUseKHR = -1000000001,
 
     /// A swapchain no longer matches the surface properties exactly, but *can* still be used to
     /// present to the surface successfully.
     ///
     /// Provided by [`khr_swapchain`]
-    VkSuboptimalKhr = 1000001003,
+    VkSuboptimalKHR = 1000001003,
 
     /// A surface has changed in such a way that it is no longer compatible with the swapchain, and
     /// further presentation requests using the swapchain will fail. Applications must query the
@@ -162,56 +162,56 @@ pub enum VkResult {
     /// the surface.
     ///
     /// Provided by [`khr_swapchain`]
-    VkErrorOutOfDateKhr = -1000001004,
+    VkErrorOutOfDateKHR = -1000001004,
 
     /// The display used by a swapchain does not use the same presentable image layout, or is
     /// incompatible in a way that prevents sharing an image.
     ///
     /// Provided by [`khr_display_swapchain`]
-    VkErrorIncompatibleDisplayKhr = -1000003001,
+    VkErrorIncompatibleDisplayKHR = -1000003001,
 
     /// A command failed because invalid usage was detected by the implementation or a
     /// validation-layer.
     ///
     /// Provided by [`ext_debug_report`]
-    VkErrorValidationFailedExt = -1000011001,
+    VkErrorValidationFailedEXT = -1000011001,
 
     /// One or more shaders failed to compile or link. More details are reported back to the
     /// application via [`ext_debug_report`] if enabled.
     ///
     /// Provided by [`nv_glsl_shader`]
-    VkErrorInvalidShaderNv = -1000012000,
+    VkErrorInvalidShaderNV = -1000012000,
 
     /// The requested [`VkImageUsageFlags`] are not supported.
     ///
     /// Provided by [`khr_video_queue`]
-    VkErrorImageUsageNotSupportedKhr = -1000023000,
+    VkErrorImageUsageNotSupportedKHR = -1000023000,
 
     /// The requested video picture layout is not supported.
     ///
     /// Provided by [`khr_video_queue`]
-    VkErrorVideoPictureLayoutNotSupportedKhr = -1000023001,
+    VkErrorVideoPictureLayoutNotSupportedKHR = -1000023001,
 
     /// A video profile operation specified via [`VkVideoProfileInfoKHR::videoCodecOperation`] is
     /// not supported.
     ///
     /// Provided by [`khr_video_queue`]
-    VkErrorVideoProfileOperationNotSupportedKhr = -1000023002,
+    VkErrorVideoProfileOperationNotSupportedKHR = -1000023002,
 
     /// Format parameters in a requested [`VkVideoProfileInfoKHR`] chain are not supported.
     ///
     /// Provided by [`khr_video_queue`]
-    VkErrorVideoProfileFormatNotSupportedKhr = -1000023003,
+    VkErrorVideoProfileFormatNotSupportedKHR = -1000023003,
 
     /// Codec-specific parameters in a requested [`VkVideoProfileInfoKHR`] chain are not supported.
     ///
     /// Provided by [`khr_video_queue`]
-    VkErrorVideoProfileCodecNotSupportedKhr = -1000023004,
+    VkErrorVideoProfileCodecNotSupportedKHR = -1000023004,
 
     /// The specified video Std header version is not supported.
     ///
     /// Provided by [`khr_video_queue`]
-    VkErrorVideoStdVersionNotSupportedKhr = -1000023005,
+    VkErrorVideoStdVersionNotSupportedKHR = -1000023005,
 
     /// An operation on a swapchain created with
     /// [`VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT`] failed as it did not have exclusive
@@ -219,29 +219,29 @@ pub enum VkResult {
     /// application’s control.
     ///
     /// Provided by [`ext_full_screen_exclusive`]
-    VkErrorFullScreenExclusiveModeLostExt = -1000255000,
+    VkErrorFullScreenExclusiveModeLostEXT = -1000255000,
 
     /// A deferred operation is not complete but there is currently no work for this thread to do
     /// at the time of this call.
     ///
     /// Provided by [`khr_deferred_host_operations`]
-    VkThreadIdleKhr = 1000268000,
+    VkThreadIdleKHR = 1000268000,
 
     /// A deferred operation is not complete but there is no work remaining to assign to additional
     /// threads.
     ///
     /// Provided by [`khr_deferred_host_operations`]
-    VkThreadDoneKhr = 1000268001,
+    VkThreadDoneKHR = 1000268001,
 
     /// A deferred operation was requested and at least some of the work was deferred.
     ///
     /// Provided by [`khr_deferred_host_operations`]
-    VkOperationDeferredKhr = 1000268002,
+    VkOperationDeferredKHR = 1000268002,
 
     /// A deferred operation was requested and no operations were deferred.
     ///
     /// Provided by [`khr_deferred_host_operations`]
-    VkOperationNotDeferredKhr = 1000268003,
+    VkOperationNotDeferredKHR = 1000268003,
 
     /// The specified Video Std parameters do not adhere to the syntactic or semantic requirements
     /// of the used video compression standard, or values derived from parameters according to the
@@ -249,18 +249,18 @@ pub enum VkResult {
     /// the video compression standard or the implementation.
     ///
     /// Provided by [`khr_video_encode_queue`]
-    VkErrorInvalidVideoStdParametersKhr = -1000299000,
+    VkErrorInvalidVideoStdParametersKHR = -1000299000,
 
     /// An image creation failed because internal resources required for compression are exhausted.
     /// This must only be returned when fixed-rate compression is requested.
     ///
     /// Provided by [`ext_image_compression_control`]
-    VkErrorCompressionExhaustedExt = -1000338000,
+    VkErrorCompressionExhaustedEXT = -1000338000,
 
     /// The provided binary shader code is not compatible with this device.
     ///
     /// Provided by [`ext_shader_object`]
-    VkIncompatibleShaderBinaryExt = 1000482000,
+    VkIncompatibleShaderBinaryEXT = 1000482000,
 }
 
 impl VkResult {
@@ -292,27 +292,27 @@ impl VkResult {
             VkResult::VkErrorFragmentation => "A descriptor pool creation has failed due to fragmentation",
             VkResult::VkErrorInvalidOpaqueCaptureAddress => "A buffer creation or memory allocation failed because the requested address is not available",
             VkResult::VkPipelineCompileRequired => "A requested pipeline creation would have required compilation, but the application requested compilation to not be performed",
-            VkResult::VkErrorSurfaceLostKhr => "A surface is no longer available",
-            VkResult::VkErrorNativeWindowInUseKhr => "The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again",
-            VkResult::VkSuboptimalKhr => "A swapchain no longer matches the surface properties exactly, but *can* still be used to present to the surface successfully",
-            VkResult::VkErrorOutOfDateKhr => "A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will fail",
-            VkResult::VkErrorIncompatibleDisplayKhr => "The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image",
-            VkResult::VkErrorValidationFailedExt => "A command failed because invalid usage was detected by the implementation or a validation-layer",
-            VkResult::VkErrorInvalidShaderNv => "One or more shaders failed to compile or link",
-            VkResult::VkErrorImageUsageNotSupportedKhr => "The requested image usage flags are not supported",
-            VkResult::VkErrorVideoPictureLayoutNotSupportedKhr => "The requested video picture layout is not supported",
-            VkResult::VkErrorVideoProfileOperationNotSupportedKhr => "A video profile operation is not supported",
-            VkResult::VkErrorVideoProfileFormatNotSupportedKhr => "Format parameters requested are not supported",
-            VkResult::VkErrorVideoProfileCodecNotSupportedKhr => "Codec-specific parameters requested are not supported",
-            VkResult::VkErrorVideoStdVersionNotSupportedKhr => "The specified video Std header version is not supported",
-            VkResult::VkErrorFullScreenExclusiveModeLostExt => "An operation on a swapchain created with full-screen exclusive failed as it did not have exclusive full-screen access",
-            VkResult::VkThreadIdleKhr => "A deferred operation is not complete but there is currently no work for this thread to do at the time of this call",
-            VkResult::VkThreadDoneKhr => "A deferred operation is not complete but there is no work remaining to assign to additional threads",
-            VkResult::VkOperationDeferredKhr => "A deferred operation was requested and at least some of the work was deferred",
-            VkResult::VkOperationNotDeferredKhr => "A deferred operation was requested and no operations were deferred",
-            VkResult::VkErrorInvalidVideoStdParametersKhr => "The specified Video Std parameters do not adhere to the syntactic or semantic requirements of the used video compression standard, or values derived from parameters according to the rules defined by the used video compression standard do not adhere to the capabilities of the video compression standard or the implementation",
-            VkResult::VkErrorCompressionExhaustedExt => "An image creation failed because internal resources required for compression are exhausted",
-            VkResult::VkIncompatibleShaderBinaryExt => "The provided binary shader code is not compatible with this device",
+            VkResult::VkErrorSurfaceLostKHR => "A surface is no longer available",
+            VkResult::VkErrorNativeWindowInUseKHR => "The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again",
+            VkResult::VkSuboptimalKHR => "A swapchain no longer matches the surface properties exactly, but *can* still be used to present to the surface successfully",
+            VkResult::VkErrorOutOfDateKHR => "A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will fail",
+            VkResult::VkErrorIncompatibleDisplayKHR => "The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image",
+            VkResult::VkErrorValidationFailedEXT => "A command failed because invalid usage was detected by the implementation or a validation-layer",
+            VkResult::VkErrorInvalidShaderNV => "One or more shaders failed to compile or link",
+            VkResult::VkErrorImageUsageNotSupportedKHR => "The requested image usage flags are not supported",
+            VkResult::VkErrorVideoPictureLayoutNotSupportedKHR => "The requested video picture layout is not supported",
+            VkResult::VkErrorVideoProfileOperationNotSupportedKHR => "A video profile operation is not supported",
+            VkResult::VkErrorVideoProfileFormatNotSupportedKHR => "Format parameters requested are not supported",
+            VkResult::VkErrorVideoProfileCodecNotSupportedKHR => "Codec-specific parameters requested are not supported",
+            VkResult::VkErrorVideoStdVersionNotSupportedKHR => "The specified video Std header version is not supported",
+            VkResult::VkErrorFullScreenExclusiveModeLostEXT => "An operation on a swapchain created with full-screen exclusive failed as it did not have exclusive full-screen access",
+            VkResult::VkThreadIdleKHR => "A deferred operation is not complete but there is currently no work for this thread to do at the time of this call",
+            VkResult::VkThreadDoneKHR => "A deferred operation is not complete but there is no work remaining to assign to additional threads",
+            VkResult::VkOperationDeferredKHR => "A deferred operation was requested and at least some of the work was deferred",
+            VkResult::VkOperationNotDeferredKHR => "A deferred operation was requested and no operations were deferred",
+            VkResult::VkErrorInvalidVideoStdParametersKHR => "The specified Video Std parameters do not adhere to the syntactic or semantic requirements of the used video compression standard, or values derived from parameters according to the rules defined by the used video compression standard do not adhere to the capabilities of the video compression standard or the implementation",
+            VkResult::VkErrorCompressionExhaustedEXT => "An image creation failed because internal resources required for compression are exhausted",
+            VkResult::VkIncompatibleShaderBinaryEXT => "The provided binary shader code is not compatible with this device",
             _ => "Unknown error"
         }
     }
