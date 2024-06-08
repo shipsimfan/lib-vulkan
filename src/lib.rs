@@ -7,15 +7,6 @@
 #![warn(rustdoc::broken_intra_doc_links)]
 #![feature(c_size_t)]
 
-mod constants;
-mod enumerations;
-mod functions;
-mod macros;
-mod structures;
-mod types;
+mod core;
 
-pub use constants::*;
-pub use enumerations::*;
-pub use functions::*;
-pub use structures::*;
-pub use types::*;
+pub use core::*;
