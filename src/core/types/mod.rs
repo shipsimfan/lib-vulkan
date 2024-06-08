@@ -1,6 +1,7 @@
 mod allocation_function;
 mod flags;
 mod free_function;
+mod image_usage_flags;
 mod instance;
 mod instance_create_flags;
 mod internal_allocation_notification;
@@ -11,6 +12,7 @@ mod void_function;
 pub use allocation_function::VkAllocationFunction;
 pub use flags::VkFlags;
 pub use free_function::VkFreeFunction;
+pub use image_usage_flags::VkImageUsageFlags;
 pub use instance::VkInstance;
 pub use instance_create_flags::VkInstanceCreateFlags;
 pub use internal_allocation_notification::VkInternalAllocationNotification;
