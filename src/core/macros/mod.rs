@@ -3,6 +3,7 @@ mod api_version_minor;
 mod api_version_patch;
 mod api_version_variant;
 mod define_handle;
+mod define_non_dispatchable_handle;
 mod make_api_version;
 mod make_version;
 mod version_major;
