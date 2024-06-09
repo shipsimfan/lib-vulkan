@@ -15,12 +15,12 @@ macro_rules! vk_define_non_dispatchable_handle {
         $(#[$meta:meta])*
         $object: ident
     ) => {
-        #[cfg(target_ptr_width = "64")]
+        #[cfg(target_pointer_width = "64")]
         $(#[$meta])*
         pub type $object = *mut ::std::ffi::c_void;
 
 
-        #[cfg(not(target_ptr_width = "64"))]
+        #[cfg(not(target_pointer_width = "64"))]
         $(#[$meta])*
         pub type $object = u64;
     };
