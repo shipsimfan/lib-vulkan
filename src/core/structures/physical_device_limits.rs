@@ -10,7 +10,7 @@ use crate::VK_VERSION_1_0;
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[allow(missing_docs)]
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Default, Debug, Clone, PartialEq)]
 pub struct VkPhysicalDeviceLimits {
     pub max_image_dimension_1d: u32,
     pub max_image_dimension_2d: u32,

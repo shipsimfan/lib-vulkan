@@ -1,4 +1,4 @@
-use crate::VkBool32;
+use crate::{VkBool32, VK_FALSE};
 
 // rustdoc imports
 #[allow(unused_imports)]
@@ -66,4 +66,66 @@ pub struct VkPhysicalDeviceFeatures {
     pub sparse_residency_aliased: VkBool32,
     pub variable_multisample_rate: VkBool32,
     pub inherited_queries: VkBool32,
+}
+
+impl Default for VkPhysicalDeviceFeatures {
+    fn default() -> Self {
+        VkPhysicalDeviceFeatures {
+            robust_buffer_access: VK_FALSE,
+            full_draw_index_uint32: VK_FALSE,
+            image_cube_array: VK_FALSE,
+            independent_blend: VK_FALSE,
+            geometry_shader: VK_FALSE,
+            tessellation_shader: VK_FALSE,
+            sample_rate_shading: VK_FALSE,
+            dual_src_blend: VK_FALSE,
+            logic_op: VK_FALSE,
+            multi_draw_indirect: VK_FALSE,
+            draw_indirect_first_instance: VK_FALSE,
+            depth_clamp: VK_FALSE,
+            depth_bias_clamp: VK_FALSE,
+            fill_mode_non_solid: VK_FALSE,
+            depth_bounds: VK_FALSE,
+            wide_lines: VK_FALSE,
+            large_points: VK_FALSE,
+            alpha_to_one: VK_FALSE,
+            multi_viewport: VK_FALSE,
+            sampler_anisotropy: VK_FALSE,
+            texture_compression_etc2: VK_FALSE,
+            texture_compression_astcldr: VK_FALSE,
+            texture_compression_bc: VK_FALSE,
+            occlusion_query_precise: VK_FALSE,
+            pipeline_statistics_query: VK_FALSE,
+            vertex_pipeline_stores_and_atomics: VK_FALSE,
+            fragment_stores_and_atomics: VK_FALSE,
+            shader_tessellation_and_geometry_point_size: VK_FALSE,
+            shader_image_gather_extended: VK_FALSE,
+            shader_storage_image_extended_formats: VK_FALSE,
+            shader_storage_image_multisample: VK_FALSE,
+            shader_storage_image_read_without_format: VK_FALSE,
+            shader_storage_image_write_without_format: VK_FALSE,
+            shader_uniform_buffer_array_dynamic_indexing: VK_FALSE,
+            shader_sampled_image_array_dynamic_indexing: VK_FALSE,
+            shader_storage_buffer_array_dynamic_indexing: VK_FALSE,
+            shader_storage_image_array_dynamic_indexing: VK_FALSE,
+            shader_clip_distance: VK_FALSE,
+            shader_cull_distance: VK_FALSE,
+            shader_float64: VK_FALSE,
+            shader_int64: VK_FALSE,
+            shader_int16: VK_FALSE,
+            shader_resource_residency: VK_FALSE,
+            shader_resource_min_lod: VK_FALSE,
+            sparse_binding: VK_FALSE,
+            sparse_residency_buffer: VK_FALSE,
+            sparse_residency_image_2d: VK_FALSE,
+            sparse_residency_image_3d: VK_FALSE,
+            sparse_residency_2_samples: VK_FALSE,
+            sparse_residency_4_samples: VK_FALSE,
+            sparse_residency_8_samples: VK_FALSE,
+            sparse_residency_16_samples: VK_FALSE,
+            sparse_residency_aliased: VK_FALSE,
+            variable_multisample_rate: VK_FALSE,
+            inherited_queries: VK_FALSE,
+        }
+    }
 }

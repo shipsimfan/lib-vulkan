@@ -51,3 +51,15 @@ pub struct VkPhysicalDeviceSparseProperties {
     /// was populated with 0; writes to non-resident regions will be discarded.
     pub residency_non_resident_strict: VkBool32,
 }
+
+impl Default for VkPhysicalDeviceSparseProperties {
+    fn default() -> Self {
+        VkPhysicalDeviceSparseProperties {
+            residency_standard_2d_block_shape: 0,
+            residency_standard_2d_multisample_block_shape: 0,
+            residency_standard_3d_block_shape: 0,
+            residency_aligned_mip_size: 0,
+            residency_non_resident_strict: 0,
+        }
+    }
+}

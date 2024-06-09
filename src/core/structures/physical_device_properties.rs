@@ -68,3 +68,19 @@ pub struct VkPhysicalDeviceProperties {
     /// various sparse related properties of the physical device.
     pub sparse_properties: VkPhysicalDeviceSparseProperties,
 }
+
+impl Default for VkPhysicalDeviceProperties {
+    fn default() -> Self {
+        VkPhysicalDeviceProperties {
+            api_version: 0,
+            driver_version: 0,
+            vendor_id: 0,
+            device_id: 0,
+            device_type: VkPhysicalDeviceType::Other,
+            device_name: [0; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE],
+            pipeline_cache_uuid: [0; VK_UUID_SIZE],
+            limits: VkPhysicalDeviceLimits::default(),
+            sparse_properties: VkPhysicalDeviceSparseProperties::default(),
+        }
+    }
+}
