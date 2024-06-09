@@ -21,7 +21,7 @@ use crate::ext_debug_utils;
 ///  - [`VkResult::VkErrorOutOfHostMemory`]
 ///  - [`VkResult::VkErrorOutOfDeviceMemory`]
 ///
-///  Provided by [`ext_debug_utils`]
+/// Provided by [`ext_debug_utils`]
 pub type VkSetDebugUtilsObjectNameEXT = extern "system" fn(
     device: VkDevice,
     name_info: *const VkDebugUtilsObjectNameInfoEXT,

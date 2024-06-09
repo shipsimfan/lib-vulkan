@@ -82,7 +82,7 @@ pub enum VkColorSpaceKHR {
     /// [`VkColorSpaceKHR::AdobeRGBNonlinearEXT`] specifies support for the AdobeRGB color space to
     /// be displayed using the Gamma 2.2 EOTF.
     ///
-    ///  Provided by [`swapchain_colorspace`]
+    /// Provided by [`swapchain_colorspace`]
     AdobeRGBNonlinearEXT = 1000104012,
 
     /// [`VkColorSpaceKHR::PassThroughEXT`] specifies that color components are used “as is”. This
