@@ -1,9 +1,11 @@
 mod debug_utils_label;
 mod debug_utils_messenger_callback_data;
+mod debug_utils_messenger_create_info;
 mod debug_utils_object_name_info;
 mod debug_utils_object_tag_info;
 
 pub use debug_utils_label::VkDebugUtilsLabelEXT;
 pub use debug_utils_messenger_callback_data::VkDebugUtilsMessengerCallbackDataEXT;
+pub use debug_utils_messenger_create_info::VkDebugUtilsMessengerCreateInfoEXT;
 pub use debug_utils_object_name_info::VkDebugUtilsObjectNameInfoEXT;
 pub use debug_utils_object_tag_info::VkDebugUtilsObjectTagInfoEXT;

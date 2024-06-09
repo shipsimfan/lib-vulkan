@@ -9,7 +9,7 @@ use std::{
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{ext_debug_utils, VkDebugUtilsMessageTypeFlagsEXT};
+use crate::{ext_debug_utils, VkCommandBuffer, VkDebugUtilsMessageTypeFlagsEXT};
 
 /// Structure specifying parameters returned to the callback
 ///

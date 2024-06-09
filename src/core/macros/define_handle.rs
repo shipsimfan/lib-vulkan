@@ -1,6 +1,6 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{vk_define_handle, VK_VERSION_1_0};
+use crate::{vk_define_handle, VkDevice, VK_VERSION_1_0};
 
 /// Decleare a dispatchable object handle
 ///

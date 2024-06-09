@@ -6,7 +6,10 @@ use std::ffi::c_void;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{ext_debug_utils, VkDebugUtilsMessageTypeFlagBitsEXT, VkDebugUtilsMessengerEXT};
+use crate::{
+    ext_debug_utils, VkDebugUtilsMessageTypeFlagBitsEXT, VkDebugUtilsMessengerEXT, VK_FALSE,
+    VK_TRUE,
+};
 
 /// Application-defined debug messenger callback function
 ///
@@ -18,6 +21,11 @@ use crate::{ext_debug_utils, VkDebugUtilsMessageTypeFlagBitsEXT, VkDebugUtilsMes
 ///  - `callback_data` contains all the callback related data in the
 ///    [`VkDebugUtilsMessengerCallbackDataEXT`] structure.
 ///  - `user_data` is the user data provided when the [`VkDebugUtilsMessengerEXT`] was created.
+///
+/// # Description
+/// The callback returns a [`VkBool32`], which is interpreted in a layer-specified manner. The
+/// application should always return [`VK_FALSE`]. The [`VK_TRUE`] value is reserved for use in
+/// layer development.
 ///
 /// Provided by [`ext_debug_utils`]
 pub type VkDebugUtilsMessengerCallbackEXT = extern "system" fn(
