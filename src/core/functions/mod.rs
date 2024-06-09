@@ -5,6 +5,7 @@ mod enumerate_instance_layer_properties;
 mod enumerate_instance_version;
 mod enumerate_physical_devices;
 mod get_instance_proc_addr;
+mod get_physical_device_features;
 mod get_physical_device_properties;
 
 pub use create_instance::{VkCreateInstance, VK_CREATE_INSTANCE};
@@ -19,6 +20,9 @@ pub use enumerate_instance_version::{VkEnumerateInstanceVersion, VK_ENUMERATE_IN
 pub use enumerate_physical_devices::{VkEnumeratePhysicalDevices, VK_ENUMERATE_PHYSICAL_DEVICES};
 pub use get_instance_proc_addr::{
     vkGetInstanceProcAddr, VkGetInstanceProcAddr, VK_GET_INSTANCE_PROC_ADDR,
+};
+pub use get_physical_device_features::{
+    VkGetPhysicalDeviceFeatures, VK_GET_PHYSICAL_DEVICE_FEATURES,
 };
 pub use get_physical_device_properties::{
     VkGetPhysicalDeviceProperties, VK_GET_PHYSICAL_DEVICE_PROPERTIES,
