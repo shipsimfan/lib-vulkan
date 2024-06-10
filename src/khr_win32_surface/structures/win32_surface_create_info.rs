@@ -13,7 +13,7 @@ use crate::khr_win32_surface;
 /// Provided by [`khr_win32_surface`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct VkWin32SurfceCreateInfoKHR {
+pub struct VkWin32SurfaceCreateInfoKHR {
     /// `r#type` is a [`VkStructureType`] value identifying this structure.
     pub r#type: VkStructureType,
 
@@ -30,9 +30,9 @@ pub struct VkWin32SurfceCreateInfoKHR {
     pub hwnd: HWND,
 }
 
-impl Default for VkWin32SurfceCreateInfoKHR {
+impl Default for VkWin32SurfaceCreateInfoKHR {
     fn default() -> Self {
-        VkWin32SurfceCreateInfoKHR {
+        VkWin32SurfaceCreateInfoKHR {
             r#type: VkStructureType::Win32SurfaceCreateInfoKHR,
             next: null(),
             flags: 0,
