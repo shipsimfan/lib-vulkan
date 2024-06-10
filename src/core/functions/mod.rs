@@ -7,6 +7,7 @@ mod enumerate_physical_devices;
 mod get_instance_proc_addr;
 mod get_physical_device_features;
 mod get_physical_device_properties;
+mod get_physical_device_queue_family_properties;
 
 pub use create_instance::{VkCreateInstance, VK_CREATE_INSTANCE};
 pub use destroy_instance::{VkDestroyInstance, VK_DESTROY_INSTANCE};
@@ -26,4 +27,7 @@ pub use get_physical_device_features::{
 };
 pub use get_physical_device_properties::{
     VkGetPhysicalDeviceProperties, VK_GET_PHYSICAL_DEVICE_PROPERTIES,
+};
+pub use get_physical_device_queue_family_properties::{
+    VkGetPhysicalDeviceQueueFamilyProperties, VK_GET_PHYSICAL_DEVICE_QUEUE_FAMILY_PROPERTIES,
 };

@@ -22,3 +22,4 @@ pub use physical_device_features::VkPhysicalDeviceFeatures;
 pub use physical_device_limits::VkPhysicalDeviceLimits;
 pub use physical_device_properties::VkPhysicalDeviceProperties;
 pub use physical_device_sparse_properties::VkPhysicalDeviceSparseProperties;
+pub use queue_family_properties::VkQueueFamilyProperties;
