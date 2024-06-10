@@ -7,7 +7,9 @@
 use crate::{khr_surface, khr_win32_surface, VkSurfaceKHR};
 
 mod constants;
+mod structures;
 mod types;
 
 pub use constants::*;
+pub use structures::*;
 pub use types::*;
