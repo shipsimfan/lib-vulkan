@@ -1,3 +1,4 @@
+mod create_device;
 mod create_instance;
 mod destroy_instance;
 mod enumerate_instance_extensions_properties;
@@ -9,6 +10,7 @@ mod get_physical_device_features;
 mod get_physical_device_properties;
 mod get_physical_device_queue_family_properties;
 
+pub use create_device::{VkCreateDevice, VK_CREATE_DEVICE};
 pub use create_instance::{VkCreateInstance, VK_CREATE_INSTANCE};
 pub use destroy_instance::{VkDestroyInstance, VK_DESTROY_INSTANCE};
 pub use enumerate_instance_extensions_properties::{
