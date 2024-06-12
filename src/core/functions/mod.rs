@@ -2,6 +2,7 @@ mod create_device;
 mod create_instance;
 mod destroy_device;
 mod destroy_instance;
+mod device_wait_idle;
 mod enumerate_instance_extensions_properties;
 mod enumerate_instance_layer_properties;
 mod enumerate_instance_version;
@@ -15,6 +16,7 @@ pub use create_device::{VkCreateDevice, VK_CREATE_DEVICE};
 pub use create_instance::{VkCreateInstance, VK_CREATE_INSTANCE};
 pub use destroy_device::{VkDestroyDevice, VK_DESTROY_DEVICE};
 pub use destroy_instance::{VkDestroyInstance, VK_DESTROY_INSTANCE};
+pub use device_wait_idle::{VkDeviceWaitIdle, VK_DEVICE_WAIT_IDLE};
 pub use enumerate_instance_extensions_properties::{
     VkEnumerateInstanceExtensionProperties, VK_ENUMERATE_INSTANCE_EXTENSION_PROPERTIES,
 };
