@@ -27,7 +27,7 @@ use std::ptr::{null, null_mut};
 /// The returned function pointer is of type [`VkVoidFunction`], and must be cast to the type of
 /// the command being queried before use.
 ///
-/// | instance                          | name                                                           | return value |
+/// | `instance`                        | `name`                                                         | return value |
 /// |-----------------------------------|----------------------------------------------------------------|--------------|
 /// | *                                 | [`null`]                                                       | undefined    |
 /// | invalid non-[`null_mut`] instance | *                                                              | undefined    |
