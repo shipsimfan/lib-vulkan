@@ -8,6 +8,7 @@ mod enumerate_instance_layer_properties;
 mod enumerate_instance_version;
 mod enumerate_physical_devices;
 mod get_device_proc_addr;
+mod get_device_queue;
 mod get_instance_proc_addr;
 mod get_physical_device_features;
 mod get_physical_device_properties;
@@ -27,6 +28,7 @@ pub use enumerate_instance_layer_properties::{
 pub use enumerate_instance_version::{VkEnumerateInstanceVersion, VK_ENUMERATE_INSTANCE_VERSION};
 pub use enumerate_physical_devices::{VkEnumeratePhysicalDevices, VK_ENUMERATE_PHYSICAL_DEVICES};
 pub use get_device_proc_addr::{VkGetDeviceProcAddr, VK_GET_DEVICE_PROC_ADDR};
+pub use get_device_queue::{VkGetDeviceQueue, VK_GET_DEVICE_QUEUE};
 pub use get_instance_proc_addr::{
     vkGetInstanceProcAddr, VkGetInstanceProcAddr, VK_GET_INSTANCE_PROC_ADDR,
 };
