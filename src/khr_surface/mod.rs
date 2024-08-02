@@ -9,7 +9,7 @@
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::khr_surface;
+use crate::{khr_surface, khr_swapchain};
 
 mod constants;
 mod enumerations;
