@@ -17,6 +17,7 @@ mod queue;
 mod queue_flags;
 mod reallocation_function;
 mod sample_count_flags;
+mod semaphore;
 mod void_function;
 
 pub use allocation_function::VkAllocationFunction;
@@ -38,4 +39,5 @@ pub use queue::VkQueue;
 pub use queue_flags::VkQueueFlags;
 pub use reallocation_function::VkReallocationFunction;
 pub use sample_count_flags::VkSampleCountFlags;
+pub use semaphore::VkSemaphore;
 pub use void_function::VkVoidFunction;

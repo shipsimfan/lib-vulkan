@@ -8,6 +8,7 @@ mod physical_device_type;
 mod queue_flag_bits;
 mod result;
 mod sample_count_flag_bits;
+mod sharing_mode;
 mod structure_type;
 mod system_allocation_scope;
 
@@ -21,5 +22,6 @@ pub use physical_device_type::VkPhysicalDeviceType;
 pub use queue_flag_bits::VkQueueFlagBits;
 pub use result::VkResult;
 pub use sample_count_flag_bits::VkSampleCountFlagBits;
+pub use sharing_mode::VkSharingMode;
 pub use structure_type::VkStructureType;
 pub use system_allocation_scope::VkSystemAllocationScope;
