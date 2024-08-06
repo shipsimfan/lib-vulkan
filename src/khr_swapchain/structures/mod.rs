@@ -1,5 +1,16 @@
+mod acquire_next_image_info;
+mod bind_image_memory_swapchain_info;
+mod device_group_present_capabilities;
+mod device_group_present_info;
+mod device_group_swapchain_create_info;
+mod image_swapchain_create_info;
 mod present_info;
 mod swapchain_create_info;
 
+pub use acquire_next_image_info::VkAcquireNextImageInfoKHR;
+pub use bind_image_memory_swapchain_info::VkBindImageMemorySwapchainInfoKHR;
+pub use device_group_present_capabilities::VkDeviceGroupPresentCapabilitiesKHR;
+pub use device_group_present_info::VkDeviceGroupPresentInfoKHR;
+pub use device_group_swapchain_create_info::VkDeviceGroupSwapchainCreateInfoKHR;
 pub use present_info::VkPresentInfoKHR;
 pub use swapchain_create_info::VkSwapchainCreateInfoKHR;
