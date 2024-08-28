@@ -27,7 +27,7 @@ use crate::khr_surface;
 pub type VkGetPhysicalDeviceSurfaceCapabilitiesKHR = extern "system" fn(
     physical_device: VkPhysicalDevice,
     surface: VkSurfaceKHR,
-    surface_capabilities: VkSurfaceCapabilitiesKHR,
+    surface_capabilities: *mut VkSurfaceCapabilitiesKHR,
 ) -> VkResult;
 
 /// The name of [`VkGetPhysicalDeviceSurfaceCapabilitiesKHR`]

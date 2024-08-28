@@ -60,5 +60,5 @@ pub type VkGetPhysicalDeviceSurfaceFormatsKHR = extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkGetPhysicalDeviceSurfaceFormatsKHR`]
-pub const VK_GET_PHYSICAL_DEVICE_SURFACE_FORMAT_KHR: &CStr =
+pub const VK_GET_PHYSICAL_DEVICE_SURFACE_FORMATS_KHR: &CStr =
     unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDeviceSurfaceFormatsKHR\0") };

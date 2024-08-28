@@ -9,7 +9,7 @@ pub use get_physical_device_surface_capabilities::{
     VkGetPhysicalDeviceSurfaceCapabilitiesKHR, VK_GET_PHYSICAL_DEVICE_SURFACE_CAPABILITIES_KHR,
 };
 pub use get_physical_device_surface_formats::{
-    VkGetPhysicalDeviceSurfaceFormatsKHR, VK_GET_PHYSICAL_DEVICE_SURFACE_FORMAT_KHR,
+    VkGetPhysicalDeviceSurfaceFormatsKHR, VK_GET_PHYSICAL_DEVICE_SURFACE_FORMATS_KHR,
 };
 pub use get_physical_device_surface_present_modes::{
     VkGetPhysicalDeviceSurfacePresentModesKHR, VK_GET_PHYSICAL_DEVICE_SURFACE_PRESENT_MODES_KHR,
