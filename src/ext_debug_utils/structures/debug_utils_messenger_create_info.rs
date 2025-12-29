@@ -1,7 +1,7 @@
 use crate::{
-    VkBool32, VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT,
+    VK_FALSE, VkBool32, VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT,
     VkDebugUtilsMessengerCallbackDataEXT, VkDebugUtilsMessengerCallbackEXT,
-    VkDebugUtilsMessengerCreateFlagsEXT, VkStructureType, VK_FALSE,
+    VkDebugUtilsMessengerCreateFlagsEXT, VkStructureType,
 };
 use std::{
     ffi::c_void,
@@ -11,8 +11,8 @@ use std::{
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    ext_debug_utils, VkDebugUtilsMessageSeverityFlagBitsEXT, VkDebugUtilsMessageTypeFlagBitsEXT,
-    VkDebugUtilsMessengerEXT,
+    VkDebugUtilsMessageSeverityFlagBitsEXT, VkDebugUtilsMessageTypeFlagBitsEXT,
+    VkDebugUtilsMessengerEXT, ext_debug_utils,
 };
 
 /// Structure specifying parameters of a newly created debug messenger
@@ -45,7 +45,7 @@ use crate::{
 ///
 /// Provided by [`ext_debug_utils`]
 #[repr(C)]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone)]
 pub struct VkDebugUtilsMessengerCreateInfoEXT {
     /// `r#type` is a [`VkStructureType`] value identifying this structure.
     pub r#type: VkStructureType,

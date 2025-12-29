@@ -19,3 +19,8 @@ pub const VK_VERSION_1_2: u32 = vk_make_api_version!(0, 1, 2, 0);
 ///
 /// Provided by [`VK_VERSION_1_3`]
 pub const VK_VERSION_1_3: u32 = vk_make_api_version!(0, 1, 3, 0);
+
+/// [`VK_VERSION_1_4`] returns the API version number for Vulkan 1.4.0.
+///
+/// Provided by [`VK_VERSION_1_4`]
+pub const VK_VERSION_1_4: u32 = vk_make_api_version!(0, 1, 4, 0);

@@ -12,7 +12,7 @@ use crate::VK_VERSION_1_0;
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone)]
 pub struct VkAllocationCallbacks {
     /// `user_data` is a value to be interpreted by the implementation of the callbacks. When any
     /// of the callbacks in [`VkAllocationCallbacks`] are called, the Vulkan implementation will

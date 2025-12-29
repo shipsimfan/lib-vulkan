@@ -1,5 +1,5 @@
 use crate::{VkInstance, VkVoidFunction};
-use std::ffi::{c_char, CStr};
+use std::ffi::{CStr, c_char};
 
 // rustdoc imports
 #[allow(unused_imports)]
@@ -47,8 +47,9 @@ pub type VkGetInstanceProcAddr =
 pub const VK_GET_INSTANCE_PROC_ADDR: &CStr =
     unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetInstanceProcAddr\0") };
 
-#[link(name = "vulkan-1")]
-extern "system" {
+#[cfg_attr(target_os = "windows", link(name = "vulkan-1"))]
+#[cfg_attr(target_os = "linux", link(name = "vulkan"))]
+unsafe extern "system" {
     /// Linked version of [`VkGetInstanceProcAddr`]
     pub fn vkGetInstanceProcAddr(
         instance: VkInstance,
