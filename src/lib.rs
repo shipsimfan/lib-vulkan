@@ -5,18 +5,30 @@
 #![deny(rustdoc::unescaped_backticks)]
 #![deny(rustdoc::redundant_explicit_links)]
 #![warn(rustdoc::broken_intra_doc_links)]
+//
+// Constant impl features
+#![feature(const_clone)]
+#![feature(const_cmp)]
+#![feature(const_convert)]
+#![feature(const_default)]
+#![feature(const_trait_impl)]
+#![feature(const_ops)]
+//
+// Other features
 #![feature(c_size_t)]
 
+use macros::flags;
+
+#[cfg(feature = "VK_EXT_debug_utils")]
 pub mod ext_debug_utils;
+#[cfg(feature = "VK_KHR_surface")]
 pub mod khr_surface;
+#[cfg(feature = "VK_KHR_swapchain")]
 pub mod khr_swapchain;
+#[cfg(feature = "VK_KHR_win32_surface")]
 pub mod khr_win32_surface;
 
 mod core;
 mod macros;
 
 pub use core::*;
-
-pub use ext_debug_utils::*;
-pub use khr_swapchain::*;
-pub use khr_win32_surface::*;

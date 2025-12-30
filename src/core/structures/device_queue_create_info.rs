@@ -3,7 +3,7 @@ use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VkGetPhysicalDeviceQueueFamilyProperties, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkGetPhysicalDeviceQueueFamilyProperties};
 
 /// Structure specifying parameters of a newly created device queue
 ///
@@ -40,7 +40,7 @@ impl Default for VkDeviceQueueCreateInfo {
         VkDeviceQueueCreateInfo {
             r#type: VkStructureType::DeviceQueueCreateInfo,
             next: null(),
-            flags: 0,
+            flags: VkDeviceQueueCreateFlags::new(),
             queue_family_index: 0,
             queue_count: 0,
             queue_priorities: null(),

@@ -1,9 +1,15 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{
-    ext_debug_utils, khr_surface, khr_swapchain, VK_VERSION_1_0, VK_VERSION_1_1, VK_VERSION_1_2,
-    VK_VERSION_1_3,
-};
+#[cfg(feature = "VK_EXT_debug_utils")]
+use crate::ext_debug_utils;
+#[allow(unused_imports)]
+#[cfg(feature = "VK_KHR_surface")]
+use crate::khr_surface;
+#[allow(unused_imports)]
+#[cfg(feature = "VK_KHR_swapchain")]
+use crate::khr_swapchain;
+#[allow(unused_imports)]
+use crate::{VK_VERSION_1_0, VK_VERSION_1_1, VK_VERSION_1_2, VK_VERSION_1_3};
 
 /// Vulkan structure types
 ///

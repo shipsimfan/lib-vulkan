@@ -6,7 +6,7 @@ use std::{
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VkCreateInstance, VkInstanceCreateFlagBits, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkCreateInstance, VkInstanceCreateFlagBits};
 
 /// Structure specifying parameters of a newly created instance
 ///
@@ -62,7 +62,7 @@ impl Default for VkInstanceCreateInfo {
         VkInstanceCreateInfo {
             r#type: VkStructureType::InstanceCreateInfo,
             next: null(),
-            flags: 0,
+            flags: VkInstanceCreateFlags::new(),
             application_info: null(),
             enabled_layer_count: 0,
             enabled_layer_names: null(),

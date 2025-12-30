@@ -64,7 +64,7 @@ pub struct VkQueueFamilyProperties {
 impl Default for VkQueueFamilyProperties {
     fn default() -> Self {
         VkQueueFamilyProperties {
-            queue_flags: 0,
+            queue_flags: VkQueueFlags::new(),
             queue_count: 0,
             timestamp_valid_bits: 0,
             min_image_transfer_granularity: VkExtent3D::default(),

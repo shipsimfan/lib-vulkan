@@ -7,3 +7,9 @@ edition = "2024"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/shipsimfan/lib-vulkan"
 publish = false
+
+[features]
+vk_version_1_1 = []
+vk_version_1_2 = ["vk_version_1_1"]
+vk_version_1_3 = ["vk_version_1_2"]
+vk_version_1_4 = ["vk_version_1_3"]

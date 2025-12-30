@@ -2,6 +2,14 @@
 #[allow(unused_imports)]
 use crate::VK_VERSION_1_0;
 
+mod clone;
+mod contains;
+mod display;
+mod eq;
+mod into;
+mod new;
+mod set;
+
 /// Vulkan bitmasks
 ///
 /// # Description
@@ -25,4 +33,6 @@ use crate::VK_VERSION_1_0;
 /// Only the low-order 31 bits (bit positions zero through 30) are available for use as flag bits.
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkFlags = u32;
+#[repr(C)]
+#[derive(Debug)]
+pub struct VkFlags(pub u32);
