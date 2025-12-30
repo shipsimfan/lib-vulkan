@@ -34,4 +34,4 @@ pub type VkSubmitDebugUtilsMessageEXT = extern "system" fn(
 
 /// The name of [`VkSubmitDebugUtilsMessageEXT`]
 pub const VK_SUBMIT_DEBUG_UTILS_MESSAGE_EXT: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkSubmitDebugUtilsMessageEXT\0") };
+    c"vkSubmitDebugUtilsMessageEXT";

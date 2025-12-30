@@ -1,4 +1,4 @@
-use crate::{VkAllocationCallbacks, VkInstance, VkSurfaceKHR};
+use crate::{VkAllocationCallbacks, VkInstance, khr_surface::VkSurfaceKHR};
 use std::ffi::CStr;
 
 // rustdoc imports
@@ -26,5 +26,4 @@ pub type VkDestroySurfaceKHR = extern "system" fn(
 );
 
 /// The name of [`VkDestroySurfaceKHR`]
-pub const VK_DESTROY_SURFACE_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkDestroySurfaceKHR\0") };
+pub const VK_DESTROY_SURFACE_KHR: &CStr = c"vkDestroySurfaceKHR";

@@ -91,4 +91,4 @@ pub type VkQueuePresentKHR =
 
 /// The name of [`VkQueuePresentKHR`]
 pub const VK_QUEUE_PRESENT_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkQueuePresentKHR\0") };
+    c"vkQueuePresentKHR";

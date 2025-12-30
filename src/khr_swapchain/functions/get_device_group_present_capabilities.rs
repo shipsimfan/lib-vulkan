@@ -22,4 +22,4 @@ pub type VkGetDeviceGroupPresentCapabilitiesKHR = extern "system" fn(
 
 /// The name of [`VkAcquireNextImage2KHR`]
 pub const VK_GET_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetDeviceGroupPresentCapabilitiesKHR\0") };
+    c"vkGetDeviceGroupPresentCapabilitiesKHR";

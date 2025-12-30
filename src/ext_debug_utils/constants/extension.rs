@@ -8,7 +8,7 @@ use crate::ext_debug_utils;
 ///
 /// Provided by [`ext_debug_utils`]
 pub const VK_EXT_DEBUG_UTILS_EXTENSION_NAME: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"VK_EXT_debug_utils\0") };
+    c"VK_EXT_debug_utils";
 
 /// The version of the [`ext_debug_utils`] extension provided by these bindings
 ///

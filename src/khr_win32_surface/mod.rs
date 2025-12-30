@@ -4,7 +4,10 @@
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_surface, khr_win32_surface, VkSurfaceKHR};
+use crate::{
+    khr_surface::{self, VkSurfaceKHR},
+    khr_win32_surface,
+};
 
 mod constants;
 mod functions;

@@ -1,9 +1,9 @@
-use crate::{VkDevice, VkDeviceGroupPresentModeFlagsKHR, VkResult, VkSurfaceKHR};
+use crate::{VkDevice, VkDeviceGroupPresentModeFlagsKHR, VkResult, khr_surface::VkSurfaceKHR};
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_swapchain, VkGetDeviceGroupPresentCapabilitiesKHR, VK_VERSION_1_1};
+use crate::{VK_VERSION_1_1, VkGetDeviceGroupPresentCapabilitiesKHR, khr_swapchain};
 
 /// Query present capabilities for a surface
 ///
@@ -28,4 +28,4 @@ pub type VkGetDeviceGroupSurfacePresentModesKHR = extern "system" fn(
 
 /// The name of [`VkAcquireNextImage2KHR`]
 pub const VK_GET_DEVICE_GROUP_SURFACE_PRESENT_MODES_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetDeviceGroupSurfacePresentModesKHR\0") };
+    c"vkGetDeviceGroupSurfacePresentModesKHR";

@@ -19,4 +19,4 @@ pub type VkQueueEndDebugUtilsLabelEXT = extern "system" fn(queue: VkQueue);
 
 /// The name of [`VkQueueEndDebugUtilsLabelEXT`]
 pub const VK_QUEUE_END_DEBUG_UTILS_LABEL_EXT: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkQueueEndDebugUtilsLabelEXT\0") };
+    c"vkQueueEndDebugUtilsLabelEXT";

@@ -1,9 +1,9 @@
-use crate::{VkPhysicalDevice, VkRect2D, VkResult, VkSurfaceKHR};
+use crate::{VkPhysicalDevice, VkRect2D, VkResult, khr_surface::VkSurfaceKHR};
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_swapchain, VK_VERSION_1_1};
+use crate::{VK_VERSION_1_1, khr_swapchain};
 #[allow(unused_imports)]
 use std::ptr::null_mut;
 
@@ -41,4 +41,4 @@ pub type VkGetPhysicalDevicePresentRectanglesKHR = extern "system" fn(
 
 /// The name of [`VkGetPhysicalDevicePresentRectanglesKHR`]
 pub const VK_GET_PHYSICAL_DEVICE_PRESENT_RECTANGLES_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDevicePresentRectanglesKHR\0") };
+    c"vkGetPhysicalDevicePresentRectanglesKHR";

@@ -45,5 +45,4 @@ pub type VkEnumerateInstanceLayerProperties =
     extern "system" fn(property_count: *mut u32, properties: *mut VkLayerProperties) -> VkResult;
 
 /// The name of [`VkEnumerateInstanceLayerProperties`]
-pub const VK_ENUMERATE_INSTANCE_LAYER_PROPERTIES: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkEnumerateInstanceLayerProperties\0") };
+pub const VK_ENUMERATE_INSTANCE_LAYER_PROPERTIES: &CStr = c"vkEnumerateInstanceLayerProperties";

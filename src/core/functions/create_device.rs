@@ -55,4 +55,4 @@ pub type VkCreateDevice = extern "system" fn(
 
 /// The name of [`VkCreateDevice`]
 pub const VK_CREATE_DEVICE: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkCreateDevice\0") };
+    c"vkCreateDevice";

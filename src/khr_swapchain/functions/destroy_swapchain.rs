@@ -3,7 +3,7 @@ use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_swapchain, VkSurfaceKHR};
+use crate::{khr_surface::VkSurfaceKHR, khr_swapchain};
 
 /// Destroy a swapchain object
 ///
@@ -40,5 +40,4 @@ pub type VkDestroySwapchainKHR = extern "system" fn(
 );
 
 /// The name of [`VkDestroySwapchainKHR`]
-pub const VK_DESTROY_SWAPCHAIN_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkDestroySwapchainKHR\0") };
+pub const VK_DESTROY_SWAPCHAIN_KHR: &CStr = c"vkDestroySwapchainKHR";

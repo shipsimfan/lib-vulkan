@@ -27,4 +27,4 @@ pub type VkSetDebugUtilsObjectTagEXT =
 
 /// The name of [`VkSetDebugUtilsObjectTagEXT`]
 pub const VK_SET_DEBUG_UTILS_OBJECT_TAG_EXT: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkSetDebugUtilsObjectTagEXT\0") };
+    c"vkSetDebugUtilsObjectTagEXT";

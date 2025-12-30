@@ -2,7 +2,7 @@ use crate::VkFlags;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_surface, VkSurfaceTransformFlagBitsKHR};
+use crate::khr_surface::{self, VkSurfaceTransformFlagBitsKHR};
 
 /// Bitmask of [`VkSurfaceTransformFlagBitsKHR`]
 ///

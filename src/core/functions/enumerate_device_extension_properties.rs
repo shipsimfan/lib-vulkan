@@ -58,4 +58,4 @@ pub type VkEnumerateDeviceExtensionProperties = extern "system" fn(
 
 /// The name of [`VkEnumerateInstanceExtensionProperties`]
 pub const VK_ENUMERATE_DEVICE_EXTENSION_PROPERTIES: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkEnumerateDeviceExtensionProperties\0") };
+    c"vkEnumerateDeviceExtensionProperties";

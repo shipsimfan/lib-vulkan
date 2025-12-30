@@ -1,4 +1,7 @@
-use crate::{VkPhysicalDevice, VkResult, VkSurfaceCapabilitiesKHR, VkSurfaceKHR};
+use crate::{
+    VkPhysicalDevice, VkResult,
+    khr_surface::{VkSurfaceCapabilitiesKHR, VkSurfaceKHR},
+};
 use std::ffi::CStr;
 
 // rustdoc imports
@@ -32,4 +35,4 @@ pub type VkGetPhysicalDeviceSurfaceCapabilitiesKHR = extern "system" fn(
 
 /// The name of [`VkGetPhysicalDeviceSurfaceCapabilitiesKHR`]
 pub const VK_GET_PHYSICAL_DEVICE_SURFACE_CAPABILITIES_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDeviceSurfaceCapabilitiesKHR\0") };
+    c"vkGetPhysicalDeviceSurfaceCapabilitiesKHR";

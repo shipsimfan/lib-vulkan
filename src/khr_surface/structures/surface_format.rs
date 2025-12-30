@@ -1,4 +1,4 @@
-use crate::{VkColorSpaceKHR, VkFormat};
+use crate::{VkFormat, khr_surface::VkColorSpaceKHR};
 
 // rustdoc imports
 #[allow(unused_imports)]

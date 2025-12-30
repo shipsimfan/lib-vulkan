@@ -16,7 +16,7 @@ mod core;
 mod macros;
 
 pub use core::*;
+
 pub use ext_debug_utils::*;
-pub use khr_surface::*;
 pub use khr_swapchain::*;
 pub use khr_win32_surface::*;

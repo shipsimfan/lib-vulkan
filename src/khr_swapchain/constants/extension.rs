@@ -8,7 +8,7 @@ use crate::khr_swapchain;
 ///
 /// Provided by [`khr_swapchain`]
 pub const VK_KHR_SWAPCHAIN_EXTENSION_NAME: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"VK_KHR_swapchain\0") };
+    c"VK_KHR_swapchain";
 
 /// The version of the [`khr_swapchain`] extension provided by these bindings
 ///

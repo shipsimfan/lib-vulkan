@@ -29,4 +29,4 @@ pub type VkSetDebugUtilsObjectNameEXT = extern "system" fn(
 
 /// The name of [`VkSetDebugUtilsObjectNameEXT`]
 pub const VK_SET_DEBUG_UTILS_OBJECT_NAME_EXT: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkSetDebugUtilsObjectNameEXT\0") };
+    c"vkSetDebugUtilsObjectNameEXT";

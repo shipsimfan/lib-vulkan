@@ -28,4 +28,4 @@ pub type VkDestroyDebugUtilsMessengerEXT = extern "system" fn(
 
 /// The name of [`VkDestroyDebugUtilsMessengerEXT`]
 pub const VK_DESTROY_DEBUG_UTILS_MESSENGER_EXT: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkDestroyDebugUtilsMessengerEXT\0") };
+    c"vkDestroyDebugUtilsMessengerEXT";

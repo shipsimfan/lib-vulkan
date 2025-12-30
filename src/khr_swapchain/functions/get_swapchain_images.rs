@@ -37,4 +37,4 @@ pub type VkGetSwapchainImagesKHR = extern "system" fn(
 
 /// The name of [`VkGetSwapchainImagesKHR`]
 pub const VK_GET_SWAPCHAIN_IMAGES_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetSwapchainImagesKHR\0") };
+    c"vkGetSwapchainImagesKHR";

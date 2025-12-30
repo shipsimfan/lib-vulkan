@@ -8,7 +8,7 @@ use crate::khr_surface;
 ///
 /// Provided by [`khr_surface`]
 pub const VK_KHR_SURFACE_EXTENSION_NAME: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"VK_KHR_surface\0") };
+    c"VK_KHR_surface";
 
 /// The version of the [`khr_surface`] extension provided by these bindings
 ///

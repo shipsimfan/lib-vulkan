@@ -1,7 +1,10 @@
 use crate::{
-    VkBool32, VkColorSpaceKHR, VkCompositeAlphaFlagsKHR, VkExtent2D, VkFormat, VkImageUsageFlags,
-    VkPresentModeKHR, VkSharingMode, VkStructureType, VkSurfaceKHR, VkSurfaceTransformFlagsKHR,
+    VkBool32, VkExtent2D, VkFormat, VkImageUsageFlags, VkSharingMode, VkStructureType,
     VkSwapchainCreateFlagsKHR, VkSwapchainKHR,
+    khr_surface::{
+        VkColorSpaceKHR, VkCompositeAlphaFlagsKHR, VkPresentModeKHR, VkSurfaceKHR,
+        VkSurfaceTransformFlagsKHR,
+    },
 };
 use std::{
     ffi::c_void,
@@ -11,9 +14,12 @@ use std::{
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    khr_swapchain, VkCompositeAlphaFlagBitsKHR, VkGetPhysicalDeviceSurfaceCapabilitiesKHR,
-    VkImageUsageFlagBits, VkSurfaceTransformFlagBitsKHR, VkSwapchainCreateFlagBitsKHR, VK_FALSE,
-    VK_NULL_HANDLE, VK_TRUE,
+    VK_FALSE, VK_NULL_HANDLE, VK_TRUE, VkImageUsageFlagBits, VkSwapchainCreateFlagBitsKHR,
+    khr_surface::{
+        VkCompositeAlphaFlagBitsKHR, VkGetPhysicalDeviceSurfaceCapabilitiesKHR,
+        VkSurfaceTransformFlagBitsKHR,
+    },
+    khr_swapchain,
 };
 
 /// Structure specifying parameters of a newly created swapchain object

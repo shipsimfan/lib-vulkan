@@ -18,4 +18,4 @@ pub type VkQueueInsertDebugUtilsLabelEXT =
 
 /// The name of [`VkQueueInsertDebugUtilsLabelEXT`]
 pub const VK_QUEUE_INSERT_DEBUG_UTILS_LABEL_EXT: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkQueueInsertDebugUtilsLabelEXT\0") };
+    c"vkQueueInsertDebugUtilsLabelEXT";

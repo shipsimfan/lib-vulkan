@@ -29,4 +29,4 @@ pub type VkAcquireNextImage2KHR = extern "system" fn(
 
 /// The name of [`VkAcquireNextImage2KHR`]
 pub const VK_ACQUIRE_NEXT_IMAGE_2_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkAcquireNextImage2KHR\0") };
+    c"vkAcquireNextImage2KHR";

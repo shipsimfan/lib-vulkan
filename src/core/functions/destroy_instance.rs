@@ -17,4 +17,4 @@ pub type VkDestroyInstance =
 
 /// The name of [`VkDestroyInstance`]
 pub const VK_DESTROY_INSTANCE: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkDestroyInstance\0") };
+    c"vkDestroyInstance";

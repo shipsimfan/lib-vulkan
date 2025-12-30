@@ -3,7 +3,7 @@ use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VkCreateInstance, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkCreateInstance};
 #[allow(unused_imports)]
 use std::ptr::null;
 
@@ -44,5 +44,4 @@ pub type VkEnumeratePhysicalDevices = extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkEnumeratePhysicalDevices`]
-pub const VK_ENUMERATE_PHYSICAL_DEVICES: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkEnumeratePhysicalDevices\0") };
+pub const VK_ENUMERATE_PHYSICAL_DEVICES: &CStr = c"vkEnumeratePhysicalDevices";

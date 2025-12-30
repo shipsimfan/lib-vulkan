@@ -1,11 +1,16 @@
 use crate::{
-    VkCompositeAlphaFlagsKHR, VkExtent2D, VkImageUsageFlags, VkSurfaceTransformFlagBitsKHR,
-    VkSurfaceTransformFlagsKHR,
+    VkExtent2D, VkImageUsageFlags,
+    khr_surface::{
+        VkCompositeAlphaFlagsKHR, VkSurfaceTransformFlagBitsKHR, VkSurfaceTransformFlagsKHR,
+    },
 };
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_surface, VkCompositeAlphaFlagBitsKHR, VkImageUsageFlagBits, VkPresentModeKHR};
+use crate::{
+    VkImageUsageFlagBits,
+    khr_surface::{self, VkCompositeAlphaFlagBitsKHR, VkPresentModeKHR},
+};
 
 /// Structure describing capabilities of a surface
 ///

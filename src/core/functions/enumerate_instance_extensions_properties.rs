@@ -1,5 +1,5 @@
 use crate::{VkExtensionProperties, VkResult};
-use std::ffi::{c_char, CStr};
+use std::ffi::{CStr, c_char};
 
 // rustdoc imports
 #[allow(unused_imports)]
@@ -39,7 +39,7 @@ use std::ptr::{null, null_mut};
 /// Implementations must not advertise any pair of extensions that cannot be enabled together due
 /// to behavioral differences, or any extension that cannot be enabled against the advertised
 /// version.
-/// 
+///
 /// # Return Codes
 /// On success, this command returns:
 ///  - [`VkResult::VkSuccess`]
@@ -59,4 +59,4 @@ pub type VkEnumerateInstanceExtensionProperties = extern "system" fn(
 
 /// The name of [`VkEnumerateInstanceExtensionProperties`]
 pub const VK_ENUMERATE_INSTANCE_EXTENSION_PROPERTIES: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkEnumerateInstanceExtensionProperties\0") };
+    c"vkEnumerateInstanceExtensionProperties";

@@ -3,7 +3,7 @@ use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VkDeviceQueueCreateInfo, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkDeviceQueueCreateInfo};
 
 /// Get a queue handle from a device
 ///
@@ -28,5 +28,4 @@ pub type VkGetDeviceQueue = extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkGetDeviceQueue`]
-pub const VK_GET_DEVICE_QUEUE: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetDeviceQueue\0") };
+pub const VK_GET_DEVICE_QUEUE: &CStr = c"vkGetDeviceQueue";

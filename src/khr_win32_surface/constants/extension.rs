@@ -8,7 +8,7 @@ use crate::khr_win32_surface;
 ///
 /// Provided by [`khr_win32_surface`]
 pub const VK_KHR_WIN32_SURFACE_EXTENSION_NAME: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"VK_KHR_win32_surface\0") };
+    c"VK_KHR_win32_surface";
 
 /// The version of the [`khr_win32_surface`] extension provided by these bindings
 ///

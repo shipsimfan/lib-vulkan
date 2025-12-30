@@ -1,9 +1,9 @@
-use crate::{VkBool32, VkPhysicalDevice, VkResult, VkSurfaceKHR};
+use crate::{VkBool32, VkPhysicalDevice, VkResult, khr_surface::VkSurfaceKHR};
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_surface, VK_FALSE, VK_TRUE};
+use crate::{VK_FALSE, VK_TRUE, khr_surface};
 
 /// Query if presentation is supported
 ///
@@ -33,4 +33,4 @@ pub type VkGetPhysicalDeviceSurfaceSupportKHR = extern "system" fn(
 
 /// The name of [`VkGetPhysicalDeviceSurfaceSupportKHR`]
 pub const VK_GET_PHYSICAL_DEVICE_SURFACE_SUPPORT_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDeviceSurfaceSupportKHR\0") };
+    c"vkGetPhysicalDeviceSurfaceSupportKHR";

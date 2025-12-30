@@ -3,7 +3,7 @@ use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_swapchain, VkSampleCountFlagBits, VkSurfaceKHR, VK_NULL_HANDLE};
+use crate::{VK_NULL_HANDLE, VkSampleCountFlagBits, khr_surface::VkSurfaceKHR, khr_swapchain};
 
 /// Create a swapchain
 ///
@@ -94,5 +94,4 @@ pub type VkCreateSwapchainKHR = extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkCreateSwapchainKHR`]
-pub const VK_CREATE_SWAPCHAIN_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkCreateSwapchainKHR\0") };
+pub const VK_CREATE_SWAPCHAIN_KHR: &CStr = c"vkCreateSwapchainKHR";

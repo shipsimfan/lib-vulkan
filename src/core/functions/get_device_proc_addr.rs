@@ -1,9 +1,9 @@
 use crate::{VkDevice, VkVoidFunction};
-use std::ffi::{c_char, CStr};
+use std::ffi::{CStr, c_char};
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VkGetInstanceProcAddr, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkGetInstanceProcAddr};
 #[allow(unused_imports)]
 use std::ptr::{null, null_mut};
 
@@ -39,5 +39,4 @@ pub type VkGetDeviceProcAddr =
     extern "system" fn(device: VkDevice, name: *const c_char) -> Option<VkVoidFunction>;
 
 /// The name of [`VkGetDeviceProcAddr`]
-pub const VK_GET_DEVICE_PROC_ADDR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetDeviceProcAddr\0") };
+pub const VK_GET_DEVICE_PROC_ADDR: &CStr = c"vkGetDeviceProcAddr";

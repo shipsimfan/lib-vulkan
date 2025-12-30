@@ -1,5 +1,6 @@
 use crate::{
-    VkAllocationCallbacks, VkInstance, VkResult, VkSurfaceKHR, VkWin32SurfaceCreateInfoKHR,
+    VkAllocationCallbacks, VkInstance, VkResult, VkWin32SurfaceCreateInfoKHR,
+    khr_surface::VkSurfaceKHR,
 };
 use std::ffi::CStr;
 
@@ -35,5 +36,4 @@ pub type VkCreateWin32SurfaceKHR = extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkCreateWin32SurfaceKHR`]
-pub const VK_CREATE_WIN32_SURFACE_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkCreateWin32SurfaceKHR\0") };
+pub const VK_CREATE_WIN32_SURFACE_KHR: &CStr = c"vkCreateWin32SurfaceKHR";

@@ -34,4 +34,4 @@ pub type VkAcquireNextImageKHR = extern "system" fn(
 
 /// The name of [`VkDestroySwapchainKHR`]
 pub const VK_ACQUIRE_NEXT_IMAGE_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkAcquireNextImageKHR\0") };
+    c"vkAcquireNextImageKHR";

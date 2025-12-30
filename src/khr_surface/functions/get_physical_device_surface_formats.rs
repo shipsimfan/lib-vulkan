@@ -1,9 +1,15 @@
-use crate::{VkPhysicalDevice, VkResult, VkSurfaceFormatKHR, VkSurfaceKHR};
+use crate::{
+    VkPhysicalDevice, VkResult,
+    khr_surface::{VkSurfaceFormatKHR, VkSurfaceKHR},
+};
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_surface, VkColorSpaceKHR, VkFormat, VK_NULL_HANDLE};
+use crate::{
+    VK_NULL_HANDLE, VkFormat,
+    khr_surface::{self, VkColorSpaceKHR},
+};
 #[allow(unused_imports)]
 use std::ptr::null_mut;
 
@@ -61,4 +67,4 @@ pub type VkGetPhysicalDeviceSurfaceFormatsKHR = extern "system" fn(
 
 /// The name of [`VkGetPhysicalDeviceSurfaceFormatsKHR`]
 pub const VK_GET_PHYSICAL_DEVICE_SURFACE_FORMATS_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDeviceSurfaceFormatsKHR\0") };
+    c"vkGetPhysicalDeviceSurfaceFormatsKHR";

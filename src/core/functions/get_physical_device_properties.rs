@@ -19,5 +19,4 @@ pub type VkGetPhysicalDeviceProperties = extern "system" fn(
 );
 
 /// The name of [`VkGetPhysicalDeviceProperties`]
-pub const VK_GET_PHYSICAL_DEVICE_PROPERTIES: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDeviceProperties\0") };
+pub const VK_GET_PHYSICAL_DEVICE_PROPERTIES: &CStr = c"vkGetPhysicalDeviceProperties";

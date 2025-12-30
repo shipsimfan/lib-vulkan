@@ -34,4 +34,4 @@ pub type VkGetPhysicalDeviceQueueFamilyProperties = extern "system" fn(
 
 /// The name of [`VkGetPhysicalDeviceQueueFamilyProperties`]
 pub const VK_GET_PHYSICAL_DEVICE_QUEUE_FAMILY_PROPERTIES: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDeviceQueueFamilyProperties\0") };
+    c"vkGetPhysicalDeviceQueueFamilyProperties";

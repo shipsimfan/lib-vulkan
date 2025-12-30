@@ -19,5 +19,4 @@ pub type VkGetPhysicalDeviceFeatures =
     extern "system" fn(physical_device: VkPhysicalDevice, features: *mut VkPhysicalDeviceFeatures);
 
 /// The name of [`VkGetPhysicalDeviceFeatures`]
-pub const VK_GET_PHYSICAL_DEVICE_FEATURES: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDeviceFeatures\0") };
+pub const VK_GET_PHYSICAL_DEVICE_FEATURES: &CStr = c"vkGetPhysicalDeviceFeatures";

@@ -31,4 +31,4 @@ pub type VkCmdEndDebugUtilsLabelEXT =
 
 /// The name of [`VkCmdEndDebugUtilsLabelEXT`]
 pub const VK_CMD_END_DEBUG_UTILS_LABEL_EXT: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkCmdEndDebugUtilsLabelEXT\0") };
+    c"vkCmdEndDebugUtilsLabelEXT";

@@ -41,4 +41,4 @@ pub type VkCreateDebugUtilsMessengerEXT = extern "system" fn(
 
 /// The name of [`VkCreateDebugUtilsMessengerEXT`]
 pub const VK_CREATE_DEBUG_UTILS_MESSENGER_EXT: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkCreateDebugUtilsMessengerEXT\0") };
+    c"vkCreateDebugUtilsMessengerEXT";

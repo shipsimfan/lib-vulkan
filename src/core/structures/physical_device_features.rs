@@ -1,4 +1,4 @@
-use crate::{VkBool32, VK_FALSE};
+use crate::{VK_FALSE, VkBool32};
 
 // rustdoc imports
 #[allow(unused_imports)]
@@ -9,7 +9,7 @@ use crate::VK_VERSION_1_0;
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[allow(missing_docs)]
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkPhysicalDeviceFeatures {
     pub robust_buffer_access: VkBool32,
     pub full_draw_index_uint32: VkBool32,

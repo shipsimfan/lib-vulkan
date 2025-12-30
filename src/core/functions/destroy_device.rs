@@ -23,4 +23,4 @@ pub type VkDestroyDevice =
 
 /// The name of [`VkCreateInstance`]
 pub const VK_DESTROY_DEVICE: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkDestroyDevice\0") };
+    c"vkDestroyDevice";

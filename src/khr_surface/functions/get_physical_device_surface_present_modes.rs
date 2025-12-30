@@ -1,9 +1,12 @@
-use crate::{VkPhysicalDevice, VkPresentModeKHR, VkResult, VkSurfaceKHR};
+use crate::{
+    VkPhysicalDevice, VkResult,
+    khr_surface::{VkPresentModeKHR, VkSurfaceKHR},
+};
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_surface, VK_NULL_HANDLE};
+use crate::{VK_NULL_HANDLE, khr_surface};
 #[allow(unused_imports)]
 use std::ptr::null_mut;
 
@@ -53,4 +56,4 @@ pub type VkGetPhysicalDeviceSurfacePresentModesKHR = extern "system" fn(
 
 /// The name of [`VkGetPhysicalDeviceSurfacePresentModesKHR`]
 pub const VK_GET_PHYSICAL_DEVICE_SURFACE_PRESENT_MODES_KHR: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkGetPhysicalDeviceSurfacePresentModesKHR\0") };
+    c"vkGetPhysicalDeviceSurfacePresentModesKHR";

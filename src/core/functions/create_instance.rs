@@ -44,4 +44,4 @@ pub type VkCreateInstance = extern "system" fn(
 
 /// The name of [`VkCreateInstance`]
 pub const VK_CREATE_INSTANCE: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkCreateInstance\0") };
+    c"vkCreateInstance";

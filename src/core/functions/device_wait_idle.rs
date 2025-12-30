@@ -28,4 +28,4 @@ pub type VkDeviceWaitIdle = extern "system" fn(device: VkDevice) -> VkResult;
 
 /// The name of [`VkDeviceWaitIdle`]
 pub const VK_DEVICE_WAIT_IDLE: &CStr =
-    unsafe { CStr::from_bytes_with_nul_unchecked(b"vkDeviceWaitIdle\0") };
+    c"vkDeviceWaitIdle";
