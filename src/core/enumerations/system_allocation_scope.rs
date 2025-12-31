@@ -1,9 +1,10 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VkDevice, VkInstance, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkDevice, VkInstance};
 
 /// Allocation scope
 ///
+/// # Description
 /// Each allocation has an allocation scope defining its lifetime and which object it is associated
 /// with.
 ///

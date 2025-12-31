@@ -17,15 +17,15 @@
 // Other features
 #![feature(c_size_t)]
 
-use macros::flags;
+use macros::{flags, flags_no_bits};
 
-#[cfg(feature = "VK_EXT_debug_utils")]
+#[cfg(feature = "vk_ext_debug_utils")]
 pub mod ext_debug_utils;
-#[cfg(feature = "VK_KHR_surface")]
+#[cfg(feature = "vk_khr_surface")]
 pub mod khr_surface;
-#[cfg(feature = "VK_KHR_swapchain")]
+#[cfg(feature = "vk_khr_swapchain")]
 pub mod khr_swapchain;
-#[cfg(feature = "VK_KHR_win32_surface")]
+#[cfg(feature = "vk_khr_win32_surface")]
 pub mod khr_win32_surface;
 
 mod core;

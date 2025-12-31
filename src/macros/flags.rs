@@ -10,10 +10,10 @@ macro_rules! flags {
             $variant: ident = $value: expr,
         )*}
     } => {
-        $(#[$struct_meta])*
-        #[repr(C)]
-        #[derive(Debug)]
-        pub struct $struct_name(pub $crate::VkFlags);
+        $crate::flags_no_bits!(
+            $(#[$struct_meta])*
+            pub struct $struct_name;
+        );
 
         $(#[$enum_meta])*
         #[repr(C)]
@@ -25,14 +25,48 @@ macro_rules! flags {
         )*}
 
         impl $struct_name {
-            #[doc = std::concat!(" Creates a new [`", std::stringify!($struct_name), "`] with no flags set")]
-            pub const fn new() -> $struct_name {
-                $struct_name::from_flags(0)
-            }
-
             #[doc = std::concat!(" Creates a new [`", std::stringify!($struct_name), "`] from `f`")]
             pub const fn from_flag(f: $enum_name) -> $struct_name {
                 $struct_name::from_flags(f as u32)
+            }
+        }
+
+        impl const From<$enum_name> for $struct_name {
+            fn from(flag: $enum_name) -> Self {
+                $struct_name::from_flag(flag)
+            }
+        }
+
+        impl const PartialEq<$enum_name> for $struct_name {
+            fn eq(&self, other: &$enum_name) -> bool {
+                self.0.eq(&(*other as u32))
+            }
+        }
+
+        impl const std::ops::BitOr<$struct_name> for $enum_name {
+            type Output = $struct_name;
+
+            fn bitor(self, rhs: $struct_name) -> Self::Output {
+                $struct_name::from_flags(self as u32 | rhs.0)
+            }
+        }
+    };
+}
+
+macro_rules! flags_no_bits {
+    (
+        $(#[$struct_meta: meta])*
+        pub struct $struct_name: ident;
+    ) => {
+        $(#[$struct_meta])*
+        #[repr(C)]
+        #[derive(Debug)]
+        pub struct $struct_name(pub $crate::VkFlags);
+
+        impl $struct_name {
+            #[doc = std::concat!(" Creates a new [`", std::stringify!($struct_name), "`] with no flags set")]
+            pub const fn new() -> $struct_name {
+                $struct_name::from_flags(0)
             }
 
             #[doc = std::concat!(" Creates a new [`", std::stringify!($struct_name), "`] from `f`")]
@@ -69,11 +103,6 @@ macro_rules! flags {
             }
         }
 
-        impl const From<$enum_name> for $struct_name {
-            fn from(flag: $enum_name) -> Self {
-                $struct_name::from_flag(flag)
-            }
-        }
 
         impl const Into<u32> for $struct_name {
             fn into(self) -> u32 {
@@ -123,6 +152,14 @@ macro_rules! flags {
             }
         }
 
+        impl const std::ops::BitOr<$struct_name> for u32 {
+            type Output = $struct_name;
+
+            fn bitor(self, rhs: $struct_name) -> Self::Output {
+                $struct_name::from_flags(self | rhs.0)
+            }
+        }
+
         impl std::fmt::Display for $struct_name {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 self.0.fmt(f)
@@ -130,4 +167,5 @@ macro_rules! flags {
         }
     };
 }
-pub(crate) use flags;
+
+pub(crate) use {flags, flags_no_bits};

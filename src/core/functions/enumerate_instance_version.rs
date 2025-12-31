@@ -3,6 +3,7 @@ use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
+#[cfg(feature = "vk_version_1_1")]
 use crate::VK_VERSION_1_1;
 
 /// Query instance-level version before instance creation

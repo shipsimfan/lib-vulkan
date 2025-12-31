@@ -2,7 +2,7 @@ use crate::{VkDeviceSize, VkMemoryHeapFlags};
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VkMemoryHeapFlagBits};
+use crate::{VK_VERSION_1_0, VkMemoryHeapFlag};
 
 /// Structure specifying a memory heap
 ///
@@ -14,7 +14,7 @@ pub struct VkMemoryHeap {
     /// `size` is the total memory size in bytes in the heap.
     pub size: VkDeviceSize,
 
-    /// `flags` is a bitmask of [`VkMemoryHeapFlagBits`] specifying attribute flags for the heap.
+    /// `flags` is a bitmask of [`VkMemoryHeapFlag`] specifying attribute flags for the heap.
     pub flags: VkMemoryHeapFlags,
 }
 

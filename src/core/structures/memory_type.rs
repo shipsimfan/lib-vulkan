@@ -2,7 +2,7 @@ use crate::VkMemoryPropertyFlags;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VkMemoryPropertyFlagBits, VkPhysicalDeviceMemoryProperties};
+use crate::{VK_VERSION_1_0, VkMemoryPropertyFlag, VkPhysicalDeviceMemoryProperties};
 
 /// Structure specifying memory type
 ///
@@ -11,7 +11,7 @@ use crate::{VK_VERSION_1_0, VkMemoryPropertyFlagBits, VkPhysicalDeviceMemoryProp
 #[allow(missing_docs)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct VkMemoryType {
-    /// `property_flags` is a bitmask of [`VkMemoryPropertyFlagBits`] of properties for this memory
+    /// `property_flags` is a bitmask of [`VkMemoryPropertyFlag`] of properties for this memory
     /// type.
     pub property_flags: VkMemoryPropertyFlags,
 

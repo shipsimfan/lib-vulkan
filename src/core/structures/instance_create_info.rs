@@ -6,7 +6,7 @@ use std::{
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VkCreateInstance, VkInstanceCreateFlagBits};
+use crate::{VK_VERSION_1_0, VkCreateInstance, VkInstanceCreateFlag};
 
 /// Structure specifying parameters of a newly created instance
 ///
@@ -31,7 +31,7 @@ pub struct VkInstanceCreateInfo {
     /// `next` is [`null`] or a pointer to a structure extending this structure.
     pub next: *const c_void,
 
-    /// `flags` is a bitmask of [`VkInstanceCreateFlagBits`] indicating the behavior of the
+    /// `flags` is a bitmask of [`VkInstanceCreateFlag`] indicating the behavior of the
     /// instance.
     pub flags: VkInstanceCreateFlags,
 

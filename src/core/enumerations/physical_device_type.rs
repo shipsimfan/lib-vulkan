@@ -4,6 +4,7 @@ use crate::VK_VERSION_1_0;
 
 /// Supported physical device types
 ///
+/// # Description
 /// The physical device type is advertised for informational purposes only, and does not directly
 /// affect the operation of the system. However, the device type may correlate with other
 /// advertised properties or capabilities of the system, such as how many memory heaps there are.

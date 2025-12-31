@@ -1,13 +1,22 @@
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::VK_VERSION_1_0;
+#[allow(unused_imports)]
+#[cfg(feature = "vk_version_1_1")]
+use crate::VK_VERSION_1_1;
+#[allow(unused_imports)]
+#[cfg(feature = "vk_version_1_3")]
+use crate::VK_VERSION_1_3;
+#[allow(unused_imports)]
+#[cfg(feature = "vk_version_1_4")]
+use crate::VK_VERSION_1_4;
 
 /// Available image formats
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[non_exhaustive]
-#[allow(non_camel_case_types, missing_docs)]
+#[allow(missing_docs)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum VkFormat {
     Undefined = 0,
@@ -25,49 +34,49 @@ pub enum VkFormat {
     R8SScaled = 12,
     R8UInt = 13,
     R8SInt = 14,
-    R8SRGB = 15,
+    R8Srgb = 15,
     R8G8UNorm = 16,
     R8G8SNorm = 17,
     R8G8UScaled = 18,
     R8G8SScaled = 19,
     R8G8UInt = 20,
     R8G8SInt = 21,
-    R8G8SRGB = 22,
+    R8G8Srgb = 22,
     R8G8B8UNorm = 23,
     R8G8B8SNorm = 24,
     R8G8B8UScaled = 25,
     R8G8B8SScaled = 26,
     R8G8B8UInt = 27,
     R8G8B8SInt = 28,
-    R8G8B8SRGB = 29,
+    R8G8B8Srgb = 29,
     B8G8R8UNorm = 30,
     B8G8R8SNorm = 31,
     B8G8R8UScaled = 32,
     B8G8R8SScaled = 33,
     B8G8R8UInt = 34,
     B8G8R8SInt = 35,
-    B8G8R8SRGB = 36,
+    B8G8R8Srgb = 36,
     R8G8B8A8UNorm = 37,
     R8G8B8A8SNorm = 38,
     R8G8B8A8UScaled = 39,
     R8G8B8A8SScaled = 40,
     R8G8B8A8UInt = 41,
     R8G8B8A8SInt = 42,
-    R8G8B8A8SRGB = 43,
+    R8G8B8A8Srgb = 43,
     B8G8R8A8UNorm = 44,
     B8G8R8A8SNorm = 45,
     B8G8R8A8UScaled = 46,
     B8G8R8A8SScaled = 47,
     B8G8R8A8UInt = 48,
     B8G8R8A8SInt = 49,
-    B8G8R8A8SRGB = 50,
+    B8G8R8A8Srgb = 50,
     A8B8G8R8UNormPack32 = 51,
     A8B8G8R8SNormPack32 = 52,
     A8B8G8R8UScaledPack32 = 53,
     A8B8G8R8SScaledPack32 = 54,
     A8B8G8R8UIntPack32 = 55,
     A8B8G8R8SIntPack32 = 56,
-    A8B8G8R8SRGB_Pack32 = 57,
+    A8B8G8R8SrgbPack32 = 57,
     A2R10G10B10UNormPack32 = 58,
     A2R10G10B10SNormPack32 = 59,
     A2R10G10B10UScaledPack32 = 60,
@@ -141,253 +150,318 @@ pub enum VkFormat {
     D16UNormS8UInt = 128,
     D24UNormS8UInt = 129,
     D32SFloatS8UInt = 130,
-    BC1RGB_UNormBlock = 131,
-    BC1RGB_SRGB_Block = 132,
-    BC1RGBA_UNormBlock = 133,
-    BC1RGBA_SRGB_Block = 134,
-    BC2UNormBlock = 135,
-    BC2SRGB_Block = 136,
-    BC3UNormBlock = 137,
-    BC3SRGB_Block = 138,
-    BC4UNormBlock = 139,
-    BC4SNormBlock = 140,
-    BC5UNormBlock = 141,
-    BC5SNormBlock = 142,
-    BC6H_UFloatBlock = 143,
-    BC6H_SFloatBlock = 144,
-    BC7UNormBlock = 145,
-    BC7SRGB_Block = 146,
-    ETC2R8G8B8UNormBlock = 147,
-    ETC2R8G8B8SRGB_Block = 148,
-    ETC2R8G8B8A1UNormBlock = 149,
-    ETC2R8G8B8A1SRGB_Block = 150,
-    ETC2R8G8B8A8UNormBlock = 151,
-    ETC2R8G8B8A8SRGB_Block = 152,
-    EAC_R11UNormBlock = 153,
-    EAC_R11SNormBlock = 154,
-    EAC_R11G11UNormBlock = 155,
-    EAC_R11G11SNormBlock = 156,
-    ASTC4x4UNormBlock = 157,
-    ASTC4x4SRGB_Block = 158,
-    ASTC5x4UNormBlock = 159,
-    ASTC5x4SRGB_Block = 160,
-    ASTC5x5UNormBlock = 161,
-    ASTC5x5SRGB_Block = 162,
-    ASTC6x5UNormBlock = 163,
-    ASTC6x5SRGB_Block = 164,
-    ASTC6x6UNormBlock = 165,
-    ASTC6x6SRGB_Block = 166,
-    ASTC8x5UNormBlock = 167,
-    ASTC8x5SRGB_Block = 168,
-    ASTC8x6UNormBlock = 169,
-    ASTC8x6SRGB_Block = 170,
-    ASTC8x8UNormBlock = 171,
-    ASTC8x8SRGB_Block = 172,
-    ASTC10x5UNormBlock = 173,
-    ASTC10x5SRGB_Block = 174,
-    ASTC10x6UNormBlock = 175,
-    ASTC10x6SRGB_Block = 176,
-    ASTC10x8UNormBlock = 177,
-    ASTC10x8SRGB_Block = 178,
-    ASTC10x10UNormBlock = 179,
-    ASTC10x10SRGB_Block = 180,
-    ASTC12x10UNormBlock = 181,
-    ASTC12x10SRGB_Block = 182,
-    ASTC12x12UNormBlock = 183,
-    ASTC12x12SRGB_Block = 184,
+    Bc1RgbUNormBlock = 131,
+    Bc1RgbSrgbBlock = 132,
+    Bc1RgbaUNormBlock = 133,
+    Bc1RgbaSrgbBlock = 134,
+    Bc2UNormBlock = 135,
+    Bc2SrgbBlock = 136,
+    Bc3UNormBlock = 137,
+    Bc3SrgbBlock = 138,
+    Bc4UNormBlock = 139,
+    Bc4SNormBlock = 140,
+    Bc5UNormBlock = 141,
+    Bc5SNormBlock = 142,
+    Bc6HUFloatBlock = 143,
+    Bc6HSFloatBlock = 144,
+    Bc7UNormBlock = 145,
+    Bc7SrgbBlock = 146,
+    Etc2R8G8B8UNormBlock = 147,
+    Etc2R8G8B8SrgbBlock = 148,
+    Etc2R8G8B8A1UNormBlock = 149,
+    Etc2R8G8B8A1SrgbBlock = 150,
+    Etc2R8G8B8A8UNormBlock = 151,
+    Etc2R8G8B8A8SrgbBlock = 152,
+    EacR11UNormBlock = 153,
+    EacR11SNormBlock = 154,
+    EacR11G11UNormBlock = 155,
+    EacR11G11SNormBlock = 156,
+    Astc4x4UNormBlock = 157,
+    Astc4x4SrgbBlock = 158,
+    Astc5x4UNormBlock = 159,
+    Astc5x4SrgbBlock = 160,
+    Astc5x5UNormBlock = 161,
+    Astc5x5SrgbBlock = 162,
+    Astc6x5UNormBlock = 163,
+    Astc6x5SrgbBlock = 164,
+    Astc6x6UNormBlock = 165,
+    Astc6x6SrgbBlock = 166,
+    Astc8x5UNormBlock = 167,
+    Astc8x5SrgbBlock = 168,
+    Astc8x6UNormBlock = 169,
+    Astc8x6SrgbBlock = 170,
+    Astc8x8UNormBlock = 171,
+    Astc8x8SrgbBlock = 172,
+    Astc10x5UNormBlock = 173,
+    Astc10x5SrgbBlock = 174,
+    Astc10x6UNormBlock = 175,
+    Astc10x6SrgbBlock = 176,
+    Astc10x8UNormBlock = 177,
+    Astc10x8SrgbBlock = 178,
+    Astc10x10UNormBlock = 179,
+    Astc10x10SrgbBlock = 180,
+    Astc12x10UNormBlock = 181,
+    Astc12x10SrgbBlock = 182,
+    Astc12x12UNormBlock = 183,
+    Astc12x12SrgbBlock = 184,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     G8B8G8R8_422UNorm = 1000156000,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     B8G8R8G8_422UNorm = 1000156001,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G8B8R8_3PLANE420UNorm = 1000156002,
+    #[cfg(feature = "vk_version_1_1")]
+    G8B8R8_3Plane420UNorm = 1000156002,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G8B8R8_2PLANE420UNorm = 1000156003,
+    #[cfg(feature = "vk_version_1_1")]
+    G8B8R8_2Plane420UNorm = 1000156003,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G8B8R8_3PLANE422UNorm = 1000156004,
+    #[cfg(feature = "vk_version_1_1")]
+    G8B8R8_3Plane422UNorm = 1000156004,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G8B8R8_2PLANE422UNorm = 1000156005,
+    #[cfg(feature = "vk_version_1_1")]
+    G8B8R8_2Plane422UNorm = 1000156005,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G8B8R8_3PLANE444UNorm = 1000156006,
+    #[cfg(feature = "vk_version_1_1")]
+    G8B8R8_3Plane444UNorm = 1000156006,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     R10X6UNormPack16 = 1000156007,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     R10X6G10X6UNorm2Pack16 = 1000156008,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     R10X6G10X6B10X6A10X6UNorm4Pack16 = 1000156009,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     G10X6B10X6G10X6R10X6_422UNorm4Pack16 = 1000156010,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     B10X6G10X6R10X6G10X6_422UNorm4Pack16 = 1000156011,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G10X6B10X6R10X6_3PLANE420UNorm3Pack16 = 1000156012,
+    #[cfg(feature = "vk_version_1_1")]
+    G10X6B10X6R10X6_3Plane420UNorm3Pack16 = 1000156012,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G10X6B10X6R10X6_2PLANE420UNorm3Pack16 = 1000156013,
+    #[cfg(feature = "vk_version_1_1")]
+    G10X6B10X6R10X6_2Plane420UNorm3Pack16 = 1000156013,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G10X6B10X6R10X6_3PLANE422UNorm3Pack16 = 1000156014,
+    #[cfg(feature = "vk_version_1_1")]
+    G10X6B10X6R10X6_3Plane422UNorm3Pack16 = 1000156014,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G10X6B10X6R10X6_2PLANE422UNorm3Pack16 = 1000156015,
+    #[cfg(feature = "vk_version_1_1")]
+    G10X6B10X6R10X6_2Plane422UNorm3Pack16 = 1000156015,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G10X6B10X6R10X6_3PLANE444UNorm3Pack16 = 1000156016,
+    #[cfg(feature = "vk_version_1_1")]
+    G10X6B10X6R10X6_3Plane444UNorm3Pack16 = 1000156016,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     R12X4UNormPack16 = 1000156017,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     R12X4G12X4UNorm2Pack16 = 1000156018,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     R12X4G12X4B12X4A12X4UNorm4Pack16 = 1000156019,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     G12X4B12X4G12X4R12X4_422UNorm4Pack16 = 1000156020,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     B12X4G12X4R12X4G12X4_422UNorm4Pack16 = 1000156021,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G12X4B12X4R12X4_3PLANE420UNorm3Pack16 = 1000156022,
+    #[cfg(feature = "vk_version_1_1")]
+    G12X4B12X4R12X4_3Plane420UNorm3Pack16 = 1000156022,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G12X4B12X4R12X4_2PLANE420UNorm3Pack16 = 1000156023,
+    #[cfg(feature = "vk_version_1_1")]
+    G12X4B12X4R12X4_2Plane420UNorm3Pack16 = 1000156023,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G12X4B12X4R12X4_3PLANE422UNorm3Pack16 = 1000156024,
+    #[cfg(feature = "vk_version_1_1")]
+    G12X4B12X4R12X4_3Plane422UNorm3Pack16 = 1000156024,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G12X4B12X4R12X4_2PLANE422UNorm3Pack16 = 1000156025,
+    #[cfg(feature = "vk_version_1_1")]
+    G12X4B12X4R12X4_2Plane422UNorm3Pack16 = 1000156025,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G12X4B12X4R12X4_3PLANE444UNorm3Pack16 = 1000156026,
+    #[cfg(feature = "vk_version_1_1")]
+    G12X4B12X4R12X4_3Plane444UNorm3Pack16 = 1000156026,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     G16B16G16R16_422UNorm = 1000156027,
 
     /// Provided by [`VK_VERSION_1_1`]
+    #[cfg(feature = "vk_version_1_1")]
     B16G16R16G16_422UNorm = 1000156028,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G16B16R16_3PLANE420UNorm = 1000156029,
+    #[cfg(feature = "vk_version_1_1")]
+    G16B16R16_3Plane420UNorm = 1000156029,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G16B16R16_2PLANE420UNorm = 1000156030,
+    #[cfg(feature = "vk_version_1_1")]
+    G16B16R16_2Plane420UNorm = 1000156030,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G16B16R16_3PLANE422UNorm = 1000156031,
+    #[cfg(feature = "vk_version_1_1")]
+    G16B16R16_3Plane422UNorm = 1000156031,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G16B16R16_2PLANE422UNorm = 1000156032,
+    #[cfg(feature = "vk_version_1_1")]
+    G16B16R16_2Plane422UNorm = 1000156032,
 
     /// Provided by [`VK_VERSION_1_1`]
-    G16B16R16_3PLANE444UNorm = 1000156033,
+    #[cfg(feature = "vk_version_1_1")]
+    G16B16R16_3Plane444UNorm = 1000156033,
 
     /// Provided by [`VK_VERSION_1_3`]
-    G8B8R8_2PLANE444UNorm = 1000330000,
+    #[cfg(feature = "vk_version_1_3")]
+    G8B8R8_2Plane444UNorm = 1000330000,
 
     /// Provided by [`VK_VERSION_1_3`]
-    G10X6B10X6R10X6_2PLANE444UNorm3Pack16 = 1000330001,
+    #[cfg(feature = "vk_version_1_3")]
+    G10X6B10X6R10X6_2Plane444UNorm3Pack16 = 1000330001,
 
     /// Provided by [`VK_VERSION_1_3`]
-    G12X4B12X4R12X4_2PLANE444UNorm3Pack16 = 1000330002,
+    #[cfg(feature = "vk_version_1_3")]
+    G12X4B12X4R12X4_2Plane444UNorm3Pack16 = 1000330002,
 
     /// Provided by [`VK_VERSION_1_3`]
-    G16B16R16_2PLANE444UNorm = 1000330003,
+    #[cfg(feature = "vk_version_1_3")]
+    G16B16R16_2Plane444UNorm = 1000330003,
 
     /// Provided by [`VK_VERSION_1_3`]
+    #[cfg(feature = "vk_version_1_3")]
     A4R4G4B4UNormPack16 = 1000340000,
 
     /// Provided by [`VK_VERSION_1_3`]
+    #[cfg(feature = "vk_version_1_3")]
     A4B4G4R4UNormPack16 = 1000340001,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC4x4SFloatBlock = 1000066000,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc4x4SFloatBlock = 1000066000,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC5x4SFloatBlock = 1000066001,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc5x4SFloatBlock = 1000066001,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC5x5SFloatBlock = 1000066002,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc5x5SFloatBlock = 1000066002,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC6x5SFloatBlock = 1000066003,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc6x5SFloatBlock = 1000066003,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC6x6SFloatBlock = 1000066004,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc6x6SFloatBlock = 1000066004,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC8x5SFloatBlock = 1000066005,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc8x5SFloatBlock = 1000066005,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC8x6SFloatBlock = 1000066006,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc8x6SFloatBlock = 1000066006,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC8x8SFloatBlock = 1000066007,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc8x8SFloatBlock = 1000066007,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC10x5SFloatBlock = 1000066008,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc10x5SFloatBlock = 1000066008,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC10x6SFloatBlock = 1000066009,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc10x6SFloatBlock = 1000066009,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC10x8SFloatBlock = 1000066010,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc10x8SFloatBlock = 1000066010,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC10x10SFloatBlock = 1000066011,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc10x10SFloatBlock = 1000066011,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC12x10SFloatBlock = 1000066012,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc12x10SFloatBlock = 1000066012,
 
     /// Provided by [`VK_VERSION_1_3`]
-    ASTC12x12SFloatBlock = 1000066013,
+    #[cfg(feature = "vk_version_1_3")]
+    Astc12x12SFloatBlock = 1000066013,
+
+    /// Provided by [`VK_VERSION_1_4`]
+    #[cfg(feature = "vk_version_1_4")]
+    A1B5G5R5UnormPack16 = 1000470000,
 
     /// Provided by [`img_format_pvrtc`]
-    PVRTC1_2BPP_UNormBlockIMG = 1000054000,
+    #[cfg(feature = "vk_img_format_pvrtc")]
+    Pvrtc1_2BppUNormBlockImg = 1000054000,
 
     /// Provided by [`img_format_pvrtc`]
-    PVRTC1_4BPP_UNormBlockIMG = 1000054001,
+    #[cfg(feature = "vk_img_format_pvrtc")]
+    Pvrtc1_4BppUNormBlockImg = 1000054001,
 
     /// Provided by [`img_format_pvrtc`]
-    PVRTC2_2BPP_UNormBlockIMG = 1000054002,
+    #[cfg(feature = "vk_img_format_pvrtc")]
+    PVRTC2_2BppUNormBlockImg = 1000054002,
 
     /// Provided by [`img_format_pvrtc`]
-    PVRTC2_4BPP_UNormBlockIMG = 1000054003,
+    #[cfg(feature = "vk_img_format_pvrtc")]
+    PVRTC2_4BppUNormBlockImg = 1000054003,
 
     /// Provided by [`img_format_pvrtc`]
-    PVRTC1_2BPP_SRGB_BlockIMG = 1000054004,
+    #[cfg(feature = "vk_img_format_pvrtc")]
+    Pvrtc1_2BppSrgbBlockImg = 1000054004,
 
     /// Provided by [`img_format_pvrtc`]
-    PVRTC1_4BPP_SRGB_BlockIMG = 1000054005,
+    #[cfg(feature = "vk_img_format_pvrtc")]
+    Pvrtc1_4BppSrgbBlockImg = 1000054005,
 
     /// Provided by [`img_format_pvrtc`]
-    PVRTC2_2BPP_SRGB_BlockIMG = 1000054006,
+    #[cfg(feature = "vk_img_format_pvrtc")]
+    PVRTC2_2BppSrgbBlockImg = 1000054006,
 
     /// Provided by [`img_format_pvrtc`]
-    PVRTC2_4BPP_SRGB_BlockIMG = 1000054007,
+    #[cfg(feature = "vk_img_format_pvrtc")]
+    PVRTC2_4BppSrgbBlockImg = 1000054007,
 
     /// Provided by [`nv_optical_flow`]
-    R16G16SFixed5NV = 1000464000,
+    #[cfg(feature = "vk_nv_optical_flow")]
+    R16G16SFixed5Nv = 1000464000,
 
     /// Provided by [`khr_maintenance5`]
-    A1B5G5R5UNormPack16KHR = 1000470000,
-
-    /// Provided by [`khr_maintenance5`]
-    A8UNormKHR = 1000470001,
+    #[cfg(feature = "vk_khr_maintenance5")]
+    A8UNormKhr = 1000470001,
 }

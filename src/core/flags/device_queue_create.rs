@@ -2,10 +2,17 @@ use crate::flags;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VK_VERSION_1_1};
+use crate::VK_VERSION_1_0;
+#[allow(unused_imports)]
+#[cfg(feature = "vk_version_1_1")]
+use crate::VK_VERSION_1_1;
 
 flags! {
     /// Bitmask of [`VkDeviceQueueCreateFlag`]
+    ///
+    /// # Description
+    /// [`VkDeviceQueueCreateFlags`] is a bitmask type for setting a mask of zero or more
+    /// [`VkDeviceQueueCreateFlag`].
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub struct VkDeviceQueueCreateFlags;
@@ -18,7 +25,6 @@ flags! {
         /// protected-capable queue.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        #[cfg(feature = "vk_version_1_1")]
         ProtectedBit = 0x00000001,
     }
 }
