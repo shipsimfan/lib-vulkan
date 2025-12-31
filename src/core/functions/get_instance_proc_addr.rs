@@ -39,6 +39,10 @@ use std::ptr::{null, null_mut};
 /// | instance                          | available device extension dispatchable command for `instance` | fp           |
 /// | any other case not covered above  | any other case, not covered above                              | [`null`]     |
 ///
+/// # Valid Usage (Implicit)
+///  - If `instance` is not [`null`], `instance` must be a valid [`VkInstance`] handle
+///  - `name` must be a null-terminated UTF-8 string
+///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetInstanceProcAddr =
     extern "system" fn(instance: VkInstance, name: *const c_char) -> Option<VkVoidFunction>;

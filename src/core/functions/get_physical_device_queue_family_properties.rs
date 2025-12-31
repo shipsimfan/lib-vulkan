@@ -25,6 +25,13 @@ use std::ptr::null;
 /// `queue_family_property_count` is less than the number of queue families available, at most
 /// `queue_family_property_count` structures will be written.
 ///
+/// # Valid Usage (Implicit)
+///  - `physical_device` must be a valid [`VkPhysicalDevice`] handle
+///  - `queue_family_property_count` must be a valid pointer to a [`u32`] value
+///  - If the value referenced by `queue_family_property_count` is not 0, and
+///    `queue_family_properties` is not [`null`], `queue_family_properties` must be a valid pointer
+///    to an array of `queue_family_property_count` [`VkQueueFamilyProperties`] structures
+///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetPhysicalDeviceQueueFamilyProperties = extern "system" fn(
     physical_device: VkPhysicalDevice,

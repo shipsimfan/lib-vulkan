@@ -19,6 +19,17 @@ use crate::{VK_VERSION_1_0, VkDeviceQueueCreateInfo};
 /// parameter of [`VkDeviceQueueCreateInfo`] set to zero. To get queues that were created with a
 /// non-zero `flags` parameter use [`VkGetDeviceQueue2`].
 ///
+/// # Valid Usage
+///  - `queue_family_index` must be one of the queue family indices specified when device was
+///    created, via the [`VkDeviceQueueCreateInfo`] structure
+///  - `queue_index` must be less than the value of [`VkDeviceQueueCreateInfo::queue_count`] for
+///    the queue family indicated by `queue_family_index` when device was created
+///  - [`VkDeviceQueueCreateInfo::flags`] must have been zero when device was created
+///
+/// # Valid Usage (Implicit)
+///  - `device` must be a valid [`VkDevice`] handle
+///  - `queue` must be a valid pointer to a [`VkQueue`] handle
+///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetDeviceQueue = extern "system" fn(
     device: VkDevice,

@@ -11,8 +11,6 @@ vk_define_handle!(
     /// [`VkInstance`] object. Creating a [`VkInstance`] object initializes the Vulkan library and
     /// allows the application to pass information about itself to the implementation.
     ///
-    /// Instances are represented by [`VkInstance`] handles.
-    ///
     /// Provided by [`VK_VERSION_1_0`]
     VkInstance
 );

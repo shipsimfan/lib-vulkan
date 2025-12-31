@@ -4,6 +4,8 @@ use std::ffi::CStr;
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::VK_VERSION_1_0;
+#[allow(unused_imports)]
+use std::ptr::null;
 
 /// Create a new Vulkan instance
 ///
@@ -22,6 +24,16 @@ use crate::VK_VERSION_1_0;
 /// extensions the [`VkInstance`] object is created and returned to the application. If a requested
 /// extension is only supported by a layer, both the layer and the extension need to be specified
 /// at [`VkCreateInstance`] time for the creation to succeed.
+///
+/// # Valid Usage
+///  - All required extensions for each extension in the
+///    [`VkInstanceCreateInfo::enabled_extension_names`] list must also be present in that list
+///
+/// # Valid Usage (Implicit)
+///  - `create_info` must be a valid pointer to a valid [`VkInstanceCreateInfo`] structure
+///  - If `allocator` is not [`null`], `allocator` must be a valid pointer to a valid
+///    [`VkAllocationCallbacks`] structure
+///  - `instance` must be a valid pointer to a [`VkInstance`] handle
 ///
 /// # Return Codes
 /// On success, this command returns:
@@ -43,5 +55,4 @@ pub type VkCreateInstance = extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkCreateInstance`]
-pub const VK_CREATE_INSTANCE: &CStr =
-    c"vkCreateInstance";
+pub const VK_CREATE_INSTANCE: &CStr = c"vkCreateInstance";

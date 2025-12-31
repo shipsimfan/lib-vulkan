@@ -1,21 +1,6 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VK_VERSION_1_0;
-#[allow(unused_imports)]
-#[cfg(feature = "vk_version_1_1")]
-use crate::VK_VERSION_1_1;
-#[allow(unused_imports)]
-#[cfg(feature = "vk_version_1_3")]
-use crate::VK_VERSION_1_3;
-#[allow(unused_imports)]
-#[cfg(feature = "vk_ext_debug_utils")]
-use crate::ext_debug_utils;
-#[allow(unused_imports)]
-#[cfg(feature = "vk_khr_surface")]
-use crate::khr_surface;
-#[allow(unused_imports)]
-#[cfg(feature = "vk_khr_swapchain")]
-use crate::khr_swapchain;
+use crate::{VK_VERSION_1_0, VK_VERSION_1_1, VK_VERSION_1_3};
 
 /// Specify an enumeration to track object handle types
 ///
@@ -106,150 +91,125 @@ pub enum VkObjectType {
     /// [`VkSamplerYCBCRConversion`](crate::VkSamplerYCBCRConversion)
     ///
     /// Provided by [`VK_VERSION_1_1`]
-    #[cfg(feature = "vk_version_1_1")]
     SamplerYCBCRConversion = 1000156000,
 
     /// [`VkDescriptorUpdateTemplate`](crate::VkDescriptorUpdateTemplate)
     ///
     /// Provided by [`VK_VERSION_1_1`]
-    #[cfg(feature = "vk_version_1_1")]
     DescriptorUpdateTemplate = 1000085000,
 
     /// [`VkPrivateDataSlot`](crate::VkPrivateDataSlot)
     ///
     /// Provided by [`VK_VERSION_1_3`]
-    #[cfg(feature = "vk_version_1_3")]
     PrivateDataSlot = 1000295000,
 
     /// [`VkSurfaceKhr`](crate::VkSurfaceKhr)
     ///
     /// Provided by [`khr_surface`]
-    #[cfg(feature = "vk_khr_surface")]
     SurfaceKhr = 1000000000,
 
     /// [`VkSwapchainKhr`](crate::VkSwapchainKhr)
     ///
     /// Provided by [`khr_swapchain`]
-    #[cfg(feature = "vk_khr_swapchain")]
     SwapchainKhr = 1000001000,
 
     /// [`VkDisplayKhr`](crate::VkDisplayKhr)
     ///
     /// Provided by [`khr_display`]
-    #[cfg(feature = "vk_khr_display")]
     DisplayKhr = 1000002000,
 
     /// [`VkDisplayModeKhr`](crate::VkDisplayModeKhr)
     ///
     /// Provided by [`khr_display`]
-    #[cfg(feature = "vk_khr_display")]
     DisplayModeKhr = 1000002001,
 
     /// [`VkDebugReportCallbackExt`](crate::VkDebugReportCallbackExt)
     ///
     /// Provided by [`ext_debug_report`]
-    #[cfg(feature = "vk_ext_debug_report")]
     DebugReportCallbackExt = 1000011000,
 
     /// [`VkVideoSessionKhr`](crate::VkVideoSessionKhr)
     ///
     /// Provided by [`khr_video_queue`]
-    #[cfg(feature = "vk_khr_video_queue")]
     VideoSessionKhr = 1000023000,
 
     /// [`VkVideoSessionParametersKhr`](crate::VkVideoSessionParametersKhr)
     ///
     /// Provided by [`khr_video_queue`]
-    #[cfg(feature = "vk_khr_video_queue")]
     VideoSessionParametersKhr = 1000023001,
 
     /// [`VkCuModuleNvX`](crate::VkCuModuleNvX)
     ///
     /// Provided by [`nvx_binary_import`]
-    #[cfg(feature = "vk_nvx_binary_import")]
     CuModuleNvX = 1000029000,
 
     /// [`VkCuFunctionNvX`](crate::VkCuFunctionNvX)
     ///
     /// Provided by [`nvx_binary_import`]
-    #[cfg(feature = "vk_nvx_binary_import")]
     CuFunctionNvX = 1000029001,
 
     /// [`VkDebugUtilsMessengerExt`](crate::VkDebugUtilsMessengerExt)
     ///
     /// Provided by [`ext_debug_utils`]
-    #[cfg(feature = "vk_ext_debug_utils")]
     DebugUtilsMessengerExt = 1000128000,
 
     /// [`VkAccelerationStructureKhr`](crate::VkAccelerationStructureKhr)
     ///
     /// Provided by [`khr_acceleration_structure`]
-    #[cfg(feature = "vk_khr_acceleration_structure")]
     AccelerationStructureKhr = 1000150000,
 
     /// [`VkValidationCacheExt`](crate::VkValidationCacheExt)
     ///
     /// Provided by [`ext_validation_cache`]
-    #[cfg(feature = "vk_ext_validation_cache")]
     ValidationCacheExt = 1000160000,
 
     /// [`VkAccelerationStructureNv`](crate::VkAccelerationStructureNv)
     ///
     /// Provided by [`nv_ray_tracing`]
-    #[cfg(feature = "vk_nv_ray_tracing")]
     AccelerationStructureNv = 1000165000,
 
     /// [`VkPerformanceConfigurationIntel`](crate::VkPerformanceConfigurationIntel)
     ///
     /// Provided by [`intel_performance_query`]
-    #[cfg(feature = "vk_intel_performance_query")]
     PerformanceConfigurationIntel = 1000210000,
 
     /// [`VkDeferredOperationKhr`](crate::VkDeferredOperationKhr)
     ///
     /// Provided by [`khr_deferred_host_operations`]
-    #[cfg(feature = "vk_khr_deferred_host_operations")]
     DeferredOperationKhr = 1000268000,
 
     /// [`VkIndirectCommandsLayoutNv`](crate::VkIndirectCommandsLayoutNv)
     ///
     /// Provided by [`nv_device_generated_commands`]
-    #[cfg(feature = "vk_nv_device_generated_commands")]
     IndirectCommandsLayoutNv = 1000277000,
 
     /// [`VkCudaModuleNv`](crate::VkCudaModuleNv)
     ///
     /// Provided by [`nv_cuda_kernel_launch`]
-    #[cfg(feature = "vk_nv_cuda_kernel_launch")]
     CudaModuleNv = 1000307000,
 
     /// [`VkCudaFunctionNv`](crate::VkCudaFunctionNv)
     ///
     /// Provided by [`nv_cuda_kernel_launch`]
-    #[cfg(feature = "vk_nv_cuda_kernel_launch")]
     CudaFunctionNv = 1000307001,
 
     /// [`VkBufferCollectionFuchsia`](crate::VkBufferCollectionFuchsia)
     ///
     /// Provided by [`fuchsia_buffer_collection`]
-    #[cfg(feature = "vk_fuchsia_buffer_collection")]
     BufferCollectionFuchsia = 1000366000,
 
     /// [`VkMicromapExt`](crate::VkMicromapExt)
     ///
     /// Provided by [`ext_opacity_micromap`]
-    #[cfg(feature = "vk_ext_opacity_micromap")]
     MicromapExt = 1000396000,
 
     /// [`VkOpticalFlowSessionNv`](crate::VkOpticalFlowSessionNv)
     ///
     /// Provided by [`nv_optical_flow`]
-    #[cfg(feature = "vk_nv_optical_flow")]
     OpticalFlowSessionNv = 1000464000,
 
     /// [`VkShaderExt`](crate::VkShaderExt)
     ///
     /// Provided by [`ext_shader_object`]
-    #[cfg(feature = "vk_ext_shader_object")]
     ShaderExt = 1000482000,
 }

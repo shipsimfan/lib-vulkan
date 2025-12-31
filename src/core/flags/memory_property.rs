@@ -2,10 +2,7 @@ use crate::flags;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VK_VERSION_1_0;
-#[allow(unused_imports)]
-#[cfg(feature = "vk_version_1_1")]
-use crate::VK_VERSION_1_1;
+use crate::{VK_VERSION_1_0, VK_VERSION_1_1};
 
 flags! {
     /// Bitmask of [`VkMemoryPropertyFlag`]
@@ -63,7 +60,6 @@ flags! {
         /// [`VkMemoryPropertyFlag::HostCachedBit`] set.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        #[cfg(feature = "vk_version_1_1")]
         ProtectedBit = 0x00000020,
 
         /// [`VkMemoryPropertyFlag::DeviceCoherentBitAmd`] bit specifies that device accesses to
@@ -72,21 +68,18 @@ flags! {
         /// operations are also performed automatically between host and device.
         ///
         /// Provided by [`amd_device_coherent_memory`]
-        #[cfg(feature = "vk_amd_device_coherent_memory")]
         DeviceCoherentBitAmd = 0x00000040,
 
         /// [`VkMemoryPropertyFlag::DeviceUncachedBitAmd`] bit specifies that memory allocated with
         /// this type is not cached on the device. Uncached device memory is always device coherent.
         ///
         /// Provided by [`amd_device_coherent_memory`]
-        #[cfg(feature = "vk_amd_device_coherent_memory")]
         DeviceUncachedBitAmd = 0x00000080,
 
         /// [`VkMemoryPropertyFlag::RdmaCapableBitNv`] bit specifies that external devices can
         /// access this memory directly.
         ///
         /// Provided by [`nv_external_memory_rdma`]
-        #[cfg(feature = "vk_nv_external_memory_rdma")]
         RdmaCapableBitNv = 0x00000100,
     }
 }

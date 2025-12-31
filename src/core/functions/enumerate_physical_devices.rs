@@ -26,6 +26,13 @@ use std::ptr::null;
 /// returned instead of [`VkResult::VkSuccess`], to indicate that not all the available physical
 /// devices were returned.
 ///
+/// # Valid Usage (Implicit)
+///  - `instance` must be a valid [`VkInstance`] handle
+///  - `physical_device_count` must be a valid pointer to a [`u32`] value
+///  - If the value referenced by `physical_device_count` is not 0, and `physical_devices` is not
+///    [`null`], `physical_devices` must be a valid pointer to an array of `physical_device_count`
+///    [`VkPhysicalDevice`] handles
+///
 /// # Return Codes
 /// On success, this command returns:
 ///  - [`VkResult::VkSuccess`]
@@ -35,6 +42,8 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorOutOfHostMemory`]
 ///  - [`VkResult::VkErrorOutOfDeviceMemory`]
 ///  - [`VkResult::VkErrorInitializationFailed`]
+///  - [`VkResult::VkErrorUnknown`]
+///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkEnumeratePhysicalDevices = extern "system" fn(

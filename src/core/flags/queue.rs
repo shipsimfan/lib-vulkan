@@ -2,10 +2,7 @@ use crate::flags;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VK_VERSION_1_0;
-#[allow(unused_imports)]
-#[cfg(feature = "vk_version_1_1")]
-use crate::VK_VERSION_1_1;
+use crate::{VK_VERSION_1_0, VK_VERSION_1_1};
 
 flags! {
     /// Bitmask of [`VkQueueFlag`]
@@ -58,28 +55,24 @@ flags! {
         /// `protected_memory` feature, at least one of its queue families must support this bit.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        #[cfg(feature = "vk_version_1_1")]
         ProtectedBit = 0x00000010,
 
         /// [`VkQueueFlag::VideoDecodeBitKhr`] specifies that queues in this queue family support
         /// video decode operations.
         ///
         /// Provided by [`khr_video_decode_queue`]
-        #[cfg(feature = "vk_khr_video_decode_queue")]
         VideoDecodeBitKhr = 0x00000020,
 
         /// [`VkQueueFlag::VideoEncodeBitKhr`] specifies that queues in this queue family support
         /// video encode operations.
         ///
         /// Provided by [`khr_video_encode_queue`]
-        #[cfg(feature = "vk_khr_video_encode_queue")]
         VideoEncodeBitKhr = 0x00000040,
 
         /// [`VkQueueFlag::OpticalFlowBitNv`] specifies that queues in this queue family support
         /// optical flow operations.
         ///
         /// Provided by [`nv_optical_flow`]
-        #[cfg(feature = "vk_nv_optical_flow")]
         OpticalFlowBitNv = 0x00000100,
     }
 }

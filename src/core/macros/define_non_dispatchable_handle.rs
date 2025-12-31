@@ -1,6 +1,6 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{vk_define_non_dispatchable_handle, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, vk_define_non_dispatchable_handle};
 
 /// Declare a non-dispatchable object handle
 ///
@@ -17,11 +17,53 @@ macro_rules! vk_define_non_dispatchable_handle {
     ) => {
         #[cfg(target_pointer_width = "64")]
         $(#[$meta])*
-        pub type $object = *mut ::std::ffi::c_void;
+        pub struct $object(*mut ::std::ffi::c_void);
 
 
         #[cfg(not(target_pointer_width = "64"))]
         $(#[$meta])*
-        pub type $object = u64;
+        pub struct $object(u64);
+
+        impl $object {
+            #[doc = std::concat!("Create a new [`", std::stringify!($object), "`] containing `null`")]
+            #[cfg(target_pointer_width = "64")]
+            pub const fn null() -> $object {
+                $object(std::ptr::null_mut())
+            }
+
+            #[doc = std::concat!("Create a new [`", std::stringify!($object), "`] containing `null`")]
+            #[cfg(not(target_pointer_width = "64"))]
+            pub const fn null() -> $object {
+                $object(0)
+            }
+
+            /// Is this a null pointer?
+            #[cfg(target_pointer_width = "64")]
+            pub const fn is_null(&self) -> bool {
+                self.0.is_null()
+            }
+
+            /// Is this a null pointer?
+            #[cfg(not(target_pointer_width = "64"))]
+            pub const fn is_null(&self) -> bool {
+                self.0 == 0
+            }
+        }
+
+        impl const Clone for $object {
+            fn clone(&self) -> Self {
+                $object(self.0)
+            }
+        }
+
+        impl Copy for $object {}
+
+        impl PartialEq for $object {
+            fn eq(&self, other: &Self) -> bool {
+                self.0.eq(&other.0)
+            }
+        }
+
+        impl Eq for $object {}
     };
 }

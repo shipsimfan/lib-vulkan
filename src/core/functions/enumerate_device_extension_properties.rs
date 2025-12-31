@@ -1,5 +1,5 @@
 use crate::{VkExtensionProperties, VkPhysicalDevice, VkResult};
-use std::ffi::{c_char, CStr};
+use std::ffi::{CStr, c_char};
 
 // rustdoc imports
 #[allow(unused_imports)]
@@ -48,6 +48,26 @@ use std::ptr::{null, null_mut};
 ///  - [`khr_maintenance5`]
 ///  - [`khr_push_descriptor`]
 ///
+/// # Valid Usage (Implicit)
+///  - `physical_device` must be a valid [`VkPhysicalDevice`] handle
+///  - If `layer_name` is not [`null`], `layer_name` must be a null-terminated UTF-8 string
+///  - `property_count` must be a valid pointer to a [`u32`] value
+///  - If the value referenced by `property_count` is not 0, and `properties` is not [`null_mut`],
+///    `properties` must be a valid pointer to an array of `property_count`
+///    [`VkExtensionProperties`] structures
+///
+/// # Return Codes
+/// On success, this command returns:
+///  - [`VkResult::VkIncomplete`]
+///  - [`VkResult::VkSuccess`]
+///
+/// On failure, this command returns
+///  - [`VkResult::VkErrorLayerNotPresent`]
+///  - [`VkResult::VkErrorOutOfDeviceMemory`]
+///  - [`VkResult::VkErrorOutOfHostMemory`]
+///  - [`VkResult::VkErrorUnknown`]
+///  - [`VkResult::VkErrorValidationFailedExt`]
+///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkEnumerateDeviceExtensionProperties = extern "system" fn(
     physical_device: VkPhysicalDevice,
@@ -57,5 +77,4 @@ pub type VkEnumerateDeviceExtensionProperties = extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkEnumerateInstanceExtensionProperties`]
-pub const VK_ENUMERATE_DEVICE_EXTENSION_PROPERTIES: &CStr =
-    c"vkEnumerateDeviceExtensionProperties";
+pub const VK_ENUMERATE_DEVICE_EXTENSION_PROPERTIES: &CStr = c"vkEnumerateDeviceExtensionProperties";

@@ -1,7 +1,7 @@
-use std::ptr::null_mut;
-use vulkan::{vkGetInstanceProcAddr, VK_GET_INSTANCE_PROC_ADDR};
+use vulkan::{VK_GET_INSTANCE_PROC_ADDR, VkInstance, vkGetInstanceProcAddr};
 
 #[test]
 fn loader() {
-    unsafe { vkGetInstanceProcAddr(null_mut(), VK_GET_INSTANCE_PROC_ADDR.as_ptr()) }.unwrap();
+    unsafe { vkGetInstanceProcAddr(VkInstance::null(), VK_GET_INSTANCE_PROC_ADDR.as_ptr()) }
+        .unwrap();
 }

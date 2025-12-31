@@ -31,6 +31,12 @@ use std::ptr::null_mut;
 /// to be enabled and valid for the lifetime of that instance, even if some of them become
 /// unavailable for future instances.
 ///
+/// # Valid Usage (Implicit)
+///  - `property_count` must be a valid pointer to a [`u32`] value
+///  - If the value referenced by `property_count` is not 0, and `properties` is not [`null_mut`],
+///    `properties` must be a valid pointer to an array of `property_count` [`VkLayerProperties`]
+///    structures
+///
 /// # Return Codes
 /// On success, this command returns:
 ///  - [`VkResult::VkSuccess`]
@@ -39,6 +45,8 @@ use std::ptr::null_mut;
 /// On failure, this command returns:
 ///  - [`VkResult::VkErrorOutOfHostMemory`]
 ///  - [`VkResult::VkErrorOutOfDeviceMemory`]
+///  - [`VkResult::VkErrorUnknown`]
+///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkEnumerateInstanceLayerProperties =

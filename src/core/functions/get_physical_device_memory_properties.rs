@@ -13,8 +13,8 @@ use crate::VK_VERSION_1_0;
 ///    which the properties are returned.
 ///
 /// # Valid Usage (Implicit)
-///  - `physical_device` **must** be a valid [`VkPhysicalDevice`] handle
-///  - `memory_properties` **must** be a valid pointer to a [`VkPhysicalDeviceMemoryProperties`]
+///  - `physical_device` must be a valid [`VkPhysicalDevice`] handle
+///  - `memory_properties` must be a valid pointer to a [`VkPhysicalDeviceMemoryProperties`]
 ///    structure
 ///
 /// Provided by [`VK_VERSION_1_0`]

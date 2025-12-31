@@ -2,7 +2,7 @@ use crate::vk_define_handle;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VK_VERSION_1_0;
+use crate::{VK_VERSION_1_0, VkInstance};
 
 vk_define_handle!(
     /// Opaque handle to a physical device object
@@ -12,6 +12,9 @@ vk_define_handle!(
     /// functionality) available to the host, of which there are a finite number. A logical device
     /// represents an instance of that implementation with its own state and resources independent
     /// of other logical devices.
+    ///
+    /// Physical devices cannot be independently destroyed, and are instead destroyed with the
+    /// [`VkInstance`] that they were retrieved from.
     ///
     /// Provided by [`VK_VERSION_1_0`]
     VkPhysicalDevice

@@ -14,6 +14,10 @@ use crate::{VK_FALSE, VK_TRUE, VK_VERSION_1_0};
 ///    feature is supported on this physical device, and [`VK_FALSE`] specifies that the feature is
 ///    not supported.
 ///
+/// # Valid Usage (Implicit)
+///  - `physical_device` must be a valid [`VkPhysicalDevice`] handle
+///  - `features` must be a valid pointer to a [`VkPhysicalDeviceFeatures`] structure
+///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetPhysicalDeviceFeatures =
     extern "system" fn(physical_device: VkPhysicalDevice, features: *mut VkPhysicalDeviceFeatures);

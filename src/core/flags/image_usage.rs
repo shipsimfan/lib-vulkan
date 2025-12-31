@@ -2,10 +2,7 @@ use crate::flags;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VK_VERSION_1_0;
-#[allow(unused_imports)]
-#[cfg(feature = "vk_version_1_4")]
-use crate::VK_VERSION_1_4;
+use crate::{VK_VERSION_1_0, VK_VERSION_1_4};
 
 flags! {
     /// Bitmask of [`VkImageUsageFlag`]
@@ -67,34 +64,29 @@ flags! {
         /// copy commands and host layout transitions.
         ///
         /// Provided by [`VK_VERSION_1_4`]
-        #[cfg(feature = "vk_version_1_4")]
         HostTransferBit = 0x00400000,
 
         /// [`VkImageUsageFlag::VideoDecodeDstBitKhr`] specifies that the image can be used as a
         /// decode output picture in a video decode operation.
         ///
         /// Provided by [`khr_video_decode_queue`]
-        #[cfg(feature = "vk_khr_video_decode_queue")]
         VideoDecodeDstBitKhr = 0x00000400,
 
         /// [`VkImageUsageFlag::VideoDecodeSrcBitKhr`] is reserved for future use.
         ///
         /// Provided by [`khr_video_decode_queue`]
-        #[cfg(feature = "vk_khr_video_decode_queue")]
         VideoDecodeSrcBitKhr = 0x00000800,
 
         /// [`VkImageUsageFlag::VideoDecodeDpbBitKhr`] specifies that the image can be used as an
         /// output reconstructed picture or an input reference picture in a video decode operation.
         ///
         /// Provided by [`khr_video_decode_queue`]
-        #[cfg(feature = "vk_khr_video_decode_queue")]
         VideoDecodeDpbBitKhr = 0x00001000,
 
         /// [`VkImageUsageFlag::FragmentDensityMapBitExt`] specifies that the image can be used to
         /// create a [`VkImageView`] suitable for use as a fragment density map image.
         ///
         /// Provided by [`ext_fragment_density_map`]
-        #[cfg(feature = "vk_ext_fragment_density_map")]
         FragmentDensityMapBitExt = 0x00000200,
 
         /// [`VkImageUsageFlag::FragmentShadingRateAttachmentBitKhr`] specifies that the image can
@@ -102,27 +94,23 @@ flags! {
         /// attachment or shading rate image
         ///
         /// Provided by [`khr_fragment_shading_rate`]
-        #[cfg(feature = "vk_khr_fragment_shading_rate")]
         FragmentShadingRateAttachmentBitKhr = 0x00000100,
 
         /// [`VkImageUsageFlag::VideoEncodeDstBitKhr`] is reserved for future use.
         ///
         /// Provided by [`khr_video_encode_queue`]
-        #[cfg(feature = "vk_khr_video_encode_queue")]
         VideoEncodeDstBitKhr = 0x00002000,
 
         /// [`VkImageUsageFlag::VideoEncodeSrcBitKhr`] specifies that the image can be used as an
         /// encode input picture in a video encode operation.
         ///
         /// Provided by [`khr_video_encode_queue`]
-        #[cfg(feature = "vk_khr_video_encode_queue")]
         VideoEncodeSrcBitKhr = 0x00004000,
 
         /// [`VkImageUsageFlag::VideoEncodeDpbBitKhr`] specifies that the image can be used as an
         /// output reconstructed picture or an input reference picture in a video encode operation.
         ///
         /// Provided by [`khr_video_encode_queue`]
-        #[cfg(feature = "vk_khr_video_encode_queue")]
         VideoEncodeDpbBitKhr = 0x00008000,
 
         /// [`VkImageUsageFlag::AttachmentFeedbackLoopBitExt`] specifies that the image can be
@@ -132,19 +120,15 @@ flags! {
         /// in the same render pass.
         ///
         /// Provided by [`ext_attachment_feedback_loop_layout`]
-        #[cfg(feature = "vk_ext_attachment_feedback_loop_layout")]
         AttachmentFeedbackLoopBitExt = 0x00080000,
 
         /// Provided by [`huawei_invocation_mask`]
-        #[cfg(feature = "vk_huawei_invocation_mask")]
         InvocationMaskBitHuawei = 0x00040000,
 
         /// Provided by [`qcom_image_processing`]
-        #[cfg(feature = "vk_qcom_image_processing")]
         SampleWeightBitQcom = 0x00100000,
 
         /// Provided by [`qcom_image_processing`]
-        #[cfg(feature = "vk_qcom_image_processing")]
         SampleBlockMatchBitQcom = 0x00200000,
     }
 }

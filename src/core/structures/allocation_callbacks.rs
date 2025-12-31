@@ -23,22 +23,41 @@ pub struct VkAllocationCallbacks {
 
     /// `allocation` is a [`VkAllocationFunction`] pointer to an application-defined memory
     /// allocation function.
+    ///
+    /// # Valid Usage
+    ///  - `allocation` must be a valid pointer to a valid application-defined
+    ///    [`VkAllocationFunction`]
     pub allocation: VkAllocationFunction,
 
     /// `reallocation` is a [`VkReallocationFunction`] pointer to an application-defined memory
     /// reallocation function.
+    ///
+    /// # Valid Usage
+    ///  - `reallocation` must be a valid pointer to a valid application-defined
+    ///    [`VkReallocationFunction`]
     pub reallocation: VkReallocationFunction,
 
     /// `free` is a [`VkFreeFunction`] pointer to an application-defined memory free function.
+    ///
+    /// # Valid Usage
+    ///  - `free` must be a valid pointer to a valid application-defined [`VkFreeFunction`]
     pub free: VkFreeFunction,
 
     /// `internal_allocation` is a [`VkInternalAllocationNotification`] pointer to an
     /// application-defined function that is called by the implementation when the implementation
     /// makes internal allocations.
-    pub internal_allocation: VkInternalAllocationNotification,
+    ///
+    /// # Valid Usage
+    ///  - If either of `internal_allocation` or `internal_free` is not [`None`], both must be
+    ///    valid callbacks
+    pub internal_allocation: Option<VkInternalAllocationNotification>,
 
     /// `internal_free` is a [`VkInternalFreeNotification`] pointer to an application-defined
     /// function that is called by the implementation when the implementation frees internal
     /// allocations.
-    pub internal_free: VkInternalFreeNotification,
+    ///
+    /// # Valid Usage
+    ///  - If either of `internal_allocation` or `internal_free` is not [`None`], both must be
+    ///    valid callbacks
+    pub internal_free: Option<VkInternalFreeNotification>,
 }

@@ -4,6 +4,8 @@ use std::ffi::CStr;
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::VK_VERSION_1_0;
+#[allow(unused_imports)]
+use std::ptr::null;
 
 /// Create a new device instance
 ///
@@ -32,6 +34,17 @@ use crate::VK_VERSION_1_0;
 /// may fail due to lack of device-specific resources (in addition to other errors). If that
 /// occurs, [`VkCreateDevice`] will return [`VkResult::VkErrorTooManyObjects`].
 ///
+/// # Valid Usage
+///  - All required device extensions for each extension in the
+///    [`VkDeviceCreateInfo::enabled_extension_names`] list must also be present in that list
+///
+/// # Valid Usage (Implicit)
+///  - `physical_device` must be a valid [`VkPhysicalDevice`] handle
+///  - `create_info` must be a valid pointer to a valid [`VkDeviceCreateInfo`] structure
+///  - if `allocator` is not [`null`], `allocator` must be a valid pointer to a valid
+///    [`VkAllocationCallbacks`] structure
+///  - `device` must be a valid pointer to a [`VkDevice`] handle
+///
 /// # Return Codes
 /// On success, this command returns:
 ///  - [`VkResult::VkSuccess`]
@@ -54,5 +67,4 @@ pub type VkCreateDevice = extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkCreateDevice`]
-pub const VK_CREATE_DEVICE: &CStr =
-    c"vkCreateDevice";
+pub const VK_CREATE_DEVICE: &CStr = c"vkCreateDevice";

@@ -8,7 +8,7 @@ use crate::{
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    VkImageUsageFlagBits,
+    VkImageUsageFlag,
     khr_surface::{self, VkCompositeAlphaFlagBitsKHR, VkPresentModeKHR},
 };
 
@@ -67,13 +67,13 @@ pub struct VkSurfaceCapabilitiesKHR {
     /// by ensuring that all pixels in the presentable images have an alpha value of 1.0.
     pub supported_composite_alpha: VkCompositeAlphaFlagsKHR,
 
-    /// `supported_usage_flags` is a bitmask of [`VkImageUsageFlagBits`] representing the ways the
+    /// `supported_usage_flags` is a bitmask of [`VkImageUsageFlag`] representing the ways the
     /// application can use the presentable images of a swapchain created with [`VkPresentModeKHR`]
     /// set to [`VkPresentModeKHR::ImmediateModeKHR`], [`VkPresentModeKHR::MailboxKHR`],
     /// [`VkPresentModeKHR::FIFOKHR`] or [`VkPresentModeKHR::FIFORelaxedKHR`] for the surface on
-    /// the specified device. [`VkImageUsageFlagBits::ColorAttachmentBit`] must be included in the
+    /// the specified device. [`VkImageUsageFlag::ColorAttachmentBit`] must be included in the
     /// set. Implementations may support additional usages.
-    pub supported_usage_flags: VkImageUsageFlags,
+    pub supported_usage_flags: VkImageUsageFlag,
 }
 
 impl Default for VkSurfaceCapabilitiesKHR {

@@ -40,6 +40,13 @@ use std::ptr::{null, null_mut};
 /// to behavioral differences, or any extension that cannot be enabled against the advertised
 /// version.
 ///
+/// # Valid Usage (Implicit)
+///  - If `layer_name` is not [`null`], `layer_name` must be a null-terminated UTF-8 string
+///  - `property_count` must be a valid pointer to a [`u32`] value
+///  - If the value referenced by `property_count` is not 0, and `properties` is not [`null_mut`],
+///    `properties` must be a valid pointer to an array of `property_count`
+///    [`VkExtensionProperties`] structures
+///
 /// # Return Codes
 /// On success, this command returns:
 ///  - [`VkResult::VkSuccess`]
@@ -49,6 +56,8 @@ use std::ptr::{null, null_mut};
 ///  - [`VkResult::VkErrorOutOfHostMemory`]
 ///  - [`VkResult::VkErrorOutOfDeviceMemory`]
 ///  - [`VkResult::VkErrorLayerNotPresent`]
+///  - [`VkResult::VkErrorUnknown`]
+///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkEnumerateInstanceExtensionProperties = extern "system" fn(

@@ -12,6 +12,10 @@ use crate::VK_VERSION_1_0;
 ///  - `properties` is a pointer to a [`VkPhysicalDeviceProperties`] structure in which properties
 ///    are returned.
 ///
+/// # Valid Usage (Implicit)
+///  - `physical_device` must be a valid [`VkPhysicalDevice`] handle
+///  - `properties` must be a valid pointer to a [`VkPhysicalDeviceProperties`] structure
+///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetPhysicalDeviceProperties = extern "system" fn(
     physical_device: VkPhysicalDevice,

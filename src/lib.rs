@@ -19,14 +19,10 @@
 
 use macros::{flags, flags_no_bits};
 
-#[cfg(feature = "vk_ext_debug_utils")]
-pub mod ext_debug_utils;
-#[cfg(feature = "vk_khr_surface")]
-pub mod khr_surface;
-#[cfg(feature = "vk_khr_swapchain")]
-pub mod khr_swapchain;
-#[cfg(feature = "vk_khr_win32_surface")]
-pub mod khr_win32_surface;
+//pub mod ext_debug_utils;
+//pub mod khr_surface;
+//pub mod khr_swapchain;
+//pub mod khr_win32_surface;
 
 mod core;
 mod macros;

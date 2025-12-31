@@ -4,6 +4,7 @@ use crate::{VK_FALSE, VK_TRUE, VK_VERSION_1_0};
 
 /// Vulkan boolean type
 ///
+/// # Description
 /// [`VK_TRUE`] represents a boolean True (unsigned integer 1) value, and [`VK_FALSE`] a boolean
 /// False (unsigned integer 0) value.
 ///

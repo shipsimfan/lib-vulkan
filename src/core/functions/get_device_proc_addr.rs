@@ -34,6 +34,10 @@ use std::ptr::{null, null_mut};
 /// | device                            | enabled extension device-level dispatchable command      | fp           |
 /// | any other case not covered above  | any other case, not covered above                        | [`null`]     |
 ///
+/// # Valid Usage (Implicit)
+///  - `device` must be a valid [`VkDevice`] handle
+///  - `name` must be a null-terminated UTF-8 string
+///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetDeviceProcAddr =
     extern "system" fn(device: VkDevice, name: *const c_char) -> Option<VkVoidFunction>;

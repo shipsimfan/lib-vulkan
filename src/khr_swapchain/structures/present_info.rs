@@ -10,7 +10,7 @@ use crate::khr_swapchain;
 
 /// Structure describing parameters of a queue presentation
 ///
-/// Before an application can present an image, the image’s layout **must** be transitioned to the
+/// Before an application can present an image, the image’s layout must be transitioned to the
 /// [`VkImageLayout::PresentSrcKHR`] layout, or for a shared presentable image the
 /// [`VkImageLayout::SharedPresentKHR`] layout.
 ///

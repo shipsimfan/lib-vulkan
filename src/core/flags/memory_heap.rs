@@ -29,14 +29,12 @@ flags! {
         /// physical device’s instance of the heap.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        #[cfg(feature = "vk_version_1_1")]
         MultiInstanceBit = 0x00000002,
 
         /// [`VkMemoryHeapFlag::TileMemoryBitQcom`] bit specifies that the heap corresponds to
         /// tile memory.
         ///
         /// Provided by [`qcom_tile_memory_heap`]
-        #[cfg(feature = "vk_qcom_tile_memory_heap")]
         TileMemoryBitQcom = 0x00000008,
     }
 }

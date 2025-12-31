@@ -1,4 +1,4 @@
-use crate::{VkStructureType, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkStructureType};
 use std::{ffi::c_char, os::raw::c_void, ptr::null};
 
 // rustdoc imports
@@ -20,13 +20,23 @@ use crate::VkResult;
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkApplicationInfo {
     /// `r#type` is a [`VkStructureType`] value identifying this structure.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - `r#type` must be [`VkStructureType::ApplicationInfo`]
     pub r#type: VkStructureType,
 
     /// `next` is [`null`] or a pointer to a structure extending this structure.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - `next` must be [`null`]
     pub next: *const c_void,
 
     /// `application_name` is [`null`] or is a pointer to a null-terminated UTF-8 string containing
     /// the name of the application.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - If `application_name` is not [`null`], `application_name` must be a null-terminated
+    ///    UTF-8 string
     pub application_name: *const c_char,
 
     /// `application_version` is an unsigned integer variable containing the developer-supplied
@@ -35,6 +45,10 @@ pub struct VkApplicationInfo {
 
     /// `engine_name` is [`null`] or is a pointer to a null-terminated UTF-8 string containing the
     /// name of the engine (if any) used to create the application.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - If `engine_name` is not [`null`], `engine_name` must be a null-terminated UTF-8
+    ///    string
     pub engine_name: *const c_char,
 
     /// `engine_version` is an unsigned integer variable containing the developer-supplied version
@@ -45,6 +59,10 @@ pub struct VkApplicationInfo {
     /// use. The patch version number specified in `api_version` is ignored when creating an
     /// instance object. The variant version of the instance must match that requested in
     /// `api_version`.
+    ///
+    /// # Valid Usage
+    ///  - If `api_version` is not 0, then it must be greater than or equal to
+    ///    [`VK_VERSION_1_0`]
     pub api_version: u32,
 }
 
