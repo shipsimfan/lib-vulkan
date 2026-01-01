@@ -8,31 +8,31 @@ use crate::khr_surface;
 #[repr(C)]
 #[non_exhaustive]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum VkPresentModeKHR {
-    /// [`VkPresentModeKHR::ImmediateModeKHR`] specifies that the presentation engine does not wait
+pub enum VkPresentModeKhr {
+    /// [`VkPresentModeKhr::ImmediateModeKhr`] specifies that the presentation engine does not wait
     /// for a vertical blanking period to update the current image, meaning this mode may result in
     /// visible tearing. No internal queuing of presentation requests is needed, as the requests
     /// are applied immediately.
-    ImmediateModeKHR = 0,
+    ImmediateModeKhr = 0,
 
-    /// [`VkPresentModeKHR::MailboxKHR`] specifies that the presentation engine waits for the next
+    /// [`VkPresentModeKhr::MailboxKhr`] specifies that the presentation engine waits for the next
     /// vertical blanking period to update the current image. Tearing cannot be observed. An
     /// internal single-entry queue is used to hold pending presentation requests. If the queue is
     /// full when a new presentation request is received, the new request replaces the existing
     /// entry, and any images associated with the prior entry become available for reuse by the
     /// application. One request is removed from the queue and processed during each vertical
     /// blanking period in which the queue is non-empty.
-    MailboxKHR = 1,
+    MailboxKhr = 1,
 
-    /// [`VkPresentModeKHR::FIFOKHR`] specifies that the presentation engine waits for the next
+    /// [`VkPresentModeKhr::FIFOKhr`] specifies that the presentation engine waits for the next
     /// vertical blanking period to update the current image. Tearing cannot be observed. An
     /// internal queue is used to hold pending presentation requests. New requests are appended to
     /// the end of the queue, and one request is removed from the beginning of the queue and
     /// processed during each vertical blanking period in which the queue is non-empty. This is the
     /// only value of presentMode that is required to be supported.
-    FIFOKHR = 2,
+    FIFOKhr = 2,
 
-    /// [`VkPresentModeKHR::FIFORelaxedKHR`] specifies that the presentation engine generally waits
+    /// [`VkPresentModeKhr::FIFORelaxedKhr`] specifies that the presentation engine generally waits
     /// for the next vertical blanking period to update the current image. If a vertical blanking
     /// period has already passed since the last update of the current image then the presentation
     /// engine does not wait for another vertical blanking period for the update, meaning this mode
@@ -43,9 +43,9 @@ pub enum VkPresentModeKHR {
     /// requests are appended to the end of the queue, and one request is removed from the
     /// beginning of the queue and processed during or after each vertical blanking period in which
     /// the queue is non-empty.
-    FIFORelaxedKHR = 3,
+    FIFORelaxedKhr = 3,
 
-    /// [`VkPresentModeKHR::DemandRefreshKHR`] specifies that the presentation engine and
+    /// [`VkPresentModeKhr::DemandRefreshKhr`] specifies that the presentation engine and
     /// application have concurrent access to a single image, which is referred to as a shared
     /// presentable image. The presentation engine is only required to update the current image
     /// after a new presentation request is received. Therefore the application must make a
@@ -53,9 +53,9 @@ pub enum VkPresentModeKHR {
     /// update the current image at any point, meaning this mode may result in visible tearing.
     ///
     /// Provided by [`khr_shared_presentable_image`]
-    DemandRefreshKHR = 1000111000,
+    DemandRefreshKhr = 1000111000,
 
-    /// [`VkPresentModeKHR::ContinousRefreshKHR`] specifies that the presentation engine and
+    /// [`VkPresentModeKhr::ContinousRefreshKhr`] specifies that the presentation engine and
     /// application have concurrent access to a single image, which is referred to as a shared
     /// presentable image. The presentation engine periodically updates the current image on its
     /// regular refresh cycle. The application is only required to make one initial presentation
@@ -66,5 +66,5 @@ pub enum VkPresentModeKHR {
     /// is not timed correctly.
     ///
     /// Provided by [`khr_shared_presentable_image`]
-    ContinousRefreshKHR = 1000111001,
+    ContinousRefreshKhr = 1000111001,
 }

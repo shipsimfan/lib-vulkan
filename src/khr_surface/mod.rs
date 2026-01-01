@@ -9,16 +9,18 @@
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_surface, khr_swapchain};
+use crate::khr_surface;
 
 mod constants;
 mod enumerations;
+mod flags;
 mod functions;
+mod handles;
 mod structures;
-mod types;
 
 pub use constants::*;
 pub use enumerations::*;
+pub use flags::*;
 pub use functions::*;
+pub use handles::*;
 pub use structures::*;
-pub use types::*;

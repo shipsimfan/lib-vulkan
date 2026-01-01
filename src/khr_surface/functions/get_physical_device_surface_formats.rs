@@ -1,14 +1,16 @@
 use crate::{
     VkPhysicalDevice, VkResult,
-    khr_surface::{VkSurfaceFormatKHR, VkSurfaceKHR},
+    khr_surface::{VkSurfaceFormatKhr, VkSurfaceKhr},
 };
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    VK_NULL_HANDLE, VkFormat,
-    khr_surface::{self, VkColorSpaceKHR},
+    VK_NULL_HANDLE, VkFormat, VkInstance,
+    khr_surface::{
+        self, VkColorSpaceKhr, VkGetPhysicalDeviceSurfaceSupportKhr, VkSurfaceCapabilitiesKhr,
+    },
 };
 #[allow(unused_imports)]
 use std::ptr::null_mut;
@@ -17,11 +19,11 @@ use std::ptr::null_mut;
 ///
 /// # Parameters
 ///  - `physical_device` is the physical device that will be associated with the swapchain to be
-///    created, as described for [`VkCreateSwapchainKHR`].
+///    created, as described for [`VkCreateSwapchainKhr`].
 ///  - `surface` is the surface that will be associated with the swapchain.
 ///  - `surface_format_count` is a pointer to an integer related to the number of format pairs
 ///    available or queried, as described below.
-///  - `surface_formats` is either [`null_mut`] or a pointer to an array of [`VkSurfaceFormatKHR`]
+///  - `surface_formats` is either [`null_mut`] or a pointer to an array of [`VkSurfaceFormatKhr`]
 ///    structures.
 ///
 /// # Description
@@ -38,7 +40,7 @@ use std::ptr::null_mut;
 /// not contain an entry whose value for format is [`VkFormat::Undefined`].
 ///
 /// If `surface_formats` includes an entry whose value for `color_space` is  
-/// [`VkColorSpaceKHR::SRGBNonlinearKHR`] and whose value for format is a `UNORM` (or `SRGB`)
+/// [`VkColorSpaceKhr::SRGBNonlinearKhr`] and whose value for format is a `UNORM` (or `SRGB`)
 /// format and the corresponding `SRGB` (or `UNORM`) format is a color renderable format for
 /// [`VkImageTiling::Optimal`], then `surface_formats` must also contain an entry with the same
 /// value for `color_space` and format equal to the corresponding `SRGB` (or `UNORM`) format.
@@ -46,6 +48,17 @@ use std::ptr::null_mut;
 /// If the [`google_surfaceless_query`] extension is enabled, the values returned in
 /// `surface_formats` will be identical for every valid surface created on this physical device,
 /// and so surface can be [`VK_NULL_HANDLE`].
+///
+/// # Valid Usage
+///  - `surface` must be supported by `physical_device`, as reported by
+///    [`VkGetPhysicalDeviceSurfaceSupportKhr`] or an equivalent platform-specific mechanism
+///
+/// # Valid Usage (Implicit)
+///  - `physical_device` must be a valid [`VkPhysicalDevice`] handle
+///  - `surface` must be a valid [`VkSurfaceKhr`] handle
+///  - `surface_capabilities` must be a valid pointer to a [`VkSurfaceCapabilitiesKhr`] structure
+///  - Both of `physical_device`, and `surface` must have been created, allocated, or retrieved
+///    from the same [`VkInstance`]
 ///
 /// # Return Codes
 /// On success, this command returns:
@@ -55,16 +68,16 @@ use std::ptr::null_mut;
 /// On failure, this command returns:
 ///  - [`VkResult::VkErrorOutOfHostMemory`]
 ///  - [`VkResult::VkErrorOutOfDeviceMemory`]
-///  - [`VkResult::VkErrorSurfaceLostKHR`]
+///  - [`VkResult::VkErrorSurfaceLostKhr`]
 ///
 /// Provided by [`khr_surface`]
-pub type VkGetPhysicalDeviceSurfaceFormatsKHR = extern "system" fn(
+pub type VkGetPhysicalDeviceSurfaceFormatsKhr = extern "system" fn(
     physical_device: VkPhysicalDevice,
-    surface: VkSurfaceKHR,
+    surface: VkSurfaceKhr,
     surface_format_count: *mut u32,
-    surface_formats: *mut VkSurfaceFormatKHR,
+    surface_formats: *mut VkSurfaceFormatKhr,
 ) -> VkResult;
 
-/// The name of [`VkGetPhysicalDeviceSurfaceFormatsKHR`]
+/// The name of [`VkGetPhysicalDeviceSurfaceFormatsKhr`]
 pub const VK_GET_PHYSICAL_DEVICE_SURFACE_FORMATS_KHR: &CStr =
     c"vkGetPhysicalDeviceSurfaceFormatsKHR";

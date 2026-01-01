@@ -1,7 +1,7 @@
 use crate::{
     VkExtent2D, VkImageUsageFlags,
     khr_surface::{
-        VkCompositeAlphaFlagsKHR, VkSurfaceTransformFlagBitsKHR, VkSurfaceTransformFlagsKHR,
+        VkCompositeAlphaFlagsKhr, VkSurfaceTransformFlagKhr, VkSurfaceTransformFlagsKhr,
     },
 };
 
@@ -9,7 +9,7 @@ use crate::{
 #[allow(unused_imports)]
 use crate::{
     VkImageUsageFlag,
-    khr_surface::{self, VkCompositeAlphaFlagBitsKHR, VkPresentModeKHR},
+    khr_surface::{self, VkCompositeAlphaFlagKhr, VkPresentModeKhr},
 };
 
 /// Structure describing capabilities of a surface
@@ -17,7 +17,7 @@ use crate::{
 /// Provided by [`khr_surface`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct VkSurfaceCapabilitiesKHR {
+pub struct VkSurfaceCapabilitiesKhr {
     /// `min_image_count` is the minimum number of images the specified device supports for a
     /// swapchain created for the surface, and will be at least one.
     pub min_image_count: u32,
@@ -51,44 +51,44 @@ pub struct VkSurfaceCapabilitiesKHR {
     /// swapchain created for this device and surface, and will be at least one.
     pub max_image_array_layers: u32,
 
-    /// `supported_transforms` is a bitmask of [`VkSurfaceTransformFlagBitsKHR`] indicating the
+    /// `supported_transforms` is a bitmask of [`VkSurfaceTransformFlagKhr`] indicating the
     /// presentation transforms supported for the surface on the specified device. At least one bit
     /// will be set.
-    pub supported_transforms: VkSurfaceTransformFlagsKHR,
+    pub supported_transforms: VkSurfaceTransformFlagsKhr,
 
-    /// `current_transform` is [`VkSurfaceTransformFlagBitsKHR`] value indicating the surface’s
+    /// `current_transform` is [`VkSurfaceTransformFlagKhr`] value indicating the surface’s
     /// current transform relative to the presentation engine’s natural orientation.
-    pub current_transform: VkSurfaceTransformFlagBitsKHR,
+    pub current_transform: VkSurfaceTransformFlagKhr,
 
-    /// `supported_composite_alpha` is a bitmask of [`VkCompositeAlphaFlagBitsKHR`], representing
+    /// `supported_composite_alpha` is a bitmask of [`VkCompositeAlphaFlagKhr`], representing
     /// the alpha compositing modes supported by the presentation engine for the surface on the
     /// specified device, and at least one bit will be set. Opaque composition can be achieved in
     /// any alpha compositing mode by either using an image format that has no alpha component, or
     /// by ensuring that all pixels in the presentable images have an alpha value of 1.0.
-    pub supported_composite_alpha: VkCompositeAlphaFlagsKHR,
+    pub supported_composite_alpha: VkCompositeAlphaFlagsKhr,
 
     /// `supported_usage_flags` is a bitmask of [`VkImageUsageFlag`] representing the ways the
-    /// application can use the presentable images of a swapchain created with [`VkPresentModeKHR`]
-    /// set to [`VkPresentModeKHR::ImmediateModeKHR`], [`VkPresentModeKHR::MailboxKHR`],
-    /// [`VkPresentModeKHR::FIFOKHR`] or [`VkPresentModeKHR::FIFORelaxedKHR`] for the surface on
+    /// application can use the presentable images of a swapchain created with [`VkPresentModeKhr`]
+    /// set to [`VkPresentModeKhr::ImmediateModeKhr`], [`VkPresentModeKhr::MailboxKhr`],
+    /// [`VkPresentModeKhr::FIFOKhr`] or [`VkPresentModeKhr::FIFORelaxedKhr`] for the surface on
     /// the specified device. [`VkImageUsageFlag::ColorAttachmentBit`] must be included in the
     /// set. Implementations may support additional usages.
-    pub supported_usage_flags: VkImageUsageFlag,
+    pub supported_usage_flags: VkImageUsageFlags,
 }
 
-impl Default for VkSurfaceCapabilitiesKHR {
+impl Default for VkSurfaceCapabilitiesKhr {
     fn default() -> Self {
-        VkSurfaceCapabilitiesKHR {
+        VkSurfaceCapabilitiesKhr {
             min_image_count: 0,
             max_image_count: 0,
             current_extent: VkExtent2D::default(),
             min_image_extent: VkExtent2D::default(),
             max_image_extent: VkExtent2D::default(),
             max_image_array_layers: 0,
-            supported_transforms: 0,
-            current_transform: VkSurfaceTransformFlagBitsKHR::IdentityBitKHR,
-            supported_composite_alpha: 0,
-            supported_usage_flags: 0,
+            supported_transforms: VkSurfaceTransformFlagsKhr::new(),
+            current_transform: VkSurfaceTransformFlagKhr::IdentityBitKhr,
+            supported_composite_alpha: VkCompositeAlphaFlagsKhr::new(),
+            supported_usage_flags: VkImageUsageFlags::new(),
         }
     }
 }

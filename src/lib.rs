@@ -20,7 +20,7 @@
 use macros::{flags, flags_no_bits};
 
 pub mod ext_debug_utils;
-//pub mod khr_surface;
+pub mod khr_surface;
 //pub mod khr_swapchain;
 //pub mod khr_win32_surface;
 

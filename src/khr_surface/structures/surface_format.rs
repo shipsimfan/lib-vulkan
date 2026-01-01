@@ -1,4 +1,4 @@
-use crate::{VkFormat, khr_surface::VkColorSpaceKHR};
+use crate::{VkFormat, khr_surface::VkColorSpaceKhr};
 
 // rustdoc imports
 #[allow(unused_imports)]
@@ -9,19 +9,19 @@ use crate::khr_surface;
 /// Provided by [`khr_surface`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct VkSurfaceFormatKHR {
+pub struct VkSurfaceFormatKhr {
     /// `format` is a [`VkFormat`] that is compatible with the specified surface.
     pub format: VkFormat,
 
-    /// `color_space` is a presentation [`VkColorSpaceKHR`] that is compatible with the surface.
-    pub color_space: VkColorSpaceKHR,
+    /// `color_space` is a presentation [`VkColorSpaceKhr`] that is compatible with the surface.
+    pub color_space: VkColorSpaceKhr,
 }
 
-impl Default for VkSurfaceFormatKHR {
+impl Default for VkSurfaceFormatKhr {
     fn default() -> Self {
-        VkSurfaceFormatKHR {
+        VkSurfaceFormatKhr {
             format: VkFormat::Undefined,
-            color_space: VkColorSpaceKHR::SRGBNonlinearKHR,
+            color_space: VkColorSpaceKhr::SRGBNonlinearKhr,
         }
     }
 }
