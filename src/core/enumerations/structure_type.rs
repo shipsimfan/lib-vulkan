@@ -5,6 +5,10 @@ use crate::{
     ext_debug_utils, khr_surface, khr_swapchain,
 };
 
+#[allow(unused_imports)]
+#[cfg(all(target_os = "windows", feature = "win32"))]
+use crate::khr_win32_surface;
+
 /// Vulkan structure types
 ///
 /// # Description
@@ -767,6 +771,7 @@ pub enum VkStructureType {
     AndroidSurfaceCreateInfoKhr = 1000008000,
 
     /// Provided by [`khr_win32_surface`]
+    #[cfg(all(target_os = "windows", feature = "win32"))]
     Win32SurfaceCreateInfoKhr = 1000009000,
 
     /// Provided by [`ext_debug_report`]
@@ -1646,6 +1651,7 @@ pub enum VkStructureType {
     SurfaceCapabilitiesFullScreenExclusiveExt = 1000255002,
 
     /// Provided by [`khr_win32_surface`] with [`ext_full_screen_exclusive`]
+    #[cfg(all(target_os = "windows", feature = "win32"))]
     SurfaceFullScreenExclusiveWin32InfoExt = 1000255001,
 
     /// Provided by [`ext_headless_surface`]

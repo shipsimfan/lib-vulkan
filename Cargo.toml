@@ -7,3 +7,9 @@ edition = "2024"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/shipsimfan/lib-vulkan"
 publish = false
+
+[features]
+win32 = ["dep:win32"]
+
+[target.'cfg(windows)'.dependencies]
+win32 = { git = "https://github.com/shipsimfan/lib-win32", optional = true }
