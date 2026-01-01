@@ -1,6 +1,8 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VK_VERSION_1_1, VK_VERSION_1_3, ext_debug_utils};
+use crate::{
+    VK_VERSION_1_0, VK_VERSION_1_1, VK_VERSION_1_3, ext_debug_utils, khr_surface, khr_swapchain,
+};
 
 /// Specify an enumeration to track object handle types
 ///

@@ -10,6 +10,7 @@ use crate::{VK_VERSION_1_0, VkCreateInstance, VkInstanceCreateFlag};
 
 /// Structure specifying parameters of a newly created instance
 ///
+/// # Description
 /// To capture events that occur while creating or destroying an instance, an application can link
 /// a [`VkDebugReportCallbackCreateInfoEXT`] structure or a [`VkDebugUtilsMessengerCreateInfoEXT`]
 /// structure to the `next` element of the [`VkInstanceCreateInfo`] structure given to

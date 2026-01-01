@@ -1,15 +1,16 @@
 use crate::{
-    VkPhysicalDeviceLimits, VkPhysicalDeviceSparseProperties, VkPhysicalDeviceType,
-    VK_MAX_PHYSICAL_DEVICE_NAME_SIZE, VK_UUID_SIZE,
+    VK_MAX_PHYSICAL_DEVICE_NAME_SIZE, VK_UUID_SIZE, VkPhysicalDeviceLimits,
+    VkPhysicalDeviceSparseProperties, VkPhysicalDeviceType,
 };
 use std::ffi::c_char;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VkPhysicalDevice, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkPhysicalDevice};
 
 /// Structure specifying physical device properties
 ///
+/// # Description
 /// On implementations that claim support for the Roadmap 2022 profile, the major and minor version
 /// expressed by `api_version` must be at least Vulkan 1.3.
 ///

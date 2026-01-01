@@ -1,9 +1,11 @@
-use crate::{VkPhysicalDevice, VkRect2D, VkResult, khr_surface::VkSurfaceKHR};
+use crate::{VkPhysicalDevice, VkRect2D, VkResult, khr_surface::VkSurfaceKhr};
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_1, khr_swapchain};
+use crate::{
+    VK_VERSION_1_1, VkInstance, khr_surface::VkGetPhysicalDeviceSurfaceSupportKhr, khr_swapchain,
+};
 #[allow(unused_imports)]
 use std::ptr::null_mut;
 
@@ -30,15 +32,31 @@ use std::ptr::null_mut;
 ///
 /// The rectangles returned by this command must not overlap.
 ///
+/// # Valid Usage
+///  - `surface` must be supported by `physical_device`, as reported by
+///    [`VkGetPhysicalDeviceSurfaceSupportKhr`] or an equivalent platform-specific mechanism
+///
+/// # Valid Usage (Implicit)
+///  - `physical_device` must be a valid [`VkPhysicalDevice`] handle
+///  - `surface` must be a valid [`VkSurfaceKhr`] handle
+///  - `rect_count` must be a valid pointer to a [`u32`] value
+///  - If the value referenced by `rect_count` is not 0, and `rects` is not [`null_mut`], `rects`
+///    must be a valid pointer to an array of `rect_count` [`VkRect2D`] structures
+///  - Both of `physical_device`, and `surface` must have been created, allocated, or retrieved
+///    from the same [`VkInstance`]
+///
+/// # Host Synchronization
+///  - Host access to `surface` must be externally synchronized
+///
 /// Provided by [`VK_VERSION_1_1`] with [`khr_swapchain`], [`khr_device_group`] with
 /// [`khr_swapchain`]
-pub type VkGetPhysicalDevicePresentRectanglesKHR = extern "system" fn(
+pub type VkGetPhysicalDevicePresentRectanglesKhr = extern "system" fn(
     physical_device: VkPhysicalDevice,
-    surface: VkSurfaceKHR,
+    surface: VkSurfaceKhr,
     rect_count: *mut u32,
     rects: *mut VkRect2D,
 ) -> VkResult;
 
-/// The name of [`VkGetPhysicalDevicePresentRectanglesKHR`]
+/// The name of [`VkGetPhysicalDevicePresentRectanglesKhr`]
 pub const VK_GET_PHYSICAL_DEVICE_PRESENT_RECTANGLES_KHR: &CStr =
     c"vkGetPhysicalDevicePresentRectanglesKHR";

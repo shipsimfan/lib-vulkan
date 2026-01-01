@@ -6,6 +6,7 @@ use crate::VK_VERSION_1_0;
 
 /// Structure providing information about a queue family
 ///
+/// # Description
 /// The value returned in `min_image_transfer_granularity` has a unit of compressed texel blocks
 /// for images having a block-compressed format, and a unit of texels otherwise.
 ///

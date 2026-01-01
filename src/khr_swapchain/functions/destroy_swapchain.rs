@@ -1,9 +1,11 @@
-use crate::{VkAllocationCallbacks, VkDevice, VkSwapchainKHR};
+use crate::{VkAllocationCallbacks, VkDevice, khr_swapchain::VkSwapchainKhr};
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{khr_surface::VkSurfaceKHR, khr_swapchain};
+use crate::{VK_NULL_HANDLE, khr_surface::VkSurfaceKhr, khr_swapchain};
+#[allow(unused_imports)]
+use std::ptr::null;
 
 /// Destroy a swapchain object
 ///
@@ -21,7 +23,7 @@ use crate::{khr_surface::VkSurfaceKHR, khr_swapchain};
 /// presentation engine. For example, if one image of the swapchain is being displayed in a window,
 /// the memory for that image may not be freed until the window is destroyed, or another swapchain
 /// is created for the window. Destroying the swapchain does not invalidate the parent
-/// [`VkSurfaceKHR`], and a new swapchain can be created with it.
+/// [`VkSurfaceKhr`], and a new swapchain can be created with it.
 ///
 /// When a swapchain associated with a display surface is destroyed, if the image most recently
 /// presented to the display surface is from the swapchain being destroyed, then either any display
@@ -32,12 +34,31 @@ use crate::{khr_surface::VkSurfaceKHR, khr_swapchain};
 /// If swapchain has exclusive full-screen access, it is released before the swapchain is
 /// destroyed.
 ///
+/// # Valid Usage
+///  - All uses of presentable images acquired from `swapchain` must have completed execution
+///  - If [`VkAllocationCallbacks`] were provided when `swapchain` was created, a compatible set of
+///    callbacks must be provided here
+///  - If no [`VkAllocationCallbacks`] were provided when swapchain was created, `allocator` must
+///    be [`null`]
+///
+/// # Valid Usage (Implicit)
+///  - `device` must be a valid [`VkDevice`] handle
+///  - If `swapchain` is not [`VK_NULL_HANDLE`], `swapchain` must be a valid [`VkSwapchainKhr`]
+///    handle
+///  - If `allocator` is not [`null`], `allocator` must be a valid pointer to a valid
+///    [`VkAllocationCallbacks`] structure
+///  - If `swapchain` is a valid handle, it must have been created, allocated, or retrieved from
+///    `device`
+///
+/// # Host Synchronization
+///  - Host access to `swapchain` must be externally synchronized
+///
 /// Provided by [`khr_swapchain`]
-pub type VkDestroySwapchainKHR = extern "system" fn(
+pub type VkDestroySwapchainKhr = extern "system" fn(
     device: VkDevice,
-    swapchain: VkSwapchainKHR,
+    swapchain: VkSwapchainKhr,
     allocator: *const VkAllocationCallbacks,
 );
 
-/// The name of [`VkDestroySwapchainKHR`]
+/// The name of [`VkDestroySwapchainKhr`]
 pub const VK_DESTROY_SWAPCHAIN_KHR: &CStr = c"vkDestroySwapchainKHR";

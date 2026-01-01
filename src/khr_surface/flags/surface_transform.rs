@@ -7,6 +7,10 @@ use crate::khr_surface;
 flags! {
     /// Bitmask of [`VkSurfaceTransformFlagKhr`]
     ///
+    /// # Description
+    /// [`VkSurfaceTransformFlagsKhr`] is a bitmask type for setting a mask of zero or more
+    /// [`VkSurfaceTransformFlagKhr`].
+    ///
     /// Provided by [`khr_surface`]
     pub struct VkSurfaceTransformFlagsKhr;
 
