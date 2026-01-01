@@ -70,7 +70,7 @@ pub struct VkPhysicalDeviceProperties {
     pub sparse_properties: VkPhysicalDeviceSparseProperties,
 }
 
-impl Default for VkPhysicalDeviceProperties {
+impl const Default for VkPhysicalDeviceProperties {
     fn default() -> Self {
         VkPhysicalDeviceProperties {
             api_version: 0,

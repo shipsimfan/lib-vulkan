@@ -122,7 +122,7 @@ pub struct VkPresentInfoKhr {
     pub results: *mut VkResult,
 }
 
-impl Default for VkPresentInfoKhr {
+impl const Default for VkPresentInfoKhr {
     fn default() -> Self {
         VkPresentInfoKhr {
             r#type: VkStructureType::PresentInfoKhr,

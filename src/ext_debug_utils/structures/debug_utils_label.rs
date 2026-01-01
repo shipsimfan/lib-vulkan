@@ -39,7 +39,7 @@ pub struct VkDebugUtilsLabelExt {
     pub color: [f32; 4],
 }
 
-impl Default for VkDebugUtilsLabelExt {
+impl const Default for VkDebugUtilsLabelExt {
     fn default() -> Self {
         VkDebugUtilsLabelExt {
             r#type: VkStructureType::DebugUtilsLabelExt,

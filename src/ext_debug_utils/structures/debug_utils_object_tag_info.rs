@@ -64,7 +64,7 @@ pub struct VkDebugUtilsObjectTagInfoExt {
     pub tag: *const c_void,
 }
 
-impl Default for VkDebugUtilsObjectTagInfoExt {
+impl const Default for VkDebugUtilsObjectTagInfoExt {
     fn default() -> Self {
         VkDebugUtilsObjectTagInfoExt {
             r#type: VkStructureType::DebugUtilsObjectTagInfoExt,

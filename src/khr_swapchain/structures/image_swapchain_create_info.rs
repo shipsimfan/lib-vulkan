@@ -34,7 +34,7 @@ pub struct VkImageSwapchainCreateInfoKhr {
     pub swapchain: VkSwapchainKhr,
 }
 
-impl Default for VkImageSwapchainCreateInfoKhr {
+impl const Default for VkImageSwapchainCreateInfoKhr {
     fn default() -> Self {
         VkImageSwapchainCreateInfoKhr {
             r#type: VkStructureType::ImageSwapchainCreateInfoKhr,

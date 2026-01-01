@@ -97,7 +97,7 @@ pub struct VkDeviceGroupPresentInfoKhr {
     pub mode: VkDeviceGroupPresentModeFlagKhr,
 }
 
-impl Default for VkDeviceGroupPresentInfoKhr {
+impl const Default for VkDeviceGroupPresentInfoKhr {
     fn default() -> Self {
         VkDeviceGroupPresentInfoKhr {
             r#type: VkStructureType::DeviceGroupPresentInfoKhr,

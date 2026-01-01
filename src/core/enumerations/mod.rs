@@ -1,3 +1,5 @@
+mod attachment_load_op;
+mod attachment_store_op;
 mod format;
 mod image_layout;
 mod internal_allocation_type;
@@ -8,6 +10,8 @@ mod sharing_mode;
 mod structure_type;
 mod system_allocation_scope;
 
+pub use attachment_load_op::VkAttachmentLoadOp;
+pub use attachment_store_op::VkAttachmentStoreOp;
 pub use format::VkFormat;
 pub use image_layout::VkImageLayout;
 pub use internal_allocation_type::VkInternalAllocationType;

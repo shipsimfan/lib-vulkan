@@ -1,3 +1,4 @@
+mod attachment_description;
 mod device;
 mod device_queue_create;
 mod image_usage;
@@ -9,6 +10,7 @@ mod sample_count;
 
 mod flags;
 
+pub use attachment_description::*;
 pub use device::*;
 pub use device_queue_create::*;
 pub use image_usage::*;

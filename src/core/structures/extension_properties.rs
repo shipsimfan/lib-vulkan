@@ -20,7 +20,7 @@ pub struct VkExtensionProperties {
     pub spec_version: u32,
 }
 
-impl Default for VkExtensionProperties {
+impl const Default for VkExtensionProperties {
     fn default() -> Self {
         VkExtensionProperties {
             extension_name: [0; VK_MAX_EXTENSION_NAME_SIZE],

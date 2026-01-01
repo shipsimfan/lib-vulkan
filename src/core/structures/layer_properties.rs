@@ -30,7 +30,7 @@ pub struct VkLayerProperties {
     pub description: [c_char; VK_MAX_DESCRIPTION_SIZE],
 }
 
-impl Default for VkLayerProperties {
+impl const Default for VkLayerProperties {
     fn default() -> Self {
         VkLayerProperties {
             layer_name: [0; VK_MAX_EXTENSION_NAME_SIZE],

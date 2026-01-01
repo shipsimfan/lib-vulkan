@@ -5,7 +5,7 @@ use crate::{
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_TRUE, VK_VERSION_1_0};
+use crate::{VK_TRUE, VK_VERSION_1_0, VkAttachmentDescriptionFlag};
 
 /// Structure specifying an attachment description
 ///

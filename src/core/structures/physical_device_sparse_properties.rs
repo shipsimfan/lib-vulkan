@@ -52,7 +52,7 @@ pub struct VkPhysicalDeviceSparseProperties {
     pub residency_non_resident_strict: VkBool32,
 }
 
-impl Default for VkPhysicalDeviceSparseProperties {
+impl const Default for VkPhysicalDeviceSparseProperties {
     fn default() -> Self {
         VkPhysicalDeviceSparseProperties {
             residency_standard_2d_block_shape: 0,

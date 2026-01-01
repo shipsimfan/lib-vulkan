@@ -68,7 +68,7 @@ pub struct VkPhysicalDeviceFeatures {
     pub inherited_queries: VkBool32,
 }
 
-impl Default for VkPhysicalDeviceFeatures {
+impl const Default for VkPhysicalDeviceFeatures {
     fn default() -> Self {
         VkPhysicalDeviceFeatures {
             robust_buffer_access: VK_FALSE,

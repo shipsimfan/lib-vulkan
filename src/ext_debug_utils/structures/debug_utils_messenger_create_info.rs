@@ -93,7 +93,7 @@ pub struct VkDebugUtilsMessengerCreateInfoExt {
     pub user_data: *mut c_void,
 }
 
-impl Default for VkDebugUtilsMessengerCreateInfoExt {
+impl const Default for VkDebugUtilsMessengerCreateInfoExt {
     fn default() -> Self {
         VkDebugUtilsMessengerCreateInfoExt {
             r#type: VkStructureType::DebugUtilsMessengerCreateInfoExt,

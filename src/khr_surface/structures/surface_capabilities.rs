@@ -76,7 +76,7 @@ pub struct VkSurfaceCapabilitiesKhr {
     pub supported_usage_flags: VkImageUsageFlags,
 }
 
-impl Default for VkSurfaceCapabilitiesKhr {
+impl const Default for VkSurfaceCapabilitiesKhr {
     fn default() -> Self {
         VkSurfaceCapabilitiesKhr {
             min_image_count: 0,

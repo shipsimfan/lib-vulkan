@@ -1,6 +1,9 @@
 mod allocation_callbacks;
 mod application_info;
 mod attachment_description;
+mod attachment_layout;
+mod base_in_structure;
+mod base_out_structure;
 mod device_create_info;
 mod device_queue_create_info;
 mod extension_properties;
@@ -21,6 +24,10 @@ mod rect_2d;
 
 pub use allocation_callbacks::VkAllocationCallbacks;
 pub use application_info::VkApplicationInfo;
+pub use attachment_description::VkAttachmentDescription;
+pub use attachment_layout::VkAttachmentReference;
+pub use base_in_structure::VkBaseInStructure;
+pub use base_out_structure::VkBaseOutStructure;
 pub use device_create_info::VkDeviceCreateInfo;
 pub use device_queue_create_info::VkDeviceQueueCreateInfo;
 pub use extension_properties::VkExtensionProperties;

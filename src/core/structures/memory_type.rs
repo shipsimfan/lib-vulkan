@@ -8,7 +8,6 @@ use crate::{VK_VERSION_1_0, VkMemoryPropertyFlag, VkPhysicalDeviceMemoryProperti
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
-#[allow(missing_docs)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct VkMemoryType {
     /// `property_flags` is a bitmask of [`VkMemoryPropertyFlag`] of properties for this memory
@@ -20,7 +19,7 @@ pub struct VkMemoryType {
     pub heap_index: u32,
 }
 
-impl Default for VkMemoryType {
+impl const Default for VkMemoryType {
     fn default() -> Self {
         VkMemoryType {
             property_flags: VkMemoryPropertyFlags::default(),

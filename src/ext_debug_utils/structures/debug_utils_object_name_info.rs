@@ -60,7 +60,7 @@ pub struct VkDebugUtilsObjectNameInfoExt {
     pub object_name: *const c_char,
 }
 
-impl Default for VkDebugUtilsObjectNameInfoExt {
+impl const Default for VkDebugUtilsObjectNameInfoExt {
     fn default() -> Self {
         VkDebugUtilsObjectNameInfoExt {
             r#type: VkStructureType::DebugUtilsObjectNameInfoExt,

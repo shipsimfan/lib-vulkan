@@ -57,7 +57,6 @@ use crate::{VK_VERSION_1_0, VkImageUsageFlag};
 #[repr(C)]
 #[non_exhaustive]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-#[allow(missing_docs)]
 pub enum VkSharingMode {
     /// [`VkSharingMode::Exclusive`] specifies that access to any range or image subresource of the
     /// object will be exclusive to a single queue family at a time.

@@ -9,7 +9,6 @@ use crate::{
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[non_exhaustive]
-#[allow(missing_docs)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum VkObjectType {
     /// Unknown/Undefined Handle

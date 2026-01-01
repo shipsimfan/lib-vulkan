@@ -107,7 +107,7 @@ pub struct VkDebugUtilsMessengerCallbackDataExt {
     pub objects: *const VkDebugUtilsObjectNameInfoExt,
 }
 
-impl Default for VkDebugUtilsMessengerCallbackDataExt {
+impl const Default for VkDebugUtilsMessengerCallbackDataExt {
     fn default() -> Self {
         VkDebugUtilsMessengerCallbackDataExt {
             r#type: VkStructureType::DebugUtilsMessengerCallbackDataExt,

@@ -17,7 +17,7 @@ pub struct VkRect2D {
     pub extent: VkExtent2D,
 }
 
-impl Default for VkRect2D {
+impl const Default for VkRect2D {
     fn default() -> Self {
         VkRect2D {
             offset: VkOffset2D::default(),

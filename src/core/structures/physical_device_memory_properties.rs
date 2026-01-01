@@ -123,7 +123,6 @@ use crate::{VK_VERSION_1_0, VkGetPhysicalDeviceMemoryProperties};
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
-#[allow(missing_docs)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkPhysicalDeviceMemoryProperties {
     /// `memory_type_count` is the number of valid elements in the `memory_types` array.
@@ -142,7 +141,7 @@ pub struct VkPhysicalDeviceMemoryProperties {
     pub memory_heaps: [VkMemoryHeap; VK_MAX_MEMORY_HEAPS],
 }
 
-impl Default for VkPhysicalDeviceMemoryProperties {
+impl const Default for VkPhysicalDeviceMemoryProperties {
     fn default() -> Self {
         VkPhysicalDeviceMemoryProperties {
             memory_type_count: 0,

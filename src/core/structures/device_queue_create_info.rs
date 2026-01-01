@@ -82,7 +82,7 @@ pub struct VkDeviceQueueCreateInfo {
     pub queue_priorities: *const f32,
 }
 
-impl Default for VkDeviceQueueCreateInfo {
+impl const Default for VkDeviceQueueCreateInfo {
     fn default() -> Self {
         VkDeviceQueueCreateInfo {
             r#type: VkStructureType::DeviceQueueCreateInfo,

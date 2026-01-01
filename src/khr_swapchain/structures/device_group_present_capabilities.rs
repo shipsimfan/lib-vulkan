@@ -50,7 +50,7 @@ pub struct VkDeviceGroupPresentCapabilitiesKhr {
     pub modes: VkDeviceGroupPresentModeFlagsKhr,
 }
 
-impl Default for VkDeviceGroupPresentCapabilitiesKhr {
+impl const Default for VkDeviceGroupPresentCapabilitiesKhr {
     fn default() -> Self {
         VkDeviceGroupPresentCapabilitiesKhr {
             r#type: VkStructureType::DeviceGroupPresentCapabilitiesKhr,
