@@ -1,4 +1,5 @@
 mod format;
+mod image_layout;
 mod internal_allocation_type;
 mod object_type;
 mod physical_device_type;
@@ -8,6 +9,7 @@ mod structure_type;
 mod system_allocation_scope;
 
 pub use format::VkFormat;
+pub use image_layout::VkImageLayout;
 pub use internal_allocation_type::VkInternalAllocationType;
 pub use object_type::VkObjectType;
 pub use physical_device_type::VkPhysicalDeviceType;

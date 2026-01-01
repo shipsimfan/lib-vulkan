@@ -1,5 +1,6 @@
 mod allocation_callbacks;
 mod application_info;
+mod attachment_description;
 mod device_create_info;
 mod device_queue_create_info;
 mod extension_properties;

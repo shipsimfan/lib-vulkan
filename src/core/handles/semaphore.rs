@@ -1,10 +1,10 @@
-use crate::vk_define_handle;
+use crate::vk_define_non_dispatchable_handle;
 
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::VK_VERSION_1_0;
 
-vk_define_handle!(
+vk_define_non_dispatchable_handle!(
     /// Opaque handle to a semaphore object
     ///
     /// Semaphores are a synchronization primitive that can be used to insert a dependency between

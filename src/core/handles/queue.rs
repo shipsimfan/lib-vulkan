@@ -2,7 +2,7 @@ use crate::vk_define_handle;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VK_VERSION_1_0;
+use crate::{VK_VERSION_1_0, VkCreateDevice, VkDeviceQueueCreateInfo};
 
 vk_define_handle!(
     /// Opaque handle to a queue object
