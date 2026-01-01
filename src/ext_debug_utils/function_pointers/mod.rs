@@ -1,0 +1,3 @@
+mod debug_utils_messenger_callback;
+
+pub use debug_utils_messenger_callback::VkDebugUtilsMessengerCallbackExt;

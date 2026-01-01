@@ -1,5 +1,0 @@
-mod debug_utils_message_severity_flag_bits;
-mod debug_utils_message_type_flag_bits;
-
-pub use debug_utils_message_severity_flag_bits::VkDebugUtilsMessageSeverityFlagBitsEXT;
-pub use debug_utils_message_type_flag_bits::VkDebugUtilsMessageTypeFlagBitsEXT;

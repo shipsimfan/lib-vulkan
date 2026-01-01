@@ -13,15 +13,24 @@ use crate::ext_debug_utils;
 /// Provided by [`ext_debug_utils`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq)]
-pub struct VkDebugUtilsLabelEXT {
+pub struct VkDebugUtilsLabelExt {
     /// `r#type` is a [`VkStructureType`] value identifying this structure.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - `r#type` must be [`VkStructureType::DebugUtilsLabelExt`]
     pub r#type: VkStructureType,
 
     /// `next` is [`null`] or a pointer to a structure extending this structure.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - `next` must be [`null`]
     pub next: *const c_void,
 
     /// `label_name` is a pointer to a null-terminated UTF-8 string containing the name of the
     /// label.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - `label_name` must be a null-terminated UTF-8 string
     pub label_name: *const c_char,
 
     /// `color` is an optional RGBA color value that can be associated with the label. A particular
@@ -30,10 +39,10 @@ pub struct VkDebugUtilsLabelEXT {
     pub color: [f32; 4],
 }
 
-impl Default for VkDebugUtilsLabelEXT {
+impl Default for VkDebugUtilsLabelExt {
     fn default() -> Self {
-        VkDebugUtilsLabelEXT {
-            r#type: VkStructureType::DebugUtilsLabelEXT,
+        VkDebugUtilsLabelExt {
+            r#type: VkStructureType::DebugUtilsLabelExt,
             next: null(),
             label_name: null(),
             color: [0.; 4],

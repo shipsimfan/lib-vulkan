@@ -14,5 +14,5 @@ vk_define_non_dispatchable_handle!(
     /// callback is not interested in and will only provide desired debug messages.
     ///
     /// Provided by [`ext_debug_utils`]
-    VkDebugUtilsMessengerEXT
+    VkDebugUtilsMessengerExt
 );

@@ -17,11 +17,13 @@ macro_rules! vk_define_non_dispatchable_handle {
     ) => {
         #[cfg(target_pointer_width = "64")]
         $(#[$meta])*
+        #[repr(C)]
         pub struct $object(*mut ::std::ffi::c_void);
 
 
         #[cfg(not(target_pointer_width = "64"))]
         $(#[$meta])*
+        #[repr(C)]
         pub struct $object(u64);
 
         impl $object {
@@ -49,6 +51,8 @@ macro_rules! vk_define_non_dispatchable_handle {
                 self.0 == 0
             }
         }
+
+        unsafe impl Send for $object {}
 
         impl const Clone for $object {
             fn clone(&self) -> Self {

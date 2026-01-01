@@ -11,10 +11,10 @@
 //!    labels to aid organization and offline analysis in external tools.
 //!
 //! The main difference between this extension and [`ext_debug_report`] and [`ext_debug_marker`] is
-//! that those extensions use [`VkDebugReportObjectTypeEXT`] to identify objects. This extension
-//! uses the core [`VkObjectType`] in place of [`VkDebugReportObjectTypeEXT`]. The primary reason
+//! that those extensions use [`VkDebugReportObjectTypeExt`] to identify objects. This extension
+//! uses the core [`VkObjectType`] in place of [`VkDebugReportObjectTypeExt`]. The primary reason
 //! for this move is that no future object type handle enumeration values will be added to
-//! [`VkDebugReportObjectTypeEXT`] since the creation of [`VkObjectType`].
+//! [`VkDebugReportObjectTypeExt`] since the creation of [`VkObjectType`].
 //!
 //! In addition, this extension combines the functionality of both [`ext_debug_report`] and
 //! [`ext_debug_marker`] by allowing object name and debug markers (now called labels) to be
@@ -24,16 +24,18 @@
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{ext_debug_utils, VkCommandBuffer};
+use crate::{VkCommandBuffer, VkObjectType, VkQueue, ext_debug_utils};
 
 mod constants;
-mod enumerations;
+mod flags;
+mod function_pointers;
 mod functions;
+mod handles;
 mod structures;
-mod types;
 
 pub use constants::*;
-pub use enumerations::*;
+pub use flags::*;
+pub use function_pointers::*;
 pub use functions::*;
+pub use handles::*;
 pub use structures::*;
-pub use types::*;

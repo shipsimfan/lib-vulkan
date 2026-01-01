@@ -1,4 +1,4 @@
-use crate::{VkDebugUtilsLabelEXT, VkQueue};
+use crate::{VkQueue, ext_debug_utils::VkDebugUtilsLabelExt};
 use std::ffi::CStr;
 
 // rustdoc imports
@@ -9,13 +9,19 @@ use crate::ext_debug_utils;
 ///
 /// # Parameters
 ///  - `queue` is the queue in which to start a debug label region.
-///  - `label_info` is a pointer to a [`VkDebugUtilsLabelEXT`] structure specifying parameters of
+///  - `label_info` is a pointer to a [`VkDebugUtilsLabelExt`] structure specifying parameters of
 ///    the label region to open.
 ///
+/// # Valid Usage (Implicit)
+///  - `queue` must be a valid [`VkQueue`] handle
+///  - `label_info` must be a pointer to a valid [`VkDebugUtilsLabelExt`] structure
+///
+/// # Host Synchronization
+///  - Host access to `queue` must be externally synchronized
+///
 /// Provided by [`ext_debug_utils`]
-pub type VkQueueBeginDebugUtilsLabelEXT =
-    extern "system" fn(queue: VkQueue, label_info: *const VkDebugUtilsLabelEXT);
+pub type VkQueueBeginDebugUtilsLabelExt =
+    extern "system" fn(queue: VkQueue, label_info: *const VkDebugUtilsLabelExt);
 
-/// The name of [`VkQueueBeginDebugUtilsLabelEXT`]
-pub const VK_QUEUE_BEGIN_DEBUG_UTILS_LABEL_EXT: &CStr =
-    c"vkQueueBeginDebugUtilsLabelEXT";
+/// The name of [`VkQueueBeginDebugUtilsLabelExt`]
+pub const VK_QUEUE_BEGIN_DEBUG_UTILS_LABEL_EXT: &CStr = c"vkQueueBeginDebugUtilsLabelEXT";

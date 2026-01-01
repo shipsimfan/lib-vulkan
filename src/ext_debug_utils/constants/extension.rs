@@ -7,8 +7,7 @@ use crate::ext_debug_utils;
 /// The name of the [`ext_debug_utils`] extension
 ///
 /// Provided by [`ext_debug_utils`]
-pub const VK_EXT_DEBUG_UTILS_EXTENSION_NAME: &CStr =
-    c"VK_EXT_debug_utils";
+pub const VK_EXT_DEBUG_UTILS_EXTENSION_NAME: &CStr = c"VK_EXT_debug_utils";
 
 /// The version of the [`ext_debug_utils`] extension provided by these bindings
 ///
