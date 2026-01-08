@@ -43,6 +43,14 @@ macro_rules! flags {
             }
         }
 
+        impl const std::ops::BitOr for $enum_name {
+            type Output = $struct_name;
+
+            fn bitor(self, rhs: $enum_name) -> Self::Output {
+                $struct_name::from_flags(self as u32 | rhs as u32)
+            }
+        }
+
         impl const std::ops::BitOr<$struct_name> for $enum_name {
             type Output = $struct_name;
 
