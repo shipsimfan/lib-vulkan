@@ -3,10 +3,24 @@
 version = 4
 
 [[package]]
+name = "linux"
+version = "0.1.0"
+source = "git+https://github.com/shipsimfan/lib-linux#9f4ee2d3a80afd751c6aa07ed3a78b000f58c557"
+
+[[package]]
 name = "vulkan"
 version = "0.1.0"
 dependencies = [
+ "wayland",
  "win32",
+]
+
+[[package]]
+name = "wayland"
+version = "0.1.0"
+source = "git+https://github.com/shipsimfan/lib-wayland#4db083116a15b79a9139f5b518e1b4e13893c089"
+dependencies = [
+ "linux",
 ]
 
 [[package]]

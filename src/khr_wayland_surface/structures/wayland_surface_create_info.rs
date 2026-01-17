@@ -1,0 +1,59 @@
+use crate::{VkStructureType, khr_wayland_surface::VkWaylandSurfaceCreateFlagsKhr};
+use std::{
+    ffi::c_void,
+    ptr::{null, null_mut},
+};
+use wayland::{wl_display, wl_surface};
+
+// rustdoc imports
+#[allow(unused_imports)]
+use crate::khr_wayland_surface;
+
+/// Structure specifying parameters of a newly created Wayland surface object
+///
+/// Provided by [`khr_wayland_surface`]
+#[repr(C)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct VkWaylandSurfaceCreateInfoKhr {
+    ///  `r#type` is a [`VkStructureType`] value identifying this structure.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - `r#type` must be [`VkStructureType::WaylandSurfaceCreateInfoKhr`]
+    pub r#type: VkStructureType,
+
+    /// `next` is [`null`] or a pointer to a structure extending this structure.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - `next` must be [`null`]
+    pub next: *const c_void,
+
+    /// `flags` is reserved for future use.
+    ///
+    /// # Valid Usage (Implicit)
+    ///  - `flags` must be 0
+    pub flags: VkWaylandSurfaceCreateFlagsKhr,
+
+    /// `display` is a pointer to a Wayland [`wl_display`] to associate the surface with
+    ///
+    /// # Valid Usage
+    ///  - `display` must point to a valid Wayland [`wl_display`]
+    pub display: *mut wl_display,
+
+    /// `surface` is a pointer to a Wayland [`wl_surface`] to associate the surface with
+    ///
+    /// # Valid Usage
+    ///  - `surface` must point to a valid Wayland [`wl_surface`]
+    pub surface: *mut wl_surface,
+}
+
+impl Default for VkWaylandSurfaceCreateInfoKhr {
+    fn default() -> Self {
+        VkWaylandSurfaceCreateInfoKhr {
+            r#type: VkStructureType::WaylandSurfaceCreateInfoKhr,
+            next: null(),
+            flags: VkWaylandSurfaceCreateFlagsKhr::new(),
+            display: null_mut(),
+            surface: null_mut(),
+        }
+    }
+}

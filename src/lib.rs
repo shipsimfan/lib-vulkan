@@ -22,6 +22,8 @@ use macros::{flags, flags_no_bits};
 pub mod ext_debug_utils;
 pub mod khr_surface;
 pub mod khr_swapchain;
+#[cfg(all(target_os = "linux", feature = "wayland"))]
+pub mod khr_wayland_surface;
 #[cfg(all(target_os = "windows", feature = "win32"))]
 pub mod khr_win32_surface;
 

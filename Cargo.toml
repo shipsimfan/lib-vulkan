@@ -10,6 +10,10 @@ publish = false
 
 [features]
 win32 = ["dep:win32"]
+wayland = ["dep:wayland"]
 
 [target.'cfg(windows)'.dependencies]
 win32 = { git = "https://github.com/shipsimfan/lib-win32", optional = true }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+wayland = { git = "https://github.com/shipsimfan/lib-wayland", optional = true }

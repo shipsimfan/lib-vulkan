@@ -1,20 +1,20 @@
 use crate::{
     VkAllocationCallbacks, VkInstance, VkResult, khr_surface::VkSurfaceKhr,
-    khr_win32_surface::VkWin32SurfaceCreateInfoKhr,
+    khr_wayland_surface::VkWaylandSurfaceCreateInfoKhr,
 };
 use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::khr_win32_surface;
+use crate::khr_wayland_surface;
 #[allow(unused_imports)]
 use std::ptr::null;
 
-/// Create a [`VkSurfaceKhr`] object for a Win32 native window
+/// Create a [`VkSurfaceKhr`] object for a Wayland window
 ///
 /// # Parameters
 ///  - `instance` is the instance to associate the surface with.
-///  - `create_info` is a pointer to a [`VkWin32SurfaceCreateInfoKhr`] structure containing
+///  - `create_info` is a pointer to a [`VkWaylandSurfaceCreateInfoKhr`] structure containing
 ///    parameters affecting the creation of the surface object.
 ///  - `allocator` is the allocator used for host memory allocated for the surface object when
 ///    there is no more specific allocator available.
@@ -23,7 +23,7 @@ use std::ptr::null;
 ///
 /// # Valid Usage (Implicit)
 ///  - `instance` must be a valid [`VkInstance`] handle
-///  - `create_info` must be a valid pointer to a valid [`VkWin32SurfaceCreateInfoKhr`] structure
+///  - `create_info` must be a valid pointer to a valid [`VkWaylandSurfaceCreateInfoKhr`] structure
 ///  - If `allocator` is not [`null`], `allocator` must be a valid pointer to a valid
 ///    [`VkAllocationCallbacks`] structure
 ///  - `surface` must be a valid pointer to a [`VkSurfaceKhr`] handle
@@ -35,14 +35,16 @@ use std::ptr::null;
 /// On failure, this command returns:
 ///  - [`VkResult::VkErrorOutOfHostMemory`]
 ///  - [`VkResult::VkErrorOutOfDeviceMemory`]
+///  - [`VkResult::VkErrorUnknown`]
+///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
-/// Provided by [`khr_win32_surface`]
-pub type VkCreateWin32SurfaceKhr = extern "system" fn(
+/// Provided by [`khr_wayland_surface`]
+pub type VkCreateWaylandSurfaceKhr = extern "system" fn(
     instance: VkInstance,
-    create_info: *const VkWin32SurfaceCreateInfoKhr,
-    allocator: *const VkAllocationCallbacks,
+    create_info: *const VkWaylandSurfaceCreateInfoKhr,
+    allocatior: *const VkAllocationCallbacks,
     surface: *mut VkSurfaceKhr,
 ) -> VkResult;
 
-/// The name of [`VkCreateWin32SurfaceKhr`]
-pub const VK_CREATE_WIN32_SURFACE_KHR: &CStr = c"vkCreateWin32SurfaceKHR";
+/// The name of [`VkCreateWaylandSurfaceKhr`]
+pub const VK_CREATE_WAYLAND_SURFACE_KHR: &CStr = c"vkCreateWaylandSurfaceKHR";
