@@ -1,6 +1,6 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VK_VERSION_1_3, VK_VERSION_1_4};
+use crate::{VK_TRUE, VK_VERSION_1_0, VK_VERSION_1_3, VK_VERSION_1_4};
 
 /// Indicate which dynamic state is taken from dynamic state commands
 ///
@@ -9,31 +9,68 @@ use crate::{VK_VERSION_1_0, VK_VERSION_1_3, VK_VERSION_1_4};
 #[non_exhaustive]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum VkDynamicState {
-    /// [`VkDynamicState::Viewport`] specifies that the pViewports state in VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with vkCmdSetViewport before any drawing commands. The number of viewports used by a pipeline is still specified by the viewportCount member of VkPipelineViewportStateCreateInfo.
+    /// [`VkDynamicState::Viewport`] specifies that the `viewports` state in
+    /// [`VkPipelineViewportStateCreateInfo`] will be ignored and must be set dynamically with
+    /// [`VkCmdSetViewport`] before any drawing commands. The number of viewports used by a
+    /// pipeline is still specified by the `viewport_count` member of
+    /// [`VkPipelineViewportStateCreateInfo`].
     Viewport = 0,
 
-    /// [`VkDynamicState::Scissor`] specifies that the pScissors state in VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with vkCmdSetScissor before any drawing commands. The number of scissor rectangles used by a pipeline is still specified by the scissorCount member of VkPipelineViewportStateCreateInfo.
+    /// [`VkDynamicState::Scissor`] specifies that the `scissors` state in
+    /// [`VkPipelineViewportStateCreateInfo`] will be ignored and must be set dynamically with
+    /// [`VkCmdSetScissor`] before any drawing commands. The number of scissor rectangles used by a
+    /// pipeline is still specified by the `scissor_count` member of
+    /// [`VkPipelineViewportStateCreateInfo`].
     Scissor = 1,
 
-    /// [`VkDynamicState::LineWidth`] specifies that the lineWidth state in VkPipelineRasterizationStateCreateInfo will be ignored and must be set dynamically with vkCmdSetLineWidth before any drawing commands that generate line primitives for the rasterizer.
+    /// [`VkDynamicState::LineWidth`] specifies that the `line_width` state in
+    /// [`VkPipelineRasterizationStateCreateInfo`] will be ignored and must be set dynamically with
+    /// [`VkCmdSetLineWidth`] before any drawing commands that generate line primitives for the
+    /// rasterizer.
     LineWidth = 2,
 
-    /// [`VkDynamicState::DepthBias`] specifies that any instance of VkDepthBiasRepresentationInfoExt included in the pNext chain of VkPipelineRasterizationStateCreateInfo as well as the depthBiasConstantFactor, depthBiasClamp and depthBiasSlopeFactor states in VkPipelineRasterizationStateCreateInfo will be ignored and must be set dynamically with vkCmdSetDepthBias or vkCmdSetDepthBias2Ext before any draws are performed with depth bias enabled.
+    /// [`VkDynamicState::DepthBias`] specifies that any instance of
+    /// [`VkDepthBiasRepresentationInfoExt`] included in the `next` chain of
+    /// [`VkPipelineRasterizationStateCreateInfo`] as well as the `depth_bias_constant_factor`,
+    /// `depth_bias_clamp` and `depth_bias_slope_factor` states in
+    /// [`VkPipelineRasterizationStateCreateInfo`] will be ignored and must be set dynamically with
+    /// [`VkCmdSetDepthBias`] or [`VkCmdSetDepthBias2Ext`] before any draws are performed with
+    /// depth bias enabled.
     DepthBias = 3,
 
-    /// [`VkDynamicState::BlendConstants`] specifies that the blendConstants state in VkPipelineColorBlendStateCreateInfo will be ignored and must be set dynamically with vkCmdSetBlendConstants before any draws are performed with a pipeline state with VkPipelineColorBlendAttachmentState member blendEnable set to VK_TRUE and any of the blend functions using a constant blend color.
+    /// [`VkDynamicState::BlendConstants`] specifies that the `blend_constants` state in
+    /// [`VkPipelineColorBlendStateCreateInfo`] will be ignored and must be set dynamically with
+    /// [`VkCmdSetBlendConstants`] before any draws are performed with a pipeline state with
+    /// [`VkPipelineColorBlendAttachmentState`] member `blend_enable` set to [`VK_TRUE`] and any of
+    /// the blend functions using a constant blend color.
     BlendConstants = 4,
 
-    /// [`VkDynamicState::DepthBounds`] specifies that the minDepthBounds and maxDepthBounds states of VkPipelineDepthStencilStateCreateInfo will be ignored and must be set dynamically with vkCmdSetDepthBounds before any draws are performed with a pipeline state with VkPipelineDepthStencilStateCreateInfo member depthBoundsTestEnable set to VK_TRUE.
+    /// [`VkDynamicState::DepthBounds`] specifies that the `min_depth_bounds` and
+    /// `max_depth_bounds` states of [`VkPipelineDepthStencilStateCreateInfo`] will be ignored and
+    /// must be set dynamically with [`VkCmdSetDepthBounds`] before any draws are performed with a
+    /// pipeline state with [`VkPipelineDepthStencilStateCreateInfo`] member
+    /// `depth_bounds_test_enable` set to [`VK_TRUE`].
     DepthBounds = 5,
 
-    /// [`VkDynamicState::StencilCompareMask`] specifies that the compareMask state in VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set dynamically with vkCmdSetStencilCompareMask before any draws are performed with a pipeline state with VkPipelineDepthStencilStateCreateInfo member stencilTestEnable set to VK_TRUE
+    /// [`VkDynamicState::StencilCompareMask`] specifies that the `compare_mask` state in
+    /// [`VkPipelineDepthStencilStateCreateInfo`] for both front and back will be ignored and must
+    /// be set dynamically with [`VkCmdSetStencilCompareMask`] before any draws are performed with
+    /// a pipeline state with [`VkPipelineDepthStencilStateCreateInfo`] member
+    /// `stencil_test_enable` set to [`VK_TRUE`]
     StencilCompareMask = 6,
 
-    /// [`VkDynamicState::StencilWriteMask`] specifies that the writeMask state in VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set dynamically with vkCmdSetStencilWriteMask before any draws are performed with a pipeline state with VkPipelineDepthStencilStateCreateInfo member stencilTestEnable set to VK_TRUE
+    /// [`VkDynamicState::StencilWriteMask`] specifies that the `write_mask` state in
+    /// [`VkPipelineDepthStencilStateCreateInfo`] for both front and back will be ignored and must
+    /// be set dynamically with [`VkCmdSetStencilWriteMask`] before any draws are performed with a
+    /// pipeline state with [`VkPipelineDepthStencilStateCreateInfo`] member `stencil_test_enable`
+    /// set to [`VK_TRUE`]
     StencilWriteMask = 7,
 
-    /// [`VkDynamicState::StencilReference`] specifies that the reference state in VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set dynamically with vkCmdSetStencilReference before any draws are performed with a pipeline state with VkPipelineDepthStencilStateCreateInfo member stencilTestEnable set to VK_TRUE
+    /// [`VkDynamicState::StencilReference`] specifies that the reference state in
+    /// [`VkPipelineDepthStencilStateCreateInfo`] for both front and back will be ignored and must
+    /// be set dynamically with [`VkCmdSetStencilReference`] before any draws are performed with a
+    /// pipeline state with [`VkPipelineDepthStencilStateCreateInfo`] member `stencil_test_enable`
+    /// set to [`VK_TRUE`]
     StencilReference = 8,
 
     /// [`VkDynamicState::CullMode`] specifies that the cullMode state in VkPipelineRasterizationStateCreateInfo will be ignored and must be set dynamically with vkCmdSetCullMode before any drawing commands.
@@ -51,12 +88,12 @@ pub enum VkDynamicState {
     /// Provided by [`VK_VERSION_1_3`]
     PrimitiveTopology = 1000267002,
 
-    /// [`VkDynamicState::ViewportWithCount`] specifies that the viewportCount and pViewports state in VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with vkCmdSetViewportWithCount before any draw call.
+    /// [`VkDynamicState::ViewportWithCount`] specifies that the viewportCount and `viewports` state in VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with vkCmdSetViewportWithCount before any draw call.
     ///
     /// Provided by [`VK_VERSION_1_3`]
     ViewportWithCount = 1000267003,
 
-    /// [`VkDynamicState::ScissorWithCount`] specifies that the scissorCount and pScissors state in VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with vkCmdSetScissorWithCount before any draw call.
+    /// [`VkDynamicState::ScissorWithCount`] specifies that the scissorCount and `scissors` state in VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with vkCmdSetScissorWithCount before any draw call.
     ///
     /// Provided by [`VK_VERSION_1_3`]
     ScissorWithCount = 1000267004,
@@ -262,59 +299,97 @@ pub enum VkDynamicState {
     ExtraPrimitiveOverestimationSizeExt = 1000455015,
 
     /// [`VkDynamicState::DepthClipEnableExt`] specifies that the depthClipEnable state in VkPipelineRasterizationDepthClipStateCreateInfoExt will be ignored and must be set dynamically with vkCmdSetDepthClipEnableExt before any draw call.
-    DepthClipEnableExt,
+    ///
+    /// Provided by VK_EXT_depth_clip_enable with VK_EXT_extended_dynamic_state3
+    DepthClipEnableExt = 1000455016,
 
     /// [`VkDynamicState::SampleLocationsEnableExt`] specifies that the sampleLocationsEnable state in VkPipelineSampleLocationsStateCreateInfoExt will be ignored and must be set dynamically with vkCmdSetSampleLocationsEnableExt before any draw call.
-    SampleLocationsEnableExt,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_EXT_sample_locations
+    SampleLocationsEnableExt = 1000455017,
 
     /// [`VkDynamicState::ColorBlendAdvancedExt`] specifies that the colorBlendOp state in VkPipelineColorBlendAttachmentState, and srcPremultiplied, dstPremultiplied, and blendOverlap states in VkPipelineColorBlendAdvancedStateCreateInfoExt will be ignored and must be set dynamically with vkCmdSetColorBlendAdvancedExt before any draw call.
-    ColorBlendAdvancedExt,
+    ///
+    /// Provided by VK_EXT_blend_operation_advanced with VK_EXT_extended_dynamic_state3
+    ColorBlendAdvancedExt = 1000455018,
 
     /// [`VkDynamicState::ProvokingVertexModeExt`] specifies that the provokingVertexMode state in VkPipelineRasterizationProvokingVertexStateCreateInfoExt will be ignored and must be set dynamically with vkCmdSetProvokingVertexModeExt before any draw call.
-    ProvokingVertexModeExt,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_EXT_provoking_vertex
+    ProvokingVertexModeExt = 1000455019,
 
     /// [`VkDynamicState::LineRasterizationModeExt`] specifies that the lineRasterizationMode state in VkPipelineRasterizationLineStateCreateInfo will be ignored and must be set dynamically with vkCmdSetLineRasterizationModeExt before any draw call.
-    LineRasterizationModeExt,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_EXT_line_rasterization
+    LineRasterizationModeExt = 1000455020,
 
     /// [`VkDynamicState::LineStippleEnableExt`] specifies that the stippledLineEnable state in VkPipelineRasterizationLineStateCreateInfo will be ignored and must be set dynamically with vkCmdSetLineStippleEnableExt before any draw call.
-    LineStippleEnableExt,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_EXT_line_rasterization
+    LineStippleEnableExt = 1000455021,
 
     /// [`VkDynamicState::DepthClipNegativeOneToOneExt`] specifies that the negativeOneToOne state in VkPipelineViewportDepthClipControlCreateInfoExt will be ignored and must be set dynamically with vkCmdSetDepthClipNegativeOneToOneExt before any draw call.
-    DepthClipNegativeOneToOneExt,
-
-    /// [`VkDynamicState::DepthClampRangeExt`] specifies that the depthClampMode and pDepthClampRange state in VkPipelineViewportDepthClampControlCreateInfoExt will be ignored and must be set dynamically with vkCmdSetDepthClampRangeExt before any draw call.
-    DepthClampRangeExt,
+    ///
+    /// Provided by VK_EXT_depth_clip_control with VK_EXT_extended_dynamic_state3
+    DepthClipNegativeOneToOneExt = 1000455022,
 
     /// [`VkDynamicState::ViewportWScalingEnableNv`] specifies that the viewportWScalingEnable state in VkPipelineViewportWScalingStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetViewportWScalingEnableNv before any draw call.
-    ViewportWScalingEnableNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_clip_space_w_scaling
+    ViewportWScalingEnableNv = 1000455023,
 
     /// [`VkDynamicState::ViewportSwizzleNv`] specifies that the viewportCount, and pViewportSwizzles states in VkPipelineViewportSwizzleStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetViewportSwizzleNv before any draw call.
-    ViewportSwizzleNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_viewport_swizzle
+    ViewportSwizzleNv = 1000455024,
 
     /// [`VkDynamicState::CoverageToColorEnableNv`] specifies that the coverageToColorEnable state in VkPipelineCoverageToColorStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetCoverageToColorEnableNv before any draw call.
-    CoverageToColorEnableNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_fragment_coverage_to_color
+    CoverageToColorEnableNv = 1000455025,
 
     /// [`VkDynamicState::CoverageToColorLocationNv`] specifies that the coverageToColorLocation state in VkPipelineCoverageToColorStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetCoverageToColorLocationNv before any draw call.
-    CoverageToColorLocationNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_fragment_coverage_to_color
+    CoverageToColorLocationNv = 1000455026,
 
     /// [`VkDynamicState::CoverageModulationModeNv`] specifies that the coverageModulationMode state in VkPipelineCoverageModulationStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetCoverageModulationModeNv before any draw call.
-    CoverageModulationModeNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_framebuffer_mixed_samples
+    CoverageModulationModeNv = 1000455027,
 
     /// [`VkDynamicState::CoverageModulationTableEnableNv`] specifies that the coverageModulationTableEnable state in VkPipelineCoverageModulationStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetCoverageModulationTableEnableNv before any draw call.
-    CoverageModulationTableEnableNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_framebuffer_mixed_samples
+    CoverageModulationTableEnableNv = 1000455028,
 
     /// [`VkDynamicState::CoverageModulationTableNv`] specifies that the coverageModulationTableCount, and pCoverageModulationTable states in VkPipelineCoverageModulationStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetCoverageModulationTableNv before any draw call.
-    CoverageModulationTableNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_framebuffer_mixed_samples
+    CoverageModulationTableNv = 1000455029,
 
     /// [`VkDynamicState::ShadingRateImageEnableNv`] specifies that the shadingRateImageEnable state in VkPipelineViewportShadingRateImageStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetShadingRateImageEnableNv before any draw call.
-    ShadingRateImageEnableNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_shading_rate_image
+    ShadingRateImageEnableNv = 1000455030,
 
     /// [`VkDynamicState::RepresentativeFragmentTestEnableNv`] specifies that the representativeFragmentTestEnable state in VkPipelineRepresentativeFragmentTestStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetRepresentativeFragmentTestEnableNv before any draw call.
-    RepresentativeFragmentTestEnableNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_representative_fragment_test
+    RepresentativeFragmentTestEnableNv = 1000455031,
 
     /// [`VkDynamicState::CoverageReductionModeNv`] specifies that the coverageReductionMode state in VkPipelineCoverageReductionStateCreateInfoNv will be ignored and must be set dynamically with vkCmdSetCoverageReductionModeNv before any draw call.
-    CoverageReductionModeNv,
+    ///
+    /// Provided by VK_EXT_extended_dynamic_state3 with VK_NV_coverage_reduction_mode
+    CoverageReductionModeNv = 1000455032,
 
     /// [`VkDynamicState::AttachmentFeedbackLoopEnableExt`] specifies that the VK_PipelineCREATE_ColorAttachmentFeedbackLoopBIT_Ext and VK_PipelineCREATE_DepthStencilAttachmentFeedbackLoopBIT_Ext flags will be ignored and must be set dynamically with vkCmdSetAttachmentFeedbackLoopEnableExt before any draw call.
-    AttachmentFeedbackLoopEnableExt,
+    ///
+    /// Provided by VK_EXT_attachment_feedback_loop_dynamic_state
+    AttachmentFeedbackLoopEnableExt = 1000524000,
+
+    /// [`VkDynamicState::DepthClampRangeExt`] specifies that the depthClampMode and pDepthClampRange state in VkPipelineViewportDepthClampControlCreateInfoExt will be ignored and must be set dynamically with vkCmdSetDepthClampRangeExt before any draw call.
+    ///
+    /// Provided by VK_EXT_depth_clamp_control
+    DepthClampRangeExt = 1000582000,
 }
