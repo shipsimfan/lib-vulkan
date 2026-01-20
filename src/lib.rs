@@ -20,6 +20,7 @@
 use macros::{flags, flags_no_bits};
 
 pub mod ext_debug_utils;
+pub mod ext_extended_dynamic_state;
 pub mod khr_surface;
 pub mod khr_swapchain;
 #[cfg(all(target_os = "linux", feature = "wayland"))]
