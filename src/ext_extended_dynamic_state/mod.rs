@@ -2,5 +2,7 @@
 //! number of pipeline state objects they compile and bind.
 
 mod constants;
+mod structures;
 
 pub use constants::*;
+pub use structures::*;

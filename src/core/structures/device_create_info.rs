@@ -11,7 +11,7 @@ use std::{
 use crate::{
     VK_FALSE, VK_TRUE, VK_VERSION_1_0, VkEnumerateDeviceExtensionProperties,
     VkGetPhysicalDeviceQueueFamilyProperties, VkPhysicalDeviceProperties, VkQueueFamilyProperties,
-    VkQueueFlag,
+    VkQueueFlag, ext_extended_dynamic_state::VkPhysicalDeviceExtendedDynamicStateFeaturesExt,
 };
 
 /// Structure specifying parameters of a newly created device
