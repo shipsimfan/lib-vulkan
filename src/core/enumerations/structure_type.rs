@@ -2,9 +2,12 @@
 #[allow(unused_imports)]
 use crate::{
     VK_VERSION_1_0, VK_VERSION_1_1, VK_VERSION_1_2, VK_VERSION_1_3, VK_VERSION_1_4,
-    ext_debug_utils, khr_surface, khr_swapchain,
+    ext_debug_utils, ext_extended_dynamic_state, khr_surface, khr_swapchain,
 };
 
+#[allow(unused_imports)]
+#[cfg(all(target_os = "linux", feature = "wayland"))]
+use crate::khr_wayland_surface;
 #[allow(unused_imports)]
 #[cfg(all(target_os = "windows", feature = "win32"))]
 use crate::khr_win32_surface;
