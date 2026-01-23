@@ -74,5 +74,11 @@ flags! {
         ///
         /// Provided by [`nv_optical_flow`]
         OpticalFlowBitNv = 0x00000100,
+
+        /// [`VkQueueFlag::DataGraphBitArm`] specifies that queues in this queue family support
+        /// data graph operations.
+        ///
+        /// Provided by [`arm_data_graph`]
+        DataGraphBitArm = 0x00000400,
     }
 }
