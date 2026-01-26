@@ -1,8 +1,10 @@
 mod create_command_pool;
 mod create_device;
+mod create_image_view;
 mod create_instance;
 mod destroy_command_pool;
 mod destroy_device;
+mod destroy_image;
 mod destroy_instance;
 mod device_wait_idle;
 mod enumerate_device_extension_properties;
@@ -24,6 +26,7 @@ pub use create_device::*;
 pub use create_instance::*;
 pub use destroy_command_pool::*;
 pub use destroy_device::*;
+pub use destroy_image::*;
 pub use destroy_instance::*;
 pub use device_wait_idle::*;
 pub use enumerate_device_extension_properties::*;
