@@ -1,4 +1,4 @@
-use crate::macros::flags_no_bits;
+use crate::flags_no_bits;
 
 // rustdoc imports
 #[allow(unused_imports)]

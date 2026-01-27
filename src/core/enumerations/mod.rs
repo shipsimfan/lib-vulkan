@@ -1,8 +1,10 @@
 mod attachment_load_op;
 mod attachment_store_op;
+mod component_swizzle;
 mod dynamic_state;
 mod format;
 mod image_layout;
+mod image_view_type;
 mod internal_allocation_type;
 mod object_type;
 mod physical_device_type;
@@ -13,9 +15,11 @@ mod system_allocation_scope;
 
 pub use attachment_load_op::VkAttachmentLoadOp;
 pub use attachment_store_op::VkAttachmentStoreOp;
+pub use component_swizzle::VkComponentSwizzle;
 pub use dynamic_state::VkDynamicState;
 pub use format::VkFormat;
 pub use image_layout::VkImageLayout;
+pub use image_view_type::VkImageViewType;
 pub use internal_allocation_type::VkInternalAllocationType;
 pub use object_type::VkObjectType;
 pub use physical_device_type::VkPhysicalDeviceType;

@@ -218,7 +218,7 @@ impl Default for VkImageViewCreateInfo {
             next: null(),
             flags: VkImageViewCreateFlags::new(),
             image: VkImage::null(),
-            view_type: VkImageViewType::a,
+            view_type: VkImageViewType::_1d,
             format: VkFormat::Undefined,
             components: VkComponentMapping::default(),
             subresource_range: VkImageSubresourceRange::default(),

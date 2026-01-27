@@ -23,6 +23,7 @@ mod wait_for_fences;
 
 pub use create_command_pool::*;
 pub use create_device::*;
+pub use create_image_view::*;
 pub use create_instance::*;
 pub use destroy_command_pool::*;
 pub use destroy_device::*;
