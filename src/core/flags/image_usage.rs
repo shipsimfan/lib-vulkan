@@ -130,5 +130,20 @@ flags! {
 
         /// Provided by [`qcom_image_processing`]
         SampleBlockMatchBitQcom = 0x00200000,
+
+        /// [`VkImageUsageFlag::TensorAliasingBitArm`] specifies that the image can be transitioned
+        /// to the [`VkImageLayout::TensorAliasingArm`] layout.
+        ///
+        /// Provided by [`arm_tensors`]
+        TensorAliasingBitArm = 0x00800000,
+
+        /// Provided by [`qcom_tile_memory_heap`]
+        TileMemoryBitQcom = 0x08000000,
+
+        /// Provided by [`khr_video_encode_quantization_map`]
+        VideoEncodeQuantizationDeltaMapBitKhr = 0x02000000,
+
+        /// Provided by [`khr_video_encode_quantization_map`]
+        VideoEncodeEmphasisMapBitKhr = 0x04000000,
     }
 }

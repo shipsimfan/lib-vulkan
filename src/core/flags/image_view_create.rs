@@ -17,7 +17,7 @@ flags! {
     /// Bitmask specifying additional parameters of an image view
     ///
     /// Provided by [`VK_VERSION_1_0`]
-    pub enum VkImageAspectFlag {
+    pub enum VkImageViewCreateFlag {
         /// [`VkImageViewCreateFlag::FragmentDensityMapDynamicBitExt`] specifies that the fragment
         /// density map will be read by device during
         /// [`VkPipelineStageFlag::FragmentDensityProcessBitExt`]

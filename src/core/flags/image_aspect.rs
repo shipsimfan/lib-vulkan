@@ -17,7 +17,7 @@ flags! {
     /// Bitmask specifying which aspects of an image are included in a view
     ///
     /// Provided by [`VK_VERSION_1_0`]
-    pub enum VkImageViewCreateFlag {
+    pub enum VkImageAspectFlag {
         /// [`VkImageViewCreateFlag::ColorBit`] specifies the color aspect.
         ColorBit = 0x00000001,
 
