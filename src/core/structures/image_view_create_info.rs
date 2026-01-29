@@ -7,8 +7,8 @@ use std::{os::raw::c_void, ptr::null};
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    VK_FALSE, VK_NULL_HANDLE, VkImageAspectFlag, VkImageUsageFlag, VkImageView,
-    VkImageViewCreateFlag,
+    VK_FALSE, VK_NULL_HANDLE, VK_TRUE, VkComponentSwizzle, VkDeviceMemory, VkImageAspectFlag,
+    VkImageUsageFlag, VkImageView, VkImageViewCreateFlag, VkSampleCountFlag,
 };
 
 /// Structure specifying parameters of a newly created image view
@@ -194,132 +194,270 @@ pub struct VkImageViewCreateInfo {
     ///    exception of structures of type [`VkExportMetalObjectCreateInfoExt`]
     pub next: *const c_void,
 
-    /// flags is a bitmask of VkImageViewCreateFlagBits specifying additional parameters of the image view.
+    /// `flags` is a bitmask of [`VkImageViewCreateFlag`]s specifying additional parameters of the
+    /// image view.
     ///
     /// # Valid Usage
-    ///  - If the fragmentDensityMapDynamic feature is not enabled, flags must not contain VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT
-    ///  - If the fragmentDensityMapDeferred feature is not enabled, flags must not contain VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT
-    ///  - If flags contains VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT, flags must not contain VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT
-    ///  - If flags does not contain VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT, and image was created with the [`VkImageUsageFlag::FRAGMENT_DENSITY_MAP_BIT_EXT usage flag set, its flags must not contain any of VK_IMAGE_CREATE_PROTECTED_BIT, VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, or VK_IMAGE_CREATE_SPARSE_ALIASED_BIT
-    ///  - If the `next` chain includes a VkOpaqueCaptureDescriptorDataCreateInfoEXT structure, flags must contain VK_IMAGE_VIEW_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT
+    ///  - If the `fragment_density_map_dynamic` feature is not enabled, `flags` must not contain
+    ///    [`VkImageViewCreateFlag::FragmentDensityMapDynamicBitExt`]
+    ///  - If the `fragment_density_map_deferred` feature is not enabled, `flags` must not contain
+    ///    [`VkImageViewCreateFlag::FragmentDensityMapDeferredBitExt`]
+    ///  - If `flags` contains [`VkImageViewCreateFlag::FragmentDensityMapDeferredBitExt`], `flags`
+    ///    must not contain [`VkImageViewCreateFlag::FragmentDensityMapDynamicBitExt`]
+    ///  - If `flags` does not contain [`VkImageViewCreateFlag::FragmentDensityMapDynamicBitExt`],
+    ///    and `image` was created with the [`VkImageUsageFlag::FragmentDensityMapBitExt`] usage
+    ///    flag set, its flags must not contain any of [`VkImageCreateFlag::ProtectedBit`],
+    ///    [`VkImageCreateFlag::SparseBindingBit`], [`VkImageCreateFlag::SparseResidencyBit`], or
+    ///    [`VkImageCreateFlag::SparseAliasedBit`]
+    ///  - If the `next` chain includes a [`VkOpaqueCaptureDescriptorDataCreateInfoExt`] structure,
+    ///    `flags` must contain [`VkImageViewCreateFlag::DescriptorBufferCaptureReplayBitExt`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - flags must be a valid combination of VkImageViewCreateFlagBits values
+    ///  - `flags` must be a valid combination of [`VkImageViewCreateFlag`] values
     pub flags: VkImageViewCreateFlags,
 
-    /// image is a VkImage on which the view will be created.
+    /// `image` is a [`VkImage`] on which the view will be created.
     ///
     /// # Valid Usage
-    ///  - image must have been created with a usage value containing at least one of the following:
-    ///    - [`[`VkImageUsageFlag::SAMPLED_BIT`]
-    ///    - [`[`VkImageUsageFlag::STORAGE_BIT`]
-    ///    - [`[`VkImageUsageFlag::COLOR_ATTACHMENT_BIT`]
-    ///    - [`[`VkImageUsageFlag::DEPTH_STENCIL_ATTACHMENT_BIT`]
-    ///    - [`[`VkImageUsageFlag::INPUT_ATTACHMENT_BIT`]
-    ///    - [`[`VkImageUsageFlag::TRANSIENT_ATTACHMENT_BIT`]
-    ///    - [`[`VkImageUsageFlag::FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR`]
-    ///    - [`[`VkImageUsageFlag::FRAGMENT_DENSITY_MAP_BIT_EXT`]
-    ///    - [`[`VkImageUsageFlag::VIDEO_DECODE_DST_BIT_KHR`]
-    ///    - [`[`VkImageUsageFlag::VIDEO_DECODE_DPB_BIT_KHR`]
-    ///    - [`[`VkImageUsageFlag::VIDEO_ENCODE_SRC_BIT_KHR`]
-    ///    - [`[`VkImageUsageFlag::VIDEO_ENCODE_DPB_BIT_KHR`]
-    ///    - [`[`VkImageUsageFlag::SAMPLE_WEIGHT_BIT_QCOM`]
-    ///    - [`[`VkImageUsageFlag::SAMPLE_BLOCK_MATCH_BIT_QCOM`]
-    ///    - [`[`VkImageUsageFlag::VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR`]
-    ///    - [`[`VkImageUsageFlag::VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR`]
-    ///  - If format has a _422 or _420 suffix then image must have been created with a width that is a multiple of 2
-    ///  - If format has a _420 suffix then image must have been created with a height that is a multiple of 2
-    ///  - If image is non-sparse then the image or each specified disjoint plane must be bound completely and contiguously to a single VkDeviceMemory object
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure, then image must have been created with the [`VkImageUsageFlag::SAMPLE_WEIGHT_BIT_QCOM usage flag set
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure and if viewType is VK_IMAGE_VIEW_TYPE_1D_ARRAY, then image must have been created with imageType VK_IMAGE_TYPE_1D
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure and viewType is VK_IMAGE_VIEW_TYPE_1D_ARRAY, then image must have been created with width equal to or greater than \((numPhases \times \mathbin{max}\left( \mathbin{align}\left(filterSize.width,4\right), filterSize.height\right))\)
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure and if viewType is VK_IMAGE_VIEW_TYPE_2D_ARRAY, then image must have been created with imageType VK_IMAGE_TYPE_2D
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure and viewType is VK_IMAGE_VIEW_TYPE_2D_ARRAY, then image must have been created with width equal to or greater than filterSize.width
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure and viewType is VK_IMAGE_VIEW_TYPE_2D_ARRAY, then image must have been created with height equal to or greater than filterSize.height
+    ///  - `image` must have been created with a usage value containing at least one of the
+    ///    following:
+    ///    - [`VkImageUsageFlag::SampledBit`]
+    ///    - [`VkImageUsageFlag::StorageBit`]
+    ///    - [`VkImageUsageFlag::ColorAttachmentBit`]
+    ///    - [`VkImageUsageFlag::DepthStencilAttachmentBit`]
+    ///    - [`VkImageUsageFlag::InputAttachmentBit`]
+    ///    - [`VkImageUsageFlag::TransientAttachmentBit`]
+    ///    - [`VkImageUsageFlag::FragmentShadingRateAttachmentBitKhr`]
+    ///    - [`VkImageUsageFlag::FragmentDensityMapBitExt`]
+    ///    - [`VkImageUsageFlag::VideoDecodeDstBitKhr`]
+    ///    - [`VkImageUsageFlag::VideoDecodeDpbBitKhr`]
+    ///    - [`VkImageUsageFlag::VideoEncodeSrcBitKhr`]
+    ///    - [`VkImageUsageFlag::VideoEncodeDpbBitKhr`]
+    ///    - [`VkImageUsageFlag::SampleWeightBitQcom`]
+    ///    - [`VkImageUsageFlag::SampleBlockMatchBitQcom`]
+    ///    - [`VkImageUsageFlag::VideoEncodeQuantizationDeltaMapBitKhr`]
+    ///    - [`VkImageUsageFlag::VideoEncodeEmphasisMapBitKhr`]
+    ///  - If `format` has a `_422` or `_420` suffix then `image` must have been created with a
+    ///    `width` that is a multiple of 2
+    ///  - If `format` has a `_420` suffix then `image` must have been created with a `height` that
+    ///    is a multiple of 2
+    ///  - If `image` is non-sparse then the image or each specified disjoint plane must be bound
+    ///    completely and contiguously to a single [`VkDeviceMemory`] object
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure, then
+    ///    `image` must have been created with the [`VkImageUsageFlag::SampleWeightBitQcom`] usage
+    ///    flag set
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure and if
+    ///    `view_type` is [`VkImageViewType::_1dArray`], then `image` must have been created with
+    ///    `image_type` [`VkImageType::_1d`]
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure and
+    ///    `view_type` is [`VkImageViewType::_1dArray`], then `image` must have been created with
+    ///    `width` equal to or greater than
+    ///    `num_phases * max(align(filter_size.width, 4), filter_size.height)`
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure and if
+    ///    `view_type` is [`VkImageViewType::_2dArray`], then `image` must have been created with
+    ///    `image_type` [`VkImageType::_2d`]
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure and
+    ///    `view_type` is [`VkImageViewType::_2dArray`], then `image` must have been created with
+    ///    `width` equal to or greater than `filter_size.width`
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure and
+    ///    `view_type` is [`VkImageViewType::_2dArray`], then image must have been created with
+    ///    `height` equal to or greater than `filter_size.height`
     ///
     /// # Valid Usage (Implicit)
-    ///  - image must be a valid VkImage handle
+    ///  - `image` must be a valid [`VkImage`] handle
     pub image: VkImage,
 
-    /// viewType is a VkImageViewType value specifying the type of the image view.
+    /// `view_type` is a [`VkImageViewType`] value specifying the type of the image view.
     ///
     /// # Valid Usage
-    ///  - If image was not created with VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT then viewType must not be VK_IMAGE_VIEW_TYPE_CUBE or VK_IMAGE_VIEW_TYPE_CUBE_ARRAY
-    ///  - If the imageCubeArray feature is not enabled, viewType must not be VK_IMAGE_VIEW_TYPE_CUBE_ARRAY
-    ///  - If image was created with VK_IMAGE_TYPE_3D but without VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT set then viewType must not be VK_IMAGE_VIEW_TYPE_2D_ARRAY
-    ///  - If image was created with VK_IMAGE_TYPE_3D but without VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT or VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT set, then viewType must not be VK_IMAGE_VIEW_TYPE_2D
-    ///  - If image was created with a samples value not equal to VK_SAMPLE_COUNT_1_BIT then viewType must be either VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY
-    ///  - viewType must be compatible with the type of image as shown in the view type compatibility table
-    ///  - If image was created with the [`VkImageUsageFlag::FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR usage flag set, viewType must be VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY
-    ///  - If image was created with the [`VkImageUsageFlag::VIDEO_DECODE_DST_BIT_KHR usage flag set, [`VkImageUsageFlag::VIDEO_DECODE_SRC_BIT_KHR, or [`VkImageUsageFlag::VIDEO_DECODE_DPB_BIT_KHR, then the viewType must be VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY
-    ///  - If image was created with the [`VkImageUsageFlag::VIDEO_ENCODE_DST_BIT_KHR usage flag set, [`VkImageUsageFlag::VIDEO_ENCODE_SRC_BIT_KHR, or [`VkImageUsageFlag::VIDEO_ENCODE_DPB_BIT_KHR, then the viewType must be VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY
-    ///  - If image was created with the [`VkImageUsageFlag::VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR or [`VkImageUsageFlag::VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR usage flags set, then viewType must be VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY
-    ///  - If the pNet chain includes VkImageViewSampleWeightCreateInfoQCOM structure, then viewType must be VK_IMAGE_VIEW_TYPE_1D_ARRAY or VK_IMAGE_VIEW_TYPE_2D_ARRAY
+    ///  - If `image` was not created with [`VkImageCreateFlag::CubeCompatibleBit`] then
+    ///    `view_type` must not be [`VkImageViewType::Cube`] or [`VkImageViewType::CubeArray`]
+    ///  - If the `image_cube_array` feature is not enabled, `view_type` must not be
+    ///    [`VkImageViewType::CubeArray`]
+    ///  - If `image` was created with [`VkImageType::_3d`] but without
+    ///    [`VkImageCreateFlag::_2dArrayCompatibleBit`] set then `view_type` must not be
+    ///    [`VkImageViewType::_2dArray`]
+    ///  - If `image` was created with [`VkImageType::_3d`] but without
+    ///    [`VkImageCreateFlag::_2dArrayCompatibleBit`] or
+    ///    [`VkImageCreateFlag::_2dViewCompatibleBitExt`] set, then `view_type` must not be
+    ///    [`VkImageViewType::_2d`]
+    ///  - If `image` was created with a samples value not equal to [`VkSampleCountFlag::_1Bit`]
+    ///    then `view_type` must be either [`VkImageViewType::_2d`] or
+    ///    [`VkImageViewType::_2dArray`]
+    ///  - `view_type` must be compatible with the type of image as shown in the view type
+    ///    compatibility table
+    ///  - If `image` was created with the
+    ///    [`VkImageUsageFlag::FragmentShadingRateAttachmentBitKhr`] usage flag set, `view_type`
+    ///    must be [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`]
+    ///  - If `image` was created with the [`VkImageUsageFlag::VideoDecodeDstBitKhr`] usage flag
+    ///    set, [`VkImageUsageFlag::VideoDecodeSrcBitKhr`], or
+    ///    [`VkImageUsageFlag::VideoDecodeDpbBitKhr`], then the `view_type` must be
+    ///    [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`]
+    ///  - If `image` was created with the [`VkImageUsageFlag::VideoEncodeDstBitKhr`] usage flag
+    ///    set, [`VkImageUsageFlag::VideoEncodeSrcBitKhr`], or
+    ///    [`VkImageUsageFlag::VideoEncodeDpbBitKhr`], then the `view_type` must be
+    ///    [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`]
+    ///  - If `image` was created with the
+    ///    [`VkImageUsageFlag::VideoEncodeQuantizationDeltaMapBitKhr`] or
+    ///    [`VkImageUsageFlag::VideoEncodeEmphasisMapBitKhr`] usage flags set, then `view_type`
+    ///    must be [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`]
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure, then
+    ///    `view_type` must be [`VkImageViewType::_1dArray`] or [`VkImageViewType::_2dArray`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - viewType must be a valid VkImageViewType value
+    ///  - `view_type` must be a valid [`VkImageViewType`] value
     pub view_type: VkImageViewType,
 
-    /// format is a VkFormat specifying the format and type used to interpret texel blocks of the image.
+    /// `format` is a [`VkFormat`] specifying the format and type used to interpret texel blocks of
+    /// the image.
     ///
     /// # Valid Usage
-    ///  - If image was created with the VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, but without the VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT flag, and if the format of the image is not a multi-planar format, format must be compatible with the format used to create image, as defined in Format Compatibility Classes
-    ///  - If image was created with the VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT flag, format must be compatible with, or must be an uncompressed format that is size-compatible with, the format used to create image
-    ///  - If a VkImageFormatListCreateInfo structure was included in the `next` chain of the VkImageCreateInfo structure used when creating image and VkImageFormatListCreateInfo::viewFormatCount is not zero then format must be one of the formats in VkImageFormatListCreateInfo::pViewFormats
-    ///  - If image was created with the VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, if the format of the image is a multi-planar format, and if subresourceRange.`aspect_mask` is one of the multi-planar aspect mask bits, then format must be compatible with the VkFormat for the plane of the image format indicated by subresourceRange.`aspect_mask`, as defined in Compatible Formats of Planes of Multi-Planar Formats
-    ///  - If image was not created with the VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, or if the format of the image is a multi-planar format and if subresourceRange.`aspect_mask` is VK_IMAGE_ASPECT_COLOR_BIT, format must be identical to the format used to create image
-    ///  - If the `next` chain includes a VkSamplerYcbcrConversionInfo structure with a conversion value other than VK_NULL_HANDLE, format must be the same used in VkSamplerYcbcrConversionCreateInfo::format
-    ///  - If image has an Android external format, format must be VK_FORMAT_UNDEFINED
-    ///  - If image has an QNX Screen external format, format must be VK_FORMAT_UNDEFINED
-    ///  - If the shadingRateImage feature is enabled, and image was created with the [`VkImageUsageFlag::SHADING_RATE_IMAGE_BIT_NV usage flag set, format must be VK_FORMAT_R8_UINT
-    ///  - If the invocationMask feature is enabled, and image was created with the [`VkImageUsageFlag::INVOCATION_MASK_BIT_HUAWEI usage flag set, format must be VK_FORMAT_R8_UINT
-    ///  - If the VK_KHR_portability_subset extension is enabled, and VkPhysicalDevicePortabilitySubsetFeaturesKHR::imageViewFormatReinterpretation is VK_FALSE, the VkFormat in format must not contain a different number of components, or a different number of bits in each component, than the format of the VkImage in image
-    ///  - If Vulkan 1.3 is not supported and the ycbcr2plane444Formats feature is not enabled, format must not be VK_FORMAT_G8_B8R8_2PLANE_444_UNORM, VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16, VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16, or VK_FORMAT_G16_B16R16_2PLANE_444_UNORM
+    ///  - If `image` was created with the [`VkImageCreateFlag::MutableFormatBit`] flag, but
+    ///    without the [`VkImageCreateFlag::BlockTexelViewCompatibleBit`] flag, and if the format
+    ///    of the image is not a multi-planar format, `format` must be compatible with the format
+    ///    used to create `image`
+    ///  - If `image` was created with the [`VkImageCreateFlag::BlockTexelViewCompatibleBit`] flag,
+    ///    `format` must be compatible with, or must be an uncompressed format that is
+    ///    size-compatible with, the format used to create `image`
+    ///  - If a [`VkImageFormatListCreateInfo`] structure was included in the `next` chain of the
+    ///    [`VkImageCreateInfo`] structure used when creating image and
+    ///    [`VkImageFormatListCreateInfo::view_format_count`] is not zero then `format` must be one
+    ///    of the formats in [`VkImageFormatListCreateInfo::view_formats`]
+    ///  - If `image` was created with the [`VkImageCreateFlag::MutableFormatBit`] flag, if the
+    ///    format of the image is a multi-planar format, and if `subresource_range.aspect_mask` is
+    ///    one of the multi-planar aspect mask bits, then `format` must be compatible with the
+    ///    [`VkFormat`] for the plane of the image format indicated by
+    ///    `subresource_range.aspect_mask`
+    ///  - If `image` was not created with the [`VkImageCreateFlag::MutableFormatBit`] flag, or if
+    ///    the format of the image is a multi-planar format and if `subresource_range.aspect_mask`
+    ///    is [`VkImageAspectFlag::ColorBit`], `format` must be identical to the format used to
+    ///    create `image`
+    ///  - If the `next` chain includes a [`VkSamplerYcbcrConversionInfo`] structure with a
+    ///    conversion value other than [`VK_NULL_HANDLE`], format must be the same used in
+    ///    [`VkSamplerYcbcrConversionCreateInfo::format`]
+    ///  - If `image` has an Android external format, `format` must be [`VkFormat::Undefined`]
+    ///  - If `image` has an QNX Screen external format, `format` must be [`VkFormat::Undefined`]
+    ///  - If the `shading_rate_image` feature is enabled, and `image` was created with the
+    ///    [`VkImageUsageFlag::ShadingRateImageBitNv`] usage flag set, `format` must be
+    ///    [`VkFormat::R8UInt`]
+    ///  - If the `invocation_mask` feature is enabled, and `image` was created with the
+    ///    [`VkImageUsageFlag::InvocationMaskBitHuawei`] usage flag set, `format` must be
+    ///    [`VkFormat::R8UInt`]
+    ///  - If the [`khr_portability_subset`] extension is enabled, and
+    ///    [`VkPhysicalDevicePortabilitySubsetFeaturesKHR::image_view_format_reinterpretation`] is
+    ///    [`VK_FALSE`], the [`VkFormat`] in `format` must not contain a different number of
+    ///    components, or a different number of bits in each component, than the format of the
+    ///    [`VkImage`] in `image`
+    ///  - If Vulkan 1.3 is not supported and the `ycbcr2_plane444_formats` feature is not enabled,
+    ///    `format` must not be [`VkFormat::G8B8R8_2Plane444UNorm`],
+    ///    [`VkFormat::G10X6B10X6R10X6_2Plane444UNorm3Pack16`],
+    ///    [`VkFormat::G12X4B12X4R12X4_2Plane444UNorm3Pack16`], or
+    ///    [`VkFormat::G16B16R16_2Plane444UNorm`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - format must be a valid VkFormat value
+    ///  - `format` must be a valid [`VkFormat`] value
     pub format: VkFormat,
 
-    /// components is a VkComponentMapping structure specifying a remapping of color components (or of depth or stencil components after they have been converted into color components).
+    /// `components` is a [`VkComponentMapping`] structure specifying a remapping of color
+    /// components (or of depth or stencil components after they have been converted into color
+    /// components).
     ///
     /// # Valid Usage
-    ///  - If the `next` chain includes a VkSamplerYcbcrConversionInfo structure with a conversion value other than VK_NULL_HANDLE, all members of components must have the identity swizzle
-    ///  - If image has an Android external format, all members of components must be the identity swizzle
-    ///  - If image has an QNX Screen external format, all members of components must be the identity swizzle
-    ///  - If the VK_KHR_portability_subset extension is enabled, and VkPhysicalDevicePortabilitySubsetFeaturesKHR::imageViewFormatSwizzle is VK_FALSE, all elements of components must have the identity swizzle
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure, then components must be VK_COMPONENT_SWIZZLE_IDENTITY for all components
+    ///  - If the `next` chain includes a [`VkSamplerYcbcrConversionInfo`] structure with a
+    ///    conversion value other than [`VK_NULL_HANDLE`], all members of `components` must have
+    ///    the identity swizzle
+    ///  - If `image` has an Android external format, all members of `components` must be the
+    ///    identity swizzle
+    ///  - If `image` has an QNX Screen external format, all members of `components` must be the
+    ///    identity swizzle
+    ///  - If the [`khr_portability_subset`] extension is enabled, and
+    ///    [`VkPhysicalDevicePortabilitySubsetFeaturesKhr::image_view_format_swizzle`] is
+    ///    [`VK_FALSE`], all elements of `components` must have the identity swizzle
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure, then
+    ///    `components` must be [`VkComponentSwizzle::Identity`] for all components
     ///
     /// # Valid Usage (Implicit)
-    ///  - components must be a valid VkComponentMapping structure
+    ///  - `components` must be a valid [`VkComponentMapping`] structure
     pub components: VkComponentMapping,
 
-    /// subresourceRange is a VkImageSubresourceRange structure selecting the set of mipmap levels and array layers to be accessible to the view.
+    /// `subresource_range` is a [`VkImageSubresourceRange`] structure selecting the set of mipmap
+    /// levels and array layers to be accessible to the view.
     ///
     /// # Valid Usage
-    ///  - If image was created with VK_IMAGE_TYPE_3D and viewType is VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY then subresourceRange.levelCount must be 1
-    ///  - subresourceRange.baseMipLevel must be less than the mipLevels specified in VkImageCreateInfo when image was created
-    ///  - If subresourceRange.levelCount is not VK_REMAINING_MIP_LEVELS, subresourceRange.baseMipLevel + subresourceRange.levelCount must be less than or equal to the mipLevels specified in VkImageCreateInfo when image was created
-    ///  - If image was created with the [`VkImageUsageFlag::FRAGMENT_DENSITY_MAP_BIT_EXT usage flag set, subresourceRange.levelCount must be 1
-    ///  - If image is not a 3D image created with VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT or VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT set, or viewType is not VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY, subresourceRange.baseArrayLayer must be less than the arrayLayers specified in VkImageCreateInfo when image was created
-    ///  - If subresourceRange.layerCount is not VK_REMAINING_ARRAY_LAYERS, image is not a 3D image created with VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT or VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT set, or viewType is not VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY, subresourceRange.layerCount must be non-zero and subresourceRange.baseArrayLayer + subresourceRange.layerCount must be less than or equal to the arrayLayers specified in VkImageCreateInfo when image was created
-    ///  - If image is a 3D image created with VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT set, and viewType is VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY, subresourceRange.baseArrayLayer must be less than the depth computed from baseMipLevel and extent.depth specified in VkImageCreateInfo when image was created, according to the formula defined in Image Mip Level Sizing
-    ///  - If subresourceRange.layerCount is not VK_REMAINING_ARRAY_LAYERS, image is a 3D image created with VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT set, and viewType is VK_IMAGE_VIEW_TYPE_2D or VK_IMAGE_VIEW_TYPE_2D_ARRAY, subresourceRange.layerCount must be non-zero and subresourceRange.baseArrayLayer + subresourceRange.layerCount must be less than or equal to the depth computed from baseMipLevel and extent.depth specified in VkImageCreateInfo when image was created, according to the formula defined in Image Mip Level Sizing
-    ///  - If image was created with the VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT flag and format is a non-compressed format, the levelCount member of subresourceRange must be 1
-    ///  - If image was created with the VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT flag, the VkPhysicalDeviceMaintenance6Properties::blockTexelViewCompatibleMultipleLayers property is not VK_TRUE, and format is a non-compressed format, then the layerCount member of subresourceRange must be 1
-    ///  - subresourceRange.`aspect_mask` must only have at most 1 valid multi-planar aspect mask bit
-    ///  - If the attachmentFragmentShadingRate feature is enabled, the usage for the image view includes [`VkImageUsageFlag::FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR, and layeredShadingRateAttachments is VK_FALSE, subresourceRange.layerCount must be 1
-    ///  - If image was created with flags containing VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT and the [`VkImageUsageFlag::SAMPLED_BIT usage flag set, subresourceRange.layerCount must be less than or equal to VkPhysicalDeviceFragmentDensityMap2PropertiesEXT::maxSubsampledArrayLayers
-    ///  - If viewType is VK_IMAGE_VIEW_TYPE_1D, VK_IMAGE_VIEW_TYPE_2D, or VK_IMAGE_VIEW_TYPE_3D; and subresourceRange.layerCount is not VK_REMAINING_ARRAY_LAYERS, then subresourceRange.layerCount must be 1
-    ///  - If viewType is VK_IMAGE_VIEW_TYPE_CUBE and subresourceRange.layerCount is not VK_REMAINING_ARRAY_LAYERS, subresourceRange.layerCount must be 6
-    ///  - If viewType is VK_IMAGE_VIEW_TYPE_CUBE_ARRAY and subresourceRange.layerCount is not VK_REMAINING_ARRAY_LAYERS, subresourceRange.layerCount must be a multiple of 6
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure, then subresourceRange.`aspect_mask` must be VK_IMAGE_ASPECT_COLOR_BIT
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure, then subresourceRange.levelCount must be 1
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure and viewType is VK_IMAGE_VIEW_TYPE_1D_ARRAY, then subresourceRange.layerCount must be equal to 2
-    ///  - If the `next` chain includes VkImageViewSampleWeightCreateInfoQCOM structure and viewType is VK_IMAGE_VIEW_TYPE_2D_ARRAY, then subresourceRange.layerCount must be equal or greater than numPhases
-    ///  - subresourceRange.`aspect_mask` must be valid for the format the image was created with
+    ///  - If `image` was created with [`VkImageType::_3d`] and `view_type` is
+    ///    [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`] then
+    ///    `subresource_range.level_count` must be 1
+    ///  - `subresource_range.base_mip_level` must be less than the `mip_levels` specified in
+    ///    [`VkImageCreateInfo`] when `image` was created
+    ///  - If `subresource_range.level_count` is not [`VK_REMAINING_MIP_LEVELS`],
+    ///    `subresource_range.base_mip_level + subresource_range.level_count` must be less than or
+    ///    equal to the `mip_levels` specified in [`VkImageCreateInfo`] when image was created
+    ///  - If `image` was created with the [`VkImageUsageFlag::FragmentDensityMapBitExt`] usage
+    ///    flag set, `subresource_range.level_count` must be 1
+    ///  - If `image` is not a 3D image created with [`VkImageCreateFlag::_2dArrayCompatibleBit`]
+    ///    or [`VkImageCreateFlag::_2dViewCompatibleBit`] set, or `view_type` is not
+    ///    [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`],
+    ///    `subresource_range.base_array_layer` must be less than the `array_layers` specified in
+    ///    [`VkImageCreateInfo`] when `image` was created
+    ///  - If `subresource_range.layer_count` is not [`VK_REMAINING_ARRAY_LAYERS`], `image` is not
+    ///    a 3D image created with [`VkImageCreateFlag::_2dArrayCompatibleBit`] or
+    ///    [`VkImageCreateFlag::_2dViewCompatibleBitExt`] set, or `view_type` is not
+    ///    [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`],
+    ///    `subresource_range.layer_count` must be non-zero and
+    ///    `subresource_range.base_array_layer + subresource_range.layer_count` must be less than
+    ///    or equal to the `array_layers` specified in [`VkImageCreateInfo`] when image was created
+    ///  - If `image` is a 3D image created with [`VkImageCreateFlag::_2dArrayCompatibleBit`] set,
+    ///    and `view_type` is [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`],
+    ///    `subresource_range.base_array_layer` must be less than the depth computed from
+    ///    `base_mip_level` and `extent.depth` specified in [`VkImageCreateInfo`] when `image` was
+    ///    created
+    ///  - If `subresource_range.layer_count` is not [`VK_REMAINING_ARRAY_LAYERS`], `image` is a 3D
+    ///    `image` created with [`VkImageCreateFlag::_2dArrayCompatibleBit`] set, and `view_type`
+    ///    is [`VkImageViewType::_2d`] or [`VkImageViewType::_2dArray`],
+    ///    `subresource_range.layer_count` must be non-zero and
+    ///    `subresource_range.base_array_layer + subresource_range.layer_count` must be less than
+    ///    or equal to the depth computed from `base_mip_level` and `extent.depth` specified in
+    ///    [`VkImageCreateInfo`] when `image` was created
+    ///  - If `image` was created with the [`VkImageCreateFlag::BlockTexelViewCompatibleBit`] flag
+    ///    and `format` is a non-compressed format, the `level_count` member of `subresource_range`
+    ///    must be 1
+    ///  - If `image` was created with the [`VkImageCreateFlag::BlockTexelViewCompatibleBit`] flag,
+    ///    the
+    ///    [`VkPhysicalDeviceMaintenance6Properties::block_texel_view_compatible_multiple_layers`]
+    ///    property is not [`VK_TRUE`], and `format` is a non-compressed format, then the
+    ///    `layer_count` member of `subresource_range` must be 1
+    ///  - `subresource_range.aspect_mask` must only have at most 1 valid multi-planar aspect mask
+    ///    bit
+    ///  - If the `attachment_fragment_shading_rate` feature is enabled, the usage for the image
+    ///    view includes [`VkImageUsageFlag::FragmentShadingRateAttachmentBitKhr`], and
+    ///    `layered_shading_rate_attachments` is [`VK_FALSE`], `subresource_range.layer_count` must
+    ///    be 1
+    ///  - If `image` was created with flags containing [`VkImageCreateFlag::SubsampledBitExt`] and
+    ///    the [`VkImageUsageFlag::SampledBit`] usage flag set, `subresource_range.layer_count`
+    ///    must be less than or equal to
+    ///    [`VkPhysicalDeviceFragmentDensityMap2PropertiesExt::max_subsampled_array_layers`]
+    ///  - If `view_type` is [`VkImageViewType::_1d`], [`VkImageViewType::_2d`], or
+    ///    [`VkImageViewType::_3d`]; and `subresource_range.layer_count` is not
+    ///    [`VK_REMAINING_ARRAY_LAYERS`], then `subresource_range.layer_count` must be 1
+    ///  - If `view_type` is [`VkImageViewType::Cube`] and `subresource_range.layer_count` is not
+    ///    [`VK_REMAINING_ARRAY_LAYERS`], `subresource_range.layer_count` must be 6
+    ///  - If `view_type` is [`VkImageViewType::CubeArray`] and `subresource_range.layer_count` is
+    ///    not [`VK_REMAINING_ARRAY_LAYERS`], `subresource_range.layer_count` must be a multiple of
+    ///    6
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure, then
+    ///    `subresource_range.aspect_mask` must be [`VkImageAspectFlag::ColorBit`]
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure, then
+    ///    `subresource_range.level_count` must be 1
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure and
+    ///    `view_type` is [`VkImageViewType::_1dArray`], then `subresource_range.layer_count` must
+    ///    be equal to 2
+    ///  - If the `next` chain includes [`VkImageViewSampleWeightCreateInfoQcom`] structure and
+    ///    `view_type` is [`VkImageViewType::_2dArray`], then `subresource_range.layer_count` must
+    ///    be equal or greater than `num_phases`
+    ///  - `subresource_range.aspect_mask` must be valid for the format the image was created with
     ///
     /// # Valid Usage (Implicit)
-    ///  - subresourceRange must be a valid VkImageSubresourceRange structure
+    ///  - `subresource_range` must be a valid [`VkImageSubresourceRange`] structure
     pub subresource_range: VkImageSubresourceRange,
 }
 
