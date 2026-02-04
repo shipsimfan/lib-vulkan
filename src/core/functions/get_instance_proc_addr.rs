@@ -50,6 +50,7 @@ pub type VkGetInstanceProcAddr =
 /// The name of [`VkGetInstanceProcAddr`]
 pub const VK_GET_INSTANCE_PROC_ADDR: &CStr = c"vkGetInstanceProcAddr";
 
+#[cfg(feature = "link")]
 #[cfg_attr(target_os = "windows", link(name = "vulkan-1"))]
 #[cfg_attr(target_os = "linux", link(name = "vulkan"))]
 unsafe extern "system" {

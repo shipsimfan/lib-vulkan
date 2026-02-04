@@ -9,8 +9,11 @@ repository = "https://github.com/shipsimfan/lib-vulkan"
 publish = false
 
 [features]
+link = []
+
 win32 = ["dep:win32"]
 wayland = ["dep:wayland"]
+
 
 [target.'cfg(windows)'.dependencies]
 win32 = { git = "https://github.com/shipsimfan/lib-win32", optional = true }
