@@ -54,7 +54,7 @@ use crate::{VK_TRUE, VK_VERSION_1_0};
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkWaitForFences = extern "system" fn(
+pub type VkWaitForFences = unsafe extern "system" fn(
     device: VkDevice,
     fence_count: u32,
     fences: *const VkFence,

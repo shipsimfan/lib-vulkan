@@ -19,4 +19,4 @@ use std::ptr::null_mut;
 /// application should free this memory.
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkFreeFunction = extern "system" fn(user_data: *mut c_void, memory: *mut c_void);
+pub type VkFreeFunction = unsafe extern "system" fn(user_data: *mut c_void, memory: *mut c_void);

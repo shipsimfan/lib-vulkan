@@ -40,7 +40,7 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkCreateCommandPool = extern "system" fn(
+pub type VkCreateCommandPool = unsafe extern "system" fn(
     device: VkDevice,
     create_info: *const VkCommandPoolCreateInfo,
     allocator: *const VkAllocationCallbacks,

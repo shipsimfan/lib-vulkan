@@ -42,7 +42,7 @@ use std::ptr::null;
 ///  - Host access to `command_pool` must be externally synchronized
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkDestroyCommandPool = extern "system" fn(
+pub type VkDestroyCommandPool = unsafe extern "system" fn(
     device: VkDevice,
     command_pool: VkCommandPool,
     allocator: *const VkAllocationCallbacks,

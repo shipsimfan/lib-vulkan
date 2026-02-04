@@ -28,7 +28,7 @@ use crate::{VkQueueFlag, ext_debug_utils};
 ///
 /// Provided by [`ext_debug_utils`]
 pub type VkCmdBeginDebugUtilsLabelExt =
-    extern "system" fn(command_buffer: VkCommandBuffer, label_info: *const VkDebugUtilsLabelExt);
+    unsafe extern "system" fn(command_buffer: VkCommandBuffer, label_info: *const VkDebugUtilsLabelExt);
 
 /// The name of [`VkCmdBeginDebugUtilsLabelExt`]
 pub const VK_CMD_BEGIN_DEBUG_UTILS_LABEL_EXT: &CStr = c"vkCmdBeginDebugUtilsLabelEXT";

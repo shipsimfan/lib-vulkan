@@ -41,7 +41,7 @@ use crate::{VK_NULL_HANDLE, VkInstance, VkObjectType, VkPhysicalDevice, ext_debu
 ///  - [`VkResult::VkErrorOutOfDeviceMemory`]
 ///
 /// Provided by [`ext_debug_utils`]
-pub type VkSetDebugUtilsObjectNameExt = extern "system" fn(
+pub type VkSetDebugUtilsObjectNameExt = unsafe extern "system" fn(
     device: VkDevice,
     name_info: *const VkDebugUtilsObjectNameInfoExt,
 ) -> VkResult;

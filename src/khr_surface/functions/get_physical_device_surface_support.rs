@@ -35,7 +35,7 @@ use crate::{VK_FALSE, VK_TRUE, VkGetPhysicalDeviceQueueFamilyProperties, VkInsta
 ///  - [`VkResult::VkErrorSurfaceLostKhr`]
 ///
 /// Provided by [`khr_surface`]
-pub type VkGetPhysicalDeviceSurfaceSupportKhr = extern "system" fn(
+pub type VkGetPhysicalDeviceSurfaceSupportKhr = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     queue_family_index: u32,
     surface: VkSurfaceKhr,

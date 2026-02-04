@@ -33,7 +33,7 @@ use std::ptr::null_mut;
 /// [`VkResult::VkErrorOutOfHostMemory`] as a result of this failed allocation.
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkAllocationFunction = extern "system" fn(
+pub type VkAllocationFunction = unsafe extern "system" fn(
     user_data: *mut c_void,
     size: c_size_t,
     alignment: c_size_t,

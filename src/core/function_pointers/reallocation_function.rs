@@ -42,7 +42,7 @@ use std::ptr::null_mut;
 /// `reallocation` must follow the same rules for return values as [`VkAllocationFunction`].
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkReallocationFunction = extern "system" fn(
+pub type VkReallocationFunction = unsafe extern "system" fn(
     user_data: *mut c_void,
     original: *mut c_void,
     size: c_size_t,

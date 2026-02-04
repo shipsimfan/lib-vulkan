@@ -30,7 +30,7 @@ use crate::{VK_VERSION_1_0, VkQueue};
 ///  - [`VkResult::VkErrorDeviceLost`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkDeviceWaitIdle = extern "system" fn(device: VkDevice) -> VkResult;
+pub type VkDeviceWaitIdle = unsafe extern "system" fn(device: VkDevice) -> VkResult;
 
 /// The name of [`VkDeviceWaitIdle`]
 pub const VK_DEVICE_WAIT_IDLE: &CStr = c"vkDeviceWaitIdle";

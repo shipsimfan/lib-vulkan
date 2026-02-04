@@ -50,7 +50,7 @@ use std::ptr::null_mut;
 ///
 /// Provided by [`VK_VERSION_1_1`] with [`khr_swapchain`], [`khr_device_group`] with
 /// [`khr_swapchain`]
-pub type VkGetPhysicalDevicePresentRectanglesKhr = extern "system" fn(
+pub type VkGetPhysicalDevicePresentRectanglesKhr = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     surface: VkSurfaceKhr,
     rect_count: *mut u32,

@@ -17,7 +17,7 @@ use crate::VK_VERSION_1_0;
 ///  - `properties` must be a valid pointer to a [`VkPhysicalDeviceProperties`] structure
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkGetPhysicalDeviceProperties = extern "system" fn(
+pub type VkGetPhysicalDeviceProperties = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     properties: *mut VkPhysicalDeviceProperties,
 );

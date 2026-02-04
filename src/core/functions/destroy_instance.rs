@@ -34,7 +34,7 @@ use std::ptr::{null, null_mut};
 ///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkDestroyInstance =
-    extern "system" fn(instance: VkInstance, allocator: *const VkAllocationCallbacks);
+    unsafe extern "system" fn(instance: VkInstance, allocator: *const VkAllocationCallbacks);
 
 /// The name of [`VkDestroyInstance`]
 pub const VK_DESTROY_INSTANCE: &CStr = c"vkDestroyInstance";

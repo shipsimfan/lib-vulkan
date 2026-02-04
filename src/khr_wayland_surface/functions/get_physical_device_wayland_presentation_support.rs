@@ -27,7 +27,7 @@ use std::ptr::null;
 ///  - `display` must be a valid pointer to a [`wl_display`] value
 ///
 /// Provided by [`khr_wayland_surface`]
-pub type VkGetPhysicalDeviceWaylandPresentationSupportKhr = extern "system" fn(
+pub type VkGetPhysicalDeviceWaylandPresentationSupportKhr = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     queue_family_index: u32,
     display: *mut wl_display,

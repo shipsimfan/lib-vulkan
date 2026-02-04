@@ -8,4 +8,4 @@ use crate::VK_VERSION_1_0;
 /// command function pointer before use.
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkVoidFunction = extern "system" fn();
+pub type VkVoidFunction = unsafe extern "system" fn();

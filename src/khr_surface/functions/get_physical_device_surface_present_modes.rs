@@ -67,7 +67,7 @@ use std::ptr::null_mut;
 ///  - [`VkResult::VkErrorSurfaceLostKhr`]
 ///
 /// Provided by [`khr_surface`]
-pub type VkGetPhysicalDeviceSurfacePresentModesKhr = extern "system" fn(
+pub type VkGetPhysicalDeviceSurfacePresentModesKhr = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     surface: VkSurfaceKhr,
     present_mode_count: *mut u32,

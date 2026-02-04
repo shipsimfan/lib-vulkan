@@ -36,7 +36,7 @@ use std::ptr::null_mut;
 ///  - `swapchain` must have been created, allocated, or retrieved from `device`
 ///
 /// Provided by [`khr_swapchain`]
-pub type VkGetSwapchainImagesKhr = extern "system" fn(
+pub type VkGetSwapchainImagesKhr = unsafe extern "system" fn(
     device: VkDevice,
     swapchain: VkSwapchainKhr,
     swapchain_image_count: *mut u32,

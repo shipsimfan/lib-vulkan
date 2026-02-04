@@ -31,7 +31,7 @@ use crate::{VK_VERSION_1_0, VkDeviceQueueCreateInfo};
 ///  - `queue` must be a valid pointer to a [`VkQueue`] handle
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkGetDeviceQueue = extern "system" fn(
+pub type VkGetDeviceQueue = unsafe extern "system" fn(
     device: VkDevice,
     queue_family_index: u32,
     queue_index: u32,

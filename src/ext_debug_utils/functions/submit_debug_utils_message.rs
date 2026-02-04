@@ -43,7 +43,7 @@ use crate::{
 ///    structure
 ///
 /// Provided by [`ext_debug_utils`]
-pub type VkSubmitDebugUtilsMessageExt = extern "system" fn(
+pub type VkSubmitDebugUtilsMessageExt = unsafe extern "system" fn(
     instance: VkInstance,
     message_severity: VkDebugUtilsMessageSeverityFlagExt,
     message_types: VkDebugUtilsMessageTypeFlagsExt,

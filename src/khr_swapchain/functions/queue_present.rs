@@ -114,7 +114,7 @@ use crate::{
 ///
 /// Provided by [`khr_swapchain`]
 pub type VkQueuePresentKhr =
-    extern "system" fn(queue: VkQueue, present_info: *const VkPresentInfoKhr) -> VkResult;
+    unsafe extern "system" fn(queue: VkQueue, present_info: *const VkPresentInfoKhr) -> VkResult;
 
 /// The name of [`VkQueuePresentKhr`]
 pub const VK_QUEUE_PRESENT_KHR: &CStr = c"vkQueuePresentKHR";

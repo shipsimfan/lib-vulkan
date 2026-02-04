@@ -44,7 +44,7 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`ext_debug_utils`]
-pub type VkCreateDebugUtilsMessengerExt = extern "system" fn(
+pub type VkCreateDebugUtilsMessengerExt = unsafe extern "system" fn(
     instance: VkInstance,
     create_info: *const VkDebugUtilsMessengerCreateInfoExt,
     allocator: *const VkAllocationCallbacks,

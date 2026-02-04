@@ -41,7 +41,7 @@ use crate::{
 ///  - [`VkResult::VkErrorSurfaceLostKhr`]
 ///
 /// Provided by [`khr_surface`]
-pub type VkGetPhysicalDeviceSurfaceCapabilitiesKhr = extern "system" fn(
+pub type VkGetPhysicalDeviceSurfaceCapabilitiesKhr = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     surface: VkSurfaceKhr,
     surface_capabilities: *mut VkSurfaceCapabilitiesKhr,

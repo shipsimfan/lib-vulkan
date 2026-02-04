@@ -46,7 +46,7 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkEnumeratePhysicalDevices = extern "system" fn(
+pub type VkEnumeratePhysicalDevices = unsafe extern "system" fn(
     instance: VkInstance,
     physical_device_count: *mut u32,
     physical_devices: *mut VkPhysicalDevice,

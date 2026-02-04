@@ -34,7 +34,7 @@ use crate::{
 ///  - The callback must not make calls to any Vulkan commands
 ///
 /// Provided by [`ext_debug_utils`]
-pub type VkDebugUtilsMessengerCallbackExt = extern "system" fn(
+pub type VkDebugUtilsMessengerCallbackExt = unsafe extern "system" fn(
     message_severity: VkDebugUtilsMessageSeverityFlagExt,
     message_types: VkDebugUtilsMessageTypeFlagsExt,
     callback_data: *const VkDebugUtilsMessengerCallbackDataExt,

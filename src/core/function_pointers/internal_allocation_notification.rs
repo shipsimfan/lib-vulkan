@@ -20,7 +20,7 @@ use crate::VK_VERSION_1_0;
 /// This is a purely informational callback.
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkInternalAllocationNotification = extern "system" fn(
+pub type VkInternalAllocationNotification = unsafe extern "system" fn(
     user_data: *mut c_void,
     size: c_size_t,
     allocation_type: VkInternalAllocationType,

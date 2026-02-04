@@ -20,7 +20,7 @@ use crate::{VK_FALSE, VK_TRUE, VK_VERSION_1_0};
 ///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetPhysicalDeviceFeatures =
-    extern "system" fn(physical_device: VkPhysicalDevice, features: *mut VkPhysicalDeviceFeatures);
+    unsafe extern "system" fn(physical_device: VkPhysicalDevice, features: *mut VkPhysicalDeviceFeatures);
 
 /// The name of [`VkGetPhysicalDeviceFeatures`]
 pub const VK_GET_PHYSICAL_DEVICE_FEATURES: &CStr = c"vkGetPhysicalDeviceFeatures";

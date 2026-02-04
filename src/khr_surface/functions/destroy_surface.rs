@@ -40,7 +40,7 @@ use std::ptr::null;
 ///  - Host access to `surface` must be externally synchronized
 ///
 /// Provided by [`khr_surface`]
-pub type VkDestroySurfaceKhr = extern "system" fn(
+pub type VkDestroySurfaceKhr = unsafe extern "system" fn(
     instance: VkInstance,
     surface: VkSurfaceKhr,
     allocator: *const VkAllocationCallbacks,

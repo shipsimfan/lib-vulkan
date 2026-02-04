@@ -33,7 +33,7 @@ use std::ptr::null;
 ///    to an array of `queue_family_property_count` [`VkQueueFamilyProperties`] structures
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkGetPhysicalDeviceQueueFamilyProperties = extern "system" fn(
+pub type VkGetPhysicalDeviceQueueFamilyProperties = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     queue_family_property_count: *mut u32,
     queue_family_properties: *mut VkQueueFamilyProperties,

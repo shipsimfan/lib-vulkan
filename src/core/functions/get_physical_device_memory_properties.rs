@@ -18,7 +18,7 @@ use crate::VK_VERSION_1_0;
 ///    structure
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkGetPhysicalDeviceMemoryProperties = extern "system" fn(
+pub type VkGetPhysicalDeviceMemoryProperties = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     memory_properties: *mut VkPhysicalDeviceMemoryProperties,
 );

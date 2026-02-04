@@ -50,7 +50,7 @@ use crate::{
 ///
 /// Provided by [`ext_debug_utils`]
 pub type VkCmdEndDebugUtilsLabelExt =
-    extern "system" fn(command_buffer: VkCommandBuffer, label_info: *const VkDebugUtilsLabelExt);
+    unsafe extern "system" fn(command_buffer: VkCommandBuffer, label_info: *const VkDebugUtilsLabelExt);
 
 /// The name of [`VkCmdEndDebugUtilsLabelExt`]
 pub const VK_CMD_END_DEBUG_UTILS_LABEL_EXT: &CStr = c"vkCmdEndDebugUtilsLabelEXT";

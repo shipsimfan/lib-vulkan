@@ -23,7 +23,7 @@ use crate::{VkGetPhysicalDeviceQueueFamilyProperties, khr_win32_surface};
 ///
 /// Provided by [`khr_win32_surface`]
 pub type VkGetPhysicalDeviceWin32PresentationSupportKhr =
-    extern "system" fn(physical_device: VkPhysicalDevice, queue_family_index: u32) -> VkBool32;
+    unsafe extern "system" fn(physical_device: VkPhysicalDevice, queue_family_index: u32) -> VkBool32;
 
 /// The name of [`VkGetPhysicalDeviceWin32PresentationSupportKhr`]
 pub const VK_GET_PHYSICAL_DEVICE_WIN32_PRESENTATION_SUPPORT_KHR: &CStr = unsafe {

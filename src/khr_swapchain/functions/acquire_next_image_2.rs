@@ -33,7 +33,7 @@ use crate::{
 ///
 /// Provided by [`VK_VERSION_1_1`] with [`khr_swapchain`], [`khr_device_group`] with
 /// [`khr_swapchain`]
-pub type VkAcquireNextImage2Khr = extern "system" fn(
+pub type VkAcquireNextImage2Khr = unsafe extern "system" fn(
     device: VkDevice,
     acquire_info: *const VkAcquireNextImageInfoKhr,
     image_index: *mut u32,

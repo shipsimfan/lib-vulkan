@@ -43,7 +43,7 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkCreateImageView = extern "system" fn(
+pub type VkCreateImageView = unsafe extern "system" fn(
     device: VkDevice,
     create_info: *const VkImageViewCreateInfo,
     allocator: *const VkAllocationCallbacks,

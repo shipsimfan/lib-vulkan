@@ -40,7 +40,7 @@ use std::ptr::{null, null_mut};
 ///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetDeviceProcAddr =
-    extern "system" fn(device: VkDevice, name: *const c_char) -> Option<VkVoidFunction>;
+    unsafe extern "system" fn(device: VkDevice, name: *const c_char) -> Option<VkVoidFunction>;
 
 /// The name of [`VkGetDeviceProcAddr`]
 pub const VK_GET_DEVICE_PROC_ADDR: &CStr = c"vkGetDeviceProcAddr";

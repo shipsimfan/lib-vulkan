@@ -57,7 +57,7 @@ use crate::{
 ///  - Host access to `fence` must be externally synchronized
 ///
 /// Provided by [`khr_swapchain`]
-pub type VkAcquireNextImageKhr = extern "system" fn(
+pub type VkAcquireNextImageKhr = unsafe extern "system" fn(
     device: VkDevice,
     swapchain: VkSwapchainKhr,
     timeout: u64,

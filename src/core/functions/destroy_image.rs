@@ -35,8 +35,11 @@ use std::ptr::null;
 ///  - Host access to image must be externally synchronized
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkDestroyImage =
-    extern "system" fn(device: VkDevice, image: VkImage, allocator: *const VkAllocationCallbacks);
+pub type VkDestroyImage = unsafe extern "system" fn(
+    device: VkDevice,
+    image: VkImage,
+    allocator: *const VkAllocationCallbacks,
+);
 
 /// The name of [`VkDestroyImage`]
 pub const VK_DESTROY_IMAGE: &CStr = c"vkDestroyImage";

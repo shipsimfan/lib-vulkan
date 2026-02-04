@@ -39,7 +39,7 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`khr_wayland_surface`]
-pub type VkCreateWaylandSurfaceKhr = extern "system" fn(
+pub type VkCreateWaylandSurfaceKhr = unsafe extern "system" fn(
     instance: VkInstance,
     create_info: *const VkWaylandSurfaceCreateInfoKhr,
     allocatior: *const VkAllocationCallbacks,

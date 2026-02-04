@@ -69,7 +69,7 @@ use std::ptr::{null, null_mut};
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkEnumerateDeviceExtensionProperties = extern "system" fn(
+pub type VkEnumerateDeviceExtensionProperties = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     layer_name: *const c_char,
     property_count: *mut u32,

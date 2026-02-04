@@ -20,7 +20,7 @@ use crate::{VK_VERSION_1_1, khr_swapchain};
 ///
 /// Provided by [`VK_VERSION_1_1`] with [`khr_swapchain`], [`khr_device_group`] with
 /// [`khr_swapchain`]
-pub type VkGetDeviceGroupPresentCapabilitiesKhr = extern "system" fn(
+pub type VkGetDeviceGroupPresentCapabilitiesKhr = unsafe extern "system" fn(
     device: VkDevice,
     device_group_present_capabilities: VkDeviceGroupPresentCapabilitiesKhr,
 ) -> VkResult;

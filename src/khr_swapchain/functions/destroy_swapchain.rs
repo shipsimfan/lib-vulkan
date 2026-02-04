@@ -54,7 +54,7 @@ use std::ptr::null;
 ///  - Host access to `swapchain` must be externally synchronized
 ///
 /// Provided by [`khr_swapchain`]
-pub type VkDestroySwapchainKhr = extern "system" fn(
+pub type VkDestroySwapchainKhr = unsafe extern "system" fn(
     device: VkDevice,
     swapchain: VkSwapchainKhr,
     allocator: *const VkAllocationCallbacks,

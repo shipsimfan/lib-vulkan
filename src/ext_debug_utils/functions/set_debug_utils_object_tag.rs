@@ -37,7 +37,7 @@ use crate::{VkInstance, VkPhysicalDevice, ext_debug_utils};
 ///
 /// Provided by [`ext_debug_utils`]
 pub type VkSetDebugUtilsObjectTagExt =
-    extern "system" fn(device: VkDevice, tag_info: *const VkDebugUtilsObjectTagInfoExt) -> VkResult;
+    unsafe extern "system" fn(device: VkDevice, tag_info: *const VkDebugUtilsObjectTagInfoExt) -> VkResult;
 
 /// The name of [`VkSetDebugUtilsObjectTagExt`]
 pub const VK_SET_DEBUG_UTILS_OBJECT_TAG_EXT: &CStr = c"vkSetDebugUtilsObjectTagEXT";

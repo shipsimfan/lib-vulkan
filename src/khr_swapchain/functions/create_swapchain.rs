@@ -103,7 +103,7 @@ use std::ptr::null;
 ///  - The `device` must have been created with at least 1 queue
 ///
 /// Provided by [`khr_swapchain`]
-pub type VkCreateSwapchainKhr = extern "system" fn(
+pub type VkCreateSwapchainKhr = unsafe extern "system" fn(
     device: VkDevice,
     create_info: *const VkSwapchainCreateInfoKhr,
     allocator: *const VkAllocationCallbacks,

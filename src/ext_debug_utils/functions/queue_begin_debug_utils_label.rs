@@ -21,7 +21,7 @@ use crate::ext_debug_utils;
 ///
 /// Provided by [`ext_debug_utils`]
 pub type VkQueueBeginDebugUtilsLabelExt =
-    extern "system" fn(queue: VkQueue, label_info: *const VkDebugUtilsLabelExt);
+    unsafe extern "system" fn(queue: VkQueue, label_info: *const VkDebugUtilsLabelExt);
 
 /// The name of [`VkQueueBeginDebugUtilsLabelExt`]
 pub const VK_QUEUE_BEGIN_DEBUG_UTILS_LABEL_EXT: &CStr = c"vkQueueBeginDebugUtilsLabelEXT";

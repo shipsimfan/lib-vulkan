@@ -59,7 +59,7 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorDeviceLost`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkCreateDevice = extern "system" fn(
+pub type VkCreateDevice = unsafe extern "system" fn(
     physical_device: VkPhysicalDevice,
     create_info: *const VkDeviceCreateInfo,
     allocator: *const VkAllocationCallbacks,

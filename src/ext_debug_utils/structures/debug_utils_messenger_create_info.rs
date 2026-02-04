@@ -107,7 +107,7 @@ impl const Default for VkDebugUtilsMessengerCreateInfoExt {
     }
 }
 
-extern "system" fn default(
+unsafe extern "system" fn default(
     _: VkDebugUtilsMessageSeverityFlagExt,
     _: VkDebugUtilsMessageTypeFlagsExt,
     _: *const VkDebugUtilsMessengerCallbackDataExt,

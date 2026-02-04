@@ -25,7 +25,7 @@ use crate::ext_debug_utils::{self, VkQueueBeginDebugUtilsLabelExt};
 ///  - Host access to `queue` must be externally synchronized
 ///
 /// Provided by [`ext_debug_utils`]
-pub type VkQueueEndDebugUtilsLabelExt = extern "system" fn(queue: VkQueue);
+pub type VkQueueEndDebugUtilsLabelExt = unsafe extern "system" fn(queue: VkQueue);
 
 /// The name of [`VkQueueEndDebugUtilsLabelExt`]
 pub const VK_QUEUE_END_DEBUG_UTILS_LABEL_EXT: &CStr = c"vkQueueEndDebugUtilsLabelEXT";

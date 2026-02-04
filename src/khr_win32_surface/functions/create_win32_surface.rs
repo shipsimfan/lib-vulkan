@@ -37,7 +37,7 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorOutOfDeviceMemory`]
 ///
 /// Provided by [`khr_win32_surface`]
-pub type VkCreateWin32SurfaceKhr = extern "system" fn(
+pub type VkCreateWin32SurfaceKhr = unsafe extern "system" fn(
     instance: VkInstance,
     create_info: *const VkWin32SurfaceCreateInfoKhr,
     allocator: *const VkAllocationCallbacks,

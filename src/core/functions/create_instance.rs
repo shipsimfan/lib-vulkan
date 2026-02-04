@@ -48,7 +48,7 @@ use std::ptr::null;
 ///  - [`VkResult::VkErrorIncompatibleDriver`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkCreateInstance = extern "system" fn(
+pub type VkCreateInstance = unsafe extern "system" fn(
     create_info: *const VkInstanceCreateInfo,
     allocator: *const VkAllocationCallbacks,
     instance: *mut VkInstance,

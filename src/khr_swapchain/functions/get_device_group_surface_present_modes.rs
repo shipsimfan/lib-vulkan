@@ -39,7 +39,7 @@ use crate::{
 ///
 /// Provided by [`VK_VERSION_1_1`] with [`khr_swapchain`], [`khr_device_group`] with
 /// [`khr_swapchain`]
-pub type VkGetDeviceGroupSurfacePresentModesKhr = extern "system" fn(
+pub type VkGetDeviceGroupSurfacePresentModesKhr = unsafe extern "system" fn(
     device: VkDevice,
     surface: VkSurfaceKhr,
     modes: *mut VkDeviceGroupPresentModeFlagsKhr,

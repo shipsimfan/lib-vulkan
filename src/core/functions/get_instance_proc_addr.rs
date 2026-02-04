@@ -45,7 +45,7 @@ use std::ptr::{null, null_mut};
 ///
 /// Provided by [`VK_VERSION_1_0`]
 pub type VkGetInstanceProcAddr =
-    extern "system" fn(instance: VkInstance, name: *const c_char) -> Option<VkVoidFunction>;
+    unsafe extern "system" fn(instance: VkInstance, name: *const c_char) -> Option<VkVoidFunction>;
 
 /// The name of [`VkGetInstanceProcAddr`]
 pub const VK_GET_INSTANCE_PROC_ADDR: &CStr = c"vkGetInstanceProcAddr";

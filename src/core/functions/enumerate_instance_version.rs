@@ -24,7 +24,7 @@ use crate::VK_VERSION_1_1;
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_1`]
-pub type VkEnumerateInstanceVersion = extern "system" fn(api_version: *mut u32) -> VkResult;
+pub type VkEnumerateInstanceVersion = unsafe extern "system" fn(api_version: *mut u32) -> VkResult;
 
 /// The name of [`VkEnumerateInstanceVersion`]
 pub const VK_ENUMERATE_INSTANCE_VERSION: &CStr = c"vkEnumerateInstanceVersion";

@@ -40,7 +40,7 @@ use std::ptr::null;
 ///  - Host access to `messenger` must be externally synchronized
 ///
 /// Provided by [`ext_debug_utils`]
-pub type VkDestroyDebugUtilsMessengerExt = extern "system" fn(
+pub type VkDestroyDebugUtilsMessengerExt = unsafe extern "system" fn(
     instance: VkInstance,
     messenger: VkDebugUtilsMessengerExt,
     allocator: *const VkAllocationCallbacks,
