@@ -6,7 +6,7 @@ use crate::VkResult;
 #[macro_export]
 macro_rules! try_vulkan {
     ($expr: expr) => {{
-        let result = $expr;
+        let result = unsafe { $expr };
         if result as usize >= 0 {
             Ok(result)
         } else {
