@@ -1,5 +1,6 @@
 mod attachment_load_op;
 mod attachment_store_op;
+mod command_buffer_level;
 mod component_swizzle;
 mod dynamic_state;
 mod format;
@@ -15,6 +16,7 @@ mod system_allocation_scope;
 
 pub use attachment_load_op::VkAttachmentLoadOp;
 pub use attachment_store_op::VkAttachmentStoreOp;
+pub use command_buffer_level::VkCommandBufferLevel;
 pub use component_swizzle::VkComponentSwizzle;
 pub use dynamic_state::VkDynamicState;
 pub use format::VkFormat;

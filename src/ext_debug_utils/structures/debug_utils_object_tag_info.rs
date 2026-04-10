@@ -1,6 +1,8 @@
 use crate::{VkObjectType, VkStructureType};
-use core::ffi::{c_size_t, c_void};
-use std::ptr::null;
+use std::{
+    ffi::{c_size_t, c_void},
+    ptr::null,
+};
 
 // rustdoc imports
 #[allow(unused_imports)]

@@ -1,5 +1,5 @@
 use crate::{VkBool32, VkDeviceSize, VkSampleCountFlags};
-use core::ffi::c_size_t;
+use std::ffi::c_size_t;
 
 // rustdoc imports
 #[allow(unused_imports)]

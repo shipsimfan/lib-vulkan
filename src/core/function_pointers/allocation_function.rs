@@ -1,9 +1,9 @@
 use crate::VkSystemAllocationScope;
-use core::ffi::{c_size_t, c_void};
+use std::ffi::{c_size_t, c_void};
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VkResult, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, VkResult};
 #[allow(unused_imports)]
 use std::ptr::null_mut;
 

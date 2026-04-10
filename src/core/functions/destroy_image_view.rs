@@ -5,7 +5,7 @@ use std::ffi::CStr;
 #[allow(unused_imports)]
 use crate::{VK_NULL_HANDLE, VK_VERSION_1_0};
 #[allow(unused_imports)]
-use core::ptr::null;
+use std::ptr::null;
 
 /// Destroy an image view object
 ///
