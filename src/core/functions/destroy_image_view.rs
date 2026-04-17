@@ -28,7 +28,7 @@ use std::ptr::null;
 ///  - If `allocator` is not [`null`], `allocator` must be a valid pointer to a valid
 ///    [`VkAllocationCallbacks`] structure
 ///  - If `image_view` is a valid handle, it must have been created, allocated, or retrieved from
-///    device
+///    `device`
 ///
 /// # Host Synchronization
 ///  - Host access to `image_view` must be externally synchronized
