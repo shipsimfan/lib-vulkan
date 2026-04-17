@@ -1,6 +1,6 @@
 mod attachment_description;
 mod comnand_pool_create;
-mod device;
+mod device_create;
 mod device_queue_create;
 mod image_aspect;
 mod image_usage;
@@ -10,12 +10,13 @@ mod memory_heap;
 mod memory_property;
 mod queue;
 mod sample_count;
+mod semaphore_create;
 
 mod flags;
 
 pub use attachment_description::*;
 pub use comnand_pool_create::*;
-pub use device::*;
+pub use device_create::*;
 pub use device_queue_create::*;
 pub use image_aspect::*;
 pub use image_usage::*;
@@ -25,5 +26,6 @@ pub use memory_heap::*;
 pub use memory_property::*;
 pub use queue::*;
 pub use sample_count::*;
+pub use semaphore_create::*;
 
 pub use flags::VkFlags;

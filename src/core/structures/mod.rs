@@ -28,6 +28,7 @@ mod physical_device_sparse_properties;
 mod physical_device_vulkan_1_3_features;
 mod queue_family_properties;
 mod rect_2d;
+mod semaphore_create_info;
 
 pub use allocation_callbacks::VkAllocationCallbacks;
 pub use application_info::VkApplicationInfo;
@@ -59,3 +60,4 @@ pub use physical_device_sparse_properties::VkPhysicalDeviceSparseProperties;
 pub use physical_device_vulkan_1_3_features::VkPhysicalDeviceVulkan13Features;
 pub use queue_family_properties::VkQueueFamilyProperties;
 pub use rect_2d::VkRect2D;
+pub use semaphore_create_info::VkSemaphoreCreateInfo;
