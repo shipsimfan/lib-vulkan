@@ -1,4 +1,5 @@
 mod attachment_description;
+mod command_buffer_usage;
 mod comnand_pool_create;
 mod device_create;
 mod device_queue_create;
@@ -16,6 +17,7 @@ mod semaphore_create;
 mod flags;
 
 pub use attachment_description::*;
+pub use command_buffer_usage::*;
 pub use comnand_pool_create::*;
 pub use device_create::*;
 pub use device_queue_create::*;

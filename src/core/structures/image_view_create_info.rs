@@ -7,8 +7,8 @@ use std::{os::raw::c_void, ptr::null};
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    VK_FALSE, VK_NULL_HANDLE, VK_TRUE, VkComponentSwizzle, VkDeviceMemory, VkImageAspectFlag,
-    VkImageUsageFlag, VkImageView, VkImageViewCreateFlag, VkSampleCountFlag,
+    VK_FALSE, VK_NULL_HANDLE, VK_TRUE, VK_VERSION_1_0, VkComponentSwizzle, VkDeviceMemory,
+    VkImageAspectFlag, VkImageUsageFlag, VkImageView, VkImageViewCreateFlag, VkSampleCountFlag,
 };
 
 /// Structure specifying parameters of a newly created image view
@@ -136,6 +136,8 @@ use crate::{
 ///    [`VK_REMAINING_ARRAY_LAYERS`], the remaining number of layers must be a multiple of 6
 ///  - If `flags` includes [`VkImageViewCreateFlag::DescriptorBufferCaptureReplayBitExt`], the
 ///    `descriptor_buffer_capture_replay` feature must be enabled
+///
+/// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkImageViewCreateInfo {

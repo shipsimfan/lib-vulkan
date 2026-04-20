@@ -3,9 +3,11 @@ use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VkFenceCreateFlag;
+use crate::{VK_VERSION_1_0, VkFenceCreateFlag};
 
 /// Structure specifying parameters of a newly created fence
+///
+/// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkFenceCreateInfo {

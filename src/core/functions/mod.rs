@@ -1,4 +1,5 @@
 mod allocate_command_buffers;
+mod begin_command_buffer;
 mod create_command_pool;
 mod create_device;
 mod create_fence;
@@ -29,6 +30,7 @@ mod get_physical_device_queue_family_properties;
 mod wait_for_fences;
 
 pub use allocate_command_buffers::*;
+pub use begin_command_buffer::*;
 pub use create_command_pool::*;
 pub use create_device::*;
 pub use create_fence::*;

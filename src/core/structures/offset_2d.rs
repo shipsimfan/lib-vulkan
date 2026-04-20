@@ -1,3 +1,7 @@
+// rustdoc imports
+#[allow(unused_imports)]
+use crate::VK_VERSION_1_0;
+
 /// Structure specifying a two-dimensional offset
 ///
 /// Provided by [`VK_VERSION_1_0`]

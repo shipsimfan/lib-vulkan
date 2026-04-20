@@ -1,7 +1,13 @@
 use crate::{VkSemaphoreCreateFlags, VkStructureType};
 use std::{ffi::c_void, ptr::null_mut};
 
+// rustdoc imports
+#[allow(unused_imports)]
+use crate::VK_VERSION_1_0;
+
 /// Structure specifying parameters of a newly created semaphore
+///
+/// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkSemaphoreCreateInfo {
