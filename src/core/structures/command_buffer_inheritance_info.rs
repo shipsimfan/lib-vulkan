@@ -6,10 +6,7 @@ use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{
-    VK_FALSE, VK_NULL_HANDLE, VK_TRUE, VK_VERSION_1_0, VkCmdBeginRendering, VkCommandBuffer,
-    VkDevice,
-};
+use crate::{VK_FALSE, VK_NULL_HANDLE, VK_TRUE, VK_VERSION_1_0, VkCommandBuffer, VkDevice};
 
 /// Structure specifying command buffer inheritance information
 ///

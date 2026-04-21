@@ -41,6 +41,7 @@ pub use base_in_structure::VkBaseInStructure;
 pub use base_out_structure::VkBaseOutStructure;
 pub use command_buffer_allocate_info::VkCommandBufferAllocateInfo;
 pub use command_buffer_begin_info::VkCommandBufferBeginInfo;
+pub use command_buffer_inheritance_info::VkCommandBufferInheritanceInfo;
 pub use command_pool_create_info::VkCommandPoolCreateInfo;
 pub use component_mapping::VkComponentMapping;
 pub use device_create_info::VkDeviceCreateInfo;
