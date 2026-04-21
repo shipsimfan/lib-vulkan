@@ -3,7 +3,10 @@ use std::ffi::CStr;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VkCommandPool};
+use crate::{
+    VK_VERSION_1_0, VkCommandPool,
+    ext_debug_utils::{VkCmdBeginDebugUtilsLabelExt, VkCmdEndDebugUtilsLabelExt},
+};
 
 /// Finish recording a command buffer
 ///

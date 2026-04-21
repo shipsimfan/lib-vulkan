@@ -1,3 +1,4 @@
+mod access;
 mod attachment_description;
 mod command_buffer_usage;
 mod comnand_pool_create;
@@ -10,6 +11,7 @@ mod image_view_create;
 mod instance_create;
 mod memory_heap;
 mod memory_property;
+mod pipeline_stage;
 mod pipeline_statistic;
 mod query_control;
 mod queue;
@@ -18,6 +20,7 @@ mod semaphore_create;
 
 mod flags;
 
+pub use access::*;
 pub use attachment_description::*;
 pub use command_buffer_usage::*;
 pub use comnand_pool_create::*;
@@ -30,6 +33,7 @@ pub use image_view_create::*;
 pub use instance_create::*;
 pub use memory_heap::*;
 pub use memory_property::*;
+pub use pipeline_stage::*;
 pub use pipeline_statistic::*;
 pub use query_control::*;
 pub use queue::*;

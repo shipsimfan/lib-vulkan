@@ -19,6 +19,7 @@ mod image_subresource_range;
 mod image_view_create_info;
 mod instance_create_info;
 mod layer_properties;
+mod memory_barrier;
 mod memory_heap;
 mod memory_type;
 mod offset_2d;
