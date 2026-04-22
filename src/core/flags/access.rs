@@ -8,7 +8,7 @@ flags! {
     /// Bitmask of [`VkAccessFlags`]
     ///
     /// # Description
-    /// [`VkAccessFlags`] is a bitmask type for setting a mask of zero or more [`VkAccessFlag`].
+    /// [`VkAccessFlags`] is a bitmask type for setting a mask of zero or more [`VkAccessFlag`]s.
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub struct VkAccessFlags;
@@ -189,17 +189,23 @@ flags! {
         /// Provided by [`ext_fragment_density_map`]
         FragmentDensityMapReadBitExt = 0x00800000,
 
-        /// [`VkAccessFlag::FragmentShadingRateAttachmentReadBitKhr`] specifies read access to a fragment shading rate attachment during rasterization. Such access occurs in the [`VkPipelineStageFlag::FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR pipeline stage.
+        /// [`VkAccessFlag::FragmentShadingRateAttachmentReadBitKhr`] specifies read access to a
+        /// fragment shading rate attachment during rasterization. Such access occurs in the
+        /// [`VkPipelineStageFlag::FragmentShadingRateAttachmentBitKhr`] pipeline stage.
         ///
         /// Provided by [`ext_fragment_shading_rate`]
         FragmentShadingRateAttachmentReadBitKhr = 0x01000000,
 
-        /// [`VkAccessFlag::COMMAND_PREPROCESS_READ_BIT_EXT specifies reads from buffer inputs to vkCmdPreprocessGeneratedCommandsEXT. Such access occurs in the [`VkPipelineStageFlag::COMMAND_PREPROCESS_BIT_EXT pipeline stage.
+        /// [`VkAccessFlag::CommandPreprocessReadBitExt`] specifies reads from buffer inputs to
+        /// [`VkCmdPreprocessGeneratedCommandsExt`]. Such access occurs in the
+        /// [`VkPipelineStageFlag::CommandPreprocessBitExt`] pipeline stage.
         ///
         /// Provided by [`ext_device_generated_commands`]
         CommandPreprocessReadBitExt = 0x00020000,
 
-        /// [`VkAccessFlag::COMMAND_PREPROCESS_WRITE_BIT_EXT specifies writes to the target command buffer preprocess outputs in vkCmdPreprocessGeneratedCommandsEXT. Such access occurs in the [`VkPipelineStageFlag::COMMAND_PREPROCESS_BIT_EXT pipeline stage.
+        /// [`VkAccessFlag::CommandPreprocessWriteBitExt`] specifies writes to the target command
+        /// buffer preprocess outputs in [`VkCmdPreprocessGeneratedCommandsExt`]. Such access
+        /// occurs in the [`VkPipelineStageFlag::CommandPreprocessBitExt`] pipeline stage.
         ///
         /// Provided by [`ext_device_generated_commands`]
         CommandPreprocessWriteBitExt = 0x00040000,

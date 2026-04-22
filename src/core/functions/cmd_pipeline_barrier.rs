@@ -8,15 +8,15 @@ use std::ffi::CStr;
 #[allow(unused_imports)]
 use crate::{
     VK_VERSION_1_0, VkCommandPool, VkCommandPoolCreateInfo, VkDependencyFlag, VkImageLayout,
-    VkPipelinseStageFlag, VkQueueFlag, VkRenderPass,
+    VkPipelineStageFlag, VkQueueFlag, VkRenderPass,
 };
 
 /// Insert a memory dependency
 ///
 /// # Parameters
 ///  - `command_buffer` is the command buffer into which the command is recorded.
-///  - `src_stage_mask` is a bitmask of [`VkPipelinseStageFlag`]s specifying the source stages.
-///  - `dst_stage_mask` is a bitmask of [`VkPipelinseStageFlag`]s specifying the destination
+///  - `src_stage_mask` is a bitmask of [`VkPipelineStageFlag`]s specifying the source stages.
+///  - `dst_stage_mask` is a bitmask of [`VkPipelineStageFlag`]s specifying the destination
 ///    stages.
 ///  - `dependency_flags` is a bitmask of [`VkDependencyFlag`]s specifying how execution and memory
 ///    dependencies are formed.
@@ -68,32 +68,32 @@ use crate::{
 ///
 /// # Valid Usage
 ///  - If the `geometry_shader` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::GeometryShaderBit`]
+///    [`VkPipelineStageFlag::GeometryShaderBit`]
 ///  - If the `tessellation_shader` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::TessellationControlShaderBit`] or
-///    [`VkPipelineStateFlag::TessellationEvaluationShaderBit`]
+///    [`VkPipelineStageFlag::TessellationControlShaderBit`] or
+///    [`VkPipelineStageFlag::TessellationEvaluationShaderBit`]
 ///  - If the conditionalRendering feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::ConditionalRenderingBitExt`]
+///    [`VkPipelineStageFlag::ConditionalRenderingBitExt`]
 ///  - If the `fragment_density_map` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::FragmentDensityProcessBitExt`]
+///    [`VkPipelineStageFlag::FragmentDensityProcessBitExt`]
 ///  - If the `transform_feedback` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::TransformFeedbackBitExt`]
+///    [`VkPipelineStageFlag::TransformFeedbackBitExt`]
 ///  - If the `mesh_shader` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::MeshShaderBitExt`]
+///    [`VkPipelineStageFlag::MeshShaderBitExt`]
 ///  - If the `task_shader` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::TaskShaderBitExt`]
+///    [`VkPipelineStageFlag::TaskShaderBitExt`]
 ///  - If neither of the `shading_rate_image` or the `attachment_fragment_shading_rate` features
 ///    are enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::FragmentShadingRateAttachmentBitKhr`]
+///    [`VkPipelineStageFlag::FragmentShadingRateAttachmentBitKhr`]
 ///  - If the `synchronization2` feature is not enabled, `src_stage_mask` must not be 0
 ///  - If neither the `nv_ray_tracing` extension or the `ray_tracing_pipeline` feature are enabled,
-///    `src_stage_mask` must not contain [`VkPipelineStateFlag::RayTracingShaderBitKhr`]
+///    `src_stage_mask` must not contain [`VkPipelineStageFlag::RayTracingShaderBitKhr`]
 ///  - If the `acceleration_structure` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStateFlag::AccelerationStructureBuildBitKhr`]
+///    [`VkPipelineStageFlag::AccelerationStructureBuildBitKhr`]
 ///  - If the `ray_query` feature is not enabled and a memory barrier `src_access_mask` includes
 ///    [`VkAccessFlag::AccelerationStructureReadBitKhr`], `src_stage_mask` must not include any of
-///    the `VkPipelineStateFlag::*ShaderBit`] stages except
-///    [`VkPipelineStateFlag::RayTracingShaderBitKhr`]
+///    the `VkPipelineStageFlag::*ShaderBit`] stages except
+///    [`VkPipelineStageFlag::RayTracingShaderBitKhr`]
 ///  - The `src_access_mask` member of each element of `memory_barriers` must only include access
 ///    flags that are supported by one or more of the pipeline stages in `src_stage_mask`, as
 ///    specified in the table of supported access types
@@ -192,10 +192,10 @@ use crate::{
 ///    queue family specified by the `queue_family_index` member of the [`VkCommandPoolCreateInfo`]
 ///    structure that was used to create the [`VkCommandPool`] that `command_buffer` was allocated
 ///    from, as specified in the table of supported pipeline stages
-///  - If either `src_stage_mask` or `dst_stage_mask` includes [`VkPipelineStateFlag::HostBit`],
+///  - If either `src_stage_mask` or `dst_stage_mask` includes [`VkPipelineStageFlag::HostBit`],
 ///    for each element of `image_memory_barriers`, `src_queue_family_index` and
 ///    `dst_queue_family_index` must be equal
-///  - If either `src_stage_mask` or `dst_stage_mask` includes [`VkPipelineStateFlag::HostBit`],
+///  - If either `src_stage_mask` or `dst_stage_mask` includes [`VkPipelineStageFlag::HostBit`],
 ///    for each element of `buffer_memory_barrier`, `src_queue_family_index` and
 ///    `dst_queue_family_index` must be equal
 ///  - If a buffer or image memory barrier specifies a queue family ownership transfer operation,
@@ -207,8 +207,8 @@ use crate::{
 ///
 /// # Valid Usage (Implicit)
 ///  - `command_buffer` must be a valid [`VkCommandBuffer`] handle
-///  - `src_stage_mask` must be a valid combination of [`VkPipelinseStageFlag`]s values
-///  - `dst_stage_mask` must be a valid combination of [`VkPipelinseStageFlag`]s values
+///  - `src_stage_mask` must be a valid combination of [`VkPipelineStageFlag`]s values
+///  - `dst_stage_mask` must be a valid combination of [`VkPipelineStageFlag`]s values
 ///  - `dependency_flags` must be a valid combination of [`VkDependencyFlag`]s values
 ///  - If `memory_barrier_count` is not 0, `memory_barriers` must be a valid pointer to an array of
 ///    `memory_barrier_count` valid [`VkMemoryBarrier`] structures

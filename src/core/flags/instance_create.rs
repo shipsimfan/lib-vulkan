@@ -9,7 +9,7 @@ flags! {
     ///
     /// # Description
     /// [`VkInstanceCreateFlags`] is a bitmask type for setting a mask of zero or more
-    /// [`VkInstanceCreateFlag`].
+    /// [`VkInstanceCreateFlag`]s.
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub struct VkInstanceCreateFlags;

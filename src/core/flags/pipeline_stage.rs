@@ -9,7 +9,7 @@ flags! {
     ///
     /// # Description
     /// [`VkPipelineStageFlags`] is a bitmask type for setting a mask of zero or more
-    /// [`VkPipelineStageFlag`].
+    /// [`VkPipelineStageFlag`]s.
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub struct VkPipelineStageFlags;

@@ -9,7 +9,7 @@ flags! {
     ///
     /// # Description
     /// [`VkMemoryHeapFlags`] is a bitmask type for setting a mask of zero or more
-    /// [`VkMemoryHeapFlag`].
+    /// [`VkMemoryHeapFlag`]s.
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub struct VkMemoryHeapFlags;

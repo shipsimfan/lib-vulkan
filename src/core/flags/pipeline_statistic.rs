@@ -9,7 +9,7 @@ flags! {
     ///
     /// # Description
     /// [`VkQueryPipelineStatisticFlags`] is a bitmask type for setting a mask of zero or more
-    /// [`VkQueryPipelineStatisticFlag`].
+    /// [`VkQueryPipelineStatisticFlag`]s.
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub struct VkQueryPipelineStatisticFlags;

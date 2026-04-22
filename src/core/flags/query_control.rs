@@ -9,7 +9,7 @@ flags! {
     ///
     /// # Description
     /// [`VkQueryControlFlags`] is a bitmask type for setting a mask of zero or more
-    /// [`VkQueryControlFlag`].
+    /// [`VkQueryControlFlag`]s.
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub struct VkQueryControlFlags;

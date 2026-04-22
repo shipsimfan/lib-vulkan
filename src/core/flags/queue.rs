@@ -8,7 +8,7 @@ flags! {
     /// Bitmask of [`VkQueueFlag`]
     ///
     /// # Description
-    /// [`VkQueueFlags`] is a bitmask type for setting a mask of zero or more [`VkQueueFlag`].
+    /// [`VkQueueFlags`] is a bitmask type for setting a mask of zero or more [`VkQueueFlag`]s.
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub struct VkQueueFlags;
