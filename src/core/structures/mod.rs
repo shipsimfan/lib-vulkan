@@ -54,6 +54,7 @@ pub use extension_properties::VkExtensionProperties;
 pub use extent_2d::VkExtent2D;
 pub use extent_3d::VkExtent3D;
 pub use fence_create_info::VkFenceCreateInfo;
+pub use image_memory_barrier::VkImageMemoryBarrier;
 pub use image_subresource_range::VkImageSubresourceRange;
 pub use image_view_create_info::VkImageViewCreateInfo;
 pub use instance_create_info::VkInstanceCreateInfo;

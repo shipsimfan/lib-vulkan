@@ -1,6 +1,6 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VK_VERSION_1_0;
+use crate::{VK_VERSION_1_0, VkBuffer, VkDeviceMemory};
 
 /// Vulkan device address type
 ///

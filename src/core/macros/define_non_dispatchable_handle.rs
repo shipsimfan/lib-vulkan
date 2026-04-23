@@ -1,6 +1,6 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, vk_define_non_dispatchable_handle};
+use crate::{VK_VERSION_1_0, VkBuffer, vk_define_non_dispatchable_handle};
 
 /// Declare a non-dispatchable object handle
 ///
