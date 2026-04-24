@@ -16,6 +16,8 @@ mod pipeline_stage;
 mod pipeline_statistic;
 mod query_control;
 mod queue;
+mod rendering;
+mod resolve_mode;
 mod sample_count;
 mod semaphore_create;
 
@@ -39,6 +41,8 @@ pub use pipeline_stage::*;
 pub use pipeline_statistic::*;
 pub use query_control::*;
 pub use queue::*;
+pub use rendering::*;
+pub use resolve_mode::*;
 pub use sample_count::*;
 pub use semaphore_create::*;
 
