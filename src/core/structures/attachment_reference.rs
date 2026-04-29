@@ -8,7 +8,7 @@ use crate::VK_VERSION_1_0;
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct VkAttachmentReference {
     /// `attachment` is either an integer value identifying an attachment at the corresponding
     /// index in [`VkRenderPassCreateInfo::attachments`], or [`VK_ATTACHMENT_UNUSED`] to signify

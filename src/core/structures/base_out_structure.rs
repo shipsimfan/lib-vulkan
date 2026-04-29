@@ -13,7 +13,7 @@ use crate::VK_VERSION_1_0;
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct VkBaseOutStructure {
     /// `r#type` is the structure type of the structure being iterated through.
     pub r#type: VkStructureType,

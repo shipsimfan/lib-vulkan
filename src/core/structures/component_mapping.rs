@@ -8,7 +8,7 @@ use crate::VK_VERSION_1_0;
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct VkComponentMapping {
     /// `r` is a [`VkComponentSwizzle`] specifying the component value placed in the R component of
     /// the output vector.

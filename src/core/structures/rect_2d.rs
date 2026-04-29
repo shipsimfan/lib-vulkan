@@ -8,7 +8,7 @@ use crate::VK_VERSION_1_0;
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct VkRect2D {
     /// `offset` is a [`VkOffset2D`] specifying the rectangle offset.
     pub offset: VkOffset2D,
