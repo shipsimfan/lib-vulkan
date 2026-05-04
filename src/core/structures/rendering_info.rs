@@ -4,9 +4,8 @@ use std::{ffi::c_void, ptr::null};
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    VkImageAspectFlag, VkImageLayout, VkImageUsageFlag, VkImageView, VkPhysicalDeviceLimits,
-    VkRenderingFlag, VkResolveModeFlag, VkSampleCountFlag, VK_FALSE, VK_NULL_HANDLE,
-    VK_VERSION_1_3,
+    VK_FALSE, VK_NULL_HANDLE, VK_VERSION_1_3, VkImageAspectFlag, VkImageLayout, VkImageUsageFlag,
+    VkImageView, VkPhysicalDeviceLimits, VkRenderingFlag, VkResolveModeFlag, VkSampleCountFlag,
 };
 
 /// Structure specifying render pass instance begin info
@@ -404,67 +403,190 @@ pub struct VkRenderingInfo {
     ///    `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be greater than or equal to the
     ///    sum of the `offset.y` and `extent.height` members of each element of
     ///    `device_render_areas`
-    ///  - If neither `depth_attachment` or `stencil_attachment` are [`null`] and the `image_view` member of either structure is not [`VK_NULL_HANDLE`], the `image_view` member of each structure must be the same
-    ///  - If neither `depth_attachment` or `stencil_attachment` are [`null`], and the `resolve_mode` member of each is not [`VkResolveModeFlag::None`], the `resolve_image_view` member of each structure must be the same
-    ///  - If `depth_attachment` is not [`null`] and `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `depth_attachment`->`image_view` must have been created with a format that includes a depth component
-    ///  - If `depth_attachment` is not [`null`] and `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `depth_attachment`->`image_view` must have been created with the [`VkImageUsageFlag::DEPTH_STENCIL_ATTACHMENT_BIT usage flag set
-    ///  - If `depth_attachment` is not [`null`] and `depth_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `depth_attachment`->`resolve_image_view` must have been created with the [`VkImageUsageFlag::DEPTH_STENCIL_ATTACHMENT_BIT usage flag set
-    ///  - If `depth_attachment` is not [`null`] and `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `depth_attachment`->layout must not be [`VkImageLayout::COLOR_ATTACHMENT_OPTIMAL
-    ///  - If `depth_attachment` is not [`null`], `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], and `depth_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `depth_attachment`->`resolve_image_layout` must not be [`VkImageLayout::COLOR_ATTACHMENT_OPTIMAL
-    ///  - If `view_mask` is 0, each `depth_attachment`->`image_view` and `depth_attachment`->`resolve_image_view` that is not [`VK_NULL_HANDLE`] must have a `layer_count` that is greater than or equal to [`VkRenderingInfo`]::`layer_count`
-    ///  - If `view_mask` is not 0, each `depth_attachment`->`image_view` and `depth_attachment`->`resolve_image_view` that is not [`VK_NULL_HANDLE`] must have a `layer_count` that is greater than the index of the most significant bit in `view_mask`
-    ///  - If `depth_attachment` is not [`null`], `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], and `depth_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `depth_attachment`->`resolve_image_layout` must not be [`VkImageLayout::DepthReadOnlyStencilAttachmentOptimal`]
-    ///  - If `depth_attachment` is not [`null`] and `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `depth_attachment`->layout must not be [`VkImageLayout::StencilAttachmentOptimal`] or [`VkImageLayout::StencilReadOnlyOptimal`]
-    ///  - If `depth_attachment` is not [`null`], `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], and `depth_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `depth_attachment`->`resolve_image_layout` must not be [`VkImageLayout::StencilAttachmentOptimal`] or [`VkImageLayout::StencilReadOnlyOptimal`]
-    ///  - If `depth_attachment` is not [`null`] and `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `depth_attachment`->`resolve_mode` must be one of the bits set in VkPhysicalDeviceDepthStencilResolveProperties::supportedDepthResolveModes
-    ///  - If `depth_attachment` or `stencil_attachment` are both not [`null`], `depth_attachment`->`image_view` and `stencil_attachment`->`image_view` are both not [`VK_NULL_HANDLE`], and VkPhysicalDeviceDepthStencilResolveProperties::independentResolveNone is [`VK_FALSE`], the `resolve_mode` of both structures must be the same value
-    ///  - If `depth_attachment` or `stencil_attachment` are both not [`null`], pDepthAttachmet->`image_view` and `stencil_attachment`->`image_view` are both not [`VK_NULL_HANDLE`], VkPhysicalDeviceDepthStencilResolveProperties::independentResolve is [`VK_FALSE`], and the `resolve_mode` of neither structure is [`VkResolveModeFlag::None`], the `resolve_mode` of both structures must be the same value
-    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`] structure included in the `next` chain is not [`VK_NULL_HANDLE`], and the `fragment_density_map_non_subsampled_images` feature is not enabled, valid `image_view` and `resolve_image_view` members of `depth_attachment`, `stencil_attachment`, and each element of `color_attachments` must be a VkImageView created with [`VkImageCreateFlag::SubsampledBitExt`]
-    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`] structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is not 0, `image_view` must have a `layer_count` greater than the index of the most significant bit in `view_mask`
-    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`] structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is 0, `image_view` must have a `layer_count` equal to 1
-    ///  - `depth_attachment`->`resolve_mode` must not be [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`]
-    ///  - If `depth_attachment` is not [`null`] and `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `depth_attachment`->`image_view` must have been created with the identity swizzle
-    ///  - If `depth_attachment` is not [`null`], `depth_attachment`->`image_view` is not [`VK_NULL_HANDLE`], and `depth_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `depth_attachment`->`resolve_image_view` must have been created with the identity swizzle
+    ///  - If neither `depth_attachment` or `stencil_attachment` are [`null`] and the `image_view`
+    ///    member of either structure is not [`VK_NULL_HANDLE`], the `image_view` member of each
+    ///    structure must be the same
+    ///  - If neither `depth_attachment` or `stencil_attachment` are [`null`], and the
+    ///    `resolve_mode` member of each is not [`VkResolveModeFlag::None`], the
+    ///    `resolve_image_view` member of each structure must be the same
+    ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `depth_attachment.image_view` must have been created with a format
+    ///    that includes a depth component
+    ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `depth_attachment.image_view` must have been created with the
+    ///    [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///  - If `depth_attachment` is not [`null`] and `depth_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `depth_attachment.resolve_image_view` must have been
+    ///    created with the [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `depth_attachment.layout` must not be
+    ///    [`VkImageLayout::ColorAttachmentOptimal`]
+    ///  - If `depth_attachment` is not [`null`], `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], and `depth_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `depth_attachment.resolve_image_layout` must not be
+    ///    [`VkImageLayout::ColorAttachmentOptimal`]
+    ///  - If `view_mask` is 0, each `depth_attachment.image_view` and
+    ///    `depth_attachment.resolve_image_view` that is not [`VK_NULL_HANDLE`] must have a
+    ///    `layer_count` that is greater than or equal to [`VkRenderingInfo::layer_count`]
+    ///  - If `view_mask` is not 0, each `depth_attachment.image_view` and
+    ///    `depth_attachment.resolve_image_view` that is not [`VK_NULL_HANDLE`] must have a
+    ///    `layer_count` that is greater than the index of the most significant bit in `view_mask`
+    ///  - If `depth_attachment` is not [`null`], `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], and `depth_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `depth_attachment.resolve_image_layout` must not be
+    ///    [`VkImageLayout::DepthReadOnlyStencilAttachmentOptimal`]
+    ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `depth_attachment.layout` must not be
+    ///    [`VkImageLayout::StencilAttachmentOptimal`] or [`VkImageLayout::StencilReadOnlyOptimal`]
+    ///  - If `depth_attachment` is not [`null`], `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], and `depth_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `depth_attachment.resolve_image_layout` must not be
+    ///    [`VkImageLayout::StencilAttachmentOptimal`] or [`VkImageLayout::StencilReadOnlyOptimal`]
+    ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `depth_attachment.resolve_mode` must be one of the bits set in
+    ///    [`VkPhysicalDeviceDepthStencilResolveProperties::supported_depth_resolve_modes`]
+    ///  - If `depth_attachment` or `stencil_attachment` are both not [`null`],
+    ///    `depth_attachment.image_view` and `stencil_attachment.image_view` are both not
+    ///    [`VK_NULL_HANDLE`], and
+    ///    [`VkPhysicalDeviceDepthStencilResolveProperties::independent_resolve_none`] is
+    ///    [`VK_FALSE`], the `resolve_mode` of both structures must be the same value
+    ///  - If `depth_attachment` or `stencil_attachment` are both not [`null`],
+    ///    `depth_attachment.image_view` and `stencil_attachment.image_view` are both not
+    ///    [`VK_NULL_HANDLE`],
+    ///    [`VkPhysicalDeviceDepthStencilResolveProperties::independent_resolve`] is [`VK_FALSE`],
+    ///    and the `resolve_mode` of neither structure is [`VkResolveModeFlag::None`], the
+    ///    `resolve_mode` of both structures must be the same value
+    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
+    ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and the
+    ///    `fragment_density_map_non_subsampled_images` feature is not enabled, valid `image_view`
+    ///    and `resolve_image_view` members of `depth_attachment`, `stencil_attachment`, and each
+    ///    element of `color_attachments` must be a VkImageView created with
+    ///    [`VkImageCreateFlag::SubsampledBitExt`]
+    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
+    ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is not
+    ///    0, `image_view` must have a `layer_count` greater than the index of the most significant
+    ///    bit in `view_mask`
+    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
+    ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is 0,
+    ///    `image_view` must have a `layer_count` equal to 1
+    ///  - `depth_attachment.resolve_mode` must not be
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`]
+    ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `depth_attachment.image_view` must have been created with the
+    ///    identity swizzle
+    ///  - If `depth_attachment` is not [`null`], `depth_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], and `depth_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `depth_attachment.resolve_image_view` must have been
+    ///    created with the identity swizzle
     ///
     /// # Valid Usage (Implicit)
-    ///  - If `depth_attachment` is not [`null`], `depth_attachment` must be a valid pointer to a valid VkRenderingAttachmentInfo structure
+    ///  - If `depth_attachment` is not [`null`], `depth_attachment` must be a valid pointer to a
+    ///    valid [`VkRenderingAttachmentInfo`] structure
     pub depth_attachment: *const VkRenderingAttachmentInfo,
 
-    /// `stencil_attachment` is a pointer to a VkRenderingAttachmentInfo structure describing a stencil attachment.
+    /// `stencil_attachment` is a pointer to a [`VkRenderingAttachmentInfo`] structure describing a
+    /// stencil attachment.
     ///
     /// # Valid Usage
-    ///  - If none of the following are enabled, the `image_view` member of `depth_attachment`, `stencil_attachment`, and elements of `color_attachments` that are not [`VK_NULL_HANDLE`] must have been created with the same `sample_count`:
+    ///  - If none of the following are enabled, the `image_view` member of `depth_attachment`,
+    ///    `stencil_attachment`, and elements of `color_attachments` that are not
+    ///    [`VK_NULL_HANDLE`] must have been created with the same `sample_count`:
     ///    - The [`amd_mixed_attachment_samples`] extension
     ///    - The [`nv_framebuffer_mixed_samples`] extension
     ///    - The `multisampled_render_to_single_sampled` feature
-    ///  - If multisampled-render-to-single-sampled is enabled, then all attachments referenced by `image_view` members of `depth_attachment`, `stencil_attachment`, and elements of `color_attachments` that are not [`VK_NULL_HANDLE`] must have a sample count that is either [`VkSampleCountFlag::_1Bit`] or equal to [`VkMultisampledRenderToSingleSampledInfoExt`]::rasterization_samples`]
-    ///  - If multisampled-render-to-single-sampled is enabled, then all attachments referenced by `image_view` members of `depth_attachment`, `stencil_attachment`, and elements of `color_attachments` that are not [`VK_NULL_HANDLE`] and have a sample count of [`VkSampleCountFlag::_1Bit`] must have been created with [`VkImageCreateFlag::MultisampledRenderToSingleSampledBitExt`] in their VkImageCreateInfo::`flags`
-    ///  - If the `next` chain does not contain [`VkDeviceGroupRenderPassBeginInfo`] or its `device_render_area_count` member is equal to 0, the width of the `image_view` member of each element of `color_attachments`, `depth_attachment`, or `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be greater than or equal to `render_area`.offset.x + `render_area`.extent.width
-    ///  - If the `next` chain does not contain [`VkDeviceGroupRenderPassBeginInfo`] or its `device_render_area_count` member is equal to 0, the height of the `image_view` member of each element of `color_attachments`, `depth_attachment`, or `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be greater than or equal to `render_area`.offset.y + `render_area`.extent.height
-    ///  - If the `next` chain contains [`VkDeviceGroupRenderPassBeginInfo`], the width of the `image_view` member of any element of `color_attachments`, `depth_attachment`, or `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be greater than or equal to the sum of the offset.x and extent.width members of each element of `device_render_areas`
-    ///  - If the `next` chain contains [`VkDeviceGroupRenderPassBeginInfo`], the height of the `image_view` member of any element of `color_attachments`, `depth_attachment`, or `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be greater than or equal to the sum of the offset.y and extent.height members of each element of `device_render_areas`
-    ///  - If neither `depth_attachment` or `stencil_attachment` are [`null`] and the `image_view` member of either structure is not [`VK_NULL_HANDLE`], the `image_view` member of each structure must be the same
-    ///  - If neither `depth_attachment` or `stencil_attachment` are [`null`], and the `resolve_mode` member of each is not [`VkResolveModeFlag::None`], the `resolve_image_view` member of each structure must be the same
-    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `stencil_attachment`->`image_view` must have been created with a format that includes a stencil aspect
-    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `stencil_attachment`->`image_view` must have been created with a format that includes a stencil aspect
-    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `stencil_attachment`->`resolve_image_view` must have been created with the [`VkImageUsageFlag::DEPTH_STENCIL_ATTACHMENT_BIT usage flag set
-    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `stencil_attachment`->layout must not be [`VkImageLayout::COLOR_ATTACHMENT_OPTIMAL
-    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], and `stencil_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `stencil_attachment`->`resolve_image_layout` must not be [`VkImageLayout::COLOR_ATTACHMENT_OPTIMAL
-    ///  - If `view_mask` is 0, each `stencil_attachment`->`image_view` and `stencil_attachment`->`resolve_image_view` that is not [`VK_NULL_HANDLE`] must have a `layer_count` that is greater than or equal to [`VkRenderingInfo`]::`layer_count`
-    ///  - If `view_mask` is not 0, each `stencil_attachment`->`image_view` and `stencil_attachment`->`resolve_image_view` that is not [`VK_NULL_HANDLE`] must have a `layer_count` that is greater than the index of the most significant bit in `view_mask`
-    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], and `stencil_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `stencil_attachment`->`resolve_image_layout` must not be [`VkImageLayout::DepthAttachmentStencilReadOnlyOptimal`]
-    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `stencil_attachment`->layout must not be [`VkImageLayout::DepthAttachmentOptimal`] or [`VkImageLayout::DepthReadOnlyOptimal`]
-    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], and `stencil_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `stencil_attachment`->`resolve_image_layout` must not be [`VkImageLayout::DepthAttachmentOptimal`] or [`VkImageLayout::DepthReadOnlyOptimal`]
-    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `stencil_attachment`->`resolve_mode` must be one of the bits set in VkPhysicalDeviceDepthStencilResolveProperties::supportedStencilResolveModes
-    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`] structure included in the `next` chain is not [`VK_NULL_HANDLE`], and the `fragment_density_map_non_subsampled_images` feature is not enabled, valid `image_view` and `resolve_image_view` members of `depth_attachment`, `stencil_attachment`, and each element of `color_attachments` must be a VkImageView created with [`VkImageCreateFlag::SubsampledBitExt`]
-    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`] structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is not 0, `image_view` must have a `layer_count` greater than the index of the most significant bit in `view_mask`
-    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`] structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is 0, `image_view` must have a `layer_count` equal to 1
-    ///  - `stencil_attachment`->`resolve_mode` must not be [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`]
-    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], `stencil_attachment`->`image_view` must have been created with the identity swizzle
-    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment`->`image_view` is not [`VK_NULL_HANDLE`], and `stencil_attachment`->`resolve_mode` is not [`VkResolveModeFlag::None`], `stencil_attachment`->`resolve_image_view` must have been created with the identity swizzle
+    ///  - If multisampled-render-to-single-sampled is enabled, the the attachment referenced by
+    ///    `image_view` member of `stencil_attachment` that is not [`VK_NULL_HANDLE`] must have a
+    ///    sample count that is either [`VkSampleCountFlag::_1Bit`] or equal to
+    ///    [`VkMultisampledRenderToSingleSampledInfoExt::rasterization_samples`]
+    ///  - If multisampled-render-to-single-sampled is enabled, then the attachment referenced by
+    ///    `image_view` member of `stencil_attachment` that is not [`VK_NULL_HANDLE`] and have a
+    ///    sample count of [`VkSampleCountFlag::_1Bit`] must have been created with
+    ///    [`VkImageCreateFlag::MultisampledRenderToSingleSampledBitExt`] in their
+    ///    [`VkImageCreateInfo::flags`]
+    ///  - If the `next` chain does not contain [`VkDeviceGroupRenderPassBeginInfo`] or its
+    ///    `device_render_area_count` member is equal to 0, the width of the `image_view` member
+    ///    of `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be greater than or equal to
+    ///    `render_area.offset.x + render_area.extent.width`
+    ///  - If the `next` chain does not contain [`VkDeviceGroupRenderPassBeginInfo`] or its
+    ///    `device_render_area_count` member is equal to 0, the height of the `image_view` member
+    ///    of `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be greater than or equal to
+    ///    `render_area.offset.y + render_area.extent.height`
+    ///  - If the `next` chain contains [`VkDeviceGroupRenderPassBeginInfo`], the width of the
+    ///    `image_view` member of `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be
+    ///    greater than or equal to the sum of the `offset.x` and `extent.width` members of each
+    ///    element of `device_render_areas`
+    ///  - If the `next` chain contains [`VkDeviceGroupRenderPassBeginInfo`], the height of the
+    ///    `image_view` member of `stencil_attachment` that is not [`VK_NULL_HANDLE`] must be
+    ///    greater than or equal to the sum of the `offset.y` and `extent.height` members of each
+    ///    element of `device_render_areas`
+    ///  - If neither `depth_attachment` or `stencil_attachment` are [`null`] and the `image_view`
+    ///    member of either structure is not [`VK_NULL_HANDLE`], the `image_view` member of each
+    ///    structure must be the same
+    ///  - If neither `depth_attachment` or `stencil_attachment` are [`null`], and the
+    ///    `resolve_mode` member of each is not [`VkResolveModeFlag::None`], the
+    ///    `resolve_image_view` member of each structure must be the same
+    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `stencil_attachment.image_view` must have been created with a format
+    ///    that includes a stencil aspect
+    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `stencil_attachment.image_view` must have been created with a format
+    ///    that includes a stencil aspect
+    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `stencil_attachment.resolve_image_view` must have been
+    ///    created with the [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `stencil_attachment.layout` must not be
+    ///    [`VkImageLayout::ColorAttachmentOptimal`]
+    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], and `stencil_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `stencil_attachment.resolve_image_layout` must not be
+    ///    [`VkImageLayout::ColorAttachmentOptimal`]
+    ///  - If `view_mask` is 0, each `stencil_attachment.image_view` and
+    ///    `stencil_attachment.resolve_image_view` that is not [`VK_NULL_HANDLE`] must have a
+    ///    `layer_count` that is greater than or equal to [`VkRenderingInfo::layer_count`]
+    ///  - If `view_mask` is not 0, each `stencil_attachment.image_view` and
+    ///    `stencil_attachment.resolve_image_view` that is not [`VK_NULL_HANDLE`] must have a
+    ///    `layer_count` that is greater than the index of the most significant bit in `view_mask`
+    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], and `stencil_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `stencil_attachment.resolve_image_layout` must not be
+    ///    [`VkImageLayout::DepthAttachmentStencilReadOnlyOptimal`]
+    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `stencil_attachment.layout` must not be
+    ///    [`VkImageLayout::DepthAttachmentOptimal`] or [`VkImageLayout::DepthReadOnlyOptimal`]
+    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], and `stencil_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `stencil_attachment.resolve_image_layout` must not be
+    ///    [`VkImageLayout::DepthAttachmentOptimal`] or [`VkImageLayout::DepthReadOnlyOptimal`]
+    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `stencil_attachment.resolve_mode` must be one of the bits set in
+    ///    [`VkPhysicalDeviceDepthStencilResolveProperties::supported_stencil_resolve_modes`]
+    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
+    ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and the
+    ///    `fragment_density_map_non_subsampled_images` feature is not enabled, valid `image_view`
+    ///    and `resolve_image_view` members of `depth_attachment`, `stencil_attachment`, and each
+    ///    element of `color_attachments` must be a VkImageView created with
+    ///    [`VkImageCreateFlag::SubsampledBitExt`]
+    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
+    ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is not
+    ///    0, `image_view` must have a `layer_count` greater than the index of the most significant
+    ///    bit in `view_mask`
+    ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
+    ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is 0,
+    ///    `image_view` must have a `layer_count` equal to 1
+    ///  - `stencil_attachment.resolve_mode` must not be
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`]
+    ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], `stencil_attachment.image_view` must have been created with the
+    ///    identity swizzle
+    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment.image_view` is not
+    ///    [`VK_NULL_HANDLE`], and `stencil_attachment.resolve_mode` is not
+    ///    [`VkResolveModeFlag::None`], `stencil_attachment.resolve_image_view` must have been
+    ///    created with the identity swizzle
     ///
     /// # Valid Usage (Implicit)
-    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment` must be a valid pointer to a valid VkRenderingAttachmentInfo structure
+    ///  - If `stencil_attachment` is not [`null`], `stencil_attachment` must be a valid pointer to
+    ///    a valid [`VkRenderingAttachmentInfo`] structure
     pub stencil_attachment: *const VkRenderingAttachmentInfo,
 }
 
