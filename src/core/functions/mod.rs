@@ -1,5 +1,6 @@
 mod allocate_command_buffers;
 mod begin_command_buffer;
+mod cmd_begin_rendering;
 mod cmd_pipeline_barrier;
 mod create_command_pool;
 mod create_device;
@@ -33,6 +34,7 @@ mod wait_for_fences;
 
 pub use allocate_command_buffers::*;
 pub use begin_command_buffer::*;
+pub use cmd_begin_rendering::*;
 pub use cmd_pipeline_barrier::*;
 pub use create_command_pool::*;
 pub use create_device::*;
