@@ -1,5 +1,5 @@
-/// Define a new set of flags
-macro_rules! flags {
+/// Define a new set of 64-bit flags
+macro_rules! flags64 {
     {
         $(#[$struct_meta: meta])*
         pub struct $struct_name: ident;
@@ -10,13 +10,13 @@ macro_rules! flags {
             $variant: ident = $value: expr,
         )*}
     } => {
-        $crate::flags_no_bits!(
+        $crate::flags64_no_bits!(
             $(#[$struct_meta])*
             pub struct $struct_name;
         );
 
         $(#[$enum_meta])*
-        #[repr(C)]
+        #[repr(u64)]
         #[non_exhaustive]
         #[derive(Debug, Clone, Copy, PartialEq, Eq)]
         pub enum $enum_name {$(
@@ -27,7 +27,7 @@ macro_rules! flags {
         impl $struct_name {
             #[doc = std::concat!(" Creates a new [`", std::stringify!($struct_name), "`] from `f`")]
             pub const fn from_flag(f: $enum_name) -> $struct_name {
-                $struct_name::from_flags(f as u32)
+                $struct_name::from_flags(f as u64)
             }
         }
 
@@ -39,7 +39,7 @@ macro_rules! flags {
 
         impl const PartialEq<$enum_name> for $struct_name {
             fn eq(&self, other: &$enum_name) -> bool {
-                self.0.eq(&(*other as u32))
+                self.0.eq(&(*other as u64))
             }
         }
 
@@ -47,7 +47,7 @@ macro_rules! flags {
             type Output = $struct_name;
 
             fn bitor(self, rhs: $enum_name) -> Self::Output {
-                $struct_name::from_flags(self as u32 | rhs as u32)
+                $struct_name::from_flags(self as u64 | rhs as u64)
             }
         }
 
@@ -55,14 +55,14 @@ macro_rules! flags {
             type Output = $struct_name;
 
             fn bitor(self, rhs: $struct_name) -> Self::Output {
-                $struct_name::from_flags(self as u32 | rhs.0)
+                $struct_name::from_flags(self as u64 | rhs.0)
             }
         }
     };
 }
 
-/// Define a new set of flags with no bits defined
-macro_rules! flags_no_bits {
+/// Define a new set of 64-bit flags with no bits defined
+macro_rules! flags64_no_bits {
     (
         $(#[$struct_meta: meta])*
         pub struct $struct_name: ident;
@@ -70,7 +70,7 @@ macro_rules! flags_no_bits {
         $(#[$struct_meta])*
         #[repr(C)]
         #[derive(Debug)]
-        pub struct $struct_name(pub $crate::VkFlags);
+        pub struct $struct_name(pub $crate::VkFlags64);
 
         impl $struct_name {
             #[doc = std::concat!(" Creates a new [`", std::stringify!($struct_name), "`] with no flags set")]
@@ -79,7 +79,7 @@ macro_rules! flags_no_bits {
             }
 
             #[doc = std::concat!(" Creates a new [`", std::stringify!($struct_name), "`] from `f`")]
-            pub const fn from_flags<F: [const] Into<$crate::VkFlags>>(f: F) -> $struct_name {
+            pub const fn from_flags<F: [const] Into<$crate::VkFlags64>>(f: F) -> $struct_name {
                 $struct_name(f.into())
             }
 
@@ -100,27 +100,27 @@ macro_rules! flags_no_bits {
             }
         }
 
-        impl const From<u32> for $struct_name {
-            fn from(flags: u32) -> Self {
+        impl const From<u64> for $struct_name {
+            fn from(flags: u64) -> Self {
                 $struct_name::from_flags(flags)
             }
         }
 
-        impl const From<$crate::VkFlags> for $struct_name {
-            fn from(flags: $crate::VkFlags) -> Self {
+        impl const From<$crate::VkFlags64> for $struct_name {
+            fn from(flags: $crate::VkFlags64) -> Self {
                 $struct_name::from_flags(flags)
             }
         }
 
 
-        impl const Into<u32> for $struct_name {
-            fn into(self) -> u32 {
+        impl const Into<u64> for $struct_name {
+            fn into(self) -> u64 {
                 self.0.into()
             }
         }
 
-        impl const Into<$crate::VkFlags> for $struct_name {
-            fn into(self) -> $crate::VkFlags {
+        impl const Into<$crate::VkFlags64> for $struct_name {
+            fn into(self) -> $crate::VkFlags64 {
                 self.0
             }
         }
@@ -139,14 +139,14 @@ macro_rules! flags_no_bits {
             }
         }
 
-        impl const PartialEq<$crate::VkFlags> for $struct_name {
-            fn eq(&self, other: &$crate::VkFlags) -> bool {
+        impl const PartialEq<$crate::VkFlags64> for $struct_name {
+            fn eq(&self, other: &$crate::VkFlags64) -> bool {
                 self.0.eq(other)
             }
         }
 
-        impl const PartialEq<u32> for $struct_name {
-            fn eq(&self, other: &u32) -> bool {
+        impl const PartialEq<u64> for $struct_name {
+            fn eq(&self, other: &u64) -> bool {
                 self.0.eq(other)
             }
         }
@@ -161,7 +161,7 @@ macro_rules! flags_no_bits {
             }
         }
 
-        impl const std::ops::BitOr<$struct_name> for u32 {
+        impl const std::ops::BitOr<$struct_name> for u64 {
             type Output = $struct_name;
 
             fn bitor(self, rhs: $struct_name) -> Self::Output {
@@ -177,4 +177,4 @@ macro_rules! flags_no_bits {
     };
 }
 
-pub(crate) use {flags, flags_no_bits};
+pub(crate) use {flags64, flags64_no_bits};

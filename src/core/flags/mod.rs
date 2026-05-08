@@ -1,4 +1,5 @@
 mod access;
+mod access2;
 mod attachment_description;
 mod command_buffer_usage;
 mod comnand_pool_create;
@@ -22,8 +23,10 @@ mod sample_count;
 mod semaphore_create;
 
 mod flags;
+mod flags64;
 
 pub use access::*;
+pub use access2::*;
 pub use attachment_description::*;
 pub use command_buffer_usage::*;
 pub use comnand_pool_create::*;
@@ -47,3 +50,4 @@ pub use sample_count::*;
 pub use semaphore_create::*;
 
 pub use flags::VkFlags;
+pub use flags64::VkFlags64;

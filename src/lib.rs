@@ -17,7 +17,7 @@
 // Other features
 #![feature(c_size_t)]
 
-use macros::{flags, flags_no_bits};
+use macros::*;
 
 pub mod ext_debug_utils;
 pub mod ext_extended_dynamic_state;
