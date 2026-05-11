@@ -13,7 +13,6 @@ flags64! {
     /// Provided by [`VK_VERSION_1_3`]
     pub struct VkAccessFlags2;
 
-
     /// Access flags for [`VkAccessFlags2`]
     ///
     /// # Description
