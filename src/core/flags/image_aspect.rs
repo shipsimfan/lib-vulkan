@@ -18,33 +18,33 @@ flags! {
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub enum VkImageAspectFlag {
-        /// [`VkImageViewCreateFlag::ColorBit`] specifies the color aspect.
-        ColorBit = 0x00000001,
+        /// [`VkImageViewCreateFlag::Color`] specifies the color aspect.
+        Color = 0x00000001,
 
-        /// [`VkImageViewCreateFlag::DepthBit`] specifies the depth aspect.
-        DepthBit = 0x00000002,
+        /// [`VkImageViewCreateFlag::Depth`] specifies the depth aspect.
+        Depth = 0x00000002,
 
-        /// [`VkImageViewCreateFlag::StencilBit`] specifies the stencil aspect.
-        StencilBit = 0x00000004,
+        /// [`VkImageViewCreateFlag::Stencil`] specifies the stencil aspect.
+        Stencil = 0x00000004,
 
-        /// [`VkImageViewCreateFlag::MetadataBit`] specifies the metadata aspect used for sparse
+        /// [`VkImageViewCreateFlag::Metadata`] specifies the metadata aspect used for sparse
         /// resource operations.
-        MetadataBit = 0x00000008,
+        Metadata = 0x00000008,
 
-        /// [`VkImageViewCreateFlag::Plane0Bit`] specifies plane 0 of a multi-planar image format.
+        /// [`VkImageViewCreateFlag::Plane0`] specifies plane 0 of a multi-planar image format.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        Plane0Bit = 0x00000010,
+        Plane0 = 0x00000010,
 
-        /// [`VkImageViewCreateFlag::Plane1Bit`] specifies plane 1 of a multi-planar image format.
+        /// [`VkImageViewCreateFlag::Plane1`] specifies plane 1 of a multi-planar image format.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        Plane1Bit = 0x00000020,
+        Plane1 = 0x00000020,
 
-        /// [`VkImageViewCreateFlag::Plane2Bit`] specifies plane 2 of a multi-planar image format.
+        /// [`VkImageViewCreateFlag::Plane2`] specifies plane 2 of a multi-planar image format.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        Plane2Bit = 0x00000040,
+        Plane2 = 0x00000040,
 
         /// [`VkImageViewCreateFlag::None`] specifies no image aspect, or the image aspect is not
         /// applicable.
@@ -52,24 +52,24 @@ flags! {
         /// Provided by [`VK_VERSION_1_3`]
         None = 0,
 
-        /// [`VkImageViewCreateFlag::MemoryPlane0BitExt`] specifies memory plane 0.
+        /// [`VkImageViewCreateFlag::MemoryPlane0Ext`] specifies memory plane 0.
         ///
         /// Provided by [`ext_image_drm_format_modifier`]
-        MemoryPlane0BitExt = 0x00000080,
+        MemoryPlane0Ext = 0x00000080,
 
-        /// [`VkImageViewCreateFlag::MemoryPlane1BitExt`] specifies memory plane 1.
+        /// [`VkImageViewCreateFlag::MemoryPlane1Ext`] specifies memory plane 1.
         ///
         /// Provided by [`ext_image_drm_format_modifier`]
-        MemoryPlane1BitExt = 0x00000100,
+        MemoryPlane1Ext = 0x00000100,
 
-        /// [`VkImageViewCreateFlag::MemoryPlane2BitExt`] specifies memory plane 2.
+        /// [`VkImageViewCreateFlag::MemoryPlane2Ext`] specifies memory plane 2.
         ///
         /// Provided by [`ext_image_drm_format_modifier`]
-        MemoryPlane2BitExt = 0x00000200,
+        MemoryPlane2Ext = 0x00000200,
 
-        /// [`VkImageViewCreateFlag::MemoryPlane3BitExt`] specifies memory plane 3.
+        /// [`VkImageViewCreateFlag::MemoryPlane3Ext`] specifies memory plane 3.
         ///
         /// Provided by [`ext_image_drm_format_modifier`]
-        MemoryPlane3BitExt = 0x00000400,
+        MemoryPlane3Ext = 0x00000400,
     }
 }

@@ -33,52 +33,52 @@ flags! {
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub enum VkQueueFlag {
-        /// [`VkQueueFlag::GraphicsBit`] specifies that queues in this queue family support
+        /// [`VkQueueFlag::Graphics`] specifies that queues in this queue family support
         /// graphics operations.
-        GraphicsBit = 0x00000001,
+        Graphics = 0x00000001,
 
-        /// [`VkQueueFlag::ComputeBit`] specifies that queues in this queue family support compute
+        /// [`VkQueueFlag::Compute`] specifies that queues in this queue family support compute
         /// operations.
-        ComputeBit = 0x00000002,
+        Compute = 0x00000002,
 
-        /// [`VkQueueFlag::TransferBit`] specifies that queues in this queue family support
+        /// [`VkQueueFlag::Transfer`] specifies that queues in this queue family support
         /// transfer operations.
-        TransferBit = 0x00000004,
+        Transfer = 0x00000004,
 
-        /// [`VkQueueFlag::SparseBindingBit`] specifies that queues in this queue family support
+        /// [`VkQueueFlag::SparseBinding`] specifies that queues in this queue family support
         /// sparse memory management operations. If any of the sparse resource features are
         /// enabled, then at least one queue family must support this bit.
-        SparseBindingBit = 0x00000008,
+        SparseBinding = 0x00000008,
 
-        /// [`VkQueueFlag::ProtectedBit`] specifies that queues in this queue family support the
-        /// [`VkDeviceQueueCreateBits::ProtectedBit`] bit. If the physical device supports the
+        /// [`VkQueueFlag::Protected`] specifies that queues in this queue family support the
+        /// [`VkDeviceQueueCreates::Protected`] bit. If the physical device supports the
         /// `protected_memory` feature, at least one of its queue families must support this bit.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        ProtectedBit = 0x00000010,
+        Protected = 0x00000010,
 
-        /// [`VkQueueFlag::VideoDecodeBitKhr`] specifies that queues in this queue family support
+        /// [`VkQueueFlag::VideoDecodeKhr`] specifies that queues in this queue family support
         /// video decode operations.
         ///
         /// Provided by [`khr_video_decode_queue`]
-        VideoDecodeBitKhr = 0x00000020,
+        VideoDecodeKhr = 0x00000020,
 
-        /// [`VkQueueFlag::VideoEncodeBitKhr`] specifies that queues in this queue family support
+        /// [`VkQueueFlag::VideoEncodeKhr`] specifies that queues in this queue family support
         /// video encode operations.
         ///
         /// Provided by [`khr_video_encode_queue`]
-        VideoEncodeBitKhr = 0x00000040,
+        VideoEncodeKhr = 0x00000040,
 
-        /// [`VkQueueFlag::OpticalFlowBitNv`] specifies that queues in this queue family support
+        /// [`VkQueueFlag::OpticalFlowNv`] specifies that queues in this queue family support
         /// optical flow operations.
         ///
         /// Provided by [`nv_optical_flow`]
-        OpticalFlowBitNv = 0x00000100,
+        OpticalFlowNv = 0x00000100,
 
-        /// [`VkQueueFlag::DataGraphBitArm`] specifies that queues in this queue family support
+        /// [`VkQueueFlag::DataGraphArm`] specifies that queues in this queue family support
         /// data graph operations.
         ///
         /// Provided by [`arm_data_graph`]
-        DataGraphBitArm = 0x00000400,
+        DataGraphArm = 0x00000400,
     }
 }
