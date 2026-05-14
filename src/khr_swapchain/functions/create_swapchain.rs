@@ -32,20 +32,20 @@ use std::ptr::null;
 /// While acquired by the application, presentable images can be used in any way that equivalent
 /// non-presentable images can be used. A presentable image is equivalent to a non-presentable
 /// image created with the following [`VkImageCreateInfo`] parameters:
-///  * `flags` - [`VkImageCreateFlag::SplitInstanceBindRegionsBit`] is set if
-///              [`VkSwapchainCreateFlagKhr::SplitInstanceBindRegionsBitKhr`] is set.
-///              [`VkImageCreateFlag::ProtectedBit`] is set if
-///              [`VkSwapchainCreateFlagKhr::ProtectedBitKhr`] is set.
-///              [`VkImageCreateFlag::MutableFormatBit`] and
-///              [`VkImageCreateFlag::ExtendedUsageBitKhr`] are both set if
-///              [`VkSwapchainCreateFlagKhr::MutableFormatBitKhr`] isset. All other bits are
+///  * `flags` - [`VkImageCreateFlag::SplitInstanceBindRegions`] is set if
+///              [`VkSwapchainCreateFlagKhr::SplitInstanceBindRegionsKhr`] is set.
+///              [`VkImageCreateFlag::Protected`] is set if
+///              [`VkSwapchainCreateFlagKhr::ProtectedKhr`] is set.
+///              [`VkImageCreateFlag::MutableFormat`] and
+///              [`VkImageCreateFlag::ExtendedUsageKhr`] are both set if
+///              [`VkSwapchainCreateFlagKhr::MutableFormatKhr`] isset. All other bits are
 ///              unset.
 ///  * `image_type` - [`VkImageType::_2D`]
 ///  * `format` - `create_info.image_format`
 ///  * `extent` -  `{ create_info.image_extent.width, create_info.image_extent.height, 1 }`
 ///  * `mip_levels` - 1
 ///  * `array_layers` - `create_info.image_array_layers`
-///  * `samples` - [`VkSampleCountFlag::_1Bit`]
+///  * `samples` - [`VkSampleCountFlag::_1`]
 ///  * `tiling` - [`VkImageTiling::Optimal`]
 ///  * `usage` - `create_info.image_usage`
 ///  * `sharing_mode` - `create_info.image_sharing_mode`

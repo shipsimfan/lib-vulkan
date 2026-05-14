@@ -18,22 +18,22 @@ flags! {
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub enum VkAttachmentDescriptionFlag {
-        /// [`VkAttachmentDescriptionFlag::MayAliasBit`] specifies that the attachment aliases the
+        /// [`VkAttachmentDescriptionFlag::MayAlias`] specifies that the attachment aliases the
         /// same device memory as other attachments.
-        MayAliasBit = 0x00000001,
+        MayAlias = 0x00000001,
 
-        /// [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionBitKhr`] specifies that
+        /// [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionKhr`] specifies that
         /// resolve operations happening to an sRGB encoded attachment must not convert samples
         /// from nonlinear to linear before averaging.
         ///
         /// Provided by [`khr_maintenance10`]
-        ResolveSkipTransferFunctionBitKhr = 0x00000002,
+        ResolveSkipTransferFunctionKhr = 0x00000002,
 
-        /// [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionBitKhr`] specifies that
+        /// [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionKhr`] specifies that
         /// resolve operations happening to an sRGB encoded attachment must convert samples from
         /// nonlinear to linear before averaging.
         ///
         /// Provided by [`khr_maintenance10`]
-        ResolveEnableTransferFunctionBitKhr = 0x00000004,
+        ResolveEnableTransferFunctionKhr = 0x00000004,
     }
 }

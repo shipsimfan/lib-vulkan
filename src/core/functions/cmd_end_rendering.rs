@@ -12,7 +12,7 @@ use crate::{VK_VERSION_1_3, VkCmdBeginRendering, VkCommandPool, VkQueueFlag, VkR
 ///
 /// # Description
 /// If the value of `rendering_info.flags` used to begin this render pass instance included
-/// [`VkRenderingFlag::SuspendingBit`], then this render pass is suspended and will be resumed
+/// [`VkRenderingFlag::Suspending`], then this render pass is suspended and will be resumed
 /// later in submission order.
 ///
 /// # Valid Usage
@@ -27,7 +27,7 @@ use crate::{VK_VERSION_1_3, VkCmdBeginRendering, VkCommandPool, VkQueueFlag, VkR
 ///  - `command_buffer` must be a valid [`VkCommandBuffer`] handle
 ///  - `command_buffer` must be a valid [`VkCommandBuffer`] handle
 ///  - The [`VkCommandPool`] that `command_buffer` was allocated from must support
-///    [`VkQueueFlag::GraphicsBit`] operations
+///    [`VkQueueFlag::Graphics`] operations
 ///  - This command must only be called inside of a render pass instance
 ///  - This command must not be called between suspended render pass instances
 ///  - This command must only be called outside of a video coding scope

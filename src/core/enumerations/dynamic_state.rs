@@ -542,8 +542,8 @@ pub enum VkDynamicState {
     CoverageReductionModeNv = 1000455032,
 
     /// [`VkDynamicState::AttachmentFeedbackLoopEnableExt`] specifies that the
-    /// [`VkPipelineCreateFlag::ColorAttachmentFeedbackLoopBitExt`] and
-    /// [`VkPipelineCreateFlag::DepthStencilAttachmentFeedbackLoopBitExt`] flags will be ignored
+    /// [`VkPipelineCreateFlag::ColorAttachmentFeedbackLoopExt`] and
+    /// [`VkPipelineCreateFlag::DepthStencilAttachmentFeedbackLoopExt`] flags will be ignored
     /// and must be set dynamically with [`VkCmdSetAttachmentFeedbackLoopEnableExt`] before any
     /// draw call.
     ///

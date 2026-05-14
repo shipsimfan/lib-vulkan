@@ -19,7 +19,7 @@ use crate::{
 /// # Valid Usage
 ///  - `command_buffer` must not be in the recording or pending state
 ///  - If `command_buffer` was allocated from a [`VkCommandPool`] which did not have the
-///    [`VkCommandPoolCreateFlag::ResetCommandBufferBit`] flag set, `command_buffer` must be in the
+///    [`VkCommandPoolCreateFlag::ResetCommandBuffer`] flag set, `command_buffer` must be in the
 ///    initial state
 ///  - If `command_buffer` is a secondary command buffer, the `inheritance_info` member of
 ///    `begin_info` must be a valid [`VkCommandBufferInheritanceInfo`] structure
@@ -27,10 +27,10 @@ use crate::{
 ///    member of the inheritance_info member of `begin_info` is [`VK_FALSE`], or the
 ///    `occlusion_query_precise` feature is not enabled, then
 ///    `begin_info.inheritance_info.query_flags` must not contain
-///    [`VkQueryControlFlag::PreciseBit`]
+///    [`VkQueryControlFlag::Precise`]
 ///  - If `command_buffer` is a primary command buffer, then `begin_info.flags` must not set both
-///    the [`VkCommandBufferUsageFlag::OneTimeSubmitBit`] and the
-///    [`VkCommandBufferUsageFlag::SimultaneousUseBit`] flags
+///    the [`VkCommandBufferUsageFlag::OneTimeSubmit`] and the
+///    [`VkCommandBufferUsageFlag::SimultaneousUse`] flags
 ///
 /// # Valid Usage (Implicit)
 ///  - `command_buffer` must be a valid [`VkCommandBuffer`] handle

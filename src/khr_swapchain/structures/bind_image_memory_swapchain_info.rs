@@ -47,7 +47,7 @@ pub struct VkBindImageMemorySwapchainInfoKhr {
     /// # Valid Usage
     ///  - `image_index` must be less than the number of images in `swapchain`
     ///  - If the `swapchain` has been created with
-    ///    [`VkSwapchainCreateFlagKhr::DeferredMemoryAllocationBitKhr`], `image_index` must be one
+    ///    [`VkSwapchainCreateFlagKhr::DeferredMemoryAllocationKhr`], `image_index` must be one
     ///    that has previously been returned by [`VkAcquireNextImageKhr`] or
     ///    [`VkAcquireNextImage2Khr`]
     pub image_index: u32,

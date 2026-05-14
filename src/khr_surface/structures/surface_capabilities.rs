@@ -71,7 +71,7 @@ pub struct VkSurfaceCapabilitiesKhr {
     /// application can use the presentable images of a swapchain created with [`VkPresentModeKhr`]
     /// set to [`VkPresentModeKhr::ImmediateModeKhr`], [`VkPresentModeKhr::MailboxKhr`],
     /// [`VkPresentModeKhr::FIFOKhr`] or [`VkPresentModeKhr::FIFORelaxedKhr`] for the surface on
-    /// the specified device. [`VkImageUsageFlag::ColorAttachmentBit`] must be included in the
+    /// the specified device. [`VkImageUsageFlag::ColorAttachment`] must be included in the
     /// set. Implementations may support additional usages.
     pub supported_usage_flags: VkImageUsageFlags,
 }
@@ -86,7 +86,7 @@ impl const Default for VkSurfaceCapabilitiesKhr {
             max_image_extent: VkExtent2D::default(),
             max_image_array_layers: 0,
             supported_transforms: VkSurfaceTransformFlagsKhr::new(),
-            current_transform: VkSurfaceTransformFlagKhr::IdentityBitKhr,
+            current_transform: VkSurfaceTransformFlagKhr::IdentityKhr,
             supported_composite_alpha: VkCompositeAlphaFlagsKhr::new(),
             supported_usage_flags: VkImageUsageFlags::new(),
         }

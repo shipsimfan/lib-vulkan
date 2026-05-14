@@ -12,23 +12,23 @@ use crate::{VK_VERSION_1_0, VK_VERSION_1_4};
 pub enum VkAttachmentLoadOp {
     /// [`VkAttachmentLoadOp::Load`] specifies that the previous contents of the image within the
     /// render area will be preserved as the initial values. For attachments with a depth/stencil
-    /// format, this uses the access type [`VkAccessFlag::DepthStencilAttachmentReadBit`]. For
+    /// format, this uses the access type [`VkAccessFlag::DepthStencilAttachmentRead`]. For
     /// attachments with a color format, this uses the access type
-    /// [`VkAccessFlag::ColorAttachmentReadBit`].
+    /// [`VkAccessFlag::ColorAttachmentRead`].
     Load = 0,
 
     /// [`VkAttachmentLoadOp::Clear`] specifies that the contents within the render area will be
     /// cleared to a uniform value, which is specified when a render pass instance is begun. For
     /// attachments with a depth/stencil format, this uses the access type
-    /// [`VkAccessFlag::DepthStencilAttachmentWriteBit`]. For attachments with a color format, this
-    /// uses the access type [`VkAccessFlag::ColorAttachmentWriteBit`].
+    /// [`VkAccessFlag::DepthStencilAttachmentWrite`]. For attachments with a color format, this
+    /// uses the access type [`VkAccessFlag::ColorAttachmentWrite`].
     Clear = 1,
 
     /// [`VkAttachmentLoadOp::DontCare`] specifies that the previous contents within the area need
     /// not be preserved; the contents of the attachment will be undefined inside the render area.
     /// For attachments with a depth/stencil format, this uses the access type
-    /// [`VkAccessFlag::DepthStencilAttachmentWriteBit`]. For attachments with a color format, this
-    /// uses the access type [`VkAccessFlag::ColorAttachmentWriteBit`].
+    /// [`VkAccessFlag::DepthStencilAttachmentWrite`]. For attachments with a color format, this
+    /// uses the access type [`VkAccessFlag::ColorAttachmentWrite`].
     DontCare = 2,
 
     /// [`VkAttachmentLoadOp::None`] specifies that the previous contents of the image will be

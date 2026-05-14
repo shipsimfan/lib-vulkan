@@ -18,11 +18,11 @@ flags! {
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub enum VkInstanceCreateFlag {
-        /// [`VkInstanceCreateFlag::EnumeratePortabilityBitKhr`] specifies that the instance
+        /// [`VkInstanceCreateFlag::EnumeratePortabilityKhr`] specifies that the instance
         /// will enumerate available Vulkan Portability-compliant physical devices and groups in
         /// addition to the Vulkan physical devices and groups that are enumerated by default.
         ///
         /// Provided by [`khr_portability_enumeration`]
-        EnumeratePortabilityBitKhr = 0x00000001,
+        EnumeratePortabilityKhr = 0x00000001,
     }
 }

@@ -43,7 +43,7 @@ use crate::VK_VERSION_1_0;
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkQueueFamilyProperties {
-    /// `queue_flags` is a bitmask of VkQueueFlagBits indicating capabilities of the queues in this
+    /// `queue_flags` is a bitmask of VkQueueFlags indicating capabilities of the queues in this
     /// queue family.
     pub queue_flags: VkQueueFlags,
 

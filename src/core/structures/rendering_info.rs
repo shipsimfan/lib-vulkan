@@ -28,13 +28,13 @@ use crate::{
 /// i.e. if the shader declares an output variable decorated with a `location` value of `x`, then
 /// it uses the attachment provided in `color_attachments[x]`. If the `image_view` member of any
 /// element of `color_attachments` is [`VK_NULL_HANDLE`], and `resolve_mode` is not
-/// [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`], writes to the corresponding location
+/// [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`], writes to the corresponding location
 /// by a fragment are discarded.
 ///
 /// The `aspect_mask` of any image view specified for `depth_attachment` or `stencil_attachment` is
 /// ignored. Instead, depth attachments are automatically treated as if
-/// [`VkImageAspectFlag::DepthBit`] was specified for their aspect masks, and stencil attachments
-/// are automatically treated as if [`VkImageAspectFlag::StencilBit`] was specified for their
+/// [`VkImageAspectFlag::Depth`] was specified for their aspect masks, and stencil attachments
+/// are automatically treated as if [`VkImageAspectFlag::Stencil`] was specified for their
 /// aspect masks.
 ///
 /// # Valid Usage
@@ -153,7 +153,7 @@ pub struct VkRenderingInfo {
     ///    created with the identity swizzle
     ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
     ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`],
-    ///    [`VkTileShadingRenderPassFlagQcom::EnableBitQcom`] must not be included in
+    ///    [`VkTileShadingRenderPassFlagQcom::EnableQcom`] must not be included in
     ///    [`VkRenderPassTileShadingCreateInfoQcom::flags`]
     ///
     /// # Valid Usage (Implicit)
@@ -172,18 +172,18 @@ pub struct VkRenderingInfo {
     /// `flags` is a bitmask of [`VkRenderingFlag`]s.
     ///
     /// # Valid Usage
-    ///  - If `flags` contains [`VkRenderingFlag::CustomResolveBitExt`] or
-    ///    [`VkRenderingFlag::FragmentRegionBitExt`], then the `custom_resolve` feature must
+    ///  - If `flags` contains [`VkRenderingFlag::CustomResolveExt`] or
+    ///    [`VkRenderingFlag::FragmentRegionExt`], then the `custom_resolve` feature must
     ///    enabled
     ///  - For any element of `color_attachments`, `depth_attachment`, or `stencil_attachment`, if
-    ///    `resolve_mode` contains [`VkResolveModeFlag::CustomBitExt`], then `flags` must contain
-    ///    [`VkRenderingFlag::CustomResolveBitExt`]
-    ///  - If `flags` contains [`VkRenderingFlag::CustomResolveBitExt`], then for any element of
+    ///    `resolve_mode` contains [`VkResolveModeFlag::CustomExt`], then `flags` must contain
+    ///    [`VkRenderingFlag::CustomResolveExt`]
+    ///  - If `flags` contains [`VkRenderingFlag::CustomResolveExt`], then for any element of
     ///    `color_attachments`, `depth_attachment`, or `stencil_attachment`, `resolve_mode` must be
-    ///    [`VkResolveModeFlag::CustomBitExt`] or [`VkResolveModeFlag::None`]
+    ///    [`VkResolveModeFlag::CustomExt`] or [`VkResolveModeFlag::None`]
     ///  - If the `fragment_density_map_layered` feature is not enabled, `flags` must not contain
-    ///    [`VkRenderingFlag::PerLayerFragmentDensityBitValve`]
-    ///  - If `flags` includes [`VkRenderingFlag::ContentsInlineBitKhr`] then at least one of the
+    ///    [`VkRenderingFlag::PerLayerFragmentDensityValve`]
+    ///  - If `flags` includes [`VkRenderingFlag::ContentsInlineKhr`] then at least one of the
     ///    following features must be enabled:
     ///    - `maintenance7`
     ///    - `nested_command_buffer`
@@ -218,7 +218,7 @@ pub struct VkRenderingInfo {
     /// # Valid Usage
     ///  - If `view_mask` is 0, `layer_count` must not be 0
     ///  - `layer_count` must be less than or equal to `max_framebuffer_layers`
-    ///  - If `flags` contains [`VkRenderingFlag::PerLayerFragmentDensityBitValve`], then
+    ///  - If `flags` contains [`VkRenderingFlag::PerLayerFragmentDensityValve`], then
     ///    `layer_count` must be less than or equal to `max_fragment_density_map_layers`
     pub layer_count: u32,
 
@@ -253,12 +253,12 @@ pub struct VkRenderingInfo {
     ///    `multisampled_render_to_single_sampled` feature is not enabled
     ///  - If multisampled-render-to-single-sampled is enabled, then all attachments referenced by
     ///    `image_view` members of elements of `color_attachments` that are not [`VK_NULL_HANDLE`]
-    ///    must have a sample count that is either [`VkSampleCountFlag::_1Bit`] or equal to
+    ///    must have a sample count that is either [`VkSampleCountFlag::_1`] or equal to
     ///    [`VkMultisampledRenderToSingleSampledInfoExt::rasterization_samples`]
     ///  - If multisampled-render-to-single-sampled is enabled, then all attachments referenced by
     ///    `image_view` members of elements of `color_attachments` that are not [`VK_NULL_HANDLE`]
-    ///    and have a sample count of [`VkSampleCountFlag::_1Bit`] must have been created with
-    ///    [`VkImageCreateFlag::MultisampledRenderToSingleSampledBitExt`] in their
+    ///    and have a sample count of [`VkSampleCountFlag::_1`] must have been created with
+    ///    [`VkImageCreateFlag::MultisampledRenderToSingleSampledExt`] in their
     ///    [`VkImageCreateInfo::flags`]
     ///  - If the `next` chain does not contain [`VkDeviceGroupRenderPassBeginInfo`] or its
     ///    `device_render_area_count` member is equal to 0, the width of the `image_view` member of
@@ -278,14 +278,14 @@ pub struct VkRenderingInfo {
     ///    of each element of `device_render_areas`
     ///  - If `color_attachment_count` is not 0 and the `image_view` member of an element of
     ///    `color_attachments` is not [`VK_NULL_HANDLE`], that `image_view` must have been created
-    ///    with the [`VkImageUsageFlag::ColorAttachmentBit`] usage flag set
+    ///    with the [`VkImageUsageFlag::ColorAttachment`] usage flag set
     ///  - If `color_attachment_count` is not 0 and there is an element of `color_attachments` with
     ///    either its `resolve_mode` member set to
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`], or its `image_view` member
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`], or its `image_view` member
     ///    not [`VK_NULL_HANDLE`], and its `resolve_mode` member not set to
     ///    [`VkResolveModeFlag::None`], the `resolve_image_view` member of that element of
     ///    `color_attachments` must have been created with the
-    ///    [`VkImageUsageFlag::ColorAttachmentBit`] usage flag set
+    ///    [`VkImageUsageFlag::ColorAttachment`] usage flag set
     ///  - If `color_attachment_count` is not 0 and the `image_view` member of an element of
     ///    `color_attachments` is not [`VK_NULL_HANDLE`], the layout member of that element of
     ///    `color_attachments` must not be [`VkImageLayout::DepthStencilAttachmentOptimal`] or
@@ -328,7 +328,7 @@ pub struct VkRenderingInfo {
     ///    `fragment_density_map_non_subsampled_images` feature is not enabled, valid `image_view`
     ///    and `resolve_image_view` members of `depth_attachment`, `stencil_attachment`, and each
     ///    element of `color_attachments` must be a [`VkImageView`] created with
-    ///    [`VkImageCreateFlag::SubsampledBitExt`]
+    ///    [`VkImageCreateFlag::SubsampledExt`]
     ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
     ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is not
     ///    0, `image_view` must have a `layer_count` greater than the index of the most significant
@@ -338,13 +338,13 @@ pub struct VkRenderingInfo {
     ///    `image_view` must have a `layer_count` equal to 1
     ///  - If `color_attachment_count` is not 1, the `resolve_mode` member of any element of
     ///    `color_attachments` must not be
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`]
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`]
     ///  - If the `resolve_mode` of any element of `color_attachments` is
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`],
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`],
     ///    [`VkRenderingFragmentDensityMapAttachmentInfoExt::image_view`] must be
     ///    [`VK_NULL_HANDLE`]
     ///  - If the `resolve_mode` of any element of `color_attachments` is
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`],
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`],
     ///    [`VkRenderingFragmentShadingRateAttachmentInfoKhr::image_view`] must be
     ///    [`VK_NULL_HANDLE`]
     ///  - If `color_attachment_count` is not 0 and the `image_view` member of an element of
@@ -352,13 +352,13 @@ pub struct VkRenderingInfo {
     ///    with the identity swizzle
     ///  - If `color_attachment_count` is not 0, and there is an element of `color_attachments`
     ///    with either its `resolve_mode` member set to
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`], or its `image_view` member
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`], or its `image_view` member
     ///    not set to [`VK_NULL_HANDLE`] and its `resolve_mode` member not set to
     ///    [`VkResolveModeFlag::None`], the `resolve_image_view` member of that element of
     ///    `color_attachments` must have been created with the identity swizzle
     ///  - If the `resolve_mode` of any element of `color_attachments` is
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`],
-    ///    [`VkTileShadingRenderPassFlag::EnableBitQcom`] must not be included in
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`],
+    ///    [`VkTileShadingRenderPassFlag::EnableQcom`] must not be included in
     ///    [`VkRenderPassTileShadingCreateInfoQcom::flags`]
     ///
     /// # Valid Usage (Implicit)
@@ -378,13 +378,13 @@ pub struct VkRenderingInfo {
     ///    - The `multisampled_render_to_single_sampled` feature
     ///  - If multisampled-render-to-single-sampled is enabled, then all attachments referenced by
     ///    `image_view` members of `depth_attachment` that is not [`VK_NULL_HANDLE`] must have a
-    ///    sample count that is either [`VkSampleCountFlag::_1Bit`] or equal to
+    ///    sample count that is either [`VkSampleCountFlag::_1`] or equal to
     ///    [`VkMultisampledRenderToSingleSampledInfoExt::rasterization_samples`]
     ///  - If multisampled-render-to-single-sampled is enabled, then all attachments referenced by
     ///    `image_view` members of `depth_attachment`, `stencil_attachment`, and elements of
     ///    `color_attachments` that are not [`VK_NULL_HANDLE`] and have a sample count of
-    ///    [`VkSampleCountFlag::_1Bit`] must have been created with
-    ///    [`VkImageCreateFlag::MultisampledRenderToSingleSampledBitExt`] in their
+    ///    [`VkSampleCountFlag::_1`] must have been created with
+    ///    [`VkImageCreateFlag::MultisampledRenderToSingleSampledExt`] in their
     ///    [`VkImageCreateInfo::flags`]
     ///  - If the `next` chain does not contain [`VkDeviceGroupRenderPassBeginInfo`] or its
     ///    `device_render_area_count` member is equal to 0, the width of the `image_view` member of
@@ -414,10 +414,10 @@ pub struct VkRenderingInfo {
     ///    that includes a depth component
     ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
     ///    [`VK_NULL_HANDLE`], `depth_attachment.image_view` must have been created with the
-    ///    [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If `depth_attachment` is not [`null`] and `depth_attachment.resolve_mode` is not
     ///    [`VkResolveModeFlag::None`], `depth_attachment.resolve_image_view` must have been
-    ///    created with the [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    created with the [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
     ///    [`VK_NULL_HANDLE`], `depth_attachment.layout` must not be
     ///    [`VkImageLayout::ColorAttachmentOptimal`]
@@ -461,7 +461,7 @@ pub struct VkRenderingInfo {
     ///    `fragment_density_map_non_subsampled_images` feature is not enabled, valid `image_view`
     ///    and `resolve_image_view` members of `depth_attachment`, `stencil_attachment`, and each
     ///    element of `color_attachments` must be a VkImageView created with
-    ///    [`VkImageCreateFlag::SubsampledBitExt`]
+    ///    [`VkImageCreateFlag::SubsampledExt`]
     ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
     ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is not
     ///    0, `image_view` must have a `layer_count` greater than the index of the most significant
@@ -470,7 +470,7 @@ pub struct VkRenderingInfo {
     ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is 0,
     ///    `image_view` must have a `layer_count` equal to 1
     ///  - `depth_attachment.resolve_mode` must not be
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`]
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`]
     ///  - If `depth_attachment` is not [`null`] and `depth_attachment.image_view` is not
     ///    [`VK_NULL_HANDLE`], `depth_attachment.image_view` must have been created with the
     ///    identity swizzle
@@ -496,12 +496,12 @@ pub struct VkRenderingInfo {
     ///    - The `multisampled_render_to_single_sampled` feature
     ///  - If multisampled-render-to-single-sampled is enabled, the the attachment referenced by
     ///    `image_view` member of `stencil_attachment` that is not [`VK_NULL_HANDLE`] must have a
-    ///    sample count that is either [`VkSampleCountFlag::_1Bit`] or equal to
+    ///    sample count that is either [`VkSampleCountFlag::_1`] or equal to
     ///    [`VkMultisampledRenderToSingleSampledInfoExt::rasterization_samples`]
     ///  - If multisampled-render-to-single-sampled is enabled, then the attachment referenced by
     ///    `image_view` member of `stencil_attachment` that is not [`VK_NULL_HANDLE`] and have a
-    ///    sample count of [`VkSampleCountFlag::_1Bit`] must have been created with
-    ///    [`VkImageCreateFlag::MultisampledRenderToSingleSampledBitExt`] in their
+    ///    sample count of [`VkSampleCountFlag::_1`] must have been created with
+    ///    [`VkImageCreateFlag::MultisampledRenderToSingleSampledExt`] in their
     ///    [`VkImageCreateInfo::flags`]
     ///  - If the `next` chain does not contain [`VkDeviceGroupRenderPassBeginInfo`] or its
     ///    `device_render_area_count` member is equal to 0, the width of the `image_view` member
@@ -533,7 +533,7 @@ pub struct VkRenderingInfo {
     ///    that includes a stencil aspect
     ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.resolve_mode` is not
     ///    [`VkResolveModeFlag::None`], `stencil_attachment.resolve_image_view` must have been
-    ///    created with the [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    created with the [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.image_view` is not
     ///    [`VK_NULL_HANDLE`], `stencil_attachment.layout` must not be
     ///    [`VkImageLayout::ColorAttachmentOptimal`]
@@ -566,7 +566,7 @@ pub struct VkRenderingInfo {
     ///    `fragment_density_map_non_subsampled_images` feature is not enabled, valid `image_view`
     ///    and `resolve_image_view` members of `depth_attachment`, `stencil_attachment`, and each
     ///    element of `color_attachments` must be a VkImageView created with
-    ///    [`VkImageCreateFlag::SubsampledBitExt`]
+    ///    [`VkImageCreateFlag::SubsampledExt`]
     ///  - If the `image_view` member of a [`VkRenderingFragmentDensityMapAttachmentInfoExt`]
     ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is not
     ///    0, `image_view` must have a `layer_count` greater than the index of the most significant
@@ -575,7 +575,7 @@ pub struct VkRenderingInfo {
     ///    structure included in the `next` chain is not [`VK_NULL_HANDLE`], and `view_mask` is 0,
     ///    `image_view` must have a `layer_count` equal to 1
     ///  - `stencil_attachment.resolve_mode` must not be
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`]
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`]
     ///  - If `stencil_attachment` is not [`null`] and `stencil_attachment.image_view` is not
     ///    [`VK_NULL_HANDLE`], `stencil_attachment.image_view` must have been created with the
     ///    identity swizzle

@@ -37,7 +37,7 @@ pub enum VkImageLayout {
 
     /// [`VkImageLayout::ColorAttachmentOptimal`] must only be used as a color or resolve
     /// attachment in a [`VkFramebuffer`]. This layout is valid only for image subresources of
-    /// images created with the [`VkImageUsageFlag::ColorAttachmentBit`] usage flag set.
+    /// images created with the [`VkImageUsageFlag::ColorAttachment`] usage flag set.
     ColorAttachmentOptimal = 2,
 
     /// [`VkImageLayout::DepthStencilAttachmentOptimal`] specifies a layout for both the depth and
@@ -56,20 +56,20 @@ pub enum VkImageLayout {
     /// [`VkImageLayout::ShaderReadOnlyOptimal`] specifies a layout allowing read-only access in a
     /// shader as a sampled image, combined image/sampler, or input attachment. This layout is
     /// valid only for image subresources of images created with the
-    /// [`VkImageUsageFlag::SampledBit`] or [`VkImageUsageFlag::InputAttachmentBit`] usage bits
+    /// [`VkImageUsageFlag::Sampled`] or [`VkImageUsageFlag::InputAttachment`] usage bits
     /// enabled.
     ShaderReadOnlyOptimal = 5,
 
     /// [`VkImageLayout::TransferSrcOptimal`] specifies a layout allowing read-only access in a
     /// shader as a sampled image, combined image/sampler, or input attachment. This layout is
     /// valid only for image subresources of images created with the
-    /// [`VkImageUsageFlag::SampledBit`] or [`VkImageUsageFlag::InputAttachmentBit`] usage bits
+    /// [`VkImageUsageFlag::Sampled`] or [`VkImageUsageFlag::InputAttachment`] usage bits
     /// enabled.
     TransferSrcOptimal = 6,
 
     /// [`VkImageLayout::TransferDstOptimal`] must only be used as a destination image of a
     /// transfer command. This layout is valid only for image subresources of images created with
-    /// the [`VkImageUsageFlag::TransferDstBit`] usage flag set.
+    /// the [`VkImageUsageFlag::TransferDst`] usage flag set.
     TransferDstOptimal = 7,
 
     /// [`VkImageLayout::Preinitialized`] specifies that an image’s memory is in a defined layout
@@ -140,9 +140,9 @@ pub enum VkImageLayout {
 
     /// [`VkImageLayout::RenderingLocalRead`] must only be used as either a storage image, or a
     /// color or depth/stencil attachment and an input attachment. This layout is valid only for
-    /// image subresources of images created with either the [`VkImageUsageFlag::StorageBit`] usage
-    /// flag set, or both the [`VkImageUsageFlag::InputAttachmentBit`] and either of the
-    /// [`VkImageUsageFlag::ColorAttachmentBit`] or [`VkImageUsageFlag::DepthStencilAttachmentBit`]
+    /// image subresources of images created with either the [`VkImageUsageFlag::Storage`] usage
+    /// flag set, or both the [`VkImageUsageFlag::InputAttachment`] and either of the
+    /// [`VkImageUsageFlag::ColorAttachment`] or [`VkImageUsageFlag::DepthStencilAttachment`]
     /// usage flags set.
     ///
     /// Provided by [`VK_VERSION_1_4`]
@@ -156,7 +156,7 @@ pub enum VkImageLayout {
 
     /// [`VkImageLayout::VideoDecodeDstKhr`] must only be used as a decode output picture in a
     /// video decode operation. This layout is valid only for image subresources of images created
-    /// with the [`VkImageUsageFlag::VideoDecodeDstBitKhr`] usage flag set.
+    /// with the [`VkImageUsageFlag::VideoDecodeDstKhr`] usage flag set.
     ///
     /// Provided by [`khr_video_decode_queue`]
     VideoDecodeDstKhr = 1000024000,
@@ -168,7 +168,7 @@ pub enum VkImageLayout {
 
     /// [`VkImageLayout::VideoDecodeDpbKhr`] must only be used as an output reconstructed picture
     /// or an input reference picture in a video decode operation. This layout is valid only for
-    /// image subresources of images created with the [`VkImageUsageFlag::VideoDecodeDpbBitKhr`]
+    /// image subresources of images created with the [`VkImageUsageFlag::VideoDecodeDpbKhr`]
     /// usage flag set.
     ///
     /// Provided by [`khr_video_decode_queue`]
@@ -182,7 +182,7 @@ pub enum VkImageLayout {
 
     /// [`VkImageLayout::FragmentDensityMapOptimalExt`] must only be used as a fragment density map
     /// attachment in a [`VkRenderPass`]. This layout is valid only for image subresources of
-    /// images created with the [`VkImageUsageFlag::FragmentDensityMapBitExt`] usage flag set.
+    /// images created with the [`VkImageUsageFlag::FragmentDensityMapExt`] usage flag set.
     ///
     /// Provided by [`ext_fragment_density_map`]
     FragmentDensityMapOptimalExt = 1000218000,
@@ -190,7 +190,7 @@ pub enum VkImageLayout {
     /// [`VkImageLayout::FragmentShadingRateAttachmentOptimalKhr`] must only be used as a fragment
     /// shading rate attachment or shading rate image. This layout is valid only for image
     /// subresources of images created with the
-    /// [`VkImageUsageFlag::FragmentShadingRateAttachmentBitKhr`] usage flag set.
+    /// [`VkImageUsageFlag::FragmentShadingRateAttachmentKhr`] usage flag set.
     ///
     /// Provided by [`khr_fragment_shading_rate`]
     FragmentShadingRateAttachmentOptimalKhr = 1000164003,
@@ -202,14 +202,14 @@ pub enum VkImageLayout {
 
     /// [`VkImageLayout::VideoEncodeSrcKhr`] must only be used as an encode input picture in a
     /// video encode operation. This layout is valid only for image subresources of images created
-    /// with the [`VkImageUsageFlag::VideoEncodeSrcBitKhr`] usage flag set.
+    /// with the [`VkImageUsageFlag::VideoEncodeSrcKhr`] usage flag set.
     ///
     /// Provided by [`khr_video_encode_queue`]
     VideoEncodeSrcKhr = 1000299001,
 
     /// [`VkImageLayout::VideoEncodeDpbKhr`] must only be used as an output reconstructed picture
     /// or an input reference picture in a video encode operation. This layout is valid only for
-    /// image subresources of images created with the [`VkImageUsageFlag::VideoEncodeDpbBitKhr`]
+    /// image subresources of images created with the [`VkImageUsageFlag::VideoEncodeDpbKhr`]
     /// usage flag set.
     ///
     /// Provided by [`khr_video_encode_queue`]
@@ -218,10 +218,10 @@ pub enum VkImageLayout {
     /// [`VkImageLayout::AttachmentFeedbackLoopOptimalExt`] must only be used as either a color
     /// attachment or depth/stencil attachment and/or read-only access in a shader as a sampled
     /// image, combined image/sampler, or input attachment. This layout is valid only for image
-    /// subresources of images created with the [`VkImageUsageFlag::AttachmentFeedbackLoopBitExt`]
-    /// usage flag set, and either the [`VkImageUsageFlag::ColorAttachmentBit`] or
-    /// [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flags set, and either the
-    /// [`VkImageUsageFlag::InputAttachmentBit`] or [`VkImageUsageFlag::SampledBit`] usage flags
+    /// subresources of images created with the [`VkImageUsageFlag::AttachmentFeedbackLoopExt`]
+    /// usage flag set, and either the [`VkImageUsageFlag::ColorAttachment`] or
+    /// [`VkImageUsageFlag::DepthStencilAttachment`] usage flags set, and either the
+    /// [`VkImageUsageFlag::InputAttachment`] or [`VkImageUsageFlag::Sampled`] usage flags
     /// set
     ///
     /// Provided by [`ext_attachment_feedback_loop_layout`]
@@ -230,7 +230,7 @@ pub enum VkImageLayout {
     /// [`VkImageLayout::TensorAliasingArm`] specifies the layout that an image created with
     /// [`VkImageTiling::Optimal`] must be in for it and a tensor bound to the same aliased range
     /// of memory to consistently interpret the data in memory. This layout is valid only for image
-    /// subresources of images created with the [`VkImageUsageFlag::TensorAliasingBitArm`] usage
+    /// subresources of images created with the [`VkImageUsageFlag::TensorAliasingArm`] usage
     /// flag set.
     ///
     /// Provided by [`arm_tensors`]
@@ -238,8 +238,8 @@ pub enum VkImageLayout {
 
     /// [`VkImageLayout::VideoEncodeQuantizationMapKhr`] must only be used as a quantization map in
     /// a video encode operation. This layout is valid only for image subresources of images
-    /// created with the [`VkImageUsageFlag::VideoEncodeQuantizationDeltaMapBitKhr`] or
-    /// [`VkImageUsageFlag::VideoEncodeEmphasisMapBitKhr`] usage flags set.
+    /// created with the [`VkImageUsageFlag::VideoEncodeQuantizationDeltaMapKhr`] or
+    /// [`VkImageUsageFlag::VideoEncodeEmphasisMapKhr`] usage flags set.
     ///
     /// Provided by [`khr_video_encode_quantization_map`]
     VideoEncodeQuantizationMapKhr = 1000553000,
@@ -249,7 +249,7 @@ pub enum VkImageLayout {
     /// cannot be transitioned into this layout. This layout can be used as the `initial_layout`
     /// member of [`VkImageCreateInfo`]. This layout is intended to be used as the initial layout
     /// for an image whose contents are already zeroed, either from being explicitly set to zero by
-    /// an application or from being allocated with [`VkMemoryAllocateFlag::ZeroInitializeBitExt`].
+    /// an application or from being allocated with [`VkMemoryAllocateFlag::ZeroInitializeExt`].
     ///
     /// Provided by [`ext_zero_initialize_device_memory`]
     ZeroInitializedExt = 1000620000,

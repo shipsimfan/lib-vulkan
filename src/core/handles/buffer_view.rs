@@ -11,8 +11,8 @@ vk_define_non_dispatchable_handle!(
     /// interpret the data. Buffer views are used to enable shaders to access buffer contents using
     /// image operations. In order to create a valid buffer view, the buffer must have been created
     /// with at least one of the following usage flags:
-    ///  - [`VkBufferUsageFlag::UniformTexelBufferBit`]
-    ///  - [`VkBufferUsageFlag::StorageTexelBufferBit`]
+    ///  - [`VkBufferUsageFlag::UniformTexelBuffer`]
+    ///  - [`VkBufferUsageFlag::StorageTexelBuffer`]
     ///
     /// Provided by [`VK_VERSION_1_0`]
     VkBufferView

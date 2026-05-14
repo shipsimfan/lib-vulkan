@@ -20,14 +20,14 @@ use crate::{VK_TRUE, VK_VERSION_1_0, VkAttachmentDescriptionFlag};
 /// no load or store ops will be performed. However, any transition specified by `initial_layout`
 /// and `final_layout` will still be executed.
 ///
-/// If `flags` includes [`VkAttachmentDescriptionFlag::MayAliasBit`], then the attachment is
+/// If `flags` includes [`VkAttachmentDescriptionFlag::MayAlias`], then the attachment is
 /// treated as if it shares physical memory with another attachment in the same render pass. This
 /// information limits the ability of the implementation to reorder certain operations (like layout
 /// transitions and the `load_op`) such that it is not improperly reordered against other uses of
 /// the same physical memory via a different attachment. This is described in more detail below.
 ///
 /// If a render pass uses multiple attachments that alias the same device memory, those attachments
-/// must each include the [`VkAttachmentDescriptionFlag::MayAliasBit`] bit in their attachment
+/// must each include the [`VkAttachmentDescriptionFlag::MayAlias`] bit in their attachment
 /// description `flags`. Attachments aliasing the same memory occurs in multiple ways:
 ///  - Multiple attachments being assigned the same image view as part of framebuffer creation.
 ///  - Attachments using distinct image views that correspond to the same image subresource of an
@@ -57,14 +57,14 @@ pub struct VkAttachmentDescription {
     /// the attachment.
     ///
     /// # Valid Usage
-    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionBitKhr`],
+    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionKhr`],
     ///    `flags` must not include
-    ///    [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionBitKhr`]
-    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionBitKhr`]
-    ///    or [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionBitKhr`],
+    ///    [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionKhr`]
+    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionKhr`]
+    ///    or [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionKhr`],
     ///    `resolve_srgb_format_supports_transfer_function_control` must be [`VK_TRUE`]
-    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionBitKhr`]
-    ///    or [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionBitKhr`], `maintenance10`
+    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionKhr`]
+    ///    or [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionKhr`], `maintenance10`
     ///    must be enabled
     ///
     /// # Valid Usage (Implicit)
@@ -75,8 +75,8 @@ pub struct VkAttachmentDescription {
     /// for the attachment.
     ///
     /// # Valid Usage
-    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionBitKhr`]
-    ///    or [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionBitKhr`], `format` must
+    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionKhr`]
+    ///    or [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionKhr`], `format` must
     ///    use sRGB encoding
     ///  - format must not be [`VkFormat::Undefined`]
     ///
@@ -89,9 +89,9 @@ pub struct VkAttachmentDescription {
     /// # Valid Usage
     ///  - `samples` must be a valid [`VkSampleCountFlag`] value that is set in
     ///    `image_create_sample_counts` (as defined in Image Creation Limits) for the given format
-    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionBitKhr`]
-    ///    or [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionBitKhr`], `samples` must
-    ///    be [`VkSampleCountFlag::_1Bit`]
+    ///  - If `flags` includes [`VkAttachmentDescriptionFlag::ResolveSkipTransferFunctionKhr`]
+    ///    or [`VkAttachmentDescriptionFlag::ResolveEnableTransferFunctionKhr`], `samples` must
+    ///    be [`VkSampleCountFlag::_1`]
     ///
     /// # Valid Usage (Implicit)
     ///  - samples must be a valid [`VkSampleCountFlag`] value

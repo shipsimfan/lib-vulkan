@@ -14,26 +14,26 @@ use crate::{
 /// The first access scope is limited to access to memory through the specified buffer range, via
 /// access types in the source access mask specified by `src_access_mask` and, if a
 /// [`VkMemoryBarrierAccessFlags3Khr`] is passed in `next`, `src_access_mask3`. If the source
-/// access mask includes [`VkAccessFlag::HostWriteBit`], a memory domain operation is performed
+/// access mask includes [`VkAccessFlag::HostWrite`], a memory domain operation is performed
 /// where available memory in the host domain is also made available to the device domain.
 ///
 /// The second access scope is limited to access to memory through the specified buffer range, via
 /// access types in the destination access mask specified by `dst_access_mask` and, if a
 /// [`VkMemoryBarrierAccessFlags3Khr`] is passed in `next`, `dst_access_mask3`. If the destination
-/// access mask includes [`VkAccessFlag::HostWriteBit`] or [`VkAccessFlag::HostReadBit`], a memory
+/// access mask includes [`VkAccessFlag::HostWrite`] or [`VkAccessFlag::HostRead`], a memory
 /// domain operation is performed where available memory in the device domain is also made
 /// available to the host domain.
 ///
 /// If `src_queue_family_index` is not equal to `dst_queue_family_index`, and
 /// `src_queue_family_index` is equal to the current queue family, then the memory barrier defines
 /// a queue family release operation for the specified buffer range, and if `dependency_flags` did
-/// not include [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesBitKhr`], the second
+/// not include [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesKhr`], the second
 /// synchronization scope of the calling command does not apply to this operation.
 ///
 /// If `dst_queue_family_index` is not equal to `src_queue_family_index`, and
 /// `dst_queue_family_index` is equal to the current queue family, then the memory barrier defines
 /// a queue family acquire operation for the specified buffer range, and if `dependency_flags` did
-/// not include [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesBitKhr`], the first
+/// not include [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesKhr`], the first
 /// synchronization scope of the calling command does not apply to this operation.
 ///
 /// Provided by [`VK_VERSION_1_0`]

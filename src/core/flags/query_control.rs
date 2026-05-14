@@ -19,7 +19,7 @@ flags! {
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub enum VkQueryControlFlag {
-        /// [`VkQueryControlFlag::PreciseBit`] specifies the precision of occlusion queries.
-        PreciseBit = 0x00000001,
+        /// [`VkQueryControlFlag::Precise`] specifies the precision of occlusion queries.
+        Precise = 0x00000001,
     }
 }

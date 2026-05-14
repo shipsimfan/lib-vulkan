@@ -18,10 +18,10 @@ flags! {
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub enum VkDeviceQueueCreateFlag {
-        /// [`VkDeviceQueueCreateFlag::ProtectedBit`] specifies that the device queue is a
+        /// [`VkDeviceQueueCreateFlag::Protected`] specifies that the device queue is a
         /// protected-capable queue.
         ///
         /// Provided by [`VK_VERSION_1_1`]
-        ProtectedBit = 0x00000001,
+        Protected = 0x00000001,
     }
 }

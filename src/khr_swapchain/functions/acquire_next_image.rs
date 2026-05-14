@@ -21,7 +21,7 @@ use crate::{
 ///
 /// # Description
 /// If the swapchain has been created with the
-/// [`VkSwapchainCreateFlagKhr::DeferredMemoryAllocationBitExt`] flag, the image whose index is
+/// [`VkSwapchainCreateFlagKhr::DeferredMemoryAllocationExt`] flag, the image whose index is
 /// returned in `image_index` will be fully backed by memory before this call returns to the
 /// application, as if it is bound completely and contiguously to a single [`VkDeviceMemory`]
 /// object.

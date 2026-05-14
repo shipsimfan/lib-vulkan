@@ -18,25 +18,25 @@ flags! {
     ///
     /// Provided by [`ext_debug_utils`]
     pub enum VkDebugUtilsMessageSeverityFlagExt {
-        /// [`VkDebugUtilsMessageSeverityFlagExt::VerboseBitExt`] specifies the most verbose output
+        /// [`VkDebugUtilsMessageSeverityFlagExt::VerboseExt`] specifies the most verbose output
         /// indicating all diagnostic messages from the Vulkan loader, layers, and drivers should
         /// be captured.
-        VerboseBitExt = 0x00000001,
+        VerboseExt = 0x00000001,
 
-        /// [`VkDebugUtilsMessageSeverityFlagExt::InfoBitExt`] specifies an informational message
+        /// [`VkDebugUtilsMessageSeverityFlagExt::InfoExt`] specifies an informational message
         /// such as resource details that may be handy when debugging an application.
-        InfoBitExt = 0x00000010,
+        InfoExt = 0x00000010,
 
-        /// [`VkDebugUtilsMessageSeverityFlagExt::WarningBitExt`] specifies use of Vulkan that may
+        /// [`VkDebugUtilsMessageSeverityFlagExt::WarningExt`] specifies use of Vulkan that may
         /// expose an app bug. Such cases may not be immediately harmful, such as a fragment shader
         /// outputting to a location with no attachment. Other cases may point to behavior that is
         /// almost certainly bad when unintended such as using an image whose memory has not been
         /// filled. In general if you see a warning but you know that the behavior is
         /// intended/desired, then simply ignore the warning.
-        WarningBitExt = 0x00000100,
+        WarningExt = 0x00000100,
 
-        /// [`VkDebugUtilsMessageSeverityFlagExt::ErrorBitExt`] specifies that the application has
+        /// [`VkDebugUtilsMessageSeverityFlagExt::ErrorExt`] specifies that the application has
         /// violated a valid usage condition of the specification.
-        ErrorBitExt = 0x00001000,
+        ErrorExt = 0x00001000,
     }
 }

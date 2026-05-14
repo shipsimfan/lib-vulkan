@@ -13,27 +13,27 @@ use crate::{
 /// # Description
 /// The first access scope is limited to access to memory through the specified `image` subresource
 /// range, via access types in the source access mask specified by `src_access_mask`. If
-/// `src_access_mask` includes [`VkAccessFlag::HostWriteBit`], memory writes performed by that
+/// `src_access_mask` includes [`VkAccessFlag::HostWrite`], memory writes performed by that
 /// access type are also made visible, as that access type is not performed through a resource.
 ///
 /// The second access scope is limited to access to memory through the specified `image`
 /// subresource range, via access types in the destination access mask specified by
-/// `dst_access_mask`. If `dst_access_mask` includes [`VkAccessFlag::HostWriteBit`] or
-/// [`VkAccessFlag::HostReadBit`], available memory writes are also made visible to accesses of
+/// `dst_access_mask`. If `dst_access_mask` includes [`VkAccessFlag::HostWrite`] or
+/// [`VkAccessFlag::HostRead`], available memory writes are also made visible to accesses of
 /// those types, as those access types are not performed through a resource.
 ///
 /// If `src_queue_family_index` is not equal to `dst_queue_family_index`, and
 /// `src_queue_family_index` is equal to the current queue family, then the memory barrier defines
 /// a queue family release operation for the specified `image` subresource range, and if
 /// `dependency_flags` did not include
-/// [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesBitKhr`], the second
+/// [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesKhr`], the second
 /// synchronization scope of the calling command does not apply to this operation.
 ///
 /// If `dst_queue_family_index` is not equal to `src_queue_family_index`, and
 /// `dst_queue_family_index` is equal to the current queue family, then the memory barrier defines
 /// a queue family acquire operation for the specified `image` subresource range, and if
 /// `dependency_flags` did not include
-/// [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesBitKhr`], the first synchronization
+/// [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesKhr`], the first synchronization
 /// scope of the calling command does not apply to this operation.
 ///
 /// If the `synchronization2` feature is not enabled or `old_layout` is not equal to `new_layout`,
@@ -45,16 +45,16 @@ use crate::{
 /// layout values are ignored and the image contents are preserved regardless of the values of
 /// `old_layout`, `new_layout`, and the current layout of the `image`.
 ///
-/// If `image` is a 3D image created with [`VkImageCreateFlag::_2dArrayCompatibleBit`] and the
+/// If `image` is a 3D image created with [`VkImageCreateFlag::_2dArrayCompatible`] and the
 /// `maintenance9` feature is enabled, the `base_array_layer` and `layer_count` members of
 /// `subresource_range` specify the subset of slices of the 3D image affected by the memory
 /// barrier, including the layout transition. Any slices of a 3D image not included in
 /// `subresource_range` are not affected by the memory barrier and remain in their existing layout.
 ///
 /// If `image` has a multi-planar format and the `image` is disjoint, then including
-/// [`VkImageAspectFlag::ColorBit`] in the `aspect_mask` member of `subresource_range` is
-/// equivalent to including [`VkImageAspectFlag::Plane0Bit`], [`VkImageAspectFlag::Plane1Bit`], and
-/// (for three-plane formats only) [`VkImageAspectFlag::Plane2Bit`].
+/// [`VkImageAspectFlag::Color`] in the `aspect_mask` member of `subresource_range` is
+/// equivalent to including [`VkImageAspectFlag::Plane0`], [`VkImageAspectFlag::Plane1`], and
+/// (for three-plane formats only) [`VkImageAspectFlag::Plane2`].
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
@@ -87,10 +87,10 @@ pub struct VkImageMemoryBarrier {
     ///  - If layouts are not ignored, `old_layout` must be [`VkImageLayout::Undefined`] or the
     ///    current layout of the image subresources affected by the barrier
     ///  - If the `aspect_mask` member of `subresource_range` includes
-    ///    [`VkImageAspectFlag::DepthBit`], `old_layout` must not be one of
+    ///    [`VkImageAspectFlag::Depth`], `old_layout` must not be one of
     ///    [`VkImageLayout::StencilAttachmentOptimal`] or [`VkImageLayout::StencilReadOnlyOptimal`]
     ///  - If the `aspect_mask` member of `subresource_range` includes
-    ///    [`VkImageAspectFlag::StencilBit`], `old_layout` must not be one of
+    ///    [`VkImageAspectFlag::Stencil`], `old_layout` must not be one of
     ///    [`VkImageLayout::DepthAttachmentOptimal`] or [`VkImageLayout::DepthReadOnlyOptimal`]
     ///  - If the `zero_initialize_device_memory` feature is not enabled, `old_layout` must not be
     ///    [`VkImageLayout::ZeroInitializedExt`]
@@ -101,8 +101,8 @@ pub struct VkImageMemoryBarrier {
     ///  - If the `dynamic_rendering_local_read` feature is not enabled, `old_layout` must not be
     ///    [`VkImageLayout::RenderingLocalRead`]
     ///  - If `src_queue_family_index` is [`VK_QUEUE_FAMILY_EXTERNAL`] and `image` was created with
-    ///    [`VkExternalMemoryHandleType::D3d11TextureBit`] or
-    ///    [`VkExternalMemoryHandleType::D3d11TextureKmtBit`] in
+    ///    [`VkExternalMemoryHandleType::D3d11Texture`] or
+    ///    [`VkExternalMemoryHandleType::D3d11TextureKmt`] in
     ///    [`VkExternalMemoryImageCreateInfo::handle_types`], `old_layout` must be
     ///    [`VkImageLayout::General`] or [`VkImageLayout::Undefined`]
     ///
@@ -116,10 +116,10 @@ pub struct VkImageMemoryBarrier {
     ///  - If layouts are not ignored, `new_layout` must not be [`VkImageLayout::Undefined`] or
     ///    [`VkImageLayout::ZeroInitializedExt`] or [`VkImageLayout::Preinitialized`]
     ///  - If the `aspect_mask` member of `subresource_range` includes
-    ///    [`VkImageAspectFlag::DepthBit`], `new_layout` must not be one of
+    ///    [`VkImageAspectFlag::Depth`], `new_layout` must not be one of
     ///    [`VkImageLayout::StencilAttachmentOptimal`] or [`VkImageLayout::StencilReadOnlyOptimal`]
     ///  - If the `aspect_mask` member of `subresource_range` includes
-    ///    [`VkImageAspectFlag::StencilBit`], `new_layout` must not be one of
+    ///    [`VkImageAspectFlag::Stencil`], `new_layout` must not be one of
     ///    [`VkImageLayout::DepthAttachmentOptimal`] or [`VkImageLayout::DepthReadOnlyOptimal`]
     ///  - If the `synchronization2` feature is not enabled, `new_layout` must not be
     ///    [`VkImageLayout::AttachmentOptimal`] or [`VkImageLayout::ReadOnlyOptimal`]
@@ -128,8 +128,8 @@ pub struct VkImageMemoryBarrier {
     ///  - If the `dynamic_rendering_local_read` feature is not enabled, `new_layout` must not be
     ///    [`VkImageLayout::RenderingLocalRead`]
     ///  - If `dst_queue_family_index` is [`VK_QUEUE_FAMILY_EXTERNAL`] and `image` was created with
-    ///    [`VkExternalMemoryHandleType::D3d11TextureBit`] or
-    ///    [`VkExternalMemoryHandleType::D3d11TextureKmtBit`] in
+    ///    [`VkExternalMemoryHandleType::D3d11Texture`] or
+    ///    [`VkExternalMemoryHandleType::D3d11TextureKmt`] in
     ///    [`VkExternalMemoryImageCreateInfo::handle_types`], `new_layout` must be
     ///    [`VkImageLayout::General`]
     ///
@@ -184,91 +184,91 @@ pub struct VkImageMemoryBarrier {
     ///    completely and contiguously to a single VkDeviceMemory object
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::ColorAttachmentOptimal`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::ColorAttachmentBit`] usage flag set
+    ///    [`VkImageUsageFlag::ColorAttachment`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::DepthStencilAttachmentOptimal`] then `image` must have been created
-    ///    with the [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    with the [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::DepthStencilReadOnlyOptimal`] then `image` must have been created with
-    ///    the [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    the [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::ShaderReadOnlyOptimal`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::SampledBit`] or [`VkImageUsageFlag::InputAttachmentBit`] usage flag
+    ///    [`VkImageUsageFlag::Sampled`] or [`VkImageUsageFlag::InputAttachment`] usage flag
     ///    set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::TransferSrcOptimal`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::TransferSrcBit`] usage flag set
+    ///    [`VkImageUsageFlag::TransferSrc`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::TransferDstOptimal`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::TransferDstBit`] usage flag set
+    ///    [`VkImageUsageFlag::TransferDst`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::DepthReadOnlyStencilAttachmentOptimal`] then `image` must have been
-    ///    created with the [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    created with the [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::DepthAttachmentStencilReadOnlyOptimal`] then `image` must have been
-    ///    created with the [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    created with the [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::DepthReadOnlyOptimal`] then `image` must have been created with at
-    ///    least one of the [`VkImageUsageFlag::DepthStencilAttachmentBit`],
-    ///    [`VkImageUsageFlag::SampledBit`], or [`VkImageUsageFlag::InputAttachmentBit`] usage
+    ///    least one of the [`VkImageUsageFlag::DepthStencilAttachment`],
+    ///    [`VkImageUsageFlag::Sampled`], or [`VkImageUsageFlag::InputAttachment`] usage
     ///    flags set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::DepthAttachmentOptimal`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::StencilReadOnlyOptimal`] then `image` must have been created with at
-    ///    least one of the [`VkImageUsageFlag::DepthStencilAttachmentBit`],
-    ///    [`VkImageUsageFlag::SampledBit`], or [`VkImageUsageFlag::InputAttachmentBit`] usage
+    ///    least one of the [`VkImageUsageFlag::DepthStencilAttachment`],
+    ///    [`VkImageUsageFlag::Sampled`], or [`VkImageUsageFlag::InputAttachment`] usage
     ///    flags set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::StencilAttachmentOptimal`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::AttachmentOptimal`], `image` must have been created with the
-    ///    [`VkImageUsageFlag::ColorAttachmentBit`] or
-    ///    [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flag set
+    ///    [`VkImageUsageFlag::ColorAttachment`] or
+    ///    [`VkImageUsageFlag::DepthStencilAttachment`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::ReadOnlyOptimal`], `image` must have been created with at least one of
-    ///    the [`VkImageUsageFlag::DepthStencilAttachmentBit`], [`VkImageUsageFlag::SampledBit`],
-    ///    or [`VkImageUsageFlag::InputAttachmentBit`] usage flags set
+    ///    the [`VkImageUsageFlag::DepthStencilAttachment`], [`VkImageUsageFlag::Sampled`],
+    ///    or [`VkImageUsageFlag::InputAttachment`] usage flags set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::FragmentShadingRateAttachmentOptimalKhr`] then `image` must have been
-    ///    created with the [`VkImageUsageFlag::FragmentShadingRateAttachmentBitKhr`] usage flag
+    ///    created with the [`VkImageUsageFlag::FragmentShadingRateAttachmentKhr`] usage flag
     ///    set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::VideoDecodeSrcKhr`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::VideoDecodeSrcBitKhr`] usage flag set
+    ///    [`VkImageUsageFlag::VideoDecodeSrcKhr`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::VideoDecodeDstKhr`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::VideoDecodeDstBitKhr`] usage flag set
+    ///    [`VkImageUsageFlag::VideoDecodeDstKhr`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::VideoDecodeDpbKhr`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::VideoDecodeDpbBitKhr`] usage flag set
+    ///    [`VkImageUsageFlag::VideoDecodeDpbKhr`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::VideoEncodeSrcKhr`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::VideoEncodeSrcBitKhr`] usage flag set
+    ///    [`VkImageUsageFlag::VideoEncodeSrcKhr`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::VideoEncodeDstKhr`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::VideoEncodeDstBitKhr`] usage flag set
+    ///    [`VkImageUsageFlag::VideoEncodeDstKhr`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::VideoEncodeDpbKhr`] then `image` must have been created with the
-    ///    [`VkImageUsageFlag::VideoEncodeDpbBitKhr`] usage flag set
+    ///    [`VkImageUsageFlag::VideoEncodeDpbKhr`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::VideoEncodeQuantizationMapKhr`] then `image` must have been created
-    ///    with the [`VkImageUsageFlag::VideoEncodeQuantizationDeltaMapBitKhr`] or
-    ///    [`VkImageUsageFlag::VideoEncodeEmphasisMapBitKhr`] usage flags set
+    ///    with the [`VkImageUsageFlag::VideoEncodeQuantizationDeltaMapKhr`] or
+    ///    [`VkImageUsageFlag::VideoEncodeEmphasisMapKhr`] usage flags set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::AttachmentFeedbackLoopOptimalExt`] then `image` must have been created
-    ///    with either the [`VkImageUsageFlag::ColorAttachmentBit`] or
-    ///    [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flags set, and the
-    ///    [`VkImageUsageFlag::InputAttachmentBit`] or [`VkImageUsageFlag::SampledBit`] usage flags
-    ///    set, and the [`VkImageUsageFlag::AttachmentFeedbackLoopBitExt`] usage flag set
+    ///    with either the [`VkImageUsageFlag::ColorAttachment`] or
+    ///    [`VkImageUsageFlag::DepthStencilAttachment`] usage flags set, and the
+    ///    [`VkImageUsageFlag::InputAttachment`] or [`VkImageUsageFlag::Sampled`] usage flags
+    ///    set, and the [`VkImageUsageFlag::AttachmentFeedbackLoopExt`] usage flag set
     ///  - If layouts are not ignored, `old_layout` or `new_layout` is
     ///    [`VkImageLayout::RenderingLocalRead`] then `image` must have been created with either
-    ///    the [`VkImageUsageFlag::StorageBit`] usage flag set, or with both the
-    ///    [`VkImageUsageFlag::InputAttachmentBit`] usage flag and either of the
-    ///    [`VkImageUsageFlag::ColorAttachmentBit`] or
-    ///    [`VkImageUsageFlag::DepthStencilAttachmentBit`] usage flags set
+    ///    the [`VkImageUsageFlag::Storage`] usage flag set, or with both the
+    ///    [`VkImageUsageFlag::InputAttachment`] usage flag and either of the
+    ///    [`VkImageUsageFlag::ColorAttachment`] or
+    ///    [`VkImageUsageFlag::DepthStencilAttachment`] usage flags set
     ///
     /// # Valid Usage (Implicit)
     ///  - `image` must be a valid [`VkImage`] handle
@@ -284,47 +284,47 @@ pub struct VkImageMemoryBarrier {
     ///    `subresource_range.base_mip_level + subresource_range.level_count` must be less than or
     ///    equal to the `mip_levels` specified in [`VkImageCreateInfo`] when `image` was created
     ///  - If `image` is not a 3D `image` or was created without
-    ///    [`VkImageCreateFlag::_2dArrayCompatibleBit`] set, or the `maintenance9` feature is not
+    ///    [`VkImageCreateFlag::_2dArrayCompatible`] set, or the `maintenance9` feature is not
     ///    enabled, `subresource_range.base_array_layer` must be less than the `array_layers`
     ///    specified in [`VkImageCreateInfo`] when `image` was created
     ///  - If the `maintenance9` feature is enabled and `image` is a 3D `image` created with
-    ///    [`VkImageCreateFlag::_2dArrayCompatibleBit`] set, `subresource_range.base_array_layer`
+    ///    [`VkImageCreateFlag::_2dArrayCompatible`] set, `subresource_range.base_array_layer`
     ///    must be less than the depth computed from `base_mip_level` and `extent.depth` specified
     ///    in [`VkImageCreateInfo`] when `image` was created, according to the formula defined in
     ///    Image Mip Level Sizing
     ///  - If the `maintenance9` feature is enabled and `image` is a 3D `image` created with
-    ///    [`VkImageCreateFlag::_2dArrayCompatibleBit`] set and either
+    ///    [`VkImageCreateFlag::_2dArrayCompatible`] set and either
     ///    `subresource_range.base_array_layer` is not equal to 0 or
     ///    `subresource_range.layer_count` is not equal to [`VK_REMAINING_ARRAY_LAYERS`],
     ///    `subresource_range.level_count` must be 1
     ///  - If `image` is not a 3D `image` or was created without
-    ///    [`VkImageCreateFlag::_2dArrayCompatibleBit`] set, or the `maintenance9` feature is not
+    ///    [`VkImageCreateFlag::_2dArrayCompatible`] set, or the `maintenance9` feature is not
     ///    enabled, and `subresource_range.layer_count` is not [`VK_REMAINING_ARRAY_LAYERS`],
     ///    `subresource_range.base_array_layer + subresource_range.layer_count` must be less than
     ///    or equal to the `array_layers` specified in [`VkImageCreateInfo`] when `image` was
     ///    created
     ///  - If the `maintenance9` feature is enabled, `subresource_range.layer_count` is not
     ///    [`VK_REMAINING_ARRAY_LAYERS`], and `image` is a 3D `image` created with
-    ///    [`VkImageCreateFlag::_2dArrayCompatibleBit`] set,
+    ///    [`VkImageCreateFlag::_2dArrayCompatible`] set,
     ///    `subresource_range.base_array_layer + subresource_range.layer_count` must be less than
     ///    or equal to the depth computed from `base_mip_level` and `extent.depth` specified in
     ///    [`VkImageCreateInfo`] when `image` was created, according to the formula defined in
     ///    Image Mip Level Sizing
     ///  - If `image` has a color format that is single-plane, then the `aspect_mask` member of
-    ///    `subresource_range` must be [`VkImageAspectFlag::ColorBit`]
+    ///    `subresource_range` must be [`VkImageAspectFlag::Color`]
     ///  - If `image` has a color format and is not disjoint, then the `aspect_mask` member of
-    ///    `subresource_range` must be [`VkImageAspectFlag::ColorBit`]
+    ///    `subresource_range` must be [`VkImageAspectFlag::Color`]
     ///  - If `image` has a multi-planar format and the `image` is disjoint, then the `aspect_mask`
     ///    member of `subresource_range` must include at least one multi-planar aspect mask bit or
-    ///    [`VkImageAspectFlag::ColorBit`]
+    ///    [`VkImageAspectFlag::Color`]
     ///  - If `image` has a depth/stencil format with both depth and stencil and the
     ///    `separate_depth_stencil_layouts` feature is not enabled, then the `aspect_mask` member
-    ///    of `subresource_range` must include both [`VkImageAspectFlag::DepthBit`] and
-    ///    [`VkImageAspectFlag::StencilBit`]
+    ///    of `subresource_range` must include both [`VkImageAspectFlag::Depth`] and
+    ///    [`VkImageAspectFlag::Stencil`]
     ///  - If `image` has a depth-only format then the `aspect_mask` member of `subresource_range`
-    ///    must be [`VkImageAspectFlag::DepthBit`]
+    ///    must be [`VkImageAspectFlag::Depth`]
     ///  - If `image` has a stencil-only format then the `aspect_mask` member of
-    ///    `subresource_range` must be [`VkImageAspectFlag::StencilBit`]
+    ///    `subresource_range` must be [`VkImageAspectFlag::Stencil`]
     ///  - `subresource_range.aspect_mask` must be valid for the format the `image` was created
     ///    with
     ///

@@ -113,7 +113,7 @@ pub struct VkPhysicalDeviceVulkan13Features {
     pub dynamic_rendering: VkBool32,
 
     /// `shader_integer_dot_product` specifies whether shader modules can declare the
-    /// `DotProductInputAllKHR`, `DotProductInput4x8BitKHR`, `DotProductInput4x8BitPackedKHR` and
+    /// `DotProductInputAllKHR`, `DotProductInput4x8KHR`, `DotProductInput4x8PackedKHR` and
     /// `DotProductKHR` capabilities.
     pub shader_integer_dot_product: VkBool32,
 

@@ -19,8 +19,8 @@ use std::ptr::null;
 ///
 /// # Valid Usage
 ///  - `device` must support at least one queue family with one of the
-///    [`VkQueueFlag::VideoEncodeBitKhr`], [`VkQueueFlag::VideoDecodeBitKhr`],
-///    [`VkQueueFlag::ComputeBit`], or [`VkQueueFlag::GraphicsBit`] capabilities
+///    [`VkQueueFlag::VideoEncodeKhr`], [`VkQueueFlag::VideoDecodeKhr`],
+///    [`VkQueueFlag::Compute`], or [`VkQueueFlag::Graphics`] capabilities
 ///  - [`VkImageViewCreateInfo::image`] must have been created from device
 ///
 /// # Valid Usage (Implicit)

@@ -63,37 +63,37 @@ use crate::{
 /// barriers. If no memory barriers are specified, then the second access scope includes no
 /// accesses.
 ///
-/// If `dependency_flags` includes [`VkDependencyFlag::ByRegionBit`], then any dependency between
+/// If `dependency_flags` includes [`VkDependencyFlag::ByRegion`], then any dependency between
 /// framebuffer-space pipeline stages is framebuffer-local - otherwise it is framebuffer-global.
 ///
 /// # Valid Usage
 ///  - If the `geometry_shader` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::GeometryShaderBit`]
+///    [`VkPipelineStageFlag::GeometryShader`]
 ///  - If the `tessellation_shader` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::TessellationControlShaderBit`] or
-///    [`VkPipelineStageFlag::TessellationEvaluationShaderBit`]
+///    [`VkPipelineStageFlag::TessellationControlShader`] or
+///    [`VkPipelineStageFlag::TessellationEvaluationShader`]
 ///  - If the conditionalRendering feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::ConditionalRenderingBitExt`]
+///    [`VkPipelineStageFlag::ConditionalRenderingExt`]
 ///  - If the `fragment_density_map` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::FragmentDensityProcessBitExt`]
+///    [`VkPipelineStageFlag::FragmentDensityProcessExt`]
 ///  - If the `transform_feedback` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::TransformFeedbackBitExt`]
+///    [`VkPipelineStageFlag::TransformFeedbackExt`]
 ///  - If the `mesh_shader` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::MeshShaderBitExt`]
+///    [`VkPipelineStageFlag::MeshShaderExt`]
 ///  - If the `task_shader` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::TaskShaderBitExt`]
+///    [`VkPipelineStageFlag::TaskShaderExt`]
 ///  - If neither of the `shading_rate_image` or the `attachment_fragment_shading_rate` features
 ///    are enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::FragmentShadingRateAttachmentBitKhr`]
+///    [`VkPipelineStageFlag::FragmentShadingRateAttachmentKhr`]
 ///  - If the `synchronization2` feature is not enabled, `src_stage_mask` must not be 0
 ///  - If neither the `nv_ray_tracing` extension or the `ray_tracing_pipeline` feature are enabled,
-///    `src_stage_mask` must not contain [`VkPipelineStageFlag::RayTracingShaderBitKhr`]
+///    `src_stage_mask` must not contain [`VkPipelineStageFlag::RayTracingShaderKhr`]
 ///  - If the `acceleration_structure` feature is not enabled, `src_stage_mask` must not contain
-///    [`VkPipelineStageFlag::AccelerationStructureBuildBitKhr`]
+///    [`VkPipelineStageFlag::AccelerationStructureBuildKhr`]
 ///  - If the `ray_query` feature is not enabled and a memory barrier `src_access_mask` includes
-///    [`VkAccessFlag::AccelerationStructureReadBitKhr`], `src_stage_mask` must not include any of
-///    the `VkPipelineStageFlag::*ShaderBit`] stages except
-///    [`VkPipelineStageFlag::RayTracingShaderBitKhr`]
+///    [`VkAccessFlag::AccelerationStructureReadKhr`], `src_stage_mask` must not include any of
+///    the `VkPipelineStageFlag::*Shader`] stages except
+///    [`VkPipelineStageFlag::RayTracingShaderKhr`]
 ///  - The `src_access_mask` member of each element of `memory_barriers` must only include access
 ///    flags that are supported by one or more of the pipeline stages in `src_stage_mask`, as
 ///    specified in the table of supported access types
@@ -135,8 +135,8 @@ use crate::{
 ///  - If [`VkCmdPipelineBarrier`] is called within a render pass instance using a [`VkRenderPass`]
 ///    object, the render pass must have been created with at least one subpass dependency that
 ///    expresses a dependency from the current subpass to itself, does not include
-///    [`VkDependencyFlag::ByRegionBit`] if this command does not, does not include
-///    [`VkDependencyFlag::ViewLocalBit`] if this command does not, and has synchronization scopes
+///    [`VkDependencyFlag::ByRegion`] if this command does not, does not include
+///    [`VkDependencyFlag::ViewLocal`] if this command does not, and has synchronization scopes
 ///    and access scopes that are all supersets of the scopes defined in this command
 ///  - If [`VkCmdPipelineBarrier`] is called within a render pass instance using a [`VkRenderPass`]
 ///    object, it must not include any buffer memory barriers
@@ -149,14 +149,14 @@ use crate::{
 ///    all memory barriers must only include framebuffer-space stages
 ///  - If [`VkCmdPipelineBarrier`] is called within a render pass instance, and the source stage
 ///    masks of any memory barriers include framebuffer-space stages, then `dependency_flags` must
-///    include [`VkDependencyFlag::ByRegionBit`]
+///    include [`VkDependencyFlag::ByRegion`]
 ///  - If [`VkCmdPipelineBarrier`] is called within a render pass instance, the source and
 ///    destination stage masks of any memory barriers must only include graphics pipeline stages
 ///  - If [`VkCmdPipelineBarrier`] is called outside of a render pass instance, the dependency
-///    flags must not include [`VkDependencyFlag::ViewLocalBit`]
+///    flags must not include [`VkDependencyFlag::ViewLocal`]
 ///  - If [`VkCmdPipelineBarrier`] is called inside a render pass instance, and there is more than
 ///    one view in the current subpass, dependency flags must include
-///    [`VkDependencyFlag::ViewLocalBit`]
+///    [`VkDependencyFlag::ViewLocal`]
 ///  - If none of the `shader_tile_image_color_read_access`,
 ///    `shader_tile_image_stencil_read_access`, or `shader_tile_image_depth_read_access` features
 ///    are enabled, and the `dynamic_rendering_local_read` feature is not enabled,
@@ -168,9 +168,9 @@ use crate::{
 ///  - If the `dynamic_rendering_local_read` feature is not enabled, and [`VkCmdPipelineBarrier`]
 ///    is called within a render pass instance started with [`VkCmdBeginRendering`], memory
 ///    barriers specified by this command must only include
-///    [`VkAccessFlag2::ColorAttachmentReadBit`], [`VkAccessFlag2::COLOR_ATTACHMENT_WRITE_BIT`],
-///    [`VkAccessFlag2::DepthStencilAttachmentReadBit`], or
-///    [`VkAccessFlag2::DepthStencilAttachmentWriteBit`] in their access masks
+///    [`VkAccessFlag2::ColorAttachmentRead`], [`VkAccessFlag2::COLOR_ATTACHMENT_WRITE_BIT`],
+///    [`VkAccessFlag2::DepthStencilAttachmentRead`], or
+///    [`VkAccessFlag2::DepthStencilAttachmentWrite`] in their access masks
 ///  - If [`VkCmdPipelineBarrier`] is called within a render pass instance started with
 ///    [`VkCmdBeginRendering`], [`VkImageLayout::RenderingLocalRead`] is used as an
 ///    attachment in the current render pass instance, it must be in the
@@ -192,10 +192,10 @@ use crate::{
 ///    queue family specified by the `queue_family_index` member of the [`VkCommandPoolCreateInfo`]
 ///    structure that was used to create the [`VkCommandPool`] that `command_buffer` was allocated
 ///    from, as specified in the table of supported pipeline stages
-///  - If either `src_stage_mask` or `dst_stage_mask` includes [`VkPipelineStageFlag::HostBit`],
+///  - If either `src_stage_mask` or `dst_stage_mask` includes [`VkPipelineStageFlag::Host`],
 ///    for each element of `image_memory_barriers`, `src_queue_family_index` and
 ///    `dst_queue_family_index` must be equal
-///  - If either `src_stage_mask` or `dst_stage_mask` includes [`VkPipelineStageFlag::HostBit`],
+///  - If either `src_stage_mask` or `dst_stage_mask` includes [`VkPipelineStageFlag::Host`],
 ///    for each element of `buffer_memory_barrier`, `src_queue_family_index` and
 ///    `dst_queue_family_index` must be equal
 ///  - If a buffer or image memory barrier specifies a queue family ownership transfer operation,
@@ -203,7 +203,7 @@ use crate::{
 ///    index that was used to create the command pool that `command_buffer` was allocated from must
 ///    be equal
 ///  - If the maintenance8 feature is not enabled, `dependency_flags` must not include
-///    [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesBitKhr`]
+///    [`VkDependencyFlag::QueueFamilyOwnershipTransferUseAllStagesKhr`]
 ///
 /// # Valid Usage (Implicit)
 ///  - `command_buffer` must be a valid [`VkCommandBuffer`] handle
@@ -218,8 +218,8 @@ use crate::{
 ///    an array of `image_memory_barrier_count` valid [`VkImageMemoryBarrier`] structures
 ///  - `command_buffer` must be in the recording state
 ///  - The [`VkCommandPool`] that `command_buffer` was allocated from must support
-///    [`VkQueueFlag::ComputeBit`], [`VkQueueFlag::GraphicsBit`], [`VkQueueFlag::TransferBit`],
-///    [`VkQueueFlag::VideoDecodeBitKhr`], or [`VkQueueFlag::VideoEncodeBitKhr`] operations
+///    [`VkQueueFlag::Compute`], [`VkQueueFlag::Graphics`], [`VkQueueFlag::Transfer`],
+///    [`VkQueueFlag::VideoDecodeKhr`], or [`VkQueueFlag::VideoEncodeKhr`] operations
 ///  - This command must not be called between suspended render pass instances
 ///
 /// # Host Synchronization

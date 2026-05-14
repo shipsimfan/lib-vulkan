@@ -26,7 +26,7 @@ pub struct VkCommandPoolCreateInfo {
     ///    [`VkGetPhysicalDeviceQueueFamilyDataGraphPropertiesArm`] with `queue_family_index` and
     ///    the `physical_device` that was used to create `device`
     ///  - If `queue_family_index` designates a queue family that supports
-    ///    [`VkQueueFlag::DataGraphBitArm`] and enumerates a foreign engine through
+    ///    [`VkQueueFlag::DataGraphArm`] and enumerates a foreign engine through
     ///    [`VkGetPhysicalDeviceQueueFamilyDataGraphPropertiesArm`] with type
     ///    [`VkPhysicalDeviceDataGraphProcessingEngineTypeArm::NerualQcom`] or
     ///    [`VkPhysicalDeviceDataGraphProcessingEngineTypeArm::ComputeQcom`], the `next` chain must
@@ -45,7 +45,7 @@ pub struct VkCommandPoolCreateInfo {
     ///
     /// # Valid Usage
     ///  - If the `protected_memory` feature is not enabled, the
-    ///    [`VkCommandPoolCreateFlag::ProtectedBit`] bit of `flags` must not be set
+    ///    [`VkCommandPoolCreateFlag::Protected`] bit of `flags` must not be set
     ///
     /// # Valid Usage (Implicit)
     ///  - `flags` must be a valid combination of [`VkCommandPoolCreateFlag`]s values
@@ -57,7 +57,7 @@ pub struct VkCommandPoolCreateInfo {
     /// # Valid Usage
     ///  - If the `next` chain includes a [`VkDataGraphProcessingEngineCreateInfoArm`] structure,
     ///    then `queue_family_index` must designate a queue family that supports
-    ///    [`VkQueueFlag::DataGraphBitArm`]
+    ///    [`VkQueueFlag::DataGraphArm`]
     pub queue_family_index: u32,
 }
 

@@ -77,14 +77,14 @@ pub struct VkCommandBufferInheritanceInfo {
     /// `query_flags` specifies the query flags that can be used by an active occlusion query in the primary command buffer when this secondary command buffer is executed. If this value includes the VK_QUERY_CONTROL_PRECISE_BIT bit, then the active query can return boolean results or actual sample counts. If this bit is not set, then the active query must not use the VK_QUERY_CONTROL_PRECISE_BIT bit.
     ///
     /// # Valid Usage
-    ///  - If the inheritedQueries feature is enabled, `query_flags` must be a valid combination of VkQueryControlFlagBits values
+    ///  - If the inheritedQueries feature is enabled, `query_flags` must be a valid combination of VkQueryControlFlags values
     ///  - If the inheritedQueries feature is not enabled, `query_flags` must be 0
     pub query_flags: VkQueryControlFlags,
 
-    /// pipelineStatistics is a bitmask of VkQueryPipelineStatisticFlagBits specifying the set of pipeline statistics that can be counted by an active query in the primary command buffer when this secondary command buffer is executed. If this value includes a given bit, then this command buffer can be executed whether the primary command buffer has a pipeline statistics query active that includes this bit or not. If this value excludes a given bit, then the active pipeline statistics query must not be from a query pool that counts that statistic.
+    /// pipelineStatistics is a bitmask of VkQueryPipelineStatisticFlags specifying the set of pipeline statistics that can be counted by an active query in the primary command buffer when this secondary command buffer is executed. If this value includes a given bit, then this command buffer can be executed whether the primary command buffer has a pipeline statistics query active that includes this bit or not. If this value excludes a given bit, then the active pipeline statistics query must not be from a query pool that counts that statistic.
     ///
     /// # Valid Usage
-    ///  - If the pipelineStatisticsQuery feature is enabled, pipelineStatistics must be a valid combination of VkQueryPipelineStatisticFlagBits values
+    ///  - If the pipelineStatisticsQuery feature is enabled, pipelineStatistics must be a valid combination of VkQueryPipelineStatisticFlags values
     ///  - If the pipelineStatisticsQuery feature is not enabled, pipelineStatistics must be 0
     pub pipeline_statistics: VkQueryPipelineStatisticFlags,
 }

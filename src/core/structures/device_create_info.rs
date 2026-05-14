@@ -30,13 +30,13 @@ pub struct VkDeviceCreateInfo {
     ///
     /// # Valid Usage
     ///  - If the `next` chain includes a [`VkPhysicalDeviceVulkan11Features`] structure, then it
-    ///    must not include a [`VkPhysicalDevice16BitStorageFeatures`],
+    ///    must not include a [`VkPhysicalDevice16StorageFeatures`],
     ///    [`VkPhysicalDeviceMultiviewFeatures`], [`VkPhysicalDeviceVariablePointersFeatures`],
     ///    [`VkPhysicalDeviceProtectedMemoryFeatures`],
     ///    [`VkPhysicalDeviceSamplerYcbcrConversionFeatures`], or
     ///    [`VkPhysicalDeviceShaderDrawParametersFeatures`] structure
     ///  - If the `next` chain includes a [`VkPhysicalDeviceVulkan12Features`] structure, then it
-    ///    must not include a [`VkPhysicalDevice8BitStorageFeatures`],
+    ///    must not include a [`VkPhysicalDevice8StorageFeatures`],
     ///    [`VkPhysicalDeviceShaderAtomicInt64Features`],
     ///    [`VkPhysicalDeviceShaderFloat16Int8Features`],
     ///    [`VkPhysicalDeviceDescriptorIndexingFeatures`],
@@ -133,7 +133,7 @@ pub struct VkDeviceCreateInfo {
     ///    [`VkDeviceQueueCreateInfo`] structures in `queue_create_infos`
     ///  - If the `next` chain includes a [`VkDeviceQueueShaderCoreControlCreateInfoArm`] structure
     ///    then [`VkPhysicalDeviceSchedulingControlsPropertiesArm::scheduling_controls_flags`] must
-    ///    contain [`VkPhysicalDeviceSchedulingControlsFlag::ShaderCoreCountBitArm`]
+    ///    contain [`VkPhysicalDeviceSchedulingControlsFlag::ShaderCoreCountArm`]
     ///
     /// # Valid Usage (Implicit)
     ///  - Each `next` member of any structure (including this one) in the `next` chain must be
@@ -142,8 +142,8 @@ pub struct VkDeviceCreateInfo {
     ///    [`VkDeviceGroupDeviceCreateInfo`], [`VkDeviceMemoryOverallocationCreateInfoAmd`],
     ///    [`VkDevicePipelineBinaryInternalCacheControlKhr`], [`VkDevicePrivateDataCreateInfo`],
     ///    [`VkDeviceQueueShaderCoreControlCreateInfoArm`],
-    ///    [`VkExternalComputeQueueDeviceCreateInfoNv`], [`VkPhysicalDevice16BitStorageFeatures`],
-    ///    [`VkPhysicalDevice4444FormatsFeaturesExt`], [`VkPhysicalDevice8BitStorageFeatures`],
+    ///    [`VkExternalComputeQueueDeviceCreateInfoNv`], [`VkPhysicalDevice16StorageFeatures`],
+    ///    [`VkPhysicalDevice4444FormatsFeaturesExt`], [`VkPhysicalDevice8StorageFeatures`],
     ///    [`VkPhysicalDeviceASTCDecodeFeaturesExt`],
     ///    [`VkPhysicalDeviceAccelerationStructureFeaturesKhr`],
     ///    [`VkPhysicalDeviceAddressBindingReportFeaturesExt`],
@@ -300,7 +300,7 @@ pub struct VkDeviceCreateInfo {
     ///    [`VkPhysicalDeviceScalarBlockLayoutFeatures`],
     ///    [`VkPhysicalDeviceSchedulingControlsFeaturesArm`],
     ///    [`VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures`],
-    ///    [`VkPhysicalDeviceShader64BitIndexingFeaturesExt`],
+    ///    [`VkPhysicalDeviceShader64IndexingFeaturesExt`],
     ///    [`VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNv`],
     ///    [`VkPhysicalDeviceShaderAtomicFloat2FeaturesExt`],
     ///    [`VkPhysicalDeviceShaderAtomicFloatFeaturesExt`],
@@ -407,7 +407,7 @@ pub struct VkDeviceCreateInfo {
     ///    explicitly by the including a [`VkDeviceQueueGlobalPriorityCreateInfo`] structure in the
     ///    `next` chain, or by the implicit default value
     ///  - If any element of `queue_create_infos` specifies a `queue_family_index` that supports
-    ///    [`VkQueueFlag::DataGraphBitArm`] and that `queue_family_index` enumerates an engine
+    ///    [`VkQueueFlag::DataGraphArm`] and that `queue_family_index` enumerates an engine
     ///    through [`VkGetPhysicalDeviceQueueFamilyDataGraphPropertiesArm`] with type
     ///    [`VkPhysicalDeviceDataGraphProcessingEngineTypeArm::NeuralQcom`] or
     ///    [`VkPhysicalDeviceDataGraphProcessingEngineTypeArm::ComputeQcom`], a

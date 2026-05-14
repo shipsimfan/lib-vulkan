@@ -18,132 +18,132 @@ flags! {
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub enum VkImageUsageFlag {
-        /// [`VkImageUsageFlag::TransferSrcBit`] specifies that the image can be used as the source
+        /// [`VkImageUsageFlag::TransferSrc`] specifies that the image can be used as the source
         /// of a transfer command.
-        TransferSrcBit = 0x00000001,
+        TransferSrc = 0x00000001,
 
-        /// [`VkImageUsageFlag::TransferDstBit`] specifies that the image can be used as the
+        /// [`VkImageUsageFlag::TransferDst`] specifies that the image can be used as the
         /// destination of a transfer command.
-        TransferDstBit = 0x00000002,
+        TransferDst = 0x00000002,
 
-        /// [`VkImageUsageFlag::SampledBit`] specifies that the image can be used to create a
+        /// [`VkImageUsageFlag::Sampled`] specifies that the image can be used to create a
         /// [`VkImageView`] suitable for occupying a [`VkDescriptorSet`] slot either of type
         /// [`VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE`] or [`VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER`],
         /// and be sampled by a shader.
-        SampledBit = 0x00000004,
+        Sampled = 0x00000004,
 
-        /// [`VkImageUsageFlag::StorageBit`] specifies that the image can be used to create a
+        /// [`VkImageUsageFlag::Storage`] specifies that the image can be used to create a
         /// [`VkImageView`] suitable for occupying a [`VkDescriptorSet`] slot of type
         /// [`VK_DESCRIPTOR_TYPE_STORAGE_IMAGE`].
-        StorageBit = 0x00000008,
+        Storage = 0x00000008,
 
-        /// [`VkImageUsageFlag::ColorAttachmentBit`] specifies that the image can be used to create
+        /// [`VkImageUsageFlag::ColorAttachment`] specifies that the image can be used to create
         /// a [`VkImageView`] suitable for use as a color or resolve attachment in a
         /// [`VkFramebuffer`].
-        ColorAttachmentBit = 0x00000010,
+        ColorAttachment = 0x00000010,
 
-        /// [`VkImageUsageFlag::DepthStencilAttachmentBit`] specifies that the image can be used to
+        /// [`VkImageUsageFlag::DepthStencilAttachment`] specifies that the image can be used to
         /// create a [`VkImageView`] suitable for use as a depth/stencil or depth/stencil resolve
         /// attachment in a [`VkFramebuffer`].
-        DepthStencilAttachmentBit = 0x00000020,
+        DepthStencilAttachment = 0x00000020,
 
-        /// [`VkImageUsageFlag::TransientAttachmentBit`] specifies that implementations may support
+        /// [`VkImageUsageFlag::TransientAttachment`] specifies that implementations may support
         /// using memory allocations with the [`VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT`] to back
         /// an image with this usage. This bit can be set for any image that can be used to create
         /// a [`VkImageView`] suitable for use as a color, resolve, depth/stencil, or input
         /// attachment.
-        TransientAttachmentBit = 0x00000040,
+        TransientAttachment = 0x00000040,
 
-        /// [`VkImageUsageFlag::InputAttachmentBit`] specifies that the image can be used to create
+        /// [`VkImageUsageFlag::InputAttachment`] specifies that the image can be used to create
         /// a [`VkImageView`] suitable for occupying [`VkDescriptorSet`] slot of type
         /// [`VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT`]; be read from a shader as an input attachment;
         /// and be used as an input attachment in a framebuffer.
-        InputAttachmentBit = 0x00000080,
+        InputAttachment = 0x00000080,
 
-        /// [`VkImageUsageFlag::HostTransferBit`] specifies that the image can be used with host
+        /// [`VkImageUsageFlag::HostTransfer`] specifies that the image can be used with host
         /// copy commands and host layout transitions.
         ///
         /// Provided by [`VK_VERSION_1_4`]
-        HostTransferBit = 0x00400000,
+        HostTransfer = 0x00400000,
 
-        /// [`VkImageUsageFlag::VideoDecodeDstBitKhr`] specifies that the image can be used as a
+        /// [`VkImageUsageFlag::VideoDecodeDstKhr`] specifies that the image can be used as a
         /// decode output picture in a video decode operation.
         ///
         /// Provided by [`khr_video_decode_queue`]
-        VideoDecodeDstBitKhr = 0x00000400,
+        VideoDecodeDstKhr = 0x00000400,
 
-        /// [`VkImageUsageFlag::VideoDecodeSrcBitKhr`] is reserved for future use.
+        /// [`VkImageUsageFlag::VideoDecodeSrcKhr`] is reserved for future use.
         ///
         /// Provided by [`khr_video_decode_queue`]
-        VideoDecodeSrcBitKhr = 0x00000800,
+        VideoDecodeSrcKhr = 0x00000800,
 
-        /// [`VkImageUsageFlag::VideoDecodeDpbBitKhr`] specifies that the image can be used as an
+        /// [`VkImageUsageFlag::VideoDecodeDpbKhr`] specifies that the image can be used as an
         /// output reconstructed picture or an input reference picture in a video decode operation.
         ///
         /// Provided by [`khr_video_decode_queue`]
-        VideoDecodeDpbBitKhr = 0x00001000,
+        VideoDecodeDpbKhr = 0x00001000,
 
-        /// [`VkImageUsageFlag::FragmentDensityMapBitExt`] specifies that the image can be used to
+        /// [`VkImageUsageFlag::FragmentDensityMapExt`] specifies that the image can be used to
         /// create a [`VkImageView`] suitable for use as a fragment density map image.
         ///
         /// Provided by [`ext_fragment_density_map`]
-        FragmentDensityMapBitExt = 0x00000200,
+        FragmentDensityMapExt = 0x00000200,
 
-        /// [`VkImageUsageFlag::FragmentShadingRateAttachmentBitKhr`] specifies that the image can
+        /// [`VkImageUsageFlag::FragmentShadingRateAttachmentKhr`] specifies that the image can
         /// be used to create a [`VkImageView`] suitable for use as a fragment shading rate
         /// attachment or shading rate image
         ///
         /// Provided by [`khr_fragment_shading_rate`]
-        FragmentShadingRateAttachmentBitKhr = 0x00000100,
+        FragmentShadingRateAttachmentKhr = 0x00000100,
 
-        /// [`VkImageUsageFlag::VideoEncodeDstBitKhr`] is reserved for future use.
+        /// [`VkImageUsageFlag::VideoEncodeDstKhr`] is reserved for future use.
         ///
         /// Provided by [`khr_video_encode_queue`]
-        VideoEncodeDstBitKhr = 0x00002000,
+        VideoEncodeDstKhr = 0x00002000,
 
-        /// [`VkImageUsageFlag::VideoEncodeSrcBitKhr`] specifies that the image can be used as an
+        /// [`VkImageUsageFlag::VideoEncodeSrcKhr`] specifies that the image can be used as an
         /// encode input picture in a video encode operation.
         ///
         /// Provided by [`khr_video_encode_queue`]
-        VideoEncodeSrcBitKhr = 0x00004000,
+        VideoEncodeSrcKhr = 0x00004000,
 
-        /// [`VkImageUsageFlag::VideoEncodeDpbBitKhr`] specifies that the image can be used as an
+        /// [`VkImageUsageFlag::VideoEncodeDpbKhr`] specifies that the image can be used as an
         /// output reconstructed picture or an input reference picture in a video encode operation.
         ///
         /// Provided by [`khr_video_encode_queue`]
-        VideoEncodeDpbBitKhr = 0x00008000,
+        VideoEncodeDpbKhr = 0x00008000,
 
-        /// [`VkImageUsageFlag::AttachmentFeedbackLoopBitExt`] specifies that the image can be
+        /// [`VkImageUsageFlag::AttachmentFeedbackLoopExt`] specifies that the image can be
         /// transitioned to the [`VkImageLayout::AttachementFeedbackLoopOptimalExt`] layout to be
         /// used as a color or depth/stencil attachment in a VkFramebuffer and/or as a read-only
         /// input resource in a shader (sampled image, combined image sampler or input attachment)
         /// in the same render pass.
         ///
         /// Provided by [`ext_attachment_feedback_loop_layout`]
-        AttachmentFeedbackLoopBitExt = 0x00080000,
+        AttachmentFeedbackLoopExt = 0x00080000,
 
         /// Provided by [`huawei_invocation_mask`]
-        InvocationMaskBitHuawei = 0x00040000,
+        InvocationMaskHuawei = 0x00040000,
 
         /// Provided by [`qcom_image_processing`]
-        SampleWeightBitQcom = 0x00100000,
+        SampleWeightQcom = 0x00100000,
 
         /// Provided by [`qcom_image_processing`]
-        SampleBlockMatchBitQcom = 0x00200000,
+        SampleBlockMatchQcom = 0x00200000,
 
-        /// [`VkImageUsageFlag::TensorAliasingBitArm`] specifies that the image can be transitioned
+        /// [`VkImageUsageFlag::TensorAliasingArm`] specifies that the image can be transitioned
         /// to the [`VkImageLayout::TensorAliasingArm`] layout.
         ///
         /// Provided by [`arm_tensors`]
-        TensorAliasingBitArm = 0x00800000,
+        TensorAliasingArm = 0x00800000,
 
         /// Provided by [`qcom_tile_memory_heap`]
-        TileMemoryBitQcom = 0x08000000,
+        TileMemoryQcom = 0x08000000,
 
         /// Provided by [`khr_video_encode_quantization_map`]
-        VideoEncodeQuantizationDeltaMapBitKhr = 0x02000000,
+        VideoEncodeQuantizationDeltaMapKhr = 0x02000000,
 
         /// Provided by [`khr_video_encode_quantization_map`]
-        VideoEncodeEmphasisMapBitKhr = 0x04000000,
+        VideoEncodeEmphasisMapKhr = 0x04000000,
     }
 }

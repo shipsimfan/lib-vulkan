@@ -17,9 +17,9 @@ flags! {
     /// Bitmask indicating supported depth and stencil resolve modes
     ///
     /// # Description
-    /// If no resolve mode is otherwise specified, [`VkResolveModeFlag::AverageBit`] is used.
+    /// If no resolve mode is otherwise specified, [`VkResolveModeFlag::Average`] is used.
     ///
-    /// If [`VkResolveModeFlag::AverageBit`] is used, and the source format is a floating-point or
+    /// If [`VkResolveModeFlag::Average`] is used, and the source format is a floating-point or
     /// normalized type, the sample values for each pixel are resolved with implementation-defined
     /// numerical precision.
     ///
@@ -37,23 +37,23 @@ flags! {
         /// [`VkResolveModeFlag::None`] specifies that no resolve operation is done.
         None = 0,
 
-        /// [`VkResolveModeFlag::SampleZeroBit`] specifies that result of the resolve operation is
+        /// [`VkResolveModeFlag::SampleZero`] specifies that result of the resolve operation is
         /// equal to the value of sample 0.
-        SampleZeroBit = 0x00000001,
+        SampleZero = 0x00000001,
 
-        /// [`VkResolveModeFlag::AverageBit`] specifies that result of the resolve operation is the
+        /// [`VkResolveModeFlag::Average`] specifies that result of the resolve operation is the
         /// average of the sample values.
-        AverageBit = 0x00000002,
+        Average = 0x00000002,
 
-        /// [`VkResolveModeFlag::MinBit`] specifies that result of the resolve operation is the
+        /// [`VkResolveModeFlag::Min`] specifies that result of the resolve operation is the
         /// minimum of the sample values.
-        MinBit = 0x00000004,
+        Min = 0x00000004,
 
-        /// [`VkResolveModeFlag::MaxBit`] specifies that result of the resolve operation is the
+        /// [`VkResolveModeFlag::Max`] specifies that result of the resolve operation is the
         /// maximum of the sample values.
-        MaxBit = 0x00000008,
+        Max = 0x00000008,
 
-        /// [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`] specifies that rather than a
+        /// [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`] specifies that rather than a
         /// multisample resolve, a single sampled color attachment will be downsampled into a
         /// Y′CBCR format image specified by an external Android format. Unlike other resolve
         /// modes, implementations can resolve multiple times during rendering, or even bypass
@@ -68,12 +68,12 @@ flags! {
         ///
         /// Provided by [`android_external_format_resolve`] with [`khr_dynamic_rendering`] or
         /// [`VK_VERSION_1_3`]
-        ExternalFormatDownsampleBitAndroid = 0x00000010,
+        ExternalFormatDownsampleAndroid = 0x00000010,
 
-        /// [`VkResolveModeFlag::CustomBitExt`] specifies that the attachment will be resolved by
+        /// [`VkResolveModeFlag::CustomExt`] specifies that the attachment will be resolved by
         /// shaders in the render pass instead of fixed-function operations.
         ///
         /// Provided by [`ext_custom_resolve`] with [`khr_dynamic_rendering`] or [`VK_VERSION_1_3`]
-        CustomBitExt = 0x00000020,
+        CustomExt = 0x00000020,
     }
 }

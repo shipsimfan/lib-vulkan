@@ -39,9 +39,9 @@ use crate::{
 ///  - `command_buffer` must be a valid [`VkCommandBuffer`] handle
 ///  - `command_buffer` must be in the recording state
 ///  - The [`VkCommandPool`] that `command_buffer` was allocated from must support
-///    [`VkQueueFlag::ComputeBit`], [`VkQueueFlag::GraphicsBit`],
-///    [`VkQueueFlag::OpticalFlowBitNv`], [`VkQueueFlag::TransferBit`],
-///    [`VkQueueFlag::VideoDecodeBitKhr`], or [`VkQueueFlag::VideoEncodeBitKhr`] operations
+///    [`VkQueueFlag::Compute`], [`VkQueueFlag::Graphics`],
+///    [`VkQueueFlag::OpticalFlowNv`], [`VkQueueFlag::Transfer`],
+///    [`VkQueueFlag::VideoDecodeKhr`], or [`VkQueueFlag::VideoEncodeKhr`] operations
 ///
 /// # Host Synchronization
 ///  - Host access to `command_buffer` must be externally synchronized
@@ -49,8 +49,10 @@ use crate::{
 ///    externally synchronized
 ///
 /// Provided by [`ext_debug_utils`]
-pub type VkCmdEndDebugUtilsLabelExt =
-    unsafe extern "system" fn(command_buffer: VkCommandBuffer, label_info: *const VkDebugUtilsLabelExt);
+pub type VkCmdEndDebugUtilsLabelExt = unsafe extern "system" fn(
+    command_buffer: VkCommandBuffer,
+    label_info: *const VkDebugUtilsLabelExt,
+);
 
 /// The name of [`VkCmdEndDebugUtilsLabelExt`]
 pub const VK_CMD_END_DEBUG_UTILS_LABEL_EXT: &CStr = c"vkCmdEndDebugUtilsLabelEXT";

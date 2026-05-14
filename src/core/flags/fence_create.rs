@@ -18,8 +18,8 @@ flags! {
     ///
     /// Provided by [`VK_VERSION_1_0`]
     pub enum VkFenceCreateFlag {
-        /// [`VkFenceCreateFlag::SignalledBit`] specifies that the fence object is created in the
+        /// [`VkFenceCreateFlag::Signalled`] specifies that the fence object is created in the
         /// signaled state. Otherwise, it is created in the unsignaled state.
-        SignalledBit = 0x00000001,
+        Signalled = 0x00000001,
     }
 }

@@ -18,26 +18,26 @@ flags! {
     ///
     /// Provided by [`ext_debug_utils`]
     pub enum VkDebugUtilsMessageTypeFlagExt {
-        /// [`VkDebugUtilsMessageTypeFlagExt::GeneralBitExt`] specifies that some general event has
+        /// [`VkDebugUtilsMessageTypeFlagExt::GeneralExt`] specifies that some general event has
         /// occurred. This is typically a non-specification, non-performance event.
-        GeneralBitExt = 0x00000001,
+        GeneralExt = 0x00000001,
 
-        /// [`VkDebugUtilsMessageTypeFlagExt::ValidationBitExt`] specifies that something has
+        /// [`VkDebugUtilsMessageTypeFlagExt::ValidationExt`] specifies that something has
         /// occurred during validation against the Vulkan specification that may indicate invalid
         /// behavior.
-        ValidationBitExt = 0x00000002,
+        ValidationExt = 0x00000002,
 
-        /// [`VkDebugUtilsMessageTypeFlagExt::PerformanceBitExt`] specifies a potentially
+        /// [`VkDebugUtilsMessageTypeFlagExt::PerformanceExt`] specifies a potentially
         /// non-optimal use of Vulkan, e.g. using [`VkCmdClearColorImage`] when setting
         /// [`VkAttachmentDescription::load_op`] to [`VkAttachment::LoadOpClear`] would have
         /// worked.
-        PerformanceBitExt = 0x00000004,
+        PerformanceExt = 0x00000004,
 
-        /// [`VkDebugUtilsMessageTypeFlagExt::AddressBindingBitExt`] specifies that the
+        /// [`VkDebugUtilsMessageTypeFlagExt::AddressBindingExt`] specifies that the
         /// implementation has modified the set of GPU-visible virtual addresses associated with a
         /// Vulkan object.
         ///
         /// Provided by [`ext_device_address_binding_report`]
-        AddressBindingBitExt = 0x00000008,
+        AddressBindingExt = 0x00000008,
     }
 }

@@ -37,8 +37,8 @@ pub struct VkInstanceCreateInfo {
     /// # Valid Usage
     ///  - If the `next` chain includes a [`VkExportMetalObjectCreateInfoExt`] structure, its
     ///    `export_object_type` member must be either
-    ///    [`VkExportMetalObjectTypeFlagExt::MetalDeviceBitExt`] or
-    ///    [`VkExportMetalObjectTypeFlagExt::MetalCommandQueueBitExt`]
+    ///    [`VkExportMetalObjectTypeFlagExt::MetalDeviceExt`] or
+    ///    [`VkExportMetalObjectTypeFlagExt::MetalCommandQueueExt`]
     ///
     /// # Valid Usage (Implicit)
     ///  - Each `next` member of any structure (including this one) in the `next` chain must be
@@ -94,7 +94,7 @@ pub struct VkInstanceCreateInfo {
     ///  - If the `next` chain of [`VkInstanceCreateInfo`] includes a
     ///    [`VkDebugUtilsMessengerCreateInfoExt`] structure, the list of enabled extensions in
     ///    `enabled_extension_names` must contain "VK_EXT_debug_utils"
-    ///  - If flags has the [`VkInstanceCreateFlag::EnumeratePortabilityBitKhr`] bit set, the list
+    ///  - If flags has the [`VkInstanceCreateFlag::EnumeratePortabilityKhr`] bit set, the list
     ///    of enabled extensions in `enabled_extension_names` must contain
     ///    "VK_KHR_portability_enumeration"
     ///  - If the `next` chain of [`VkInstanceCreateInfo`] includes a

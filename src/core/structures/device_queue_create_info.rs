@@ -39,7 +39,7 @@ pub struct VkDeviceQueueCreateInfo {
     ///
     /// # Valid Usage
     ///  - If the `protected_memory` feature is not enabled, the
-    ///    [`VkDeviceQueueCreateFlag::ProtectedBit`] bit of flags must not be set
+    ///    [`VkDeviceQueueCreateFlag::Protected`] bit of flags must not be set
     ///
     /// # Valid Usage (Implicit)
     ///  - `flags` must be a valid combination of [`VkDeviceQueueCreateFlag`] values
@@ -53,8 +53,8 @@ pub struct VkDeviceQueueCreateInfo {
     /// # Valid Usage
     ///  - `queue_family_index` must be less than `queue_family_property_count` returned by
     ///    [`VkGetPhysicalDeviceQueueFamilyProperties`]
-    ///  - If flags includes [`VkDeviceQueueCreateFlag::ProtectedBit`], `queue_family_index` must
-    ///    be the index of a queue family that includes the [`VkQueueFlag::ProtectedBit`]
+    ///  - If flags includes [`VkDeviceQueueCreateFlag::Protected`], `queue_family_index` must
+    ///    be the index of a queue family that includes the [`VkQueueFlag::Protected`]
     ///    capability
     pub queue_family_index: u32,
 

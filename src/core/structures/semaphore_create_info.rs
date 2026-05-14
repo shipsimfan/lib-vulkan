@@ -21,7 +21,7 @@ pub struct VkSemaphoreCreateInfo {
     ///
     /// # Valid Usage
     ///  - If the `next` chain includes a [`VkExportMetalObjectCreateInfoExt`] structure, its
-    ///    `export_object_type` member must be [`VkExportMetalObjectType::MetalSharedEventBitExt`]
+    ///    `export_object_type` member must be [`VkExportMetalObjectType::MetalSharedEventExt`]
     ///
     /// # Valid Usage (Implicit)
     ///  - Each `next` member of any structure (including this one) in the `next` chain must be

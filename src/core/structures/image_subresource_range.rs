@@ -21,15 +21,15 @@ use crate::{VK_VERSION_1_0, VkImageAspectFlag, VkImageView};
 /// `layer_count` or implied by [`VK_REMAINING_ARRAY_LAYERS`], is not a multiple of 6, the last
 /// cube map in the array must not be accessed.
 ///
-/// `aspect_mask` must be only [`VkImageAspectFlag::ColorBit`], [`VkImageAspectFlag::DepthBit`] or
-/// [`VkImageAspectFlag::StencilBit`] if format is a color, depth-only or stencil-only format,
+/// `aspect_mask` must be only [`VkImageAspectFlag::Color`], [`VkImageAspectFlag::Depth`] or
+/// [`VkImageAspectFlag::Stencil`] if format is a color, depth-only or stencil-only format,
 /// respectively, except if format is a multi-planar format. If using a depth/stencil format with
 /// both depth and stencil components, `aspect_mask` must include at least one of
-/// [`VkImageAspectFlag::DepthBit`] and [`VkImageAspectFlag::StencilBit`], and can include both.
+/// [`VkImageAspectFlag::Depth`] and [`VkImageAspectFlag::Stencil`], and can include both.
 ///
 /// When the [`VkImageSubresourceRange`] structure is used to select a subset of the slices of a 3D
 /// image’s mip level in order to create a 2D or 2D array image view of a 3D image created with
-/// [`VkImageCreateFlag::2dArrayCompatibleBit`], `base_array_layer` and `layer_count` specify the
+/// [`VkImageCreateFlag::2dArrayCompatible`], `base_array_layer` and `layer_count` specify the
 /// first slice index and the number of slices to include in the created image view. Such an image
 /// view can be used as a framebuffer attachment that refers only to the specified range of slices
 /// of the selected mip level. If the maintenance9 feature is not enabled, any layout transitions
@@ -46,26 +46,26 @@ use crate::{VK_VERSION_1_0, VkImageAspectFlag, VkImageView};
 ///
 /// When creating a [`VkImageView`], if sampler Y′CBCR conversion is enabled in the sampler, the
 /// `aspect_mask` of a subresourceRange used by the [`VkImageView`] must be
-/// [`VkImageAspectFlag::ColorBit`].
+/// [`VkImageAspectFlag::Color`].
 ///
 /// When creating a [`VkImageView`], if sampler Y′CBCR conversion is not enabled in the sampler and
 /// the image format is multi-planar format, the image must have been created with
-/// [`VkImageCreateFlag::MutableFormatBit`], and the `aspect_mask` of the [`VkImageView`]’s
-/// `subresource_range` must be [`VkImageAspectFlag::Plane0Bit`], [`VkImageAspectFlag::Plane1Bit`]
-/// or [`VkImageAspectFlag::Plane2Bit`].
+/// [`VkImageCreateFlag::MutableFormat`], and the `aspect_mask` of the [`VkImageView`]’s
+/// `subresource_range` must be [`VkImageAspectFlag::Plane0`], [`VkImageAspectFlag::Plane1`]
+/// or [`VkImageAspectFlag::Plane2`].
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkImageSubresourceRange {
-    /// `aspect_mask` is a bitmask of [`VkImageAspectFlagBits`] specifying which aspect(s) of the
+    /// `aspect_mask` is a bitmask of [`VkImageAspectFlags`] specifying which aspect(s) of the
     /// image are included in the view.
     ///
     /// # Valid Usage
-    ///  - If `aspect_mask` includes [`VkImageAspectFlag::ColorBit`], then it must not include any
-    ///    of [`VkImageAspectFlag::Plane0Bit`], [`VkImageAspectFlag::Plane1Bit`], or
-    ///    [`VkImageAspectFlag::Plane2Bit`]
-    ///  - `aspect_mask` must not include `VkImageAspectFlag::MemoryPlaneIBitExt` for any index `I`
+    ///  - If `aspect_mask` includes [`VkImageAspectFlag::Color`], then it must not include any
+    ///    of [`VkImageAspectFlag::Plane0`], [`VkImageAspectFlag::Plane1`], or
+    ///    [`VkImageAspectFlag::Plane2`]
+    ///  - `aspect_mask` must not include `VkImageAspectFlag::MemoryPlaneIExt` for any index `I`
     ///
     /// # Valid Usage (Implicit)
     ///  - `aspect_mask` must be a valid combination of [`VkImageAspectFlag`] values

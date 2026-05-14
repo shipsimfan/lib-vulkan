@@ -17,39 +17,39 @@ use crate::{
 /// Values in `image_view` are loaded and stored according to the values of `load_op` and
 /// `store_op`, within the render area for each device specified in [`VkRenderingInfo`]. If
 /// `image_view` is [`VK_NULL_HANDLE`], and `resolve_mode` is not
-/// [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`], other members of this structure are
+/// [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`], other members of this structure are
 /// ignored; writes to this attachment will be discarded, and no load, store, or multisample
 /// resolve operations will be performed.
 ///
 /// If `resolve_mode` is [`VkResolveModeFlag::None`], then `resolve_image_view` is ignored. If
 /// `resolve_mode` is not [`VkResolveModeFlag::None`], and `resolve_image_view` is not
 /// [`VK_NULL_HANDLE`], a render pass multisample resolve operation is defined for the attachment
-/// subresource. If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`],
+/// subresource. If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`],
 /// and the `null_color_attachment_with_external_format_resolve` limit is [`VK_TRUE`], values are
 /// only undefined once load operations have completed.
 ///
 /// The contents of a resolve attachment within the render area become undefined at the time
 /// [`VkCmdBeginCustomResolveExt`] is called if all of the following conditions are true:
-///  - [`VkRenderingFlag::CustomResolveBitExt`] is set.
-///  - The attachment sets `resolve_mode` to [`VkResolveModeFlag::CustomBitExt`].
+///  - [`VkRenderingFlag::CustomResolveExt`] is set.
+///  - The attachment sets `resolve_mode` to [`VkResolveModeFlag::CustomExt`].
 ///
 /// This affects color, depth, and stencil attachments. In addition, there is an implicit store
 /// operation of [`VkAttachmentStoreOp::Store`] for these attachments.
 ///
 /// Store and resolve operations are only performed at the end of a render pass instance that does
-/// not specify the [`VkRenderingFlag::SuspendingBit`] flag. If the
-/// [`VkRenderingFlag::CustomResolveBitExt`] is specified and an attachment uses the
-/// [`VkResolveModeFlag::CustomBitExt`] resolve mode, the resolve attachment will only be written
+/// not specify the [`VkRenderingFlag::Suspending`] flag. If the
+/// [`VkRenderingFlag::CustomResolveExt`] is specified and an attachment uses the
+/// [`VkResolveModeFlag::CustomExt`] resolve mode, the resolve attachment will only be written
 /// by draws recorded following a call to [`VkCmdBeginCustomResolveExt`].
 ///
 /// Load operations are only performed at the beginning of a render pass instance that does not
-/// specify the [`VkRenderingFlag::ResumingBit`] flag.
+/// specify the [`VkRenderingFlag::Resuming`] flag.
 ///
 /// Image contents at the end of a suspended render pass instance remain defined for access by a
 /// resuming render pass instance.
 ///
 /// If the `null_color_attachment_with_external_format_resolve` limit is [`VK_TRUE`], and
-/// `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`], values in the
+/// `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`], values in the
 /// color attachment will be loaded from the resolve attachment at the start of rendering, and may
 /// also be reloaded any time after a resolve occurs or the resolve attachment is written to; if
 /// this occurs it must happen-before any writes to the color attachment are performed which
@@ -79,42 +79,42 @@ pub struct VkRenderingAttachmentInfo {
     ///
     /// # Valid Usage
     ///  - If all of the following are true, `image_view` must not have a sample count of
-    ///    [`VkSampleCountFlag::_1Bit`]:
+    ///    [`VkSampleCountFlag::_1`]:
     ///    - `image_view` is not [`VK_NULL_HANDLE`]
     ///    - `resolve_mode` is not [`VkResolveModeFlag::None`]
     ///    - the `next` chain of [`VkRenderingInfo`] does not include a
     ///      [`VkMultisampledRenderToSingleSampledInfoExt`] structure with the
     ///      `multisampled_render_to_single_sampled_enable` field equal to [`VK_TRUE`]
     ///  - If `image_view` is not [`VK_NULL_HANDLE`], `resolve_image_view` is not
-    ///    [`VK_NULL_HANDLE`], and `resolve_mode` is neither [`VkResolveModeFlag::CustomBitExt`]
+    ///    [`VK_NULL_HANDLE`], and `resolve_mode` is neither [`VkResolveModeFlag::CustomExt`]
     ///    nor [`VkResolveModeFlag::None`], `image_view` and `resolve_image_view` must have the
     ///    same [`VkFormat`]
     ///  - If feedback loop is enabled for the attachment identified by `image_view`, then
     ///    `image_view` must have been created with a usage value including
-    ///    [`VkImageUsageFlag::AttachmentFeedbackLoopBitExt`], either
-    ///    [`VkImageUsageFlag::ColorAttachmentBit`] or
-    ///    [`VkImageUsageFlag::DepthStencilAttachmentBit`], and either
-    ///    [`VkImageUsageFlag::InputAttachmentBit`] or [`VkImageUsageFlag::SampledBit`]
-    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`] and
+    ///    [`VkImageUsageFlag::AttachmentFeedbackLoopExt`], either
+    ///    [`VkImageUsageFlag::ColorAttachment`] or
+    ///    [`VkImageUsageFlag::DepthStencilAttachment`], and either
+    ///    [`VkImageUsageFlag::InputAttachment`] or [`VkImageUsageFlag::Sampled`]
+    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`] and
     ///    `null_color_attachment_with_external_format_resolve` is [`VK_TRUE`], `image_view` must
     ///    be [`VK_NULL_HANDLE`]
-    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`] and
+    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`] and
     ///    `null_color_attachment_with_external_format_resolve` is [`VK_FALSE`], `image_view` must
     ///    be a valid [`VkImageView`]
-    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`] and
+    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`] and
     ///    `null_color_attachment_with_external_format_resolve` is [`VK_FALSE`], `image_view` must
     ///    have a format equal to the value of
     ///    [`VkAndroidHardwareBufferFormatResolvePropertiesAndroid::color_attachment_format`] as
     ///    returned by a call to [`VkGetAndroidHardwareBufferPropertiesAndroid`] for the Android
     ///    hardware buffer that was used to create `resolve_image_view`
     ///  - If the `next` chain includes a [`VkRenderingAttachmentFlagsInfoKhr`] structure, and
-    ///    `flags` includes [`VkRenderingAttachmentFlag::ResolveSkipTransferFunctionBitKhr`] or
-    ///    [`VkRenderingAttachmentFlag::ResolveEnableTransferFunctionBitKhr`], `image_view` must
+    ///    `flags` includes [`VkRenderingAttachmentFlag::ResolveSkipTransferFunctionKhr`] or
+    ///    [`VkRenderingAttachmentFlag::ResolveEnableTransferFunctionKhr`], `image_view` must
     ///    have a format using sRGB encoding
     ///  - If the `next` chain includes a [`VkRenderingAttachmentFlagsInfoKhr`] structure, and
-    ///    `flags` includes [`VkRenderingAttachmentFlag::InputAttachmentFeedbackBitKhr`],
+    ///    `flags` includes [`VkRenderingAttachmentFlag::InputAttachmentFeedbackKhr`],
     ///    `image_view` must have an image that was created with the
-    ///    [`VkImageUsageFlag::InputAttachmentBit`] usage flag set
+    ///    [`VkImageUsageFlag::InputAttachment`] usage flag set
     ///
     /// # Valid Usage (Implicit)
     ///  - If `image_view` is not [`VK_NULL_HANDLE`], `image_view` must be a valid [`VkImageView`]
@@ -149,23 +149,23 @@ pub struct VkRenderingAttachmentInfo {
     /// # Valid Usage
     ///  - If `image_view` is not [`VK_NULL_HANDLE`] and has a non-integer color format,
     ///    `resolve_mode` must be [`VkResolveModeFlag::None`] or
-    ///    [`VkResolveModeFlag::CustomBitExt`] or [`VkResolveModeFlag::AverageBit`]
+    ///    [`VkResolveModeFlag::CustomExt`] or [`VkResolveModeFlag::Average`]
     ///  - If `image_view` is not [`VK_NULL_HANDLE`] and has an integer color format,
     ///    `resolve_mode` must be [`VkResolveModeFlag::None`] or
-    ///    [`VkResolveModeFlag::CustomBitExt`] or [`VkResolveModeFlag::SampleZeroBit`]
+    ///    [`VkResolveModeFlag::CustomExt`] or [`VkResolveModeFlag::SampleZero`]
     ///  - If all of the following are true, then `resolve_mode` must not be
     ///    [`VkResolveModeFlag::None`]:
     ///    - `image_view` is not [`VK_NULL_HANDLE`]
-    ///    - `image_view` has a sample count of [`VkSampleCountFlag::_1Bit`]
+    ///    - `image_view` has a sample count of [`VkSampleCountFlag::_1`]
     ///    - the `next` chain of [`VkRenderingInfo`] includes a
     ///      [`VkMultisampledRenderToSingleSampledInfoExt`] structure with the
     ///      `multisampled_render_to_single_sampled_enable` field equal to [`VK_TRUE`]
     ///  - If the `external_format_resolve` feature is not enabled, `resolve_mode` must not be
-    ///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`]
+    ///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`]
     ///  - If the `next` chain includes a [`VkRenderingAttachmentFlagsInfoKhr`] structure, and
-    ///    `flags` includes [`VkRenderingAttachmentFlag::ResolveSkipTransferFunctionBitKhr`] or
-    ///    [`VkRenderingAttachmentFlag::ResolveEnableTransferFunctionBitKhr`], `resolve_mode` must
-    ///    be equal to [`VkResolveModeFlag::AverageBit`]
+    ///    `flags` includes [`VkRenderingAttachmentFlag::ResolveSkipTransferFunctionKhr`] or
+    ///    [`VkRenderingAttachmentFlag::ResolveEnableTransferFunctionKhr`], `resolve_mode` must
+    ///    be equal to [`VkResolveModeFlag::Average`]
     ///
     /// # Valid Usage (Implicit)
     ///  - If `resolve_mode` is not 0, `resolve_mode` must be a valid [`VkResolveModeFlag`] value
@@ -184,29 +184,29 @@ pub struct VkRenderingAttachmentInfo {
     ///    [`VkResolveModeFlag::None`], the `next` chain of [`VkRenderingInfo`] includes a
     ///    [`VkMultisampledRenderToSingleSampledInfoExt`] structure with the
     ///    `multisampled_render_to_single_sampled_enable` field equal to [`VK_TRUE`], and
-    ///    `image_view` has a sample count of [`VkSampleCountFlag::_1Bit`], `resolve_image_view`
+    ///    `image_view` has a sample count of [`VkSampleCountFlag::_1`], `resolve_image_view`
     ///    must be [`VK_NULL_HANDLE`]
     ///  - If `image_view` is not [`VK_NULL_HANDLE`], `resolve_image_view` is not
     ///    [`VK_NULL_HANDLE`], and `resolve_mode` is not [`VkResolveModeFlag::None`],
-    ///    `resolve_image_view` must have a sample count of [`VkSampleCountFlag::_1Bit`]
+    ///    `resolve_image_view` must have a sample count of [`VkSampleCountFlag::_1`]
     ///  - If `image_view` is not [`VK_NULL_HANDLE`], `resolve_image_view` is not
-    ///    [`VK_NULL_HANDLE`], and `resolve_mode` is neither [`VkResolveModeFlag::CustomBitExt`]
+    ///    [`VK_NULL_HANDLE`], and `resolve_mode` is neither [`VkResolveModeFlag::CustomExt`]
     ///    nor [`VkResolveModeFlag::None`], `image_view` and `resolve_image_view` must have the
     ///    same [`VkFormat`]
-    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`],
+    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`],
     ///    `resolve_image_view` must be a valid image view
     ///  - If the `null_color_attachment_with_external_format_resolve` property is [`VK_TRUE`] and
-    ///    `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`],
+    ///    `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`],
     ///    `resolve_image_view` must have been created with an image with a samples value of
-    ///    [`VkSampleCountFlag::_1Bit`]
-    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`],
+    ///    [`VkSampleCountFlag::_1`]
+    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`],
     ///    `resolve_image_view` must have been created with an external format specified by
     ///    [`VkExternalFormatAndroid`]
-    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`],
+    ///  - If `resolve_mode` is [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`],
     ///    `resolve_image_view` must have been created with a `subresource_range.layer_count` of 1
     ///  - If `resolve_image_view` is not [`VK_NULL_HANDLE`], the underlying resource must not be
     ///    bound to a [`VkDeviceMemory`] object allocated from a [`VkMemoryHeap`] with the
-    ///    [`VkMemoryHeapFlag::TileMemoryBitQcom`] property
+    ///    [`VkMemoryHeapFlag::TileMemoryQcom`] property
     ///
     /// # Valid Usage (Implicit)
     ///  - If `resolve_image_view` is not [`VK_NULL_HANDLE`], `resolve_image_view` must be a valid

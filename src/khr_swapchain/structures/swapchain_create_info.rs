@@ -51,7 +51,7 @@ pub struct VkSwapchainCreateInfoKhr {
     /// # Valid Usage
     ///  - If the `swapchain_maintenance1` feature is not enabled, then the `next` chain must not
     ///    include a [`VkSwapchainPresentModesCreateInfoKhr`] structure
-    ///  - If `flags` contains [`VkSwapchainCreateFlagKhr::MutableFormatBitKhr`] then the `next`
+    ///  - If `flags` contains [`VkSwapchainCreateFlagKhr::MutableFormatKhr`] then the `next`
     ///    chain must include a [`VkImageFormatListCreateInfo`] structure with a
     ///    `view_format_count` greater than zero and `view_formats` must have an element equal to
     ///    `image_format`
@@ -59,7 +59,7 @@ pub struct VkSwapchainCreateInfoKhr {
     ///    [`VkImageFormatListCreateInfo::view_format_count`] is not zero then all of the formats
     ///    in [`VkImageFormatListCreateInfo::view_formats`] must be compatible with the format as
     ///    described in the compatibility table
-    ///  - If `flags` does not contain [`VkSwapchainCreateFlagKhr::MutableFormatBitKhr`] and the
+    ///  - If `flags` does not contain [`VkSwapchainCreateFlagKhr::MutableFormatKhr`] and the
     ///    `next` chain include a [`VkImageFormatListCreateInfo`] structure then
     ///    [`VkImageFormatListCreateInfo::view_format_count`] must be 0 or 1
     ///  - If the `next` chain includes a [`VkSurfaceFullScreenExclusiveInfoExt`] structure with
@@ -87,17 +87,17 @@ pub struct VkSwapchainCreateInfoKhr {
     ///
     /// # Valid Usage
     ///  - If the `swapchain_maintenance1` feature is not enabled, then `flags` must not include
-    ///    [`VkSwapchainCreateFlagKhr::DeferredMemoryAllocationBitExt`]
+    ///    [`VkSwapchainCreateFlagKhr::DeferredMemoryAllocationExt`]
     ///  - If the logical device was created with
     ///    [`VkDeviceGroupDeviceCreateInfo::physical_device_count`] equal to 1, `flags` must not
-    ///    contain [`VkSwapchainCreateFlagKhr::SplitInstanceBindRegionsBitKhr`]
-    ///  - If `flags` contains [`VkSwapchainCreateFlagKhr::ProtectedBitKhr`], then
+    ///    contain [`VkSwapchainCreateFlagKhr::SplitInstanceBindRegionsKhr`]
+    ///  - If `flags` contains [`VkSwapchainCreateFlagKhr::ProtectedKhr`], then
     ///    [`VkSurfaceProtectedCapabilitiesKhr::supports_protected`] must be [`VK_TRUE`] in the
     ///    [`VkSurfaceProtectedCapabilitiesKhr`] structure returned by
     ///    [`VkGetPhysicalDeviceSurfaceCapabilities2Khr`] for `surface`
     ///  - If none of the `present_timing`, `present_at_absolute_time`, or
     ///    [`present_at_relative_time`] features are enabled, `flags` must not contain
-    ///    [`VkSwapchainCreateFlagKhr::PresentTimingBitExt`]
+    ///    [`VkSwapchainCreateFlagKhr::PresentTimingExt`]
     ///
     /// # Valid Usage (Implicit)
     ///  - `flags` must be a valid combination of [`VkSwapchainCreateFlagKhr`] values

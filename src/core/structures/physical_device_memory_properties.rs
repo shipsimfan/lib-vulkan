@@ -22,15 +22,15 @@ use crate::{VK_VERSION_1_0, VkGetPhysicalDeviceMemoryProperties};
 /// given by `memory_type_count` and is less than or equal to [`VK_MAX_MEMORY_TYPES`]. Each memory
 /// type is described by an element of the `memory_types` array as a [`VkMemoryType`] structure.
 ///
-/// At least one heap must include [`VkMemoryHeapFlagBits::DeviceLocalBit`] in
+/// At least one heap must include [`VkMemoryHeapFlags::DeviceLocal`] in
 /// [`VkMemoryHeap::flags`]. If there are multiple heaps that all have similar performance
-/// characteristics, they may all include [`VkMemoryHeapFlagBits::DeviceLocalBit`]. In a unified
+/// characteristics, they may all include [`VkMemoryHeapFlags::DeviceLocal`]. In a unified
 /// memory architecture (UMA) system there is often only a single memory heap which is considered
 /// to be equally “local” to the host and to the device, and such an implementation must advertise
 /// the heap as device-local.
 ///
 /// Memory contents within a tile memory heap, denoted by
-/// [`VkMemoryHeapFlagBits::TileMemoryBitQcom`], are only visible across the command buffers
+/// [`VkMemoryHeapFlags::TileMemoryQcom`], are only visible across the command buffers
 /// executed in a single command buffer submission batch within a [`VkQueueSubmit`] or
 /// [`VkQueueSubmit2`] call. If the
 /// [`VkPhysicalDeviceTileMemoryHeapPropertiesQCOM::queue_submit_boundary`] property is set, the
@@ -43,73 +43,73 @@ use crate::{VK_VERSION_1_0, VkGetPhysicalDeviceMemoryProperties};
 /// Each memory type returned by [`VkGetPhysicalDeviceMemoryProperties`] must have its
 /// `property_flags` set to one of the following values:
 ///  - 0
-///  - `VkMemoryPropertyFlagBits::HostVisibleBit | VkMemoryPropertyFlagBits::HostCoherentBit`
-///  - `VkMemoryPropertyFlagBits::HostVisibleBit | VkMemoryPropertyFlagBits::HostCachedBit`
-///  - `VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCachedBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit |
-///     VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit |
-///     VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCachedBit`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit |
-///     VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCachedBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit | VkMemoryPropertyFlagBits::LazilyAllocatedBit`
-///  - `VkMemoryPropertyFlagBits::PROTECTED_BIT`
-///  - `VkMemoryPropertyFlagBits::PROTECTED_BIT | VkMemoryPropertyFlagBits::DeviceLocalBit`
-///  - `VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd`
-///  - `VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCachedBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit | VkMemoryPropertyFlagBits::DeviceCoherentBitAmd`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit |
-///     VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit |
-///     VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCachedBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd`
-///  - `VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd |
-///     VkMemoryPropertyFlagBits::DeviceUncachedBitAmd`
-///  - `VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCachedBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd |
-///     VkMemoryPropertyFlagBits::DeviceUncachedBitAmd`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd |
-///     VkMemoryPropertyFlagBits::DeviceUncachedBitAmd`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit |
-///     VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd |
-///     VkMemoryPropertyFlagBits::DeviceUncachedBitAmd`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit |
-///     VkMemoryPropertyFlagBits::HostVisibleBit |
-///     VkMemoryPropertyFlagBits::HostCachedBit |
-///     VkMemoryPropertyFlagBits::HostCoherentBit |
-///     VkMemoryPropertyFlagBits::DeviceCoherentBitAmd |
-///     VkMemoryPropertyFlagBits::DeviceUncachedBitAmd`
-///  - `VkMemoryPropertyFlagBits::DeviceLocalBit | VkMemoryPropertyFlagBits::RdmaCapableBitNv`
+///  - `VkMemoryPropertyFlags::HostVisible | VkMemoryPropertyFlags::HostCoherent`
+///  - `VkMemoryPropertyFlags::HostVisible | VkMemoryPropertyFlags::HostCached`
+///  - `VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCached |
+///     VkMemoryPropertyFlags::HostCoherent`
+///  - `VkMemoryPropertyFlags::DeviceLocal`
+///  - `VkMemoryPropertyFlags::DeviceLocal |
+///     VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCoherent`
+///  - `VkMemoryPropertyFlags::DeviceLocal |
+///     VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCached`
+///  - `VkMemoryPropertyFlags::DeviceLocal |
+///     VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCached |
+///     VkMemoryPropertyFlags::HostCoherent`
+///  - `VkMemoryPropertyFlags::DeviceLocal | VkMemoryPropertyFlags::LazilyAllocated`
+///  - `VkMemoryPropertyFlags::PROTECTED_BIT`
+///  - `VkMemoryPropertyFlags::PROTECTED_BIT | VkMemoryPropertyFlags::DeviceLocal`
+///  - `VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCoherent |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd`
+///  - `VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCached |
+///     VkMemoryPropertyFlags::HostCoherent |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd`
+///  - `VkMemoryPropertyFlags::DeviceLocal | VkMemoryPropertyFlags::DeviceCoherentAmd`
+///  - `VkMemoryPropertyFlags::DeviceLocal |
+///     VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCoherent |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd`
+///  - `VkMemoryPropertyFlags::DeviceLocal |
+///     VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCached |
+///     VkMemoryPropertyFlags::HostCoherent |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd`
+///  - `VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCoherent |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd |
+///     VkMemoryPropertyFlags::DeviceUncachedAmd`
+///  - `VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCached |
+///     VkMemoryPropertyFlags::HostCoherent |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd |
+///     VkMemoryPropertyFlags::DeviceUncachedAmd`
+///  - `VkMemoryPropertyFlags::DeviceLocal |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd |
+///     VkMemoryPropertyFlags::DeviceUncachedAmd`
+///  - `VkMemoryPropertyFlags::DeviceLocal |
+///     VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCoherent |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd |
+///     VkMemoryPropertyFlags::DeviceUncachedAmd`
+///  - `VkMemoryPropertyFlags::DeviceLocal |
+///     VkMemoryPropertyFlags::HostVisible |
+///     VkMemoryPropertyFlags::HostCached |
+///     VkMemoryPropertyFlags::HostCoherent |
+///     VkMemoryPropertyFlags::DeviceCoherentAmd |
+///     VkMemoryPropertyFlags::DeviceUncachedAmd`
+///  - `VkMemoryPropertyFlags::DeviceLocal | VkMemoryPropertyFlags::RdmaCapableNv`
 ///
 /// There must be at least one memory type with both the
-/// [`VkMemoryPropertyFlagBits::HostVisibleBit`] and [`VkMemoryPropertyFlagBits::HostCoherentBit`]
+/// [`VkMemoryPropertyFlags::HostVisible`] and [`VkMemoryPropertyFlags::HostCoherent`]
 /// bits set in its `property_flags`. There must be at least one memory type with the
-/// [`VkMemoryPropertyFlagBits::DeviceLocalBit`] bit set in its `property_flags`. If the
+/// [`VkMemoryPropertyFlags::DeviceLocal`] bit set in its `property_flags`. If the
 /// `device_coherent_memory` feature is enabled, there must be at least one memory type with the
-/// [`VkMemoryPropertyFlagBits::DeviceCoherentBitAmd`] bit set in its `property_flags`.
+/// [`VkMemoryPropertyFlags::DeviceCoherentAmd`] bit set in its `property_flags`.
 ///
 /// For each pair of elements `X` and `Y` returned in `memory_types`, `X` must be placed at a lower
 /// index position than `Y` if:
@@ -118,8 +118,8 @@ use crate::{VK_VERSION_1_0, VkGetPhysicalDeviceMemoryProperties};
 ///  - the `property_flags` members of `X` and `Y` are equal, and `X` belongs to a memory heap with
 ///    greater performance (as determined in an implementation-specific manner); or
 ///  - the `property_flags` members of `Y` includes
-///    [`VkMemoryPropertyFlagBits::DeviceCoherentBitAmd`] or
-///    [`VkMemoryPropertyFlagBits::DeviceUncachedBitAmd`] and `X` does not
+///    [`VkMemoryPropertyFlags::DeviceCoherentAmd`] or
+///    [`VkMemoryPropertyFlags::DeviceUncachedAmd`] and `X` does not
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]

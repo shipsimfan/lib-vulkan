@@ -65,7 +65,7 @@ pub struct VkDebugUtilsMessengerCallbackDataExt {
     pub message_id_number: i32,
 
     /// `message` is [`null`] if `message_types` is equal to
-    /// [`VkDebugUtilsMessageTypeFlagExt::AddressBindingBitExt`], or a null-terminated UTF-8
+    /// [`VkDebugUtilsMessageTypeFlagExt::AddressBindingExt`], or a null-terminated UTF-8
     /// string detailing the trigger conditions.
     ///
     /// # Valid Usage (Implicit)

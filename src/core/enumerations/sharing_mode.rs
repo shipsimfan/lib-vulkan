@@ -29,12 +29,12 @@ use crate::{VK_VERSION_1_0, VkImageUsageFlag};
 /// set in the current queue family’s
 /// [`VkQueueFamilyOwnershipTransferPropertiesKhr::optimal_image_transfer_to_queue_families`], and
 /// that were created without any of the following bits set in usage:
-///  - [`VkImageUsageFlag::ColorAttachmentBit`]
-///  - [`VkImageUsageFlag::DepthStencilAttachmentBit`]
-///  - [`VkImageUsageFlag::TransientAttachmentBit`]
-///  - [`VkImageUsageFlag::InputAttachmentBit`]
-///  - [`VkImageUsageFlag::AttachmentFeedbackLoopBitExt`]
-///  - [`VkImageUsageFlag::FragmentShadingRateAttachmentBitKhr`]
+///  - [`VkImageUsageFlag::ColorAttachment`]
+///  - [`VkImageUsageFlag::DepthStencilAttachment`]
+///  - [`VkImageUsageFlag::TransientAttachment`]
+///  - [`VkImageUsageFlag::InputAttachment`]
+///  - [`VkImageUsageFlag::AttachmentFeedbackLoopExt`]
+///  - [`VkImageUsageFlag::FragmentShadingRateAttachmentKhr`]
 ///
 /// This means that whenever the maintenance9 feature is enabled, explicit queue family ownership
 /// transfers of such image resources between such combinations of queue families are optional. For

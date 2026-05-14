@@ -20,7 +20,7 @@ use std::ptr::null;
 /// # Description
 /// After beginning a render pass instance, the command buffer is ready to record draw commands.
 ///
-/// If `rendering_info.flags` includes [`VkRenderingFlag::ResumingBit`] then this render pass is
+/// If `rendering_info.flags` includes [`VkRenderingFlag::Resuming`] then this render pass is
 /// resumed from a render pass instance that has been suspended earlier in submission order.
 ///
 /// If there is an instance of [`VkTileMemorySizeInfoQcom`] included in the `next` chain of
@@ -30,9 +30,9 @@ use std::ptr::null;
 ///  - The `dynamic_rendering` feature must be enabled
 ///  - If `command_buffer` is a secondary command buffer, and the `nested_command_buffer` feature
 ///    is not enabled, `rendering_info.flags` must not include
-///    [`VkRenderingFlag::ContentsSecondaryCommandBuffersBit`]
+///    [`VkRenderingFlag::ContentsSecondaryCommandBuffers`]
 ///  - If `command_buffer` is a secondary command buffer,
-///    [`VkCommandBufferUsageFlag::RenderPassContinueBit`] must not have been set in
+///    [`VkCommandBufferUsageFlag::RenderPassContinue`] must not have been set in
 ///    [`VkCommandBufferBeginInfo::flags`] when `command_buffer` began
 ///  - If `rendering_info.depth_attachment` is not [`null`] and
 ///    `rendering_info.depth_attachment.image_view` is not [`VK_NULL_HANDLE`], when
@@ -58,20 +58,20 @@ use std::ptr::null;
 ///    [`VK_NULL_HANDLE`], when that image view is accessed it must be in the layout specified by
 ///    the image_layout member of that same element of `rendering_info.color_attachments`
 ///  - For each element of `rendering_info.color_attachments`, if either resolve_mode is
-///    [`VkResolveModeFlag::ExternalFormatDownsampleBitAndroid`], or `image_view` is not
+///    [`VkResolveModeFlag::ExternalFormatDownsampleAndroid`], or `image_view` is not
 ///    [`VK_NULL_HANDLE`] and `resolve_mode` is not [`VkResolveModeFlag::None`], and
 ///    `resolve_image_view` is not [`VK_NULL_HANDLE`], `resolve_image_view` must be in the layout
 ///    specified by `resolve_image_layout`
-///  - If [`VkTileShadingRenderPassFlagQcom::EnableBitQcom`] is included in
+///  - If [`VkTileShadingRenderPassFlagQcom::EnableQcom`] is included in
 ///    [`VkRenderPassTileShadingCreateInfoQcom::flags`], `command_buffer` must not have been
-///    recorded with [`VkCommandBufferUsageFlag::SimultaneousUseBit`]
+///    recorded with [`VkCommandBufferUsageFlag::SimultaneousUse`]
 ///  - [`VkRenderPassTileShadingCreateInfoQcom::flags`] must not include
-///    [`VkTileShadingRenderPassFlagQcom::PerTileExecutionBitQcom`]
+///    [`VkTileShadingRenderPassFlagQcom::PerTileExecutionQcom`]
 ///  - If `rendering_info.flags` contains
-///    [`VkRenderingFlag::LocalReadConcurrentAccessControlBitKhr`], `maintenance10` must be enabled
+///    [`VkRenderingFlag::LocalReadConcurrentAccessControlKhr`], `maintenance10` must be enabled
 ///  - If `rendering_info.flags` does not contain
-///    [`VkRenderingFlag::LocalReadConcurrentAccessControlBitKhr`], attachments must not specify
-///    [`VkRenderingAttachmentFlagKhr::InputAttachmentFeedbackBitKhr`]
+///    [`VkRenderingFlag::LocalReadConcurrentAccessControlKhr`], attachments must not specify
+///    [`VkRenderingAttachmentFlagKhr::InputAttachmentFeedbackKhr`]
 ///  - If [`VkRenderingFragmentDensityMapAttachmentInfoExt::image_view`] is not equal to
 ///    [`VK_NULL_HANDLE`], when `image_view` is accessed it must be in the layout specified by
 ///    [`VkRenderingFragmentDensityMapAttachmentInfoExt::image_layout`]
@@ -84,7 +84,7 @@ use std::ptr::null;
 ///  - `rendering_info` must be a valid pointer to a valid [`VkRenderingInfo`] structure
 ///  - `command_buffer` must be in the recording state
 ///  - The [`VkCommandPool`] that `command_buffer` was allocated from must support
-///    [`VkQueueFlag::GraphicsBit`] operations
+///    [`VkQueueFlag::Graphics`] operations
 ///  - This command must only be called outside of a render pass instance
 ///  - This command must not be called between suspended render pass instances
 ///  - This command must only be called outside of a video coding scope

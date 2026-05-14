@@ -12,15 +12,15 @@ use crate::{VK_VERSION_1_0, VK_VERSION_1_3};
 pub enum VkAttachmentStoreOp {
     /// [`VkAttachmentStoreOp::Store`] specifies the contents generated during the render pass and
     /// within the render area are written to memory. For attachments with a depth/stencil format,
-    /// this uses the access type [`VkAccessFlag::DepthStencilAttachmentWriteBit`]. For attachments
-    /// with a color format, this uses the access type [`VkAccessFlag::ColorAttachmentWriteBit`].
+    /// this uses the access type [`VkAccessFlag::DepthStencilAttachmentWrite`]. For attachments
+    /// with a color format, this uses the access type [`VkAccessFlag::ColorAttachmentWrite`].
     Store = 0,
 
     /// [`VkAttachmentStoreOp::DontCare`] specifies the contents within the render area are not
     /// needed after rendering, and may be discarded; the contents of the attachment will be
     /// undefined inside the render area. For attachments with a depth/stencil format, this uses
-    /// the access type [`VkAccessFlag::DepthStencilAttachmentWriteBit`]. For attachments with a
-    /// color format, this uses the access type [`VkAccessFlag::ColorAttachmentWriteBit`].
+    /// the access type [`VkAccessFlag::DepthStencilAttachmentWrite`]. For attachments with a
+    /// color format, this uses the access type [`VkAccessFlag::ColorAttachmentWrite`].
     DontCare = 1,
 
     /// [`VkAttachmentStoreOp::None`] specifies the contents within the render area are not

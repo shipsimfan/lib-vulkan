@@ -18,42 +18,42 @@ flags! {
     ///
     /// Provided by [`khr_surface`]
     pub enum VkSurfaceTransformFlagKhr {
-        /// [`VkSurfaceTransformFlagKhr::IdentityBitKhr`] specifies that image content is presented
+        /// [`VkSurfaceTransformFlagKhr::IdentityKhr`] specifies that image content is presented
         /// without being transformed.
-        IdentityBitKhr = 0x00000001,
+        IdentityKhr = 0x00000001,
 
-        /// [`VkSurfaceTransformFlagKhr::Rotate90BitKhr`] specifies that image content is rotated
+        /// [`VkSurfaceTransformFlagKhr::Rotate90Khr`] specifies that image content is rotated
         /// 90 degrees clockwise.
-        Rotate90BitKhr = 0x00000002,
+        Rotate90Khr = 0x00000002,
 
-        /// [`VkSurfaceTransformFlagKhr::Rotate180BitKhr`] specifies that image content is rotated
+        /// [`VkSurfaceTransformFlagKhr::Rotate180Khr`] specifies that image content is rotated
         /// 180 degrees clockwise.
-        Rotate180BitKhr = 0x00000004,
+        Rotate180Khr = 0x00000004,
 
-        /// [`VkSurfaceTransformFlagKhr::Rotate270BitKhr`] specifies that image content is rotated
+        /// [`VkSurfaceTransformFlagKhr::Rotate270Khr`] specifies that image content is rotated
         /// 270 degrees clockwise.
-        Rotate270BitKhr = 0x00000008,
+        Rotate270Khr = 0x00000008,
 
-        /// [`VkSurfaceTransformFlagKhr::HorizontalMirrorBitKhr`] specifies that image content is
+        /// [`VkSurfaceTransformFlagKhr::HorizontalMirrorKhr`] specifies that image content is
         /// mirrored horizontally.
-        HorizontalMirrorBitKhr = 0x00000010,
+        HorizontalMirrorKhr = 0x00000010,
 
-        /// [`VkSurfaceTransformFlagKhr::HorizontalMirrorRotate90BitKhr`] specifies that image
+        /// [`VkSurfaceTransformFlagKhr::HorizontalMirrorRotate90Khr`] specifies that image
         /// content is mirrored horizontally, then rotated 90 degrees clockwise.
-        HorizontalMirrorRotate90BitKhr = 0x00000020,
+        HorizontalMirrorRotate90Khr = 0x00000020,
 
-        /// [`VkSurfaceTransformFlagKhr::HorizontalMirrorRotate180BitKhr`] specifies that image
+        /// [`VkSurfaceTransformFlagKhr::HorizontalMirrorRotate180Khr`] specifies that image
         /// content is mirrored horizontally, then rotated 180 degrees clockwise.
-        HorizontalMirrorRotate180BitKhr = 0x00000040,
+        HorizontalMirrorRotate180Khr = 0x00000040,
 
-        /// [`VkSurfaceTransformFlagKhr::HorizontalMirrorRotate270BitKhr`] specifies that image
+        /// [`VkSurfaceTransformFlagKhr::HorizontalMirrorRotate270Khr`] specifies that image
         /// content is mirrored horizontally, then rotated 270 degrees clockwise.
         ///
-        HorizontalMirrorRotate270BitKhr = 0x00000080,
+        HorizontalMirrorRotate270Khr = 0x00000080,
 
-        /// [`VkSurfaceTransformFlagKhr::InheritBitKhr`] specifies that the presentation transform
+        /// [`VkSurfaceTransformFlagKhr::InheritKhr`] specifies that the presentation transform
         /// is not specified, and is instead determined by platform-specific considerations and
         /// mechanisms outside Vulkan.
-        InheritBitKhr = 0x00000100,
+        InheritKhr = 0x00000100,
     }
 }

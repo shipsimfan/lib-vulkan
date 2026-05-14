@@ -14,13 +14,13 @@ use crate::{
 /// Present capabilities from other physical devices
 ///
 /// # Description
-/// `modes` always has [`VkDeviceGroupPresentModeFlagKhr::LocalBitKhr`] set.
+/// `modes` always has [`VkDeviceGroupPresentModeFlagKhr::LocalKhr`] set.
 ///
 /// The present mode flags are also used when presenting an image, in
 /// [`VkDeviceGroupPresentInfoKhr::mode`].
 ///
 /// If a device group only includes a single physical device, then modes must equal
-/// [`VkDeviceGroupPresentModeFlagKhr::LocalBitKhr`].
+/// [`VkDeviceGroupPresentModeFlagKhr::LocalKhr`].
 ///
 /// Provided by [`VK_VERSION_1_1`] with [`khr_swapchain`], [`khr_device_group`] with
 /// [`khr_swapchain`]

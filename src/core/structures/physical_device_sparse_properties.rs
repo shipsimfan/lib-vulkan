@@ -39,7 +39,7 @@ pub struct VkPhysicalDeviceSparseProperties {
     /// placed in the mip tail. If this property is not reported, only mip levels with dimensions
     /// smaller than the `image_granularity` member of the [`VkSparseImageFormatProperties`]
     /// structure will be placed in the mip tail. If this property is reported the implementation
-    /// is allowed to return [`VkSparseImageFormat::AlignedMipSizeBit`] in the flags member of
+    /// is allowed to return [`VkSparseImageFormat::AlignedMipSize`] in the flags member of
     /// [`VkSparseImageFormatProperties`], indicating that mip level dimensions that are not
     /// integer multiples of the corresponding dimensions of the sparse image block will be placed
     /// in the mip tail.

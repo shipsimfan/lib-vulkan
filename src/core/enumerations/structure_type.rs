@@ -87,7 +87,7 @@ pub enum VkStructureType {
     BindImageMemoryInfo = 1000157001,
 
     /// Provided by [`VK_VERSION_1_1`]
-    PhysicalDevice16BitStorageFeatures = 1000083000,
+    PhysicalDevice16StorageFeatures = 1000083000,
 
     /// Provided by [`VK_VERSION_1_1`]
     MemoryDedicatedRequirements = 1000127000,
@@ -309,7 +309,7 @@ pub enum VkStructureType {
     SubpassEndInfo = 1000109006,
 
     /// Provided by [`VK_VERSION_1_2`]
-    PhysicalDevice8BitStorageFeatures = 1000177000,
+    PhysicalDevice8StorageFeatures = 1000177000,
 
     /// Provided by [`VK_VERSION_1_2`]
     PhysicalDeviceDriverProperties = 1000196000,

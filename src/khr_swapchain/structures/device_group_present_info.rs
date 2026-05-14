@@ -14,31 +14,31 @@ use crate::{
 /// Mode and mask controlling which physical devices' images are presented
 ///
 /// # Description
-/// If mode is [`VkDeviceGroupPresentModeFlagKhr::LocalBitKhr`], then each element of
+/// If mode is [`VkDeviceGroupPresentModeFlagKhr::LocalKhr`], then each element of
 /// `device_masks` selects which instance of the swapchain image is presented. Each element of
 /// `device_masks` must have exactly one bit set, and the corresponding physical device must have a
 /// presentation engine as reported by [`VkDeviceGroupPresentCapabilitiesKhr`].
 ///
-/// If mode is [`VkDeviceGroupPresentModeFlagKhr::RemoteBitKhr`], then each element of
+/// If mode is [`VkDeviceGroupPresentModeFlagKhr::RemoteKhr`], then each element of
 /// `device_masks` selects which instance of the swapchain image is presented. Each element of
 /// `device_masks` must have exactly one bit set, and some physical device in the logical device
 /// must include that bit in its [`VkDeviceGroupPresentCapabilitiesKhr::present_mask`].
 ///
-/// If mode is [`VkDeviceGroupPresentModeFlagKhr::SumBitKhr`], then each element of
+/// If mode is [`VkDeviceGroupPresentModeFlagKhr::SumKhr`], then each element of
 /// `device_masks` selects which instances of the swapchain image are component-wise summed and the
 /// sum of those images is presented. If the sum in any component is outside the representable
 /// range, the value of that component is undefined. Each element of `device_masks` must have a
 /// value for which all set bits are set in one of the elements of
 /// [`VkDeviceGroupPresentCapabilitiesKhr::present_mask`].
 ///
-/// If mode is [`VkDeviceGroupPresentModeFlagKhr::LocalMultiDeviceBitKhr`], then each element
+/// If mode is [`VkDeviceGroupPresentModeFlagKhr::LocalMultiDeviceKhr`], then each element
 /// of `device_masks` selects which instance(s) of the swapchain images are presented. For each bit
 /// set in each element of `device_masks`, the corresponding physical device must have a
 /// presentation engine as reported by [`VkDeviceGroupPresentCapabilitiesKhr`].
 ///
 /// If [`VkDeviceGroupPresentInfoKhr`] is not provided or `swapchain_count` is zero then the masks
 /// are considered to be 1. If [`VkDeviceGroupPresentInfoKhr`] is not provided, mode is considered
-/// to be [`VkDeviceGroupPresentModeFlagKhr::LocalBitKhr`].
+/// to be [`VkDeviceGroupPresentModeFlagKhr::LocalKhr`].
 ///
 /// Provided by [`VK_VERSION_1_1`] with [`khr_swapchain`], [`khr_device_group`] with
 /// [`khr_swapchain`]
@@ -64,17 +64,17 @@ pub struct VkDeviceGroupPresentInfoKhr {
     /// [`VkPresentInfoKhr::swapchains`].
     ///
     /// # Valid Usage
-    ///  - If `mode` is [`VkDeviceGroupPresentModeFlagKhr::LocalBitKhr`], then each element of
+    ///  - If `mode` is [`VkDeviceGroupPresentModeFlagKhr::LocalKhr`], then each element of
     ///    `device_masks` must have exactly one bit set, and the corresponding element of
     ///    [`VkDeviceGroupPresentCapabilitiesKhr::present_mask`] must be non-zero
-    ///  - If `mode` is [`VkDeviceGroupPresentModeFlagKhr::RemoteBitKhr`], then each element of
+    ///  - If `mode` is [`VkDeviceGroupPresentModeFlagKhr::RemoteKhr`], then each element of
     ///    `device_masks` must have exactly one bit set, and some physical device in the logical
     ///    device must include that bit in its
     ///    [`VkDeviceGroupPresentCapabilitiesKhr::present_mask`]
-    ///  - If `mode` is [`VkDeviceGroupPresentModeFlagKhr::SumBitKhr`], then each element of
+    ///  - If `mode` is [`VkDeviceGroupPresentModeFlagKhr::SumKhr`], then each element of
     ///    `device_masks` must have a value for which all set bits are set in one of the elements
     ///    of [`VkDeviceGroupPresentCapabilitiesKhr::present_mask`]
-    ///  - If `mode` is [`VkDeviceGroupPresentModeFlagKhr::LocalMultiDeviceBitKhr`], then for each
+    ///  - If `mode` is [`VkDeviceGroupPresentModeFlagKhr::LocalMultiDeviceKhr`], then for each
     ///    bit set in each element of `device_masks`, the corresponding element of
     ///    [`VkDeviceGroupPresentCapabilitiesKhr::present_mask`] must be non-zero
     ///  - The value of each element of `device_masks` must be equal to the device mask passed in
@@ -104,7 +104,7 @@ impl const Default for VkDeviceGroupPresentInfoKhr {
             next: null(),
             swapchain_count: 0,
             device_masks: null(),
-            mode: VkDeviceGroupPresentModeFlagKhr::LocalBitKhr,
+            mode: VkDeviceGroupPresentModeFlagKhr::LocalKhr,
         }
     }
 }

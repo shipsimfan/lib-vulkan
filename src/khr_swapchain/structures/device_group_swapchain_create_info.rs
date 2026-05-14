@@ -12,7 +12,7 @@ use crate::{
 ///
 /// # Description
 /// If this structure is not present, modes is considered to be
-/// [`VkDeviceGroupPresentModeFlagKhr::LocalBitKhr`].
+/// [`VkDeviceGroupPresentModeFlagKhr::LocalKhr`].
 ///
 /// Provided by [`VK_VERSION_1_1`] with [`khr_swapchain`], [`khr_device_group`] with
 /// [`khr_swapchain`]

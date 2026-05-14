@@ -32,7 +32,7 @@ pub struct VkCommandBufferBeginInfo {
     /// command buffer.
     ///
     /// # Valid Usage
-    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinueBit`], the
+    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinue`], the
     ///    [`VkCommandPool`] that `command_buffer` was allocated from must support graphics
     ///    operations
     ///  - `flags` must be a valid combination of [`VkCommandBufferUsageFlag`]s values
@@ -43,39 +43,39 @@ pub struct VkCommandBufferBeginInfo {
     /// this value is ignored.
     ///
     /// # Valid Usage
-    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinueBit`], the
+    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinue`], the
     ///    `framebuffer` member of `inheritance_info` must be either [`VK_NULL_HANDLE`], or a valid
     ///    [`VkFramebuffer`] that is compatible with the `render_pass` member of `inheritance_info`
-    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinueBit`] and the
+    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinue`] and the
     ///    `dynamic_rendering` feature is not enabled, the `render_pass` member of
     ///    `inheritance_info` must not be [`VK_NULL_HANDLE`]
-    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinueBit`] and the
+    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinue`] and the
     ///    `render_pass` member of `inheritance_info` is [`VK_NULL_HANDLE`], the `next` chain of
     ///    `inheritance_info` must include a [`VkCommandBufferInheritanceRenderingInfo`] structure
-    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinueBit`], the
+    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinue`], the
     ///    `render_pass` member of `inheritance_info` is [`VK_NULL_HANDLE`], and the `next` chain
     ///    of `inheritance_info` includes a [`VkAttachmentSampleCountInfoAmd`] or
     ///    [`VkAttachmentSampleCountInfoNv`] structure, the `color_attachment_count` member of that
     ///    structure must be equal to the value of
     ///    [`VkCommandBufferInheritanceRenderingInfo::color_attachment_count`]
-    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinueBit`] and the
+    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinue`] and the
     ///    `render_pass` member of `inheritance_info` is not [`VK_NULL_HANDLE`], the `render_pass`
     ///    member of `inheritance_info` must be a valid [`VkRenderPass`]
-    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinueBit`] and the
+    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinue`] and the
     ///    `render_pass` member of `inheritance_info` is not [`VK_NULL_HANDLE`], the `subpass`
     ///    member of `inheritance_info` must be a valid subpass index within the `render_pass`
     ///    member of `inheritance_info`
-    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinueBit`] , the
+    ///  - If `flags` contains [`VkCommandBufferUsageFlag::RenderPassContinue`] , the
     ///    `render_pass` member of `inheritance_info` is not [`VK_NULL_HANDLE`], and `render_pass`
     ///    was created with tile shading enabled,
-    ///    [`VkTileShadingRenderPassFlagQcom::EnableBitQcom`] must be included in
+    ///    [`VkTileShadingRenderPassFlagQcom::EnableQcom`] must be included in
     ///    [`VkRenderPassTileShadingCreateInfoQcom::flags`]
-    ///  - If `flags` does not contain [`VkCommandBufferUsageFlag::RenderPassContinueBit`] , the
+    ///  - If `flags` does not contain [`VkCommandBufferUsageFlag::RenderPassContinue`] , the
     ///    `render_pass` member of `inheritance_info` is [`VK_NULL_HANDLE`], or `render_pass` was
     ///    not created with tile shading enabled,
-    ///    [`VkTileShadingRenderPassFlagQcom::EnableBitQcom`] must not be included in
+    ///    [`VkTileShadingRenderPassFlagQcom::EnableQcom`] must not be included in
     ///    [`VkRenderPassTileShadingCreateInfoQcom::flags`]
-    ///  - If [`VkTileShadingRenderPassFlagQcom::EnableBitQcom`] is included in
+    ///  - If [`VkTileShadingRenderPassFlagQcom::EnableQcom`] is included in
     ///    [`VkRenderPassTileShadingCreateInfoQcom::flags`],
     ///    [`VkRenderPassTileShadingCreateInfoQcom::tile_apron_size`] must be equal to the
     ///    `tile_apron_size` used to create `render_pass`
