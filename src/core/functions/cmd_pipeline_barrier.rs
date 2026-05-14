@@ -242,4 +242,4 @@ pub type VkCmdPipelineBarrier = unsafe extern "system" fn(
 );
 
 /// The name of [`VkCmdPipelineBarrier`]
-pub const VK_CMD_PIPELINE_BARRIER: &CStr = c"[`VkCmdPipelineBarrier`]";
+pub const VK_CMD_PIPELINE_BARRIER: &CStr = c"vkCmdPipelineBarrier";
