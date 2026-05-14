@@ -44,6 +44,7 @@ mod rect_2d;
 mod rendering_attachment_info;
 mod rendering_info;
 mod semaphore_create_info;
+mod submit_info;
 
 pub use allocation_callbacks::VkAllocationCallbacks;
 pub use application_info::VkApplicationInfo;
@@ -91,3 +92,4 @@ pub use rect_2d::VkRect2D;
 pub use rendering_attachment_info::VkRenderingAttachmentInfo;
 pub use rendering_info::VkRenderingInfo;
 pub use semaphore_create_info::VkSemaphoreCreateInfo;
+pub use submit_info::VkSubmitInfo;

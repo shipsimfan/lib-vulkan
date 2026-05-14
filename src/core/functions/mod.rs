@@ -32,6 +32,7 @@ mod get_physical_device_features;
 mod get_physical_device_memory_properties;
 mod get_physical_device_properties;
 mod get_physical_device_queue_family_properties;
+mod queue_submit;
 mod reset_fences;
 mod wait_for_fences;
 
@@ -69,5 +70,6 @@ pub use get_physical_device_features::*;
 pub use get_physical_device_memory_properties::*;
 pub use get_physical_device_properties::*;
 pub use get_physical_device_queue_family_properties::*;
+pub use queue_submit::*;
 pub use reset_fences::*;
 pub use wait_for_fences::*;
