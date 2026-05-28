@@ -36,6 +36,7 @@ macro_rules! vk_define_handle {
         }
 
         unsafe impl Send for $object {}
+        unsafe impl Sync for $object {}
 
         impl const Clone for $object {
             fn clone(&self) -> Self {
