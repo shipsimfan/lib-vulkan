@@ -1,4 +1,4 @@
-use crate::{VkCommandPoolCreateFlags, VkStructureType};
+use crate::{VkCommandPoolCreateFlags, VkStructureType, util::NextChain};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -69,5 +69,19 @@ impl const Default for VkCommandPoolCreateInfo {
             flags: VkCommandPoolCreateFlags::default(),
             queue_family_index: 0,
         }
+    }
+}
+
+impl NextChain for VkCommandPoolCreateInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

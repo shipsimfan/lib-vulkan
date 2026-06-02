@@ -5,6 +5,7 @@ use crate::{
         VkSurfaceTransformFlagsKhr,
     },
     khr_swapchain::{VkSwapchainCreateFlagsKhr, VkSwapchainKhr},
+    util::NextChain,
 };
 use std::{ffi::c_void, ptr::null};
 
@@ -337,5 +338,19 @@ impl const Default for VkSwapchainCreateInfoKhr {
             clipped: 0,
             old_swapchain: VkSwapchainKhr::null(),
         }
+    }
+}
+
+impl NextChain for VkSwapchainCreateInfoKhr {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

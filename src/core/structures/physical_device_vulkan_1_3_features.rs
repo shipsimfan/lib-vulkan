@@ -1,4 +1,4 @@
-use crate::{VK_FALSE, VkBool32, VkStructureType};
+use crate::{VK_FALSE, VkBool32, VkStructureType, util::NextChainMut};
 use std::{ffi::c_void, ptr::null_mut};
 
 // rustdoc imports
@@ -153,5 +153,19 @@ impl const Default for VkPhysicalDeviceVulkan13Features {
             shader_integer_dot_product: VK_FALSE,
             maintenance4: VK_FALSE,
         }
+    }
+}
+
+impl NextChainMut for VkPhysicalDeviceVulkan13Features {
+    fn next(&mut self) -> *mut c_void {
+        self.next
+    }
+
+    fn as_mut_ptr(&mut self) -> *mut c_void {
+        (self as *mut Self).cast()
+    }
+
+    fn set_next(&mut self, next: *mut c_void) {
+        self.next = next;
     }
 }

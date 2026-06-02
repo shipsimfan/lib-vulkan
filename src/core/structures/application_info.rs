@@ -1,4 +1,4 @@
-use crate::{VK_VERSION_1_0, VkStructureType};
+use crate::{VK_VERSION_1_0, VkStructureType, util::NextChain};
 use std::{ffi::c_char, os::raw::c_void, ptr::null};
 
 // rustdoc imports
@@ -77,5 +77,19 @@ impl const Default for VkApplicationInfo {
             engine_version: 0,
             api_version: VK_VERSION_1_0,
         }
+    }
+}
+
+impl NextChain for VkApplicationInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

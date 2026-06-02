@@ -1,6 +1,6 @@
 use crate::{
     VkAttachmentLoadOp, VkAttachmentStoreOp, VkClearValue, VkImageLayout, VkImageView,
-    VkResolveModeFlag, VkStructureType,
+    VkResolveModeFlag, VkStructureType, util::NextChain,
 };
 use std::{ffi::c_void, ptr::null};
 
@@ -279,5 +279,19 @@ impl const Default for VkRenderingAttachmentInfo {
             store_op: VkAttachmentStoreOp::DontCare,
             clear_value: VkClearValue::default(),
         }
+    }
+}
+
+impl NextChain for VkRenderingAttachmentInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

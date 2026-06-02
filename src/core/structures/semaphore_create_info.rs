@@ -1,4 +1,4 @@
-use crate::{VkSemaphoreCreateFlags, VkStructureType};
+use crate::{VkSemaphoreCreateFlags, VkStructureType, util::NextChainMut};
 use std::{ffi::c_void, ptr::null_mut};
 
 // rustdoc imports
@@ -47,5 +47,19 @@ impl const Default for VkSemaphoreCreateInfo {
             next: null_mut(),
             flags: VkSemaphoreCreateFlags::default(),
         }
+    }
+}
+
+impl NextChainMut for VkSemaphoreCreateInfo {
+    fn next(&mut self) -> *mut c_void {
+        self.next
+    }
+
+    fn as_mut_ptr(&mut self) -> *mut c_void {
+        (self as *mut Self).cast()
+    }
+
+    fn set_next(&mut self, next: *mut c_void) {
+        self.next = next;
     }
 }

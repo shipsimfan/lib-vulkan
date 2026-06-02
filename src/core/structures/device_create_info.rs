@@ -1,5 +1,6 @@
 use crate::{
     VkDeviceCreateFlags, VkDeviceQueueCreateInfo, VkPhysicalDeviceFeatures, VkStructureType,
+    util::NextChain,
 };
 use std::{
     ffi::{c_char, c_void},
@@ -479,5 +480,19 @@ impl const Default for VkDeviceCreateInfo {
             enabled_extension_names: null(),
             enabled_features: null(),
         }
+    }
+}
+
+impl NextChain for VkDeviceCreateInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

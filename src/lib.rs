@@ -28,6 +28,8 @@ pub mod khr_wayland_surface;
 #[cfg(all(target_os = "windows", feature = "win32"))]
 pub mod khr_win32_surface;
 
+pub mod util;
+
 mod core;
 mod macros;
 

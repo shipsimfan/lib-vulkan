@@ -1,4 +1,6 @@
-use crate::{VkFence, VkSemaphore, VkStructureType, khr_swapchain::VkSwapchainKhr};
+use crate::{
+    VkFence, VkSemaphore, VkStructureType, khr_swapchain::VkSwapchainKhr, util::NextChain,
+};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -104,5 +106,19 @@ impl const Default for VkAcquireNextImageInfoKhr {
             fence: VkFence::null(),
             device_mask: 0,
         }
+    }
+}
+
+impl NextChain for VkAcquireNextImageInfoKhr {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

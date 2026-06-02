@@ -1,4 +1,4 @@
-use crate::{VkStructureType, khr_swapchain::VkDeviceGroupPresentModeFlagKhr};
+use crate::{VkStructureType, khr_swapchain::VkDeviceGroupPresentModeFlagKhr, util::NextChain};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -106,5 +106,19 @@ impl const Default for VkDeviceGroupPresentInfoKhr {
             device_masks: null(),
             mode: VkDeviceGroupPresentModeFlagKhr::LocalKhr,
         }
+    }
+}
+
+impl NextChain for VkDeviceGroupPresentInfoKhr {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

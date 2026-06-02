@@ -1,4 +1,4 @@
-use crate::{VkObjectType, VkStructureType};
+use crate::{VkObjectType, VkStructureType, util::NextChain};
 use std::{
     ffi::{c_char, c_void},
     ptr::null,
@@ -69,5 +69,19 @@ impl const Default for VkDebugUtilsObjectNameInfoExt {
             object_handle: 0,
             object_name: null(),
         }
+    }
+}
+
+impl NextChain for VkDebugUtilsObjectNameInfoExt {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

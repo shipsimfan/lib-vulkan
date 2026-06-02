@@ -1,4 +1,4 @@
-use crate::{VkCommandBuffer, VkPipelineStageFlags, VkSemaphore, VkStructureType};
+use crate::{VkCommandBuffer, VkPipelineStageFlags, VkSemaphore, VkStructureType, util::NextChain};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -206,5 +206,19 @@ impl const Default for VkSubmitInfo {
             signal_semaphore_count: 0,
             signal_semaphores: null(),
         }
+    }
+}
+
+impl NextChain for VkSubmitInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

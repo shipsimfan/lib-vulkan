@@ -1,4 +1,4 @@
-use crate::{VkAccessFlags2, VkPipelineStageFlags2, VkStructureType};
+use crate::{VkAccessFlags2, VkPipelineStageFlags2, VkStructureType, util::NextChain};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -446,5 +446,19 @@ impl const Default for VkMemoryBarrier2 {
             dst_stage_mask: VkPipelineStageFlags2::default(),
             dst_access_mask: VkAccessFlags2::default(),
         }
+    }
+}
+
+impl NextChain for VkMemoryBarrier2 {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

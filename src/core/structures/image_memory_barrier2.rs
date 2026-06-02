@@ -1,6 +1,6 @@
 use crate::{
     VkAccessFlags2, VkImage, VkImageLayout, VkImageSubresourceRange, VkPipelineStageFlags2,
-    VkStructureType,
+    VkStructureType, util::NextChain,
 };
 use std::{ffi::c_void, ptr::null};
 
@@ -126,5 +126,19 @@ impl const Default for VkImageMemoryBarrier2 {
             image: VkImage::null(),
             subresource_range: VkImageSubresourceRange::default(),
         }
+    }
+}
+
+impl NextChain for VkImageMemoryBarrier2 {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

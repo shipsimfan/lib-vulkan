@@ -49,8 +49,10 @@ use std::ptr::null_mut;
 ///  - [`VkResult::VkErrorValidationFailedExt`]
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkEnumerateInstanceLayerProperties =
-    unsafe extern "system" fn(property_count: *mut u32, properties: *mut VkLayerProperties) -> VkResult;
+pub type VkEnumerateInstanceLayerProperties = unsafe extern "system" fn(
+    property_count: *mut u32,
+    properties: *mut VkLayerProperties,
+) -> VkResult;
 
 /// The name of [`VkEnumerateInstanceLayerProperties`]
 pub const VK_ENUMERATE_INSTANCE_LAYER_PROPERTIES: &CStr = c"vkEnumerateInstanceLayerProperties";

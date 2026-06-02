@@ -1,4 +1,4 @@
-use crate::VkStructureType;
+use crate::{VkStructureType, util::NextChain};
 use std::{
     ffi::{c_char, c_void},
     ptr::null,
@@ -47,5 +47,19 @@ impl const Default for VkDebugUtilsLabelExt {
             label_name: null(),
             color: [0.; 4],
         }
+    }
+}
+
+impl NextChain for VkDebugUtilsLabelExt {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

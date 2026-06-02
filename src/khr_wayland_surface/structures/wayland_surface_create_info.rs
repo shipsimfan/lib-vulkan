@@ -1,4 +1,6 @@
-use crate::{VkStructureType, khr_wayland_surface::VkWaylandSurfaceCreateFlagsKhr};
+use crate::{
+    VkStructureType, khr_wayland_surface::VkWaylandSurfaceCreateFlagsKhr, util::NextChain,
+};
 use std::{
     ffi::c_void,
     ptr::{null, null_mut},
@@ -55,5 +57,19 @@ impl const Default for VkWaylandSurfaceCreateInfoKhr {
             display: null_mut(),
             surface: null_mut(),
         }
+    }
+}
+
+impl NextChain for VkWaylandSurfaceCreateInfoKhr {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

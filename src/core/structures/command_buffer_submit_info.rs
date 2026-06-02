@@ -1,4 +1,4 @@
-use crate::{VkCommandBuffer, VkStructureType};
+use crate::{VkCommandBuffer, VkStructureType, util::NextChain};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -62,5 +62,19 @@ impl const Default for VkCommandBufferSubmitInfo {
             command_buffer: VkCommandBuffer::null(),
             device_mask: 0,
         }
+    }
+}
+
+impl NextChain for VkCommandBufferSubmitInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

@@ -1,4 +1,6 @@
-use crate::{VkResult, VkSemaphore, VkStructureType, khr_swapchain::VkSwapchainKhr};
+use crate::{
+    VkResult, VkSemaphore, VkStructureType, khr_swapchain::VkSwapchainKhr, util::NextChain,
+};
 use std::{
     ffi::c_void,
     ptr::{null, null_mut},
@@ -134,5 +136,19 @@ impl const Default for VkPresentInfoKhr {
             image_indices: null(),
             results: null_mut(),
         }
+    }
+}
+
+impl NextChain for VkPresentInfoKhr {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

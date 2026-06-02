@@ -1,4 +1,7 @@
-use crate::{VkAccessFlags, VkImage, VkImageLayout, VkImageSubresourceRange, VkStructureType};
+use crate::{
+    VkAccessFlags, VkImage, VkImageLayout, VkImageSubresourceRange, VkStructureType,
+    util::NextChain,
+};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -347,5 +350,19 @@ impl const Default for VkImageMemoryBarrier {
             image: VkImage::null(),
             subresource_range: VkImageSubresourceRange::default(),
         }
+    }
+}
+
+impl NextChain for VkImageMemoryBarrier {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

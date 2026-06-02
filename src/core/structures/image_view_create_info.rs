@@ -1,6 +1,6 @@
 use crate::{
     VkComponentMapping, VkFormat, VkImage, VkImageSubresourceRange, VkImageViewCreateFlags,
-    VkImageViewType, VkStructureType,
+    VkImageViewType, VkStructureType, util::NextChain,
 };
 use std::{os::raw::c_void, ptr::null};
 
@@ -475,5 +475,19 @@ impl const Default for VkImageViewCreateInfo {
             components: VkComponentMapping::default(),
             subresource_range: VkImageSubresourceRange::default(),
         }
+    }
+}
+
+impl NextChain for VkImageViewCreateInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

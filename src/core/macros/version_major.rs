@@ -1,6 +1,6 @@
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{vk_api_version_major, vk_version_major, VK_VERSION_1_0};
+use crate::{VK_VERSION_1_0, vk_api_version_major, vk_version_major};
 
 /// [`vk_version_major`] extracts the API major version number from a packed version number
 ///

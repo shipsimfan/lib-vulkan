@@ -4,6 +4,7 @@ use crate::{
         VkDebugUtilsLabelExt, VkDebugUtilsMessengerCallbackDataFlagsExt,
         VkDebugUtilsObjectNameInfoExt,
     },
+    util::NextChain,
 };
 use std::{
     ffi::{c_char, c_void},
@@ -123,5 +124,19 @@ impl const Default for VkDebugUtilsMessengerCallbackDataExt {
             object_count: 0,
             objects: null(),
         }
+    }
+}
+
+impl NextChain for VkDebugUtilsMessengerCallbackDataExt {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

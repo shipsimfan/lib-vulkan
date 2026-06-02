@@ -1,4 +1,4 @@
-use crate::{VkPhysicalDeviceFeatures, VkStructureType};
+use crate::{VkPhysicalDeviceFeatures, VkStructureType, util::NextChainMut};
 use std::{ffi::c_void, ptr::null_mut};
 
 // rustdoc imports
@@ -38,5 +38,19 @@ impl const Default for VkPhysicalDeviceFeatures2 {
             next: null_mut(),
             features: VkPhysicalDeviceFeatures::default(),
         }
+    }
+}
+
+impl NextChainMut for VkPhysicalDeviceFeatures2 {
+    fn next(&mut self) -> *mut c_void {
+        self.next
+    }
+
+    fn as_mut_ptr(&mut self) -> *mut c_void {
+        (self as *mut Self).cast()
+    }
+
+    fn set_next(&mut self, next: *mut c_void) {
+        self.next = next;
     }
 }

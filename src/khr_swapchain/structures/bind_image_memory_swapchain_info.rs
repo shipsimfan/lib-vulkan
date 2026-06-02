@@ -1,4 +1,4 @@
-use crate::{VkStructureType, khr_swapchain::VkSwapchainKhr};
+use crate::{VkStructureType, khr_swapchain::VkSwapchainKhr, util::NextChain};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -61,5 +61,19 @@ impl const Default for VkBindImageMemorySwapchainInfoKhr {
             swapchain: VkSwapchainKhr::null(),
             image_index: 0,
         }
+    }
+}
+
+impl NextChain for VkBindImageMemorySwapchainInfoKhr {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

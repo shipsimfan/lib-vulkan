@@ -1,4 +1,4 @@
-use crate::{VkApplicationInfo, VkInstanceCreateFlags, VkStructureType};
+use crate::{VkApplicationInfo, VkInstanceCreateFlags, VkStructureType, util::NextChain};
 use std::{
     ffi::{c_char, c_void},
     ptr::null,
@@ -128,5 +128,19 @@ impl const Default for VkInstanceCreateInfo {
             enabled_extension_count: 0,
             enabled_extension_names: null(),
         }
+    }
+}
+
+impl NextChain for VkInstanceCreateInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

@@ -1,4 +1,4 @@
-use crate::{VkBool32, VkStructureType};
+use crate::{VkBool32, VkStructureType, util::NextChainMut};
 use std::{ffi::c_void, ptr::null_mut};
 
 // rustdoc imports
@@ -56,5 +56,19 @@ impl const Default for VkPhysicalDeviceExtendedDynamicStateFeaturesExt {
             next: null_mut(),
             extended_dynamic_state: 0,
         }
+    }
+}
+
+impl NextChainMut for VkPhysicalDeviceExtendedDynamicStateFeaturesExt {
+    fn next(&mut self) -> *mut c_void {
+        self.next
+    }
+
+    fn as_mut_ptr(&mut self) -> *mut c_void {
+        (self as *mut Self).cast()
+    }
+
+    fn set_next(&mut self, next: *mut c_void) {
+        self.next = next;
     }
 }

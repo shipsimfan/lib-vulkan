@@ -1,6 +1,6 @@
 use crate::{
     VkBufferMemoryBarrier2, VkDependencyFlags, VkImageMemoryBarrier2, VkMemoryBarrier2,
-    VkStructureType,
+    VkStructureType, util::NextChain,
 };
 use std::{ffi::c_void, ptr::null};
 
@@ -102,5 +102,19 @@ impl const Default for VkDependencyInfo {
             image_memory_barrier_count: 0,
             image_memory_barriers: null(),
         }
+    }
+}
+
+impl NextChain for VkDependencyInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

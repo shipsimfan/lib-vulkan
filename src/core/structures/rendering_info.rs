@@ -1,4 +1,6 @@
-use crate::{VkRect2D, VkRenderingAttachmentInfo, VkRenderingFlags, VkStructureType};
+use crate::{
+    VkRect2D, VkRenderingAttachmentInfo, VkRenderingFlags, VkStructureType, util::NextChain,
+};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -604,5 +606,19 @@ impl const Default for VkRenderingInfo {
             depth_attachment: null(),
             stencil_attachment: null(),
         }
+    }
+}
+
+impl NextChain for VkRenderingInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

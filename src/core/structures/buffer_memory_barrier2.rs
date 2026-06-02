@@ -1,4 +1,6 @@
-use crate::{VkAccessFlags2, VkBuffer, VkDeviceSize, VkPipelineStageFlags2, VkStructureType};
+use crate::{
+    VkAccessFlags2, VkBuffer, VkDeviceSize, VkPipelineStageFlags2, VkStructureType, util::NextChain,
+};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -99,5 +101,19 @@ impl const Default for VkBufferMemoryBarrier2 {
             offset: 0,
             size: 0,
         }
+    }
+}
+
+impl NextChain for VkBufferMemoryBarrier2 {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

@@ -5,6 +5,7 @@ use crate::{
         VkDebugUtilsMessengerCallbackDataExt, VkDebugUtilsMessengerCallbackExt,
         VkDebugUtilsMessengerCreateFlagsExt,
     },
+    util::NextChain,
 };
 use std::{
     ffi::c_void,
@@ -114,4 +115,18 @@ unsafe extern "system" fn default(
     _: *mut c_void,
 ) -> VkBool32 {
     VK_FALSE
+}
+
+impl NextChain for VkDebugUtilsMessengerCreateInfoExt {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
+    }
 }

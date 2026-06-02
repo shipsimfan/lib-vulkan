@@ -1,4 +1,4 @@
-use crate::{VkCommandBufferLevel, VkCommandPool, VkStructureType};
+use crate::{VkCommandBufferLevel, VkCommandPool, VkStructureType, util::NextChain};
 use std::ffi::c_void;
 
 // rustdoc imports
@@ -53,5 +53,19 @@ impl const Default for VkCommandBufferAllocateInfo {
             level: VkCommandBufferLevel::Primary,
             command_buffer_count: 0,
         }
+    }
+}
+
+impl NextChain for VkCommandBufferAllocateInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

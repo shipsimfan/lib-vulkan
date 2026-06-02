@@ -1,4 +1,4 @@
-use crate::{VkFenceCreateFlags, VkStructureType};
+use crate::{VkFenceCreateFlags, VkStructureType, util::NextChain};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -41,5 +41,19 @@ impl const Default for VkFenceCreateInfo {
             next: null(),
             flags: VkFenceCreateFlags::default(),
         }
+    }
+}
+
+impl NextChain for VkFenceCreateInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

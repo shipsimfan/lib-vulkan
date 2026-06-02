@@ -1,4 +1,6 @@
-use crate::{VkCommandBufferInheritanceInfo, VkCommandBufferUsageFlags, VkStructureType};
+use crate::{
+    VkCommandBufferInheritanceInfo, VkCommandBufferUsageFlags, VkStructureType, util::NextChain,
+};
 use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
@@ -90,5 +92,19 @@ impl const Default for VkCommandBufferBeginInfo {
             flags: VkCommandBufferUsageFlags::default(),
             inheritance_info: null(),
         }
+    }
+}
+
+impl NextChain for VkCommandBufferBeginInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

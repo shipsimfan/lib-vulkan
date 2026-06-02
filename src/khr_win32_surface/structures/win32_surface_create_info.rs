@@ -1,4 +1,4 @@
-use crate::{VkStructureType, khr_win32_surface::VkWin32SurfaceCreateFlagsKhr};
+use crate::{VkStructureType, khr_win32_surface::VkWin32SurfaceCreateFlagsKhr, util::NextChain};
 use std::{
     ffi::c_void,
     ptr::{null, null_mut},
@@ -55,5 +55,19 @@ impl const Default for VkWin32SurfaceCreateInfoKhr {
             hinstance: null_mut(),
             hwnd: null_mut(),
         }
+    }
+}
+
+impl NextChain for VkWin32SurfaceCreateInfoKhr {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

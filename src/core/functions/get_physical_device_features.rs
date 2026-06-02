@@ -19,8 +19,10 @@ use crate::{VK_FALSE, VK_TRUE, VK_VERSION_1_0};
 ///  - `features` must be a valid pointer to a [`VkPhysicalDeviceFeatures`] structure
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkGetPhysicalDeviceFeatures =
-    unsafe extern "system" fn(physical_device: VkPhysicalDevice, features: *mut VkPhysicalDeviceFeatures);
+pub type VkGetPhysicalDeviceFeatures = unsafe extern "system" fn(
+    physical_device: VkPhysicalDevice,
+    features: *mut VkPhysicalDeviceFeatures,
+);
 
 /// The name of [`VkGetPhysicalDeviceFeatures`]
 pub const VK_GET_PHYSICAL_DEVICE_FEATURES: &CStr = c"vkGetPhysicalDeviceFeatures";

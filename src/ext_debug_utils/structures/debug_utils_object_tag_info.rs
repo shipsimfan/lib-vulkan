@@ -1,4 +1,4 @@
-use crate::{VkObjectType, VkStructureType};
+use crate::{VkObjectType, VkStructureType, util::NextChain};
 use std::{
     ffi::{c_size_t, c_void},
     ptr::null,
@@ -77,5 +77,19 @@ impl const Default for VkDebugUtilsObjectTagInfoExt {
             tag_size: 0,
             tag: null(),
         }
+    }
+}
+
+impl NextChain for VkDebugUtilsObjectTagInfoExt {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

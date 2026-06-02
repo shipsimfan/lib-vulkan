@@ -1,6 +1,7 @@
 use crate::{
     VkStructureType,
     khr_swapchain::{VK_MAX_DEVICE_GROUP_SIZE, VkDeviceGroupPresentModeFlagsKhr},
+    util::NextChain,
 };
 use std::{ffi::c_void, ptr::null};
 
@@ -58,5 +59,19 @@ impl const Default for VkDeviceGroupPresentCapabilitiesKhr {
             present_mask: [0; VK_MAX_DEVICE_GROUP_SIZE],
             modes: VkDeviceGroupPresentModeFlagsKhr::empty(),
         }
+    }
+}
+
+impl NextChain for VkDeviceGroupPresentCapabilitiesKhr {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }

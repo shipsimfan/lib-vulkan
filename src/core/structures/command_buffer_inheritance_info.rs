@@ -1,6 +1,6 @@
 use crate::{
     VkBool32, VkFramebuffer, VkQueryControlFlags, VkQueryPipelineStatisticFlags, VkRenderPass,
-    VkStructureType,
+    VkStructureType, util::NextChain,
 };
 use std::{ffi::c_void, ptr::null};
 
@@ -101,5 +101,19 @@ impl const Default for VkCommandBufferInheritanceInfo {
             query_flags: VkQueryControlFlags::default(),
             pipeline_statistics: VkQueryPipelineStatisticFlags::default(),
         }
+    }
+}
+
+impl NextChain for VkCommandBufferInheritanceInfo {
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        (self as *const Self).cast()
+    }
+
+    fn set_next(&mut self, next: *const c_void) {
+        self.next = next;
     }
 }
