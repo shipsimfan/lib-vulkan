@@ -82,7 +82,7 @@ pub struct VkCommandBufferBeginInfo {
     pub inheritance_info: *const VkCommandBufferInheritanceInfo,
 }
 
-impl Default for VkCommandBufferBeginInfo {
+impl const Default for VkCommandBufferBeginInfo {
     fn default() -> Self {
         VkCommandBufferBeginInfo {
             r#type: VkStructureType::CommandBufferBeginInfo,

@@ -31,7 +31,7 @@ pub struct VkPhysicalDeviceFeatures2 {
     pub features: VkPhysicalDeviceFeatures,
 }
 
-impl Default for VkPhysicalDeviceFeatures2 {
+impl const Default for VkPhysicalDeviceFeatures2 {
     fn default() -> Self {
         VkPhysicalDeviceFeatures2 {
             r#type: VkStructureType::PhysicalDeviceFeatures2,

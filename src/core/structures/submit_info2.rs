@@ -138,7 +138,7 @@ pub struct VkSubmitInfo2 {
     pub signal_semaphore_infos: *const VkSemaphoreSubmitInfo,
 }
 
-impl Default for VkSubmitInfo2 {
+impl const Default for VkSubmitInfo2 {
     fn default() -> Self {
         VkSubmitInfo2 {
             r#type: VkStructureType::SubmitInfo2,

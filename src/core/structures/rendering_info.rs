@@ -590,7 +590,7 @@ pub struct VkRenderingInfo {
     pub stencil_attachment: *const VkRenderingAttachmentInfo,
 }
 
-impl Default for VkRenderingInfo {
+impl const Default for VkRenderingInfo {
     fn default() -> Self {
         VkRenderingInfo {
             r#type: VkStructureType::RenderingInfo,

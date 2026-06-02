@@ -54,7 +54,7 @@ pub struct VkCommandBufferSubmitInfo {
     pub device_mask: u32,
 }
 
-impl Default for VkCommandBufferSubmitInfo {
+impl const Default for VkCommandBufferSubmitInfo {
     fn default() -> Self {
         VkCommandBufferSubmitInfo {
             r#type: VkStructureType::CommandBufferSubmitInfo,

@@ -89,7 +89,7 @@ pub struct VkCommandBufferInheritanceInfo {
     pub pipeline_statistics: VkQueryPipelineStatisticFlags,
 }
 
-impl Default for VkCommandBufferInheritanceInfo {
+impl const Default for VkCommandBufferInheritanceInfo {
     fn default() -> Self {
         VkCommandBufferInheritanceInfo {
             r#type: VkStructureType::CommandBufferInheritanceInfo,

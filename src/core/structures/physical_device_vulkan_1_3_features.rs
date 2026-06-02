@@ -132,7 +132,7 @@ pub struct VkPhysicalDeviceVulkan13Features {
     pub maintenance4: VkBool32,
 }
 
-impl Default for VkPhysicalDeviceVulkan13Features {
+impl const Default for VkPhysicalDeviceVulkan13Features {
     fn default() -> Self {
         VkPhysicalDeviceVulkan13Features {
             r#type: VkStructureType::PhysicalDeviceVulkan13Features,

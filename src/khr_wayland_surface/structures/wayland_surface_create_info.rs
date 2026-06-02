@@ -46,7 +46,7 @@ pub struct VkWaylandSurfaceCreateInfoKhr {
     pub surface: *mut wl_surface,
 }
 
-impl Default for VkWaylandSurfaceCreateInfoKhr {
+impl const Default for VkWaylandSurfaceCreateInfoKhr {
     fn default() -> Self {
         VkWaylandSurfaceCreateInfoKhr {
             r#type: VkStructureType::WaylandSurfaceCreateInfoKhr,

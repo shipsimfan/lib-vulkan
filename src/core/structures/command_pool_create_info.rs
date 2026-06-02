@@ -61,7 +61,7 @@ pub struct VkCommandPoolCreateInfo {
     pub queue_family_index: u32,
 }
 
-impl Default for VkCommandPoolCreateInfo {
+impl const Default for VkCommandPoolCreateInfo {
     fn default() -> Self {
         VkCommandPoolCreateInfo {
             r#type: VkStructureType::CommandPoolCreateInfo,

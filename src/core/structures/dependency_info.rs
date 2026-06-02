@@ -89,7 +89,7 @@ pub struct VkDependencyInfo {
     pub image_memory_barriers: *const VkImageMemoryBarrier2,
 }
 
-impl Default for VkDependencyInfo {
+impl const Default for VkDependencyInfo {
     fn default() -> Self {
         VkDependencyInfo {
             r#type: VkStructureType::DependencyInfo,

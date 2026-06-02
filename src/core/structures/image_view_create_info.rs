@@ -463,7 +463,7 @@ pub struct VkImageViewCreateInfo {
     pub subresource_range: VkImageSubresourceRange,
 }
 
-impl Default for VkImageViewCreateInfo {
+impl const Default for VkImageViewCreateInfo {
     fn default() -> Self {
         VkImageViewCreateInfo {
             r#type: VkStructureType::ImageViewCreateInfo,

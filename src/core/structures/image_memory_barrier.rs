@@ -333,7 +333,7 @@ pub struct VkImageMemoryBarrier {
     pub subresource_range: VkImageSubresourceRange,
 }
 
-impl Default for VkImageMemoryBarrier {
+impl const Default for VkImageMemoryBarrier {
     fn default() -> Self {
         VkImageMemoryBarrier {
             r#type: VkStructureType::ImageMemoryBarrier,

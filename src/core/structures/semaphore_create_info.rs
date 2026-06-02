@@ -40,7 +40,7 @@ pub struct VkSemaphoreCreateInfo {
     pub flags: VkSemaphoreCreateFlags,
 }
 
-impl Default for VkSemaphoreCreateInfo {
+impl const Default for VkSemaphoreCreateInfo {
     fn default() -> Self {
         Self {
             r#type: VkStructureType::SemaphoreCreateInfo,

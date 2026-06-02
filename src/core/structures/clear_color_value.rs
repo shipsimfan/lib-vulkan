@@ -46,7 +46,7 @@ pub union VkClearColorValue {
     pub uint32: [u32; 4],
 }
 
-impl Default for VkClearColorValue {
+impl const Default for VkClearColorValue {
     fn default() -> Self {
         VkClearColorValue { uint32: [0; 4] }
     }
