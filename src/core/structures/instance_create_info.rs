@@ -121,7 +121,7 @@ impl const Default for VkInstanceCreateInfo {
         VkInstanceCreateInfo {
             r#type: VkStructureType::InstanceCreateInfo,
             next: null(),
-            flags: VkInstanceCreateFlags::new(),
+            flags: VkInstanceCreateFlags::empty(),
             application_info: null(),
             enabled_layer_count: 0,
             enabled_layer_names: null(),

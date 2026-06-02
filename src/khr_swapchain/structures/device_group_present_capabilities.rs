@@ -56,7 +56,7 @@ impl const Default for VkDeviceGroupPresentCapabilitiesKhr {
             r#type: VkStructureType::DeviceGroupPresentCapabilitiesKhr,
             next: null(),
             present_mask: [0; VK_MAX_DEVICE_GROUP_SIZE],
-            modes: VkDeviceGroupPresentModeFlagsKhr::new(),
+            modes: VkDeviceGroupPresentModeFlagsKhr::empty(),
         }
     }
 }

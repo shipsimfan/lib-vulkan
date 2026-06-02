@@ -1,5 +1,5 @@
 mod acquire_next_image;
-mod acquire_next_image_2;
+mod acquire_next_image2;
 mod create_swapchain;
 mod destroy_swapchain;
 mod get_device_group_present_capabilities;
@@ -9,7 +9,7 @@ mod get_swapchain_images;
 mod queue_present;
 
 pub use acquire_next_image::{VK_ACQUIRE_NEXT_IMAGE_KHR, VkAcquireNextImageKhr};
-pub use acquire_next_image_2::{VK_ACQUIRE_NEXT_IMAGE_2_KHR, VkAcquireNextImage2Khr};
+pub use acquire_next_image2::{VK_ACQUIRE_NEXT_IMAGE2_KHR, VkAcquireNextImage2Khr};
 pub use create_swapchain::{VK_CREATE_SWAPCHAIN_KHR, VkCreateSwapchainKhr};
 pub use destroy_swapchain::{VK_DESTROY_SWAPCHAIN_KHR, VkDestroySwapchainKhr};
 pub use get_device_group_present_capabilities::{

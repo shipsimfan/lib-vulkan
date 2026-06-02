@@ -470,7 +470,7 @@ impl const Default for VkDeviceCreateInfo {
         VkDeviceCreateInfo {
             r#type: VkStructureType::DeviceCreateInfo,
             next: null(),
-            flags: VkDeviceCreateFlags::new(),
+            flags: VkDeviceCreateFlags::empty(),
             queue_create_info_count: 0,
             queue_create_infos: null(),
             enabled_layer_count: 0,

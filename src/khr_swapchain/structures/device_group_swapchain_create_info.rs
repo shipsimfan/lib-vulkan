@@ -41,7 +41,7 @@ impl const Default for VkDeviceGroupSwapchainCreateInfoKhr {
         VkDeviceGroupSwapchainCreateInfoKhr {
             r#type: VkStructureType::DeviceGroupSwapchainCreateInfoKhr,
             next: null(),
-            modes: VkDeviceGroupPresentModeFlagsKhr::new(),
+            modes: VkDeviceGroupPresentModeFlagsKhr::empty(),
         }
     }
 }

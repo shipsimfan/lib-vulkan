@@ -51,7 +51,7 @@ impl Default for VkWaylandSurfaceCreateInfoKhr {
         VkWaylandSurfaceCreateInfoKhr {
             r#type: VkStructureType::WaylandSurfaceCreateInfoKhr,
             next: null(),
-            flags: VkWaylandSurfaceCreateFlagsKhr::new(),
+            flags: VkWaylandSurfaceCreateFlagsKhr::empty(),
             display: null_mut(),
             surface: null_mut(),
         }

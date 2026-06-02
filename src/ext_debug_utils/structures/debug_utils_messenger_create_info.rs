@@ -98,9 +98,9 @@ impl const Default for VkDebugUtilsMessengerCreateInfoExt {
         VkDebugUtilsMessengerCreateInfoExt {
             r#type: VkStructureType::DebugUtilsMessengerCreateInfoExt,
             next: null(),
-            flags: VkDebugUtilsMessengerCreateFlagsExt::new(),
-            message_severity: VkDebugUtilsMessageSeverityFlagsExt::new(),
-            message_type: VkDebugUtilsMessageTypeFlagsExt::new(),
+            flags: VkDebugUtilsMessengerCreateFlagsExt::empty(),
+            message_severity: VkDebugUtilsMessageSeverityFlagsExt::empty(),
+            message_type: VkDebugUtilsMessageTypeFlagsExt::empty(),
             user_callback: default,
             user_data: null_mut(),
         }

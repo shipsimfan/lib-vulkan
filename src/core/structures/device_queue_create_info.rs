@@ -87,7 +87,7 @@ impl const Default for VkDeviceQueueCreateInfo {
         VkDeviceQueueCreateInfo {
             r#type: VkStructureType::DeviceQueueCreateInfo,
             next: null(),
-            flags: VkDeviceQueueCreateFlags::new(),
+            flags: VkDeviceQueueCreateFlags::empty(),
             queue_family_index: 0,
             queue_count: 0,
             queue_priorities: null(),

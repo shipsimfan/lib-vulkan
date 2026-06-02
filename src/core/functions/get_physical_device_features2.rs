@@ -30,4 +30,4 @@ pub type VkGetPhysicalDeviceFeatures2 = unsafe extern "system" fn(
 );
 
 /// The name of [`VkGetPhysicalDeviceFeatures2`]
-pub const VK_GET_PHYSICAL_DEVICE_FEATURES_2: &CStr = c"vkGetPhysicalDeviceFeatures2";
+pub const VK_GET_PHYSICAL_DEVICE_FEATURES2: &CStr = c"vkGetPhysicalDeviceFeatures2";

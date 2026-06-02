@@ -51,7 +51,7 @@ impl const Default for VkWin32SurfaceCreateInfoKhr {
         VkWin32SurfaceCreateInfoKhr {
             r#type: VkStructureType::Win32SurfaceCreateInfoKhr,
             next: null(),
-            flags: VkWin32SurfaceCreateFlagsKhr::new(),
+            flags: VkWin32SurfaceCreateFlagsKhr::empty(),
             hinstance: null_mut(),
             hwnd: null_mut(),
         }

@@ -40,4 +40,4 @@ pub type VkAcquireNextImage2Khr = unsafe extern "system" fn(
 ) -> VkResult;
 
 /// The name of [`VkAcquireNextImage2Khr`]
-pub const VK_ACQUIRE_NEXT_IMAGE_2_KHR: &CStr = c"vkAcquireNextImage2KHR";
+pub const VK_ACQUIRE_NEXT_IMAGE2_KHR: &CStr = c"vkAcquireNextImage2KHR";

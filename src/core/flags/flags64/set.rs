@@ -12,7 +12,7 @@ impl<F: [const] Into<VkFlags64>> const BitOr<F> for VkFlags64 {
     type Output = VkFlags64;
 
     fn bitor(self, rhs: F) -> Self::Output {
-        VkFlags64::from_u64(self.0 | rhs.into().0)
+        VkFlags64::new(self.0 | rhs.into().0)
     }
 }
 
@@ -20,6 +20,6 @@ impl const BitOr<VkFlags64> for u64 {
     type Output = VkFlags64;
 
     fn bitor(self, rhs: VkFlags64) -> Self::Output {
-        VkFlags64::from_u64(self | rhs.0)
+        VkFlags64::new(self | rhs.0)
     }
 }

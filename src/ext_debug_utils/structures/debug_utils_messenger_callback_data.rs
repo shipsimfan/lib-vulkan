@@ -112,7 +112,7 @@ impl const Default for VkDebugUtilsMessengerCallbackDataExt {
         VkDebugUtilsMessengerCallbackDataExt {
             r#type: VkStructureType::DebugUtilsMessengerCallbackDataExt,
             next: null(),
-            flags: VkDebugUtilsMessengerCallbackDataFlagsExt::new(),
+            flags: VkDebugUtilsMessengerCallbackDataFlagsExt::empty(),
             message_id_name: null(),
             message_id_number: 0,
             message: null(),

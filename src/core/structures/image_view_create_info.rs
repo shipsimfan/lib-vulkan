@@ -468,7 +468,7 @@ impl Default for VkImageViewCreateInfo {
         VkImageViewCreateInfo {
             r#type: VkStructureType::ImageViewCreateInfo,
             next: null(),
-            flags: VkImageViewCreateFlags::new(),
+            flags: VkImageViewCreateFlags::empty(),
             image: VkImage::null(),
             view_type: VkImageViewType::_1d,
             format: VkFormat::Undefined,

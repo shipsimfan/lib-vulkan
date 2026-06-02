@@ -85,10 +85,10 @@ impl const Default for VkSurfaceCapabilitiesKhr {
             min_image_extent: VkExtent2D::default(),
             max_image_extent: VkExtent2D::default(),
             max_image_array_layers: 0,
-            supported_transforms: VkSurfaceTransformFlagsKhr::new(),
+            supported_transforms: VkSurfaceTransformFlagsKhr::empty(),
             current_transform: VkSurfaceTransformFlagKhr::IdentityKhr,
-            supported_composite_alpha: VkCompositeAlphaFlagsKhr::new(),
-            supported_usage_flags: VkImageUsageFlags::new(),
+            supported_composite_alpha: VkCompositeAlphaFlagsKhr::empty(),
+            supported_usage_flags: VkImageUsageFlags::empty(),
         }
     }
 }

@@ -96,7 +96,7 @@ pub struct VkImageSubresourceRange {
 impl Default for VkImageSubresourceRange {
     fn default() -> Self {
         VkImageSubresourceRange {
-            aspect_mask: VkImageAspectFlags::new(),
+            aspect_mask: VkImageAspectFlags::empty(),
             base_mip_level: 0,
             level_count: 0,
             base_array_layer: 0,
