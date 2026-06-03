@@ -44,7 +44,7 @@ pub struct VkPhysicalDeviceVulkan13Features {
     /// implementation supports updating inline uniform block descriptors after a set is bound. If
     /// this feature is not enabled, [`VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT`] must not be
     /// used with [`VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK`].
-    pub descriptor_binding_inline_uniform_blokc_update_after_bind: VkBool32,
+    pub descriptor_binding_inline_uniform_block_update_after_bind: VkBool32,
 
     /// `pipeline_creation_cache_control` indicates that the implementation supports:
     ///  - The following can be used in `Vk*PipelineCreateInfo::flags`:
@@ -139,7 +139,7 @@ impl const Default for VkPhysicalDeviceVulkan13Features {
             next: null_mut(),
             robust_image_access: VK_FALSE,
             inline_uniform_block: VK_FALSE,
-            descriptor_binding_inline_uniform_blokc_update_after_bind: VK_FALSE,
+            descriptor_binding_inline_uniform_block_update_after_bind: VK_FALSE,
             pipeline_creation_cache_control: VK_FALSE,
             private_data: VK_FALSE,
             shader_demote_to_helper_invocation: VK_FALSE,
@@ -157,6 +157,10 @@ impl const Default for VkPhysicalDeviceVulkan13Features {
 }
 
 impl NextChainMut for VkPhysicalDeviceVulkan13Features {
+    fn structure_type(&self) -> VkStructureType {
+        self.r#type
+    }
+
     fn next(&mut self) -> *mut c_void {
         self.next
     }
@@ -165,7 +169,7 @@ impl NextChainMut for VkPhysicalDeviceVulkan13Features {
         (self as *mut Self).cast()
     }
 
-    fn set_next(&mut self, next: *mut c_void) {
-        self.next = next;
+    fn set_next(&mut self, next: Option<&mut dyn NextChainMut>) {
+        self.next = next.map_or(null_mut(), |n| n.as_mut_ptr());
     }
 }

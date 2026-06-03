@@ -42,6 +42,10 @@ impl const Default for VkPhysicalDeviceFeatures2 {
 }
 
 impl NextChainMut for VkPhysicalDeviceFeatures2 {
+    fn structure_type(&self) -> VkStructureType {
+        self.r#type
+    }
+
     fn next(&mut self) -> *mut c_void {
         self.next
     }
@@ -50,7 +54,7 @@ impl NextChainMut for VkPhysicalDeviceFeatures2 {
         (self as *mut Self).cast()
     }
 
-    fn set_next(&mut self, next: *mut c_void) {
-        self.next = next;
+    fn set_next(&mut self, next: Option<&mut dyn NextChainMut>) {
+        self.next = next.map_or(null_mut(), |n| n.as_mut_ptr());
     }
 }

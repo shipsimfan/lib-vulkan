@@ -29,3 +29,26 @@ pub enum VkPhysicalDeviceType {
     /// The device is typically running on the same processors as the host.
     CPU = 4,
 }
+
+impl PartialOrd for VkPhysicalDeviceType {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for VkPhysicalDeviceType {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        score(*self).cmp(&score(*other))
+    }
+}
+
+/// The score of a physical device type, used for sorting devices by preference. Lower scores are preferred
+fn score(device_type: VkPhysicalDeviceType) -> u8 {
+    match device_type {
+        VkPhysicalDeviceType::DiscreteGPU => 0,
+        VkPhysicalDeviceType::IntegratedGPU => 1,
+        VkPhysicalDeviceType::VirtualGPU => 2,
+        VkPhysicalDeviceType::CPU => 3,
+        VkPhysicalDeviceType::Other => 4,
+    }
+}

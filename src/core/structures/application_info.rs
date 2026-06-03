@@ -81,6 +81,10 @@ impl const Default for VkApplicationInfo {
 }
 
 impl NextChain for VkApplicationInfo {
+    fn structure_type(&self) -> VkStructureType {
+        self.r#type
+    }
+
     fn next(&self) -> *const c_void {
         self.next
     }
@@ -89,7 +93,7 @@ impl NextChain for VkApplicationInfo {
         (self as *const Self).cast()
     }
 
-    fn set_next(&mut self, next: *const c_void) {
-        self.next = next;
+    fn set_next(&mut self, next: Option<&dyn NextChain>) {
+        self.next = next.map_or(null(), |n| n.as_ptr());
     }
 }

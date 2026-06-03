@@ -105,15 +105,19 @@ impl const Default for VkCommandBufferInheritanceInfo {
 }
 
 impl NextChain for VkCommandBufferInheritanceInfo {
+    fn structure_type(&self) -> VkStructureType {
+        self.r#type
+    }
+
     fn next(&self) -> *const c_void {
         self.next
     }
-
+    
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }
 
-    fn set_next(&mut self, next: *const c_void) {
-        self.next = next;
+    fn set_next(&mut self, next: Option<&dyn NextChain>) {
+        self.next = next.map_or(null(), |n| n.as_ptr());
     }
 }
