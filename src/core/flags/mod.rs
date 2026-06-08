@@ -22,6 +22,7 @@ mod rendering;
 mod resolve_mode;
 mod sample_count;
 mod semaphore_create;
+mod shader_module_create;
 mod submit;
 
 mod flags;
@@ -51,6 +52,7 @@ pub use rendering::*;
 pub use resolve_mode::*;
 pub use sample_count::*;
 pub use semaphore_create::*;
+pub use shader_module_create::*;
 pub use submit::*;
 
 pub use flags::VkFlags;

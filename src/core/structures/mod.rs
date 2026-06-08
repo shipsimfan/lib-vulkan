@@ -46,6 +46,7 @@ mod rendering_attachment_info;
 mod rendering_info;
 mod semaphore_create_info;
 mod semaphore_submit_info;
+mod shader_module_create_info;
 mod submit_info;
 mod submit_info2;
 
@@ -97,5 +98,6 @@ pub use rendering_attachment_info::VkRenderingAttachmentInfo;
 pub use rendering_info::VkRenderingInfo;
 pub use semaphore_create_info::VkSemaphoreCreateInfo;
 pub use semaphore_submit_info::VkSemaphoreSubmitInfo;
+pub use shader_module_create_info::VkShaderModuleCreateInfo;
 pub use submit_info::VkSubmitInfo;
 pub use submit_info2::VkSubmitInfo2;
