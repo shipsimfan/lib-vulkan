@@ -39,5 +39,4 @@ flags! {
         /// [`VkSampleCountFlag::_64`] specifies an image with 64 samples per pixel.
         _64 = 0x00000040,
     }
-
 }
