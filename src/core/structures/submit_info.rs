@@ -217,7 +217,7 @@ impl NextChain for VkSubmitInfo {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }
