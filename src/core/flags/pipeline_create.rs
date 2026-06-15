@@ -148,17 +148,18 @@ flags! {
         /// Provided by [`nv_ray_tracing`]
         DeferCompileNv = 0x00000020,
 
-        /// [`VkPipelineCreateFlag::RenderingFragmentDensityMapAttachmentExt`] specifies that the
-        /// pipeline will be used with a fragment density map attachment and dynamic rendering.
+        /// [`VkPipelineCreateFlag::RasterizationFragmentDensityMapAttachmentExt`] specifies that
+        /// the pipeline will be used with a fragment density map attachment and dynamic rendering.
         ///
         /// Provided by [`ext_fragment_density_map`] with [`VK_VERSION_1_3`] or [`khr_dynamic_rendering`]
-        RenderingFragmentDensityMapAttachmentExt = 0x00400000,
+        RasterizationFragmentDensityMapAttachmentExt = 0x00400000,
 
-        /// [`VkPipelineCreateFlag::RenderingFragmentShadingRateAttachmentKhr`] specifies that the
-        /// pipeline will be used with a fragment shading rate attachment and dynamic rendering.
+        /// [`VkPipelineCreateFlag::RasterizationFragmentShadingRateAttachmentKhr`] specifies that
+        /// the pipeline will be used with a fragment shading rate attachment and dynamic
+        /// rendering.
         ///
         /// Provided by [`khr_fragment_shading_rate`] with [`VK_VERSION_1_3`] or [`khr_dynamic_rendering`]
-        RenderingFragmentShadingRateAttachmentKhr = 0x00200000,
+        RasterizationFragmentShadingRateAttachmentKhr = 0x00200000,
 
         /// [`VkPipelineCreateFlag::CaptureStatisticsKhr`] specifies that the shader compiler
         /// should capture statistics for the pipeline executables produced by the compile process
