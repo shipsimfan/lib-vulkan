@@ -49,6 +49,7 @@ mod pipeline_input_assembly_create_info;
 mod pipeline_layout_create_info;
 mod pipeline_multisample_state_create_info;
 mod pipeline_rasterization_state_create_info;
+mod pipeline_rendering_create_info;
 mod pipeline_shader_stage_create_info;
 mod pipeline_tessellation_state_create_info;
 mod pipeline_vertex_input_state_create_info;
@@ -121,6 +122,7 @@ pub use pipeline_input_assembly_create_info::VkPipelineInputAssemblyStateCreateI
 pub use pipeline_layout_create_info::VkPipelineLayoutCreateInfo;
 pub use pipeline_multisample_state_create_info::VkPipelineMultisampleStateCreateInfo;
 pub use pipeline_rasterization_state_create_info::VkPipelineRasterizationStateCreateInfo;
+pub use pipeline_rendering_create_info::VkPipelineRenderingCreateInfo;
 pub use pipeline_shader_stage_create_info::VkPipelineShaderStageCreateInfo;
 pub use pipeline_tessellation_state_create_info::VkPipelineTessellationStateCreateInfo;
 pub use pipeline_vertex_input_state_create_info::VkPipelineVertexInputStateCreateInfo;
