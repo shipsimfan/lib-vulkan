@@ -56,12 +56,12 @@ use crate::{
 ///    externally synchronized
 ///
 /// Provided by [`VK_VERSION_1_0`]
-pub type VkCmdSetScissors = unsafe extern "system" fn(
+pub type VkCmdSetScissor = unsafe extern "system" fn(
     command_buffer: VkCommandBuffer,
     first_scissor: u32,
     scissor_count: u32,
     scissors: *const VkRect2D,
 );
 
-/// The name of [`VkCmdSetScissors`]
-pub const VK_CMD_SET_SCISSORS: &CStr = c"vkCmdSetScissors";
+/// The name of [`VkCmdSetScissor`]
+pub const VK_CMD_SET_SCISSOR: &CStr = c"vkCmdSetScissor";
