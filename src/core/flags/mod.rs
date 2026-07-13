@@ -1,6 +1,8 @@
 mod access;
 mod access2;
 mod attachment_description;
+mod buffer_create;
+mod buffer_usage;
 mod color_component;
 mod command_buffer_usage;
 mod comnand_pool_create;
@@ -46,6 +48,8 @@ mod flags64;
 pub use access::*;
 pub use access2::*;
 pub use attachment_description::*;
+pub use buffer_create::*;
+pub use buffer_usage::*;
 pub use color_component::*;
 pub use command_buffer_usage::*;
 pub use comnand_pool_create::*;
