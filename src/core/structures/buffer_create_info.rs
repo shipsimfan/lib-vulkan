@@ -6,14 +6,14 @@ use std::{ffi::c_void, ptr::null};
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_TRUE, VK_VERSION_1_0, VkBufferCreateFlag, VkBufferUsageFlag};
+use crate::{VK_FALSE, VK_TRUE, VK_VERSION_1_0, VkBuffer, VkBufferCreateFlag, VkBufferUsageFlag};
 
 /// Structure specifying the parameters of a newly created buffer object
 ///
 /// # Description
 /// `usage` defines the effective usage flags for the buffer. If the `next` chain includes a
-/// [`VkBufferUsageFlagFlags2CreateInfo`] structure, usage is ignored, and the effective usage flags
-/// are defined by [`VkBufferUsageFlagFlags2CreateInfo::usage`].
+/// [`VkBufferUsageFlagFlags2CreateInfo`] structure, usage is ignored, and the effective usage
+/// flags are defined by [`VkBufferUsageFlagFlags2CreateInfo::usage`].
 ///
 /// Provided by [`VK_VERSION_1_0`]
 #[repr(C)]
@@ -118,57 +118,99 @@ pub struct VkBufferCreateInfo {
     ///    [`VkBufferCreateFlag::SparseResidency`], or [`VkBufferCreateFlag::SparseAliased`] flags
     pub flags: VkBufferCreateFlags,
 
-    /// size is the size in bytes of the buffer to be created.
+    /// `size` is the size in bytes of the buffer to be created.
     ///
     /// # Valid Usage
-    ///  - size must be greater than 0
-    ///  - size must be less than or equal to VkPhysicalDeviceMaintenance4Properties::maxBufferSize
+    ///  - `size` must be greater than 0
+    ///  - `size` must be less than or equal to
+    ///    [`VkPhysicalDeviceMaintenance4Properties::max_buffer_size`]
     pub size: VkDeviceSize,
 
-    /// usage is a bitmask of VkBufferUsageFlagFlagBits specifying allowed usages of the buffer.
+    /// `usage` is a bitmask of [`VkBufferUsageFlags`] specifying allowed usages of the buffer.
     ///
     /// # Valid Usage
-    ///  - If the `next` chain does not include a VkBufferUsageFlagFlags2CreateInfo structure, usage must be a valid combination of VkBufferUsageFlagFlagBits values
-    ///  - If the `next` chain does not include a VkBufferUsageFlagFlags2CreateInfo structure, usage must not be 0
-    ///  - If usage includes [`VkBufferUsageFlag::VideoDecodeSrcKhr or [`VkBufferUsageFlag::VideoDecodeDstKhr, and flags does not include [`VkBufferCreateFlag::VideoProfileIndepdentKhr`], then the `next` chain must include a [`VkVideoProfileListInfoKhr`] structure with profileCount greater than 0 and pProfiles including at least one VkVideoProfileInfoKHR structure with a `video_codec_operation` member specifying a decode operation
-    ///  - If usage includes [`VkBufferUsageFlag::VideoEncodeSrcKhr or [`VkBufferUsageFlag::VideoEncodeDstKhr, and flags does not include [`VkBufferCreateFlag::VideoProfileIndepdentKhr`], then the `next` chain must include a [`VkVideoProfileListInfoKhr`] structure with profileCount greater than 0 and pProfiles including at least one VkVideoProfileInfoKHR structure with a `video_codec_operation` member specifying an encode operation
-    ///  - If usage includes [`VkBufferUsageFlag::SAMPLER_DESCRIPTOR_BUFFER_EXT, creating this VkBuffer must not cause the total required space for all currently valid buffers using this flag on the device to exceed VkPhysicalDeviceDescriptorBufferPropertiesEXT::samplerDescriptorBufferAddressSpaceSize or VkPhysicalDeviceDescriptorBufferPropertiesEXT::descriptorBufferAddressSpaceSize
-    ///  - If usage includes [`VkBufferUsageFlag::RESOURCE_DESCRIPTOR_BUFFER_EXT, creating this VkBuffer must not cause the total required space for all currently valid buffers using this flag on the device to exceed VkPhysicalDeviceDescriptorBufferPropertiesEXT::resourceDescriptorBufferAddressSpaceSize or VkPhysicalDeviceDescriptorBufferPropertiesEXT::descriptorBufferAddressSpaceSize
-    ///  - If usage includes [`VkBufferUsageFlag::PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT, the descriptorBufferPushDescriptors feature must be enabled
-    ///  - If usage includes [`VkBufferUsageFlag::PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT VkPhysicalDeviceDescriptorBufferPropertiesEXT::bufferlessPushDescriptors must be VK_FALSE
-    ///  - If usage includes [`VkBufferUsageFlag::PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT, usage must contain at least one of [`VkBufferUsageFlag::RESOURCE_DESCRIPTOR_BUFFER_EXT or [`VkBufferUsageFlag::SAMPLER_DESCRIPTOR_BUFFER_EXT
-    ///  - If the tileMemoryHeap feature is not enabled, usage must not include [`VkBufferUsageFlag::TILE_MEMORY_QCOM
-    ///  - If usage includes [`VkBufferUsageFlag::TILE_MEMORY_QCOM, then only the following usages may be set:
+    ///  - If the `next` chain does not include a [`VkBufferUsageFlagFlags2CreateInfo`] structure,
+    ///    usage must be a valid combination of [`VkBufferUsageFlags`] values
+    ///  - If the `next` chain does not include a [`VkBufferUsageFlagFlags2CreateInfo`] structure,
+    ///    usage must not be 0
+    ///  - If usage includes [`VkBufferUsageFlag::VideoDecodeSrcKhr`] or
+    ///    [`VkBufferUsageFlag::VideoDecodeDstKhr`], and flags does not include
+    ///    [`VkBufferCreateFlag::VideoProfileIndependentKhr`], then the `next` chain must include a
+    ///    [`VkVideoProfileListInfoKhr`] structure with `profile_count` greater than 0 and
+    ///    `profiles` including at least one [`VkVideoProfileInfoKhr`] structure with a
+    ///    `video_codec_operation` member specifying a decode operation
+    ///  - If usage includes [`VkBufferUsageFlag::VideoEncodeSrcKhr`] or
+    ///    [`VkBufferUsageFlag::VideoEncodeDstKhr`], and flags does not include
+    ///    [`VkBufferCreateFlag::VideoProfileIndependentKhr`], then the `next` chain must include a
+    ///    [`VkVideoProfileListInfoKhr`] structure with `profile_count` greater than 0 and
+    ///    `profiles` including at least one [`VkVideoProfileInfoKhr`] structure with a
+    ///    `video_codec_operation` member specifying an encode operation
+    ///  - If `usage` includes [`VkBufferUsageFlag::SamplerDescriptorBufferExt`], creating this
+    ///    [`VkBuffer`] must not cause the total required space for all currently valid buffers
+    ///    using this flag on the device to exceed
+    ///    [`VkPhysicalDeviceDescriptorBufferPropertiesExt::sampler_descriptor_buffer_address_space_size`]
+    ///    or
+    ///    [`VkPhysicalDeviceDescriptorBufferPropertiesExt::descriptor_buffer_address_space_size`]
+    ///  - If `usage` includes [`VkBufferUsageFlag::ResourceDescriptorBufferExt`], creating this
+    ///    [`VkBuffer`] must not cause the total required space for all currently valid buffers
+    ///    using this flag on the device to exceed
+    ///    [`VkPhysicalDeviceDescriptorBufferPropertiesExt::resource_descriptor_buffer_address_space_size`]
+    ///    or
+    ///    [`VkPhysicalDeviceDescriptorBufferPropertiesExt::descriptor_buffer_address_space_size`]
+    ///  - If `usage` includes [`VkBufferUsageFlag::PushDescriptorsDescriptorBufferExt`], the
+    ///    `descriptor_buffer_push_descriptors` feature must be enabled
+    ///  - If `usage` includes [`VkBufferUsageFlag::PushDescriptorsDescriptorBufferExt`],
+    ///    [`VkPhysicalDeviceDescriptorBufferPropertiesExt::bufferless_push_descriptors`] must be
+    ///    [`VK_FALSE`]
+    ///  - If `usage` includes [`VkBufferUsageFlag::PushDescriptorsDescriptorBufferExt`], usage
+    ///    must contain at least one of [`VkBufferUsageFlag::ResourceDescriptorBufferExt`] or
+    ///    [`VkBufferUsageFlag::SamplerDescriptorBufferExt`]
+    ///  - If the `tile_memory_heap` feature is not enabled, usage must not include
+    ///    [`VkBufferUsageFlag::TileMemoryQcom`]
+    ///  - If `usage` includes [`VkBufferUsageFlag::TileMemoryQcom`], then only the following
+    ///    usages may be set:
     ///    - [`VkBufferUsageFlag::UniformTexelBuffer`]
     ///    - [`VkBufferUsageFlag::StorageTexelBuffer`]
     ///    - [`VkBufferUsageFlag::UniformBuffer`]
     ///    - [`VkBufferUsageFlag::StorageBuffer`]
     ///    - [`VkBufferUsageFlag::ShaderDeviceAddress`]
-    ///    - and if VkPhysicalDeviceTileMemoryHeapPropertiesQCOM::tileBufferTransfers is VK_TRUE then additionally [`VkBufferUsageFlag::TransferSrc`] or [`VkBufferUsageFlag::TransferDst`]
+    ///    - and if [`VkPhysicalDeviceTileMemoryHeapPropertiesQcom::tile_buffer_transfers`] is
+    ///      [`VK_TRUE`] then additionally [`VkBufferUsageFlag::TransferSrc`] or
+    ///      [`VkBufferUsageFlag::TransferDst`]
     pub usage: VkBufferUsageFlags,
 
-    /// sharingMode is a VkSharingMode value specifying the sharing mode of the buffer when it will be accessed by multiple queue families.
+    /// `sharing_mode` is a [`VkSharingMode`] value specifying the sharing mode of the buffer when
+    /// it will be accessed by multiple queue families.
     ///
     /// # Valid Usage (Implicit)
-    ///  - sharingMode must be a valid VkSharingMode value
+    ///  - `sharing_mode` must be a valid [`VkSharingMode`] value
     pub sharing_mode: VkSharingMode,
 
-    /// queueFamilyIndexCount is the number of entries in the pQueueFamilyIndices array.
+    /// `queue_family_index_count` is the number of entries in the `queue_family_indices` array.
     ///
     /// # Valid Usage
-    ///  - If the maintenance11 feature is enabled and sharingMode is VK_SHARING_MODE_CONCURRENT, then queueFamilyIndexCount must be greater than 0
-    ///  - If the maintenance11 feature is not enabled and sharingMode is VK_SHARING_MODE_CONCURRENT, then queueFamilyIndexCount must be greater than 1
+    ///  - If the `maintenance11` feature is enabled and `sharing_mode` is
+    ///    [`VkSharingMode::Concurrent`], then `queue_family_index_count` must be greater than 0
+    ///  - If the `maintenance11` feature is not enabled and `sharing_mode` is
+    ///    [`VkSharingMode::Concurrent`], then `queue_family_index_count` must be greater than 1
     pub queue_family_index_count: u32,
 
-    /// pQueueFamilyIndices is a pointer to an array of queue families that will access this buffer. It is ignored if sharingMode is not VK_SHARING_MODE_CONCURRENT.
+    /// `queue_family_indices` is a pointer to an array of queue families that will access this
+    /// buffer. It is ignored if `sharing_mode` is not [`VkSharingMode::Concurrent`].
     ///
     /// # Valid Usage
-    ///  - If sharingMode is VK_SHARING_MODE_CONCURRENT, pQueueFamilyIndices must be a valid pointer to an array of queueFamilyIndexCount uint32_t values
-    ///  - If sharingMode is VK_SHARING_MODE_CONCURRENT, each element of pQueueFamilyIndices must be unique and must be less than pQueueFamilyPropertyCount returned by either vkGetPhysicalDeviceQueueFamilyProperties2 or vkGetPhysicalDeviceQueueFamilyProperties for the physicalDevice that was used to create device
+    ///  - If `sharing_mode` is [`VkSharingMode::Concurrent`], `queue_family_indices` must be a
+    ///    valid pointer to an array of `queue_family_index_count` [`u32`] values
+    ///  - If `sharing_mode` is [`VkSharingMode::Concurrent`], each element of
+    ///    `queue_family_indices` must be unique and must be less than
+    ///    `queue_family_property_count` returned by either
+    ///    [`VkGetPhysicalDeviceQueueFamilyProperties2`] or
+    ///    [`VkGetPhysicalDeviceQueueFamilyProperties`] for the `physical_device` that was used to
+    ///    create device
     pub queue_family_indices: *const u32,
 }
 
-impl Default for VkBufferCreateInfo {
+impl const Default for VkBufferCreateInfo {
     fn default() -> Self {
         VkBufferCreateInfo {
             r#type: VkStructureType::BufferCreateInfo,

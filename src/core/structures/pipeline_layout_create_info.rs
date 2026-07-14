@@ -342,7 +342,7 @@ pub struct VkPipelineLayoutCreateInfo {
     pub push_constant_ranges: *const VkPushConstantRange,
 }
 
-impl Default for VkPipelineLayoutCreateInfo {
+impl const Default for VkPipelineLayoutCreateInfo {
     fn default() -> Self {
         VkPipelineLayoutCreateInfo {
             r#type: VkStructureType::PipelineLayoutCreateInfo,
