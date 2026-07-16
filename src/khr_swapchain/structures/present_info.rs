@@ -124,7 +124,7 @@ pub struct VkPresentInfoKhr {
     pub results: *mut VkResult,
 }
 
-impl const Default for VkPresentInfoKhr {
+const impl Default for VkPresentInfoKhr {
     fn default() -> Self {
         VkPresentInfoKhr {
             r#type: VkStructureType::PresentInfoKhr,

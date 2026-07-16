@@ -95,7 +95,7 @@ pub struct VkAcquireNextImageInfoKhr {
     pub device_mask: u32,
 }
 
-impl const Default for VkAcquireNextImageInfoKhr {
+const impl Default for VkAcquireNextImageInfoKhr {
     fn default() -> Self {
         VkAcquireNextImageInfoKhr {
             r#type: VkStructureType::AcquireNextImageInfoKhr,

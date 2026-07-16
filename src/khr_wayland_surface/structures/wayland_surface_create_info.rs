@@ -48,7 +48,7 @@ pub struct VkWaylandSurfaceCreateInfoKhr {
     pub surface: *mut wl_surface,
 }
 
-impl const Default for VkWaylandSurfaceCreateInfoKhr {
+const impl Default for VkWaylandSurfaceCreateInfoKhr {
     fn default() -> Self {
         VkWaylandSurfaceCreateInfoKhr {
             r#type: VkStructureType::WaylandSurfaceCreateInfoKhr,
@@ -68,7 +68,7 @@ impl NextChain for VkWaylandSurfaceCreateInfoKhr {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }

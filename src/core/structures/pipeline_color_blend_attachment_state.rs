@@ -132,7 +132,7 @@ pub struct VkPipelineColorBlendAttachmentState {
     pub color_write_mask: VkColorComponentFlags,
 }
 
-impl const Default for VkPipelineColorBlendAttachmentState {
+const impl Default for VkPipelineColorBlendAttachmentState {
     fn default() -> Self {
         VkPipelineColorBlendAttachmentState {
             blend_enable: 0,

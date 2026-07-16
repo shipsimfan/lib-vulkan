@@ -63,7 +63,7 @@ pub struct VkShaderModuleCreateInfo {
     pub code: *const u32,
 }
 
-impl const Default for VkShaderModuleCreateInfo {
+const impl Default for VkShaderModuleCreateInfo {
     fn default() -> Self {
         VkShaderModuleCreateInfo {
             r#type: VkStructureType::ShaderModuleCreateInfo,

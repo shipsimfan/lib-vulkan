@@ -39,7 +39,7 @@ pub struct VkComponentMapping {
     pub a: VkComponentSwizzle,
 }
 
-impl const Default for VkComponentMapping {
+const impl Default for VkComponentMapping {
     fn default() -> Self {
         VkComponentMapping {
             r: VkComponentSwizzle::Identity,

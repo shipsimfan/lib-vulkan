@@ -93,7 +93,7 @@ pub struct VkImageSubresourceRange {
     pub layer_count: u32,
 }
 
-impl const Default for VkImageSubresourceRange {
+const impl Default for VkImageSubresourceRange {
     fn default() -> Self {
         VkImageSubresourceRange {
             aspect_mask: VkImageAspectFlags::empty(),

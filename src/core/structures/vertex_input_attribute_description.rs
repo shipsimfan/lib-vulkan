@@ -47,7 +47,7 @@ pub struct VkVertexInputAttributeDescription {
     pub offset: u32,
 }
 
-impl const Default for VkVertexInputAttributeDescription {
+const impl Default for VkVertexInputAttributeDescription {
     fn default() -> Self {
         VkVertexInputAttributeDescription {
             location: 0,

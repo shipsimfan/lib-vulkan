@@ -45,7 +45,7 @@ pub struct VkMemoryBarrier {
     pub dst_access_mask: VkAccessFlags,
 }
 
-impl const Default for VkMemoryBarrier {
+const impl Default for VkMemoryBarrier {
     fn default() -> Self {
         VkMemoryBarrier {
             r#type: VkStructureType::MemoryBarrier,

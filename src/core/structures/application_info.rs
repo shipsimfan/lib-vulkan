@@ -66,7 +66,7 @@ pub struct VkApplicationInfo {
     pub api_version: u32,
 }
 
-impl const Default for VkApplicationInfo {
+const impl Default for VkApplicationInfo {
     fn default() -> Self {
         VkApplicationInfo {
             r#type: VkStructureType::ApplicationInfo,

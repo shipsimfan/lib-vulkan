@@ -61,7 +61,7 @@ pub struct VkCommandPoolCreateInfo {
     pub queue_family_index: u32,
 }
 
-impl const Default for VkCommandPoolCreateInfo {
+const impl Default for VkCommandPoolCreateInfo {
     fn default() -> Self {
         VkCommandPoolCreateInfo {
             r#type: VkStructureType::CommandPoolCreateInfo,
@@ -80,7 +80,7 @@ impl NextChain for VkCommandPoolCreateInfo {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }

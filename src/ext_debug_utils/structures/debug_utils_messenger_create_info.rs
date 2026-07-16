@@ -94,7 +94,7 @@ pub struct VkDebugUtilsMessengerCreateInfoExt {
     pub user_data: *mut c_void,
 }
 
-impl const Default for VkDebugUtilsMessengerCreateInfoExt {
+const impl Default for VkDebugUtilsMessengerCreateInfoExt {
     fn default() -> Self {
         VkDebugUtilsMessengerCreateInfoExt {
             r#type: VkStructureType::DebugUtilsMessengerCreateInfoExt,
@@ -125,7 +125,7 @@ impl NextChain for VkDebugUtilsMessengerCreateInfoExt {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }

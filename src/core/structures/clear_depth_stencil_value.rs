@@ -24,7 +24,7 @@ pub struct VkClearDepthStencilValue {
     pub stencil: u32,
 }
 
-impl const Default for VkClearDepthStencilValue {
+const impl Default for VkClearDepthStencilValue {
     fn default() -> Self {
         Self {
             depth: 0.0,

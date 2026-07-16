@@ -96,7 +96,7 @@ pub struct VkPipelineDepthStencilStateCreateInfo {
     pub max_depth_bounds: c_float,
 }
 
-impl const Default for VkPipelineDepthStencilStateCreateInfo {
+const impl Default for VkPipelineDepthStencilStateCreateInfo {
     fn default() -> Self {
         VkPipelineDepthStencilStateCreateInfo {
             r#type: VkStructureType::PipelineDepthStencilStateCreateInfo,

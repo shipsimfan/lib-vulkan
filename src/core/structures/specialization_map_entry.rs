@@ -31,7 +31,7 @@ pub struct VkSpecializationMapEntry {
     pub size: c_size_t,
 }
 
-impl const Default for VkSpecializationMapEntry {
+const impl Default for VkSpecializationMapEntry {
     fn default() -> Self {
         VkSpecializationMapEntry {
             constant_id: 0,

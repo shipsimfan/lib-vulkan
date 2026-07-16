@@ -34,7 +34,7 @@ pub struct VkFenceCreateInfo {
     pub flags: VkFenceCreateFlags,
 }
 
-impl const Default for VkFenceCreateInfo {
+const impl Default for VkFenceCreateInfo {
     fn default() -> Self {
         Self {
             r#type: VkStructureType::FenceCreateInfo,

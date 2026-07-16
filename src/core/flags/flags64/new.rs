@@ -12,13 +12,13 @@ impl VkFlags64 {
     }
 }
 
-impl const Default for VkFlags64 {
+const impl Default for VkFlags64 {
     fn default() -> Self {
         VkFlags64::empty()
     }
 }
 
-impl const From<u64> for VkFlags64 {
+const impl From<u64> for VkFlags64 {
     fn from(flags: u64) -> Self {
         VkFlags64::new(flags)
     }

@@ -31,7 +31,7 @@ pub struct VkMemoryRequirements2 {
     pub memory_requirements: VkMemoryRequirements,
 }
 
-impl const Default for VkMemoryRequirements2 {
+const impl Default for VkMemoryRequirements2 {
     fn default() -> Self {
         VkMemoryRequirements2 {
             r#type: VkStructureType::MemoryRequirements2,

@@ -54,7 +54,7 @@ pub struct VkCommandBufferSubmitInfo {
     pub device_mask: u32,
 }
 
-impl const Default for VkCommandBufferSubmitInfo {
+const impl Default for VkCommandBufferSubmitInfo {
     fn default() -> Self {
         VkCommandBufferSubmitInfo {
             r#type: VkStructureType::CommandBufferSubmitInfo,
@@ -73,7 +73,7 @@ impl NextChain for VkCommandBufferSubmitInfo {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }

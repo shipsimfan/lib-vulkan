@@ -265,7 +265,7 @@ pub struct VkRenderingAttachmentInfo {
     pub clear_value: VkClearValue,
 }
 
-impl const Default for VkRenderingAttachmentInfo {
+const impl Default for VkRenderingAttachmentInfo {
     fn default() -> Self {
         VkRenderingAttachmentInfo {
             r#type: VkStructureType::RenderingAttachmentInfo,

@@ -436,7 +436,7 @@ pub struct VkMemoryBarrier2 {
     pub dst_access_mask: VkAccessFlags2,
 }
 
-impl const Default for VkMemoryBarrier2 {
+const impl Default for VkMemoryBarrier2 {
     fn default() -> Self {
         VkMemoryBarrier2 {
             r#type: VkStructureType::MemoryBarrier2,

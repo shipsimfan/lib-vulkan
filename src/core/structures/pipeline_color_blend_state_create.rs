@@ -94,7 +94,7 @@ pub struct VkPipelineColorBlendStateCreateInfo {
     pub blend_constants: [c_float; 4],
 }
 
-impl const Default for VkPipelineColorBlendStateCreateInfo {
+const impl Default for VkPipelineColorBlendStateCreateInfo {
     fn default() -> Self {
         VkPipelineColorBlendStateCreateInfo {
             r#type: VkStructureType::PipelineColorBlendStateCreateInfo,

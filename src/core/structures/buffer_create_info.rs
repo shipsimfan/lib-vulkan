@@ -210,7 +210,7 @@ pub struct VkBufferCreateInfo {
     pub queue_family_indices: *const u32,
 }
 
-impl const Default for VkBufferCreateInfo {
+const impl Default for VkBufferCreateInfo {
     fn default() -> Self {
         VkBufferCreateInfo {
             r#type: VkStructureType::BufferCreateInfo,

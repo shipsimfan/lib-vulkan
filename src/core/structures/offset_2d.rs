@@ -15,7 +15,7 @@ pub struct VkOffset2D {
     pub y: i32,
 }
 
-impl const Default for VkOffset2D {
+const impl Default for VkOffset2D {
     fn default() -> Self {
         VkOffset2D { x: 0, y: 0 }
     }

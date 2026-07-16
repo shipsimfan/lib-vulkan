@@ -36,7 +36,7 @@ pub struct VkDeviceGroupSwapchainCreateInfoKhr {
     pub modes: VkDeviceGroupPresentModeFlagsKhr,
 }
 
-impl const Default for VkDeviceGroupSwapchainCreateInfoKhr {
+const impl Default for VkDeviceGroupSwapchainCreateInfoKhr {
     fn default() -> Self {
         VkDeviceGroupSwapchainCreateInfoKhr {
             r#type: VkStructureType::DeviceGroupSwapchainCreateInfoKhr,

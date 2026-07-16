@@ -108,7 +108,7 @@ pub struct VkPhysicalDeviceVulkan11Features {
     pub shader_draw_parameters: VkBool32,
 }
 
-impl const Default for VkPhysicalDeviceVulkan11Features {
+const impl Default for VkPhysicalDeviceVulkan11Features {
     fn default() -> Self {
         VkPhysicalDeviceVulkan11Features {
             r#type: VkStructureType::PhysicalDeviceVulkan11Features,

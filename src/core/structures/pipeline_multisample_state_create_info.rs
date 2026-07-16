@@ -99,7 +99,7 @@ pub struct VkPipelineMultisampleStateCreateInfo {
     pub alpha_to_one_enable: VkBool32,
 }
 
-impl const Default for VkPipelineMultisampleStateCreateInfo {
+const impl Default for VkPipelineMultisampleStateCreateInfo {
     fn default() -> Self {
         VkPipelineMultisampleStateCreateInfo {
             r#type: VkStructureType::PipelineMultisampleStateCreateInfo,

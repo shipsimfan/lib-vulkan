@@ -19,7 +19,7 @@ pub struct VkMemoryType {
     pub heap_index: u32,
 }
 
-impl const Default for VkMemoryType {
+const impl Default for VkMemoryType {
     fn default() -> Self {
         VkMemoryType {
             property_flags: VkMemoryPropertyFlags::default(),

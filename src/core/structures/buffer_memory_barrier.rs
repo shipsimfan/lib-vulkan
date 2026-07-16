@@ -124,7 +124,7 @@ pub struct VkBufferMemoryBarrier {
     pub size: VkDeviceSize,
 }
 
-impl const Default for VkBufferMemoryBarrier {
+const impl Default for VkBufferMemoryBarrier {
     fn default() -> Self {
         VkBufferMemoryBarrier {
             r#type: VkStructureType::BufferMemoryBarrier,

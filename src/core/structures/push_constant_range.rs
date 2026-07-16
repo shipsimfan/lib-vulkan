@@ -39,7 +39,7 @@ pub struct VkPushConstantRange {
     pub size: u32,
 }
 
-impl const Default for VkPushConstantRange {
+const impl Default for VkPushConstantRange {
     fn default() -> Self {
         VkPushConstantRange {
             stage_flags: VkShaderStageFlags::empty(),

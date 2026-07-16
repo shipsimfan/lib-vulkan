@@ -41,31 +41,31 @@ macro_rules! flags64 {
             }
         }
 
-        impl const From<$enum_name> for $struct_name {
+        const impl From<$enum_name> for $struct_name {
             fn from(flag: $enum_name) -> Self {
                 $struct_name::new(flag as u64)
             }
         }
 
-        impl const From<$crate::VkFlags64> for $struct_name {
+        const impl From<$crate::VkFlags64> for $struct_name {
             fn from(flag: $crate::VkFlags64) -> Self {
                 $struct_name(flag)
             }
         }
 
-        impl const From<u64> for $struct_name {
+        const impl From<u64> for $struct_name {
             fn from(flag: u64) -> Self {
                 $struct_name(flag.into())
             }
         }
 
-        impl const PartialEq<$enum_name> for $struct_name {
+        const impl PartialEq<$enum_name> for $struct_name {
             fn eq(&self, other: &$enum_name) -> bool {
                 self.0.eq(&(*other as u64))
             }
         }
 
-        impl const std::ops::BitOr for $enum_name {
+        const impl std::ops::BitOr for $enum_name {
             type Output = $struct_name;
 
             fn bitor(self, rhs: $enum_name) -> Self::Output {
@@ -73,7 +73,7 @@ macro_rules! flags64 {
             }
         }
 
-        impl const std::ops::BitOr<$struct_name> for $enum_name {
+        const impl std::ops::BitOr<$struct_name> for $enum_name {
             type Output = $struct_name;
 
             fn bitor(self, rhs: $struct_name) -> Self::Output {
@@ -81,7 +81,7 @@ macro_rules! flags64 {
             }
         }
 
-        impl const std::ops::BitOr for $struct_name {
+        const impl std::ops::BitOr for $struct_name {
             type Output = $struct_name;
 
             fn bitor(self, rhs: $struct_name) -> Self::Output {
@@ -89,7 +89,7 @@ macro_rules! flags64 {
             }
         }
 
-        impl const std::ops::BitOr<$enum_name> for $struct_name {
+        const impl std::ops::BitOr<$enum_name> for $struct_name {
             type Output = $struct_name;
 
             fn bitor(self, rhs: $enum_name) -> Self::Output {
@@ -97,13 +97,13 @@ macro_rules! flags64 {
             }
         }
 
-        impl const std::ops::BitOrAssign for $struct_name {
+        const impl std::ops::BitOrAssign for $struct_name {
             fn bitor_assign(&mut self, rhs: $struct_name) {
                 *self = *self | rhs;
             }
         }
 
-        impl const std::ops::BitOrAssign<$enum_name> for $struct_name {
+        const impl std::ops::BitOrAssign<$enum_name> for $struct_name {
             fn bitor_assign(&mut self, rhs: $enum_name) {
                 *self = *self | rhs;
             }
@@ -129,25 +129,25 @@ macro_rules! flags64_no_bits {
             }
         }
 
-        impl const Default for $struct_name {
+        const impl Default for $struct_name {
             fn default() -> Self {
                 $struct_name::empty()
             }
         }
 
-        impl const Into<$crate::VkFlags64> for $struct_name {
+        const impl Into<$crate::VkFlags64> for $struct_name {
             fn into(self) -> $crate::VkFlags64 {
                 self.0
             }
         }
 
-        impl const Into<u64> for $struct_name {
+        const impl Into<u64> for $struct_name {
             fn into(self) -> u64 {
                 self.0.into()
             }
         }
 
-        impl const Clone for $struct_name {
+        const impl Clone for $struct_name {
             fn clone(&self) -> Self {
                 $struct_name(self.0)
             }
@@ -155,19 +155,19 @@ macro_rules! flags64_no_bits {
 
         impl Copy for $struct_name {}
 
-        impl const PartialEq for $struct_name {
+        const impl PartialEq for $struct_name {
             fn eq(&self, other: &Self) -> bool {
                 self.0.eq(&other.0)
             }
         }
 
-        impl const PartialEq<$crate::VkFlags64> for $struct_name {
+        const impl PartialEq<$crate::VkFlags64> for $struct_name {
             fn eq(&self, other: &$crate::VkFlags64) -> bool {
                 self.0.eq(other)
             }
         }
 
-        impl const PartialEq<u64> for $struct_name {
+        const impl PartialEq<u64> for $struct_name {
             fn eq(&self, other: &u64) -> bool {
                 self.0.eq(other)
             }

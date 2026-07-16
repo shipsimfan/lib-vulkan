@@ -5,8 +5,8 @@ use std::{ffi::c_void, ptr::null};
 #[allow(unused_imports)]
 use crate::{
     VK_NULL_HANDLE, VK_VERSION_1_0, VkAllocateMemory, VkBuffer, VkBufferCreateInfo, VkFormat,
-    VkMemoryPropertyFlag, VkMemoryRequirements, VkPhysicalDeviceLimits,
-    VkPhysicalDeviceMemoryProperties, VkResult,
+    VkGetBufferMemoryRequirements, VkMemoryPropertyFlag, VkMemoryRequirements,
+    VkPhysicalDeviceLimits, VkPhysicalDeviceMemoryProperties, VkResult,
 };
 #[allow(unused_imports)]
 use std::ptr::null_mut;
@@ -334,7 +334,7 @@ pub struct VkMemoryAllocateInfo {
     pub memory_type_index: u32,
 }
 
-impl const Default for VkMemoryAllocateInfo {
+const impl Default for VkMemoryAllocateInfo {
     fn default() -> Self {
         VkMemoryAllocateInfo {
             r#type: VkStructureType::MemoryAllocateInfo,

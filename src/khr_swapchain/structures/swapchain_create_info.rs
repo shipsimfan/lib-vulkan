@@ -316,7 +316,7 @@ pub struct VkSwapchainCreateInfoKhr {
     pub old_swapchain: VkSwapchainKhr,
 }
 
-impl const Default for VkSwapchainCreateInfoKhr {
+const impl Default for VkSwapchainCreateInfoKhr {
     fn default() -> Self {
         VkSwapchainCreateInfoKhr {
             r#type: VkStructureType::SwapchainCreateInfoKhr,

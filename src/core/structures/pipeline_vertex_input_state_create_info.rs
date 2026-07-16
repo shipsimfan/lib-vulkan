@@ -79,7 +79,7 @@ pub struct VkPipelineVertexInputStateCreateInfo {
     pub vertex_attribute_descriptions: *const VkVertexInputAttributeDescription,
 }
 
-impl const Default for VkPipelineVertexInputStateCreateInfo {
+const impl Default for VkPipelineVertexInputStateCreateInfo {
     fn default() -> Self {
         VkPipelineVertexInputStateCreateInfo {
             r#type: VkStructureType::PipelineVertexInputStateCreateInfo,

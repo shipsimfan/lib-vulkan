@@ -92,7 +92,7 @@ pub struct VkSemaphoreSubmitInfo {
     pub device_index: u32,
 }
 
-impl const Default for VkSemaphoreSubmitInfo {
+const impl Default for VkSemaphoreSubmitInfo {
     fn default() -> Self {
         VkSemaphoreSubmitInfo {
             r#type: VkStructureType::SemaphoreSubmitInfo,

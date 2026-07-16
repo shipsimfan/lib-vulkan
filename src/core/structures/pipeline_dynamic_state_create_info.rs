@@ -45,7 +45,7 @@ pub struct VkPipelineDynamicStateCreateInfo {
     pub dynamic_states: *const VkDynamicState,
 }
 
-impl const Default for VkPipelineDynamicStateCreateInfo {
+const impl Default for VkPipelineDynamicStateCreateInfo {
     fn default() -> Self {
         VkPipelineDynamicStateCreateInfo {
             r#type: VkStructureType::PipelineDynamicStateCreateInfo,

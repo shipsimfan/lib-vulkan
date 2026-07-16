@@ -46,7 +46,7 @@ pub struct VkWin32SurfaceCreateInfoKhr {
     pub hwnd: HWND,
 }
 
-impl const Default for VkWin32SurfaceCreateInfoKhr {
+const impl Default for VkWin32SurfaceCreateInfoKhr {
     fn default() -> Self {
         VkWin32SurfaceCreateInfoKhr {
             r#type: VkStructureType::Win32SurfaceCreateInfoKhr,

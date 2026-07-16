@@ -53,7 +53,7 @@ pub struct VkBindImageMemorySwapchainInfoKhr {
     pub image_index: u32,
 }
 
-impl const Default for VkBindImageMemorySwapchainInfoKhr {
+const impl Default for VkBindImageMemorySwapchainInfoKhr {
     fn default() -> Self {
         VkBindImageMemorySwapchainInfoKhr {
             r#type: VkStructureType::BindImageMemorySwapchainInfoKhr,

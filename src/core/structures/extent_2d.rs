@@ -15,7 +15,7 @@ pub struct VkExtent2D {
     pub height: u32,
 }
 
-impl const Default for VkExtent2D {
+const impl Default for VkExtent2D {
     fn default() -> Self {
         VkExtent2D {
             width: 0,

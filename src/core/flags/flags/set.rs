@@ -8,7 +8,7 @@ impl VkFlags {
     }
 }
 
-impl<F: [const] Into<VkFlags>> const BitOr<F> for VkFlags {
+const impl<F: [const] Into<VkFlags>> BitOr<F> for VkFlags {
     type Output = VkFlags;
 
     fn bitor(self, rhs: F) -> Self::Output {
@@ -16,7 +16,7 @@ impl<F: [const] Into<VkFlags>> const BitOr<F> for VkFlags {
     }
 }
 
-impl const BitOr<VkFlags> for u32 {
+const impl BitOr<VkFlags> for u32 {
     type Output = VkFlags;
 
     fn bitor(self, rhs: VkFlags) -> Self::Output {

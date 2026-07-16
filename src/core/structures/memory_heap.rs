@@ -17,7 +17,7 @@ pub struct VkMemoryHeap {
     pub flags: VkMemoryHeapFlags,
 }
 
-impl const Default for VkMemoryHeap {
+const impl Default for VkMemoryHeap {
     fn default() -> Self {
         VkMemoryHeap {
             size: 0,

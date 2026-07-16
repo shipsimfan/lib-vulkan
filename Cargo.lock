@@ -9,7 +9,7 @@ source = "git+https://github.com/shipsimfan/lib-linux#9f4ee2d3a80afd751c6aa07ed3
 
 [[package]]
 name = "vulkan"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "wayland",
  "win32",

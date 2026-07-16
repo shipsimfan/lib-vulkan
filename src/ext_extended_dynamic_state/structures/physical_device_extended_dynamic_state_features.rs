@@ -49,7 +49,7 @@ pub struct VkPhysicalDeviceExtendedDynamicStateFeaturesExt {
     pub extended_dynamic_state: VkBool32,
 }
 
-impl const Default for VkPhysicalDeviceExtendedDynamicStateFeaturesExt {
+const impl Default for VkPhysicalDeviceExtendedDynamicStateFeaturesExt {
     fn default() -> Self {
         VkPhysicalDeviceExtendedDynamicStateFeaturesExt {
             r#type: VkStructureType::PhysicalDeviceExtendedDynamicStateFeaturesExt,

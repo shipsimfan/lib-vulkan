@@ -34,7 +34,7 @@ pub struct VkVertexInputBindingDescription {
     pub input_rate: VkVertexInputRate,
 }
 
-impl const Default for VkVertexInputBindingDescription {
+const impl Default for VkVertexInputBindingDescription {
     fn default() -> Self {
         VkVertexInputBindingDescription {
             binding: 0,

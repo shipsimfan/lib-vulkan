@@ -269,7 +269,7 @@ pub struct VkPipelineShaderStageCreateInfo {
     pub specialization_info: *const VkSpecializationInfo,
 }
 
-impl const Default for VkPipelineShaderStageCreateInfo {
+const impl Default for VkPipelineShaderStageCreateInfo {
     fn default() -> Self {
         VkPipelineShaderStageCreateInfo {
             r#type: VkStructureType::PipelineShaderStageCreateInfo,

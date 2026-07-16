@@ -1,6 +1,6 @@
 use crate::VkFlags;
 
-impl const Clone for VkFlags {
+const impl Clone for VkFlags {
     fn clone(&self) -> Self {
         VkFlags::new(self.0)
     }

@@ -88,7 +88,7 @@ pub struct VkPipelineInputAssemblyStateCreateInfo {
     pub primitive_restart_enable: VkBool32,
 }
 
-impl const Default for VkPipelineInputAssemblyStateCreateInfo {
+const impl Default for VkPipelineInputAssemblyStateCreateInfo {
     fn default() -> Self {
         VkPipelineInputAssemblyStateCreateInfo {
             r#type: VkStructureType::PipelineInputAssemblyStateCreateInfo,

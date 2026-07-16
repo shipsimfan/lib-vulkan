@@ -38,7 +38,7 @@ pub struct VkAttachmentReference {
     pub layout: VkImageLayout,
 }
 
-impl const Default for VkAttachmentReference {
+const impl Default for VkAttachmentReference {
     fn default() -> Self {
         VkAttachmentReference {
             attachment: 0,

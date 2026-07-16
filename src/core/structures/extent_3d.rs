@@ -18,7 +18,7 @@ pub struct VkExtent3D {
     pub depth: u32,
 }
 
-impl const Default for VkExtent3D {
+const impl Default for VkExtent3D {
     fn default() -> Self {
         VkExtent3D {
             width: 0,

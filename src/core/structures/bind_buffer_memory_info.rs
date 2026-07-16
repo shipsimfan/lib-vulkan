@@ -5,8 +5,9 @@ use std::{ffi::c_void, ptr::null};
 #[allow(unused_imports)]
 use crate::{
     VK_NULL_HANDLE, VK_TRUE, VK_VERSION_1_1, VkBufferCreateFlag, VkBufferCreateInfo,
-    VkBufferUsageFlag, VkDevice, VkGetBufferMemoryRequirements2, VkMemoryAllocateInfo,
-    VkMemoryHeapFlag, VkMemoryPropertyFlag, VkMemoryRequirements, VkPhysicalDeviceProperties,
+    VkBufferUsageFlag, VkDevice, VkGetBufferMemoryRequirements, VkGetBufferMemoryRequirements2,
+    VkMemoryAllocateInfo, VkMemoryHeapFlag, VkMemoryPropertyFlag, VkMemoryRequirements,
+    VkPhysicalDeviceProperties,
 };
 #[allow(unused_imports)]
 use std::ptr::null_mut;
@@ -153,7 +154,7 @@ pub struct VkBindBufferMemoryInfo {
     pub memory_offset: VkDeviceSize,
 }
 
-impl const Default for VkBindBufferMemoryInfo {
+const impl Default for VkBindBufferMemoryInfo {
     fn default() -> Self {
         VkBindBufferMemoryInfo {
             r#type: VkStructureType::BindBufferMemoryInfo,

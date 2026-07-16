@@ -39,7 +39,7 @@ pub struct VkPipelineTessellationStateCreateInfo {
     pub patch_control_points: u32,
 }
 
-impl const Default for VkPipelineTessellationStateCreateInfo {
+const impl Default for VkPipelineTessellationStateCreateInfo {
     fn default() -> Self {
         VkPipelineTessellationStateCreateInfo {
             r#type: VkStructureType::PipelineTessellationStateCreateInfo,

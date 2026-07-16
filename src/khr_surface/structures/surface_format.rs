@@ -17,7 +17,7 @@ pub struct VkSurfaceFormatKhr {
     pub color_space: VkColorSpaceKhr,
 }
 
-impl const Default for VkSurfaceFormatKhr {
+const impl Default for VkSurfaceFormatKhr {
     fn default() -> Self {
         VkSurfaceFormatKhr {
             format: VkFormat::Undefined,

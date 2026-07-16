@@ -141,7 +141,7 @@ pub struct VkPhysicalDeviceMemoryProperties {
     pub memory_heaps: [VkMemoryHeap; VK_MAX_MEMORY_HEAPS],
 }
 
-impl const Default for VkPhysicalDeviceMemoryProperties {
+const impl Default for VkPhysicalDeviceMemoryProperties {
     fn default() -> Self {
         VkPhysicalDeviceMemoryProperties {
             memory_type_count: 0,

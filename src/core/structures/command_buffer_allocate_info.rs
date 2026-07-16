@@ -44,7 +44,7 @@ pub struct VkCommandBufferAllocateInfo {
     pub command_buffer_count: u32,
 }
 
-impl const Default for VkCommandBufferAllocateInfo {
+const impl Default for VkCommandBufferAllocateInfo {
     fn default() -> Self {
         VkCommandBufferAllocateInfo {
             r#type: VkStructureType::CommandBufferAllocateInfo,

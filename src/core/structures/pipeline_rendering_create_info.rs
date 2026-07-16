@@ -62,7 +62,7 @@ pub struct VkPipelineRenderingCreateInfo {
     pub stencil_attachment_format: VkFormat,
 }
 
-impl const Default for VkPipelineRenderingCreateInfo {
+const impl Default for VkPipelineRenderingCreateInfo {
     fn default() -> Self {
         VkPipelineRenderingCreateInfo {
             r#type: VkStructureType::PipelineRenderingCreateInfo,

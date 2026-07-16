@@ -22,7 +22,7 @@ pub struct VkBaseInStructure {
     pub next: *const VkBaseInStructure,
 }
 
-impl const Default for VkBaseInStructure {
+const impl Default for VkBaseInStructure {
     fn default() -> Self {
         VkBaseInStructure {
             r#type: VkStructureType::ApplicationInfo,

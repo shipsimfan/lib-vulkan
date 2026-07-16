@@ -22,7 +22,7 @@ pub struct VkBaseOutStructure {
     pub next: *mut VkBaseOutStructure,
 }
 
-impl const Default for VkBaseOutStructure {
+const impl Default for VkBaseOutStructure {
     fn default() -> Self {
         VkBaseOutStructure {
             r#type: VkStructureType::ApplicationInfo,

@@ -24,7 +24,7 @@ pub union VkClearValue {
     pub depth_stencil: VkClearDepthStencilValue,
 }
 
-impl const Default for VkClearValue {
+const impl Default for VkClearValue {
     fn default() -> Self {
         VkClearValue {
             color: VkClearColorValue::default(),

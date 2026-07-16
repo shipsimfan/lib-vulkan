@@ -308,7 +308,7 @@ pub struct VkGraphicsPipelineCreateInfo {
     pub base_pipeline_index: i32,
 }
 
-impl const Default for VkGraphicsPipelineCreateInfo {
+const impl Default for VkGraphicsPipelineCreateInfo {
     fn default() -> Self {
         VkGraphicsPipelineCreateInfo {
             r#type: VkStructureType::GraphicsPipelineCreateInfo,

@@ -51,7 +51,7 @@ pub struct VkStencilOpState {
     pub reference: u32,
 }
 
-impl const Default for VkStencilOpState {
+const impl Default for VkStencilOpState {
     fn default() -> Self {
         VkStencilOpState {
             fail_op: VkStencilOp::Keep,

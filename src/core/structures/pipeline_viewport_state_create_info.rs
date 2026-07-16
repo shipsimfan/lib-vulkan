@@ -89,7 +89,7 @@ pub struct VkPipelineViewportStateCreateInfo {
     pub scissors: *const VkRect2D,
 }
 
-impl const Default for VkPipelineViewportStateCreateInfo {
+const impl Default for VkPipelineViewportStateCreateInfo {
     fn default() -> Self {
         VkPipelineViewportStateCreateInfo {
             r#type: VkStructureType::PipelineViewportStateCreateInfo,

@@ -28,7 +28,7 @@ pub struct VkBufferMemoryRequirementsInfo2 {
     pub buffer: VkBuffer,
 }
 
-impl const Default for VkBufferMemoryRequirementsInfo2 {
+const impl Default for VkBufferMemoryRequirementsInfo2 {
     fn default() -> Self {
         VkBufferMemoryRequirementsInfo2 {
             r#type: VkStructureType::BufferMemoryRequirementsInfo2,

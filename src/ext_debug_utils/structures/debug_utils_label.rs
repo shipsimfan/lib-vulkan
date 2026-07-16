@@ -39,7 +39,7 @@ pub struct VkDebugUtilsLabelExt {
     pub color: [f32; 4],
 }
 
-impl const Default for VkDebugUtilsLabelExt {
+const impl Default for VkDebugUtilsLabelExt {
     fn default() -> Self {
         VkDebugUtilsLabelExt {
             r#type: VkStructureType::DebugUtilsLabelExt,
@@ -58,7 +58,7 @@ impl NextChain for VkDebugUtilsLabelExt {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }

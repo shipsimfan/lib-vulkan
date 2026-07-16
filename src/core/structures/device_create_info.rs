@@ -466,7 +466,7 @@ pub struct VkDeviceCreateInfo {
     pub enabled_features: *const VkPhysicalDeviceFeatures,
 }
 
-impl const Default for VkDeviceCreateInfo {
+const impl Default for VkDeviceCreateInfo {
     fn default() -> Self {
         VkDeviceCreateInfo {
             r#type: VkStructureType::DeviceCreateInfo,

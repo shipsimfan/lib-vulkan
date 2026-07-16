@@ -12,13 +12,13 @@ impl VkFlags {
     }
 }
 
-impl const Default for VkFlags {
+const impl Default for VkFlags {
     fn default() -> Self {
         VkFlags::empty()
     }
 }
 
-impl const From<u32> for VkFlags {
+const impl From<u32> for VkFlags {
     fn from(flags: u32) -> Self {
         VkFlags::new(flags)
     }

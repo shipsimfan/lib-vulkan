@@ -113,7 +113,7 @@ pub struct VkPipelineRasterizationStateCreateInfo {
     pub line_width: c_float,
 }
 
-impl const Default for VkPipelineRasterizationStateCreateInfo {
+const impl Default for VkPipelineRasterizationStateCreateInfo {
     fn default() -> Self {
         VkPipelineRasterizationStateCreateInfo {
             r#type: VkStructureType::PipelineRasterizationStateCreateInfo,

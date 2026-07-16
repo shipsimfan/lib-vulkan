@@ -116,7 +116,7 @@ pub struct VkInstanceCreateInfo {
     pub enabled_extension_names: *const *const c_char,
 }
 
-impl const Default for VkInstanceCreateInfo {
+const impl Default for VkInstanceCreateInfo {
     fn default() -> Self {
         VkInstanceCreateInfo {
             r#type: VkStructureType::InstanceCreateInfo,

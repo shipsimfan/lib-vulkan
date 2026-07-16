@@ -74,7 +74,7 @@ pub struct VkViewport {
     pub max_depth: c_float,
 }
 
-impl const Default for VkViewport {
+const impl Default for VkViewport {
     fn default() -> Self {
         VkViewport {
             x: 0.0,

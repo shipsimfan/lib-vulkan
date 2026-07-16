@@ -60,7 +60,7 @@ pub struct VkDebugUtilsObjectNameInfoExt {
     pub object_name: *const c_char,
 }
 
-impl const Default for VkDebugUtilsObjectNameInfoExt {
+const impl Default for VkDebugUtilsObjectNameInfoExt {
     fn default() -> Self {
         VkDebugUtilsObjectNameInfoExt {
             r#type: VkStructureType::DebugUtilsObjectNameInfoExt,
@@ -80,7 +80,7 @@ impl NextChain for VkDebugUtilsObjectNameInfoExt {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }

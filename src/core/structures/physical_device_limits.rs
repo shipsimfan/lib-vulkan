@@ -120,7 +120,7 @@ pub struct VkPhysicalDeviceLimits {
     pub non_coherent_atom_size: VkDeviceSize,
 }
 
-impl const Default for VkPhysicalDeviceLimits {
+const impl Default for VkPhysicalDeviceLimits {
     fn default() -> Self {
         VkPhysicalDeviceLimits {
             max_image_dimension_1d: 0,

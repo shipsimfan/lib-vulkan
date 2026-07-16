@@ -24,7 +24,7 @@ pub struct VkMemoryRequirements {
     pub memory_type_bits: u32,
 }
 
-impl const Default for VkMemoryRequirements {
+const impl Default for VkMemoryRequirements {
     fn default() -> Self {
         VkMemoryRequirements {
             size: 0,

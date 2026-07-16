@@ -36,7 +36,7 @@ pub struct VkSpecializationInfo {
     pub data: *const c_void,
 }
 
-impl const Default for VkSpecializationInfo {
+const impl Default for VkSpecializationInfo {
     fn default() -> Self {
         VkSpecializationInfo {
             map_entry_count: 0,
