@@ -4,12 +4,12 @@ version = 4
 
 [[package]]
 name = "linux"
-version = "0.1.0"
-source = "git+https://github.com/shipsimfan/lib-linux#9f4ee2d3a80afd751c6aa07ed3a78b000f58c557"
+version = "1.1.1"
+source = "git+https://github.com/shipsimfan/lib-linux#7a460a8976840718d4ba695c411aecaec9fcfc3e"
 
 [[package]]
 name = "vulkan"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "wayland",
  "win32",
@@ -17,8 +17,8 @@ dependencies = [
 
 [[package]]
 name = "wayland"
-version = "0.1.0"
-source = "git+https://github.com/shipsimfan/lib-wayland#4db083116a15b79a9139f5b518e1b4e13893c089"
+version = "1.3.0"
+source = "git+https://github.com/shipsimfan/lib-wayland#7fd6e258410c37a0a731dc49c065d252a7c95d73"
 dependencies = [
  "linux",
 ]
@@ -26,4 +26,4 @@ dependencies = [
 [[package]]
 name = "win32"
 version = "0.1.0"
-source = "git+https://github.com/shipsimfan/lib-win32#6113a8c718e9862478f9d20f6746912b1476a91d"
+source = "git+https://github.com/shipsimfan/lib-win32#380593b381b659a55901a788edb151e070f3e029"
