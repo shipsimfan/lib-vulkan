@@ -3,7 +3,7 @@ use std::ffi::c_size_t;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::VK_VERSION_1_0;
+use crate::{VK_VERSION_1_0, VkAllocateMemory, VkPipelineLayoutCreateInfo};
 
 /// Structure reporting implementation-dependent physical device limits
 ///
@@ -20,7 +20,15 @@ pub struct VkPhysicalDeviceLimits {
     pub max_texel_buffer_elements: u32,
     pub max_uniform_buffer_range: u32,
     pub max_storage_buffer_range: u32,
+
+    /// `max_push_constants_size` is the maximum size, in bytes, of the pool of push constant
+    /// memory. For each of the push constant ranges indicated by the `push_constant_ranges` member
+    /// of the [`VkPipelineLayoutCreateInfo`] structure, `offset + size` must be less than or equal
+    /// to this limit.
     pub max_push_constants_size: u32,
+
+    /// `max_memory_allocation_count` is the maximum number of device memory allocations, as
+    /// created by [`VkAllocateMemory`], which can simultaneously exist.
     pub max_memory_allocation_count: u32,
     pub max_sampler_allocation_count: u32,
     pub buffer_image_granularity: VkDeviceSize,
