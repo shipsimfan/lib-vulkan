@@ -2,7 +2,10 @@ use crate::flags;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VK_VERSION_1_2, VK_VERSION_1_4, VkPipelineCreateFlag};
+use crate::{
+    VK_VERSION_1_0, VK_VERSION_1_2, VK_VERSION_1_4, VkDescriptorPoolCreateFlag,
+    VkPipelineCreateFlag,
+};
 
 flags! {
     /// Bitmask of [`VkDescriptorSetLayoutCreateFlag`]s
