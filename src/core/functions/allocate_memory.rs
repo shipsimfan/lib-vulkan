@@ -5,7 +5,8 @@ use std::ffi::CStr;
 #[allow(unused_imports)]
 use crate::{
     VK_VERSION_1_0, VkGetPhysicalDeviceMemoryProperties, VkMemoryHeap, VkMemoryHeapFlag,
-    VkMemoryPropertyFlag, VkPhysicalDevice, VkPhysicalDeviceMemoryProperties,
+    VkMemoryPropertyFlag, VkPhysicalDevice, VkPhysicalDeviceLimits,
+    VkPhysicalDeviceMemoryProperties,
 };
 #[allow(unused_imports)]
 use std::ptr::null;

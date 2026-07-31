@@ -3,7 +3,7 @@ use std::ffi::c_size_t;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VkAllocateMemory, VkPipelineLayoutCreateInfo};
+use crate::{VK_VERSION_1_0, VkAllocateMemory, VkDescriptorType, VkPipelineLayoutCreateInfo};
 
 /// Structure reporting implementation-dependent physical device limits
 ///
@@ -18,7 +18,18 @@ pub struct VkPhysicalDeviceLimits {
     pub max_image_dimension_cube: u32,
     pub max_image_array_layers: u32,
     pub max_texel_buffer_elements: u32,
+
+    ///  `max_uniform_buffer_range` is the maximum value that can be specified in the range member
+    /// of a [`VkDescriptorBufferInfo`] structure passed to [`VkUpdateDescriptorSets`] for
+    /// descriptors of type [`VkDescriptorType::UniformBuffer`] or
+    /// [`VkDescriptorType::UniformBufferDynamic`].
     pub max_uniform_buffer_range: u32,
+
+    ///  `max_storage_buffer_range` is the maximum value that can be specified in the range member
+    /// of a [`VkDescriptorBufferInfo`] structure passed to [`VkUpdateDescriptorSets`] for
+    /// descriptors of type [`VkDescriptorType::StorageBuffer`] or
+    /// [`VkDescriptorType::StorageBufferDynamic`]. If the `shader_64_bit_indexing` feature is
+    /// enabled, this limit does not apply.
     pub max_storage_buffer_range: u32,
 
     /// `max_push_constants_size` is the maximum size, in bytes, of the pool of push constant
