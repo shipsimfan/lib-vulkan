@@ -72,42 +72,68 @@ pub struct VkDescriptorPoolCreateInfo {
     /// `next` is [`null`] or a pointer to a structure extending this structure.
     ///
     /// # Valid Usage
-    ///  - If `pool_sizes` contains a descriptorType of [`VkDescriptorType::INLINE_UNIFORM_BLOCK, the `next` chain must include a VkDescriptorPoolInlineUniformBlockCreateInfo structure whose maxInlineUniformBlockBindings member is not zero
-    ///  - If a VkDataGraphProcessingEngineCreateInfoARM structure is included in the `next` chain, each member of pProcessingEngines must be identical to an VkQueueFamilyDataGraphPropertiesARM::engine retrieved from vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM with the physicalDevice that was used to create device
+    ///  - If `pool_sizes` contains a `descriptor_type` of
+    ///    [`VkDescriptorType::InlineUniformBlock`], the `next` chain must include a
+    ///    [`VkDescriptorPoolInlineUniformBlockCreateInfo`] structure whose
+    ///    `max_inline_uniform_block_bindings` member is not zero
+    ///  - If a [`VkDataGraphProcessingEngineCreateInfoArm`] structure is included in the `next`
+    ///    chain, each member of `processing_engines` must be identical to an
+    ///    [`VkQueueFamilyDataGraphPropertiesArm::engine`] retrieved from
+    ///    [`VkGetPhysicalDeviceQueueFamilyDataGraphPropertiesArm`] with the `physical_device` that
+    ///    was used to create `device`
     ///
     /// # Valid Usage (Implicit)
-    ///  - Each `next` member of any structure (including this one) in the `next` chain must be either [`null`] or a pointer to a valid instance of VkDataGraphProcessingEngineCreateInfoARM, VkDescriptorPoolInlineUniformBlockCreateInfo, or VkMutableDescriptorTypeCreateInfoEXT
+    ///  - Each `next` member of any structure (including this one) in the `next` chain must be
+    ///    either [`null`] or a pointer to a valid instance of
+    ///    [`VkDataGraphProcessingEngineCreateInfoArm`],
+    ///    [`VkDescriptorPoolInlineUniformBlockCreateInfo`], or
+    ///    [`VkMutableDescriptorTypeCreateInfoExt`]
     ///  - The `r#type` value of each structure in the `next` chain must be unique
     pub next: *const c_void,
 
-    /// `flags` is a bitmask of VkDescriptorPoolCreateFlagBits specifying certain supported operations on the pool.
+    /// `flags` is a bitmask of [`VkDescriptorPoolCreateFlag`]s specifying certain supported
+    /// operations on the pool.
     ///
     /// # Valid Usage
-    ///  - If `flags` has the [`VkDescriptorPoolCreateFlag::ALLOW_OVERALLOCATION_SETS_BIT_NV or [`VkDescriptorPoolCreateFlag::ALLOW_OVERALLOCATION_POOLS_BIT_NV bits set, then descriptorPoolOverallocation must be enabled
-    ///  - If `flags` has the [`VkDescriptorPoolCreateFlag::HOST_ONLY_BIT_EXT bit set, then the [`VkDescriptorPoolCreateFlag::UpdateAfterBind`] bit must not be set
-    ///  - If `flags` has the [`VkDescriptorPoolCreateFlag::HOST_ONLY_BIT_EXT bit set, VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT::mutableDescriptorType must be enabled
+    ///  - If `flags` has the [`VkDescriptorPoolCreateFlag::AllowOverallocationSetsNv`] or
+    ///    [`VkDescriptorPoolCreateFlag::AllowOverallocationPoolsNv`] bits set, then
+    ///    `descriptor_pool_overallocation` must be enabled
+    ///  - If `flags` has the [`VkDescriptorPoolCreateFlag::HostOnlyExt`] bit set, then the
+    ///    [`VkDescriptorPoolCreateFlag::UpdateAfterBind`] bit must not be set
+    ///  - If `flags` has the [`VkDescriptorPoolCreateFlag::HostOnlyExt`] bit set,
+    ///    [`VkPhysicalDeviceMutableDescriptorTypeFeaturesExt::mutable_descriptor_type`] must be
+    ///    enabled
     ///
     /// # Valid Usage (Implicit)
-    ///  - `flags` must be a valid combination of VkDescriptorPoolCreateFlagBits values
+    ///  - `flags` must be a valid combination of [`VkDescriptorPoolCreateFlag`] values
     pub flags: VkDescriptorPoolCreateFlags,
 
-    /// maxSets is the maximum number of descriptor sets that can be allocated from the pool.
+    /// `max_sets` is the maximum number of descriptor sets that can be allocated from the pool.
     ///
     /// # Valid Usage
-    ///  - If the descriptorPoolOverallocation feature is not enabled, or `flags` does not have [`VkDescriptorPoolCreateFlag::ALLOW_OVERALLOCATION_SETS_BIT_NV set, maxSets must be greater than 0
+    ///  - If the `descriptor_pool_overallocation` feature is not enabled, or `flags` does not have
+    ///    [`VkDescriptorPoolCreateFlag::AllowOverallocationSetsNv`] set, `max_sets` must be
+    ///    greater than 0
     pub max_sets: u32,
 
-    /// poolSizeCount is the number of elements in `pool_sizes`.
+    /// `pool_size_count` is the number of elements in `pool_sizes`.
     pub pool_size_count: u32,
 
-    /// `pool_sizes` is a pointer to an array of VkDescriptorPoolSize structures, each containing a descriptor type and number of descriptors of that type to be allocated in the pool.
+    /// `pool_sizes` is a pointer to an array of [`VkDescriptorPoolSize`] structures, each
+    /// containing a descriptor type and number of descriptors of that type to be allocated in the
+    /// pool.
     ///
     /// # Valid Usage
-    ///  - If VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT::mutableDescriptorType is not enabled, `pool_sizes` must not contain a descriptorType of [`VkDescriptorType::MutableExt`]
-    ///  - If `pool_sizes` contains a descriptorType of [`VkDescriptorType::MutableExt`], any other [`VkDescriptorType::MutableExt`] element in `pool_sizes` must not have sets of supported descriptor types which partially overlap
+    ///  - If [`VkPhysicalDeviceMutableDescriptorTypeFeaturesExt::mutable_descriptor_type`] is not
+    ///    enabled, `pool_sizes` must not contain a `descriptor_type` of
+    ///    [`VkDescriptorType::MutableExt`]
+    ///  - If `pool_sizes` contains a `descriptor_type` of [`VkDescriptorType::MutableExt`], any
+    ///    other [`VkDescriptorType::MutableExt`] element in `pool_sizes` must not have sets of
+    ///    supported descriptor types which partially overlap
     ///
     /// # Valid Usage (Implicit)
-    ///  - If poolSizeCount is not 0, `pool_sizes` must be a valid pointer to an array of poolSizeCount valid VkDescriptorPoolSize structures
+    ///  - If `pool_size_count` is not 0, `pool_sizes` must be a valid pointer to an array of
+    ///    `pool_size_count` valid [`VkDescriptorPoolSize`] structures
     pub pool_sizes: *const VkDescriptorPoolSize,
 }
 
