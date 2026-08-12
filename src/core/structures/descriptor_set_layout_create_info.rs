@@ -11,6 +11,7 @@ use crate::{VK_VERSION_1_0, VkDescriptorSetLayoutCreateFlag, VkDescriptorType};
 /// Structure specifying parameters of a newly created descriptor set layout
 ///
 /// Provided by [`VK_VERSION_1_0`]
+#[repr(C)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkDescriptorSetLayoutCreateInfo {
     /// `r#type` is a [`VkStructureType`] value identifying this structure.
