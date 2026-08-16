@@ -5,8 +5,8 @@ use std::{ffi::c_void, ptr::null};
 #[allow(unused_imports)]
 use crate::{
     VK_NULL_HANDLE, VK_VERSION_1_0, VkAllocateMemory, VkBuffer, VkBufferCreateInfo, VkFormat,
-    VkGetBufferMemoryRequirements, VkMemoryPropertyFlag, VkMemoryRequirements,
-    VkPhysicalDeviceLimits, VkPhysicalDeviceMemoryProperties, VkResult,
+    VkGetBufferMemoryRequirements, VkMemoryAllocateFlagsInfo, VkMemoryPropertyFlag,
+    VkMemoryRequirements, VkPhysicalDeviceLimits, VkPhysicalDeviceMemoryProperties, VkResult,
 };
 #[allow(unused_imports)]
 use std::ptr::null_mut;
