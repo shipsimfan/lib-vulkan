@@ -10,7 +10,8 @@ use std::{
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    VK_NULL_HANDLE, VK_TRUE, VK_VERSION_1_0, VkObjectType, VkPhysicalDeviceLimits, VkSampler,
+    VK_LOD_CLAMP_NONE, VK_NULL_HANDLE, VK_TRUE, VK_VERSION_1_0, VkFormat, VkImageViewType,
+    VkObjectType, VkPhysicalDeviceLimits, VkSampler, VkSamplerCreateFlag,
     ext_debug_utils::VkDebugUtilsObjectNameInfoExt,
 };
 
@@ -65,169 +66,256 @@ pub struct VkSamplerCreateInfo {
     ///    [`VkSamplerReductionModeCreateInfo`] must be [`VkSamplerReductionMode::WeightedAverage`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - Each `next` member of any structure (including this one) in the `next` chain must be either [`null`] or a pointer to a valid instance of VkDebugUtilsObjectNameInfoEXT, VkOpaqueCaptureDescriptorDataCreateInfoEXT, VkSamplerBlockMatchWindowCreateInfoQCOM, VkSamplerBorderColorComponentMappingCreateInfoEXT, VkSamplerCubicWeightsCreateInfoQCOM, VkSamplerCustomBorderColorCreateInfoEXT, VkSamplerCustomBorderColorIndexCreateInfoEXT, VkSamplerReductionModeCreateInfo, or VkSamplerYcbcrConversionInfo
+    ///  - Each `next` member of any structure (including this one) in the `next` chain must be
+    ///    either [`null`] or a pointer to a valid instance of [`VkDebugUtilsObjectNameInfoExt`],
+    ///    [`VkOpaqueCaptureDescriptorDataCreateInfoExt`],
+    ///    [`VkSamplerBlockMatchWindowCreateInfoQcom`],
+    ///    [`VkSamplerBorderColorComponentMappingCreateInfoExt`],
+    ///    [`VkSamplerCubicWeightsCreateInfoQcom`], [`VkSamplerCustomBorderColorCreateInfoExt`],
+    ///    [`VkSamplerCustomBorderColorIndexCreateInfoExt`], [`VkSamplerReductionModeCreateInfo`],
+    ///    or [`VkSamplerYcbcrConversionInfo`]
     ///  - The `r#type` value of each structure in the `next` chain must be unique
     pub next: *const c_void,
 
-    /// flags is a bitmask of VkSamplerCreateFlagBits describing additional parameters of the sampler.
+    /// `flags` is a bitmask of [`VkSamplerCreateFlag`]s describing additional parameters of the
+    /// sampler.
     ///
     /// # Valid Usage
-    ///  - If the nonSeamlessCubeMap feature is not enabled, flags must not include VK_SAMPLER_CREATE_NON_SEAMLESS_CUBE_MAP_BIT_EXT
-    ///  - If flags includes VK_SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT, the descriptorBufferCaptureReplay feature must be enabled
-    ///  - If the `next` chain includes a VkOpaqueCaptureDescriptorDataCreateInfoEXT structure, flags must contain VK_SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT
+    ///  - If the `non_seamless_cube_map` feature is not enabled, `flags` must not include
+    ///    [`VkSamplerCreateFlag::NonSeamlessCubeMapExt`]
+    ///  - If `flags` includes [`VkSamplerCreateFlag::DescriptorBufferCaptureReplayExt`], the
+    ///    `descriptor_buffer_capture_replay` feature must be enabled
+    ///  - If the `next` chain includes a [`VkOpaqueCaptureDescriptorDataCreateInfoExt`] structure,
+    ///    `flags` must contain [`VkSamplerCreateFlag::DescriptorBufferCaptureReplayExt`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - flags must be a valid combination of VkSamplerCreateFlagBits values
+    ///  - `flags` must be a valid combination of [`VkSamplerCreateFlag`] values
     pub flags: VkSamplerCreateFlags,
 
-    /// `mag_filter` is a VkFilter value specifying the magnification filter to apply to lookups.
-    ///  - If sampler Y′CBCR conversion is enabled and the potential format features of the sampler Y′CBCR conversion do not support VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT, `mag_filter` must be equal to the sampler Y′CBCR conversion’s chromaFilter
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], `min_filter` and `mag_filter` must be equal
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then `min_filter` and `mag_filter` must be equal
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then `mag_filter` must be [`VkFilter::NEAREST
+    /// `mag_filter` is a [`VkFilter`] value specifying the magnification filter to apply to
+    /// lookups.
+    ///
+    ///  - If sampler Y′CBCR conversion is enabled and the potential format features of the sampler
+    ///    Y′CBCR conversion do not support
+    ///    [`VkFormatFeature::SampledImageYcbcrConversionSeparateReconstructionFilter`],
+    ///    `mag_filter` must be equal to the sampler Y′CBCR conversion’s `chroma_filter`
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `min_filter` and `mag_filter` must be
+    ///    equal
+    ///  - If `flags` includes [`VkSamplerCreateFlag::SubsampledExt`], then `min_filter` and
+    ///    `mag_filter` must be equal
+    ///  - If `flags` includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then `mag_filter` must
+    ///    be [`VkFilter::Nearest`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - `mag_filter` must be a valid VkFilter value
+    ///  - `mag_filter` must be a valid [`VkFilter`] value
     pub mag_filter: VkFilter,
 
-    /// `min_filter` is a VkFilter value specifying the minification filter to apply to lookups.
+    /// `min_filter` is a [`VkFilter`] value specifying the minification filter to apply to
+    /// lookups.
     ///
     /// # Valid Usage
-    ///  - If sampler Y′CBCR conversion is enabled and the potential format features of the sampler Y′CBCR conversion do not support VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT, `min_filter` must be equal to the sampler Y′CBCR conversion’s chromaFilter
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], `min_filter` and `mag_filter` must be equal
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then `min_filter` and `mag_filter` must be equal
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then `min_filter` must be [`VkFilter::NEAREST
+    ///  - If sampler Y′CBCR conversion is enabled and the potential format features of the sampler
+    ///    Y′CBCR conversion do not support
+    ///    [`VkFormatFeature::SampledImageYcbcrConversionSeparateReconstructionFilter`],
+    ///    `min_filter` must be equal to the sampler Y′CBCR conversion’s `chroma_filter`
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `min_filter` and `mag_filter` must be
+    ///    equal
+    ///  - If `flags` includes [`VkSamplerCreateFlag::SubsampledExt`], then `min_filter` and
+    ///    `mag_filter` must be equal
+    ///  - If `flags` includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then `min_filter` must
+    ///    be [`VkFilter::Nearest`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - `min_filter` must be a valid VkFilter value
+    ///  - `min_filter` must be a valid [`VkFilter`] value
     pub min_filter: VkFilter,
 
-    /// mipmapMode is a VkSamplerMipmapMode value specifying the mipmap filter to apply to lookups.
+    /// `mimmap_mode` is a [`VkSamplerMipmapMode`] value specifying the mipmap filter to apply to
+    /// lookups.
     ///
     /// # Valid Usage
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], mipmapMode must be VK_SAMPLER_MIPMAP_MODE_NEAREST
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then mipmapMode must be VK_SAMPLER_MIPMAP_MODE_NEAREST
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then mipmapMode must be VK_SAMPLER_MIPMAP_MODE_NEAREST
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `mimmap_mode` must be
+    ///    [`VkSamplerMipmapMode::Nearest`]
+    ///  - If flags includes [`VkSamplerCreateFlag::SubsampledExt`], then `mimmap_mode` must be
+    ///    [`VkSamplerMipmapMode::Nearest`]
+    ///  - If flags includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then `mimmap_mode` must
+    ///    be [`VkSamplerMipmapMode::Nearest`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - mipmapMode must be a valid VkSamplerMipmapMode value
+    ///  - `mimmap_mode` must be a valid [`VkSamplerMipmapMode`] value
     pub mipmap_mode: VkSamplerMipmapMode,
 
-    /// addressModeU is a VkSamplerAddressMode value specifying the wrapping operation used when the i coordinate used to sample the image would be out of bounds.
+    /// `address_mode_u` is a [`VkSamplerAddressMode`] value specifying the wrapping operation used
+    /// when the `i` coordinate used to sample the image would be out of bounds.
     ///
     /// # Valid Usage
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], addressModeU must each be either VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE or VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER
-    ///  - If sampler Y′CBCR conversion is enabled, addressModeU must be VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE
-    ///  - If the samplerMirrorClampToEdge feature is not enabled, and if the VK_KHR_sampler_mirror_clamp_to_edge extension is not enabled, addressModeU must not be VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then addressModeU must be either VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE or VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then addressModeU must be either VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE or VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `address_mode_u` must each be either
+    ///    [`VkSamplerAddressMode::ClampToEdge`] or [`VkSamplerAddressMode::ClampToBorder`]
+    ///  - If sampler Y′CBCR conversion is enabled, `address_mode_u` must be
+    ///    [`VkSamplerAddressMode::ClampToEdge`]
+    ///  - If the `sampler_mirror_clamp_to_edge` feature is not enabled, and if the
+    ///    [`khr_sampler_mirror_clamp_to_edge`] extension is not enabled, `address_mode_u` must not
+    ///    be [`VkSamplerAddressMode::MirrorClampToEdge`]
+    ///  - If flags includes [`VkSamplerCreateFlag::SubsampledExt`], then `address_mode_u` must be
+    ///    either [`VkSamplerAddressMode::ClampToEdge`] or [`VkSamplerAddressMode::ClampToBorder`]
+    ///  - If flags includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then `address_mode_u`
+    ///    must be either [`VkSamplerAddressMode::ClampToEdge`] or
+    ///    [`VkSamplerAddressMode::ClampToBorder`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - addressModeU must be a valid VkSamplerAddressMode value
+    ///  - `address_mode_u` must be a valid [`VkSamplerAddressMode`] value
     pub address_mode_u: VkSamplerAddressMode,
 
-    /// addressModeV is a VkSamplerAddressMode value specifying the wrapping operation used when the j coordinate used to sample the image would be out of bounds.
+    /// `address_mode_v` is a [`VkSamplerAddressMode`] value specifying the wrapping operation used
+    /// when the `j` coordinate used to sample the image would be out of bounds.
     ///
     /// # Valid Usage
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], addressModeV must each be either VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE or VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER
-    ///  - If sampler Y′CBCR conversion is enabled, addressModeV must be VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE
-    ///  - If the samplerMirrorClampToEdge feature is not enabled, and if the VK_KHR_sampler_mirror_clamp_to_edge extension is not enabled, addressModeV must not be VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then addressModeV must be either VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE or VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then addressModeV must be either VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE or VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `address_mode_v` must each be either
+    ///    [`VkSamplerAddressMode::ClampToEdge`] or [`VkSamplerAddressMode::ClampToBorder`]
+    ///  - If sampler Y′CBCR conversion is enabled, `address_mode_v` must be
+    ///    [`VkSamplerAddressMode::ClampToEdge`]
+    ///  - If the `sampler_mirror_clamp_to_edge` feature is not enabled, and if the
+    ///    [`khr_sampler_mirror_clamp_to_edge`] extension is not enabled, `address_mode_v` must not
+    ///    be [`VkSamplerAddressMode::MirrorClampToEdge`]
+    ///  - If flags includes [`VkSamplerCreateFlag::SubsampledExt`], then `address_mode_v` must be
+    ///    either [`VkSamplerAddressMode::ClampToEdge`] or [`VkSamplerAddressMode::ClampToBorder`]
+    ///  - If flags includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then `address_mode_v`
+    ///    must be either [`VkSamplerAddressMode::ClampToEdge`] or
+    ///    [`VkSamplerAddressMode::ClampToBorder`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - addressModeV must be a valid VkSamplerAddressMode value
+    ///  - `address_mode_v` must be a valid [`VkSamplerAddressMode`] value
     pub address_mode_v: VkSamplerAddressMode,
 
-    /// addressModeW is a VkSamplerAddressMode value spcifying the wrapping operation used when the k coordinate used to sample the image would be out of bounds. If unnormalizedCoordinates is [`VK_TRUE`], addressModeW is ignored.
+    /// `address_mode_w` is a [`VkSamplerAddressMode`] value spcifying the wrapping operation used
+    /// when the `k` coordinate used to sample the image would be out of bounds. If
+    /// `unnormalized_coordinates` is [`VK_TRUE`], `address_mode_w` is ignored.
     ///
     /// # Valid Usage
-    ///  - If sampler Y′CBCR conversion is enabled, addressModeW must be VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE
-    ///  - If the samplerMirrorClampToEdge feature is not enabled, and if the VK_KHR_sampler_mirror_clamp_to_edge extension is not enabled, addressModeW must not be VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
+    ///  - If sampler Y′CBCR conversion is enabled, `address_mode_w` must be
+    ///    [`VkSamplerAddressMode::ClampToEdge`]
+    ///  - If the `sampler_mirror_clamp_to_edge` feature is not enabled, and if the
+    ///    [`khr_sampler_mirror_clamp_to_edge`] extension is not enabled, `address_mode_w` must not
+    ///    be [`VkSamplerAddressMode::MirrorClampToEdge`]
     ///
     /// # Valid Usage (Implicit)
-    ///  - addressModeW must be a valid VkSamplerAddressMode value
+    ///  - `address_mode_w` must be a valid [`VkSamplerAddressMode`] value
     pub address_mode_w: VkSamplerAddressMode,
 
-    /// mipLodBias is the bias to be added to mipmap LOD calculation and bias provided by image sampling functions in SPIR-V, as described in the LOD Operation section.
+    /// `mip_lod_bias` is the bias to be added to mipmap LOD calculation and bias provided by image
+    /// sampling functions in SPIR-V, as described in the LOD Operation section.
     ///
     /// # Valid Usage
-    ///  - The absolute value of mipLodBias must be less than or equal to VkPhysicalDeviceLimits::maxSamplerLodBias
-    ///  - If the VK_KHR_portability_subset extension is enabled, and VkPhysicalDevicePortabilitySubsetFeaturesKHR::samplerMipLodBias is VK_FALSE, mipLodBias must be zero
+    ///  - The absolute value of `mip_lod_bias` must be less than or equal to
+    ///    [`VkPhysicalDeviceLimits::max_sampler_lod_bias`]
+    ///  - If the [`khr_portability_subset`] extension is enabled, and
+    ///    [`VkPhysicalDevicePortabilitySubsetFeaturesKhr::sampler_mip_lod_bias`] is [`VK_FALSE`],
+    ///    `mip_lod_bias` must be zero
     pub mip_lod_bias: c_float,
 
-    /// anisotropyEnable is [`VK_TRUE`] to enable anisotropic filtering, as described in the Texel Anisotropic Filtering section, or VK_FALSE otherwise.
+    /// `anisotropy_enable` is [`VK_TRUE`] to enable anisotropic filtering, or [`VK_FALSE`]
+    /// otherwise.
     ///
     /// # Valid Usage
-    ///  - If the samplerAnisotropy feature is not enabled, anisotropyEnable must be VK_FALSE
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], anisotropyEnable must be VK_FALSE
-    ///  - If sampler Y′CBCR conversion is enabled anisotropyEnable must be VK_FALSE
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then anisotropyEnable must be VK_FALSE
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then anisotropyEnable must be VK_FALSE
+    ///  - If the `sampler_anisotropy` feature is not enabled, `anisotropy_enable` must be
+    ///    [`VK_FALSE`]
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `anisotropy_enable` must be [`VK_FALSE`]
+    ///  - If sampler Y′CBCR conversion is enabled `anisotropy_enable` must be [`VK_FALSE`]
+    ///  - If `flags` includes [`VkSamplerCreateFlag::SubsampledExt`], then `anisotropy_enable`
+    ///    must be [`VK_FALSE`]
+    ///  - If `flags` includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then
+    ///    `anisotropy_enable` must be [`VK_FALSE`]
     pub anisotropy_enable: VkBool32,
 
-    /// maxAnisotropy is the anisotropy value clamp used by the sampler when anisotropyEnable is [`VK_TRUE`]. If anisotropyEnable is VK_FALSE, maxAnisotropy is ignored.
+    /// `max_anisotropy` is the anisotropy value clamp used by the sampler when `anisotropy_enable`
+    /// is [`VK_TRUE`]. If `anisotropy_enable` is [`VK_FALSE`], `max_anisotropy` is ignored.
     ///
     /// # Valid Usage
-    ///  - If anisotropyEnable is [`VK_TRUE`], maxAnisotropy must be between 1.0 and VkPhysicalDeviceLimits::maxSamplerAnisotropy, inclusive
-    ///  - If either `mag_filter` or `min_filter` is [`VkFilter::CUBIC_EXT, anisotropyEnable must be VK_FALSE
+    ///  - If `anisotropy_enable` is [`VK_TRUE`], `max_anisotropy` must be between 1.0 and
+    ///    [`VkPhysicalDeviceLimits::max_sampler_anisotropy`], inclusive
+    ///  - If either `mag_filter` or `min_filter` is [`VkFilter::CubicExt`], `anisotropy_enable`
+    ///    must be [`VK_FALSE`]
     pub max_anisotropy: c_float,
 
-    /// `compare_enable` is [`VK_TRUE`] to enable comparison against a reference value during lookups, or VK_FALSE otherwise.
+    /// `compare_enable` is [`VK_TRUE`] to enable comparison against a reference value during
+    /// lookups, or [`s`] otherwise.
     ///
     /// > Note: Some implementations will default to shader state if this member does not match.
     ///
     /// # Valid Usage
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], `compare_enable` must be VK_FALSE
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then `compare_enable` must be VK_FALSE
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then `compare_enable` must be VK_FALSE
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `compare_enable` must be [`VK_FALSE`]
+    ///  - If `flags` includes [`VkSamplerCreateFlag::SubsampledExt`], then `compare_enable` must
+    ///    be [`VK_FALSE`]
+    ///  - If `flags` includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then `compare_enable`
+    ///    must be [`VK_FALSE`]
     pub compare_enable: VkBool32,
 
-    /// compareOp is a VkCompareOp value specifying the comparison operator to apply to fetched data before filtering as described in the Depth Compare Operation section.
+    /// `compare_op` is a [`VkCompareOp`] value specifying the comparison operator to apply to
+    /// fetched data before filtering.
     ///
     /// # Valid Usage
-    ///  - If `compare_enable` is [`VK_TRUE`], compareOp must be a valid VkCompareOp value
+    ///  - If `compare_enable` is [`VK_TRUE`], `compare_op` must be a valid [`VkCompareOp`] value
     pub compare_op: VkCompareOp,
 
-    /// minLod is used to clamp the minimum of the computed LOD value.
+    /// `min_lod` is used to clamp the minimum of the computed LOD value.
     ///
     /// # Valid Usage
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], minLod must be zero
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then minLod must be zero
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then minLod must be zero
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `min_lod` must be zero
+    ///  - If `flags` includes [`VkSamplerCreateFlag::SubsampledExt`], then `min_lod` must be zero
+    ///  - If `flags` includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then `min_lod` must be
+    ///    zero
     pub min_lod: c_float,
 
-    /// maxLod is used to clamp the maximum of the computed LOD value. To avoid clamping the maximum value, set maxLod to the constant VK_LOD_CLAMP_NONE.
+    /// `max_lod` is used to clamp the maximum of the computed LOD value. To avoid clamping the
+    /// maximum value, set `max_lod` to the constant [`VK_LOD_CLAMP_NONE`].
     ///
     /// # Valid Usage
-    ///  - maxLod must be greater than or equal to minLod
-    ///  - If unnormalizedCoordinates is [`VK_TRUE`], maxLod must be zero
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then maxLod must be zero
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, then maxLod must be zero
+    ///  - `max_lod` must be greater than or equal to `min_lod`
+    ///  - If `unnormalized_coordinates` is [`VK_TRUE`], `max_lod` must be zero
+    ///  - If `flags` includes [`VkSamplerCreateFlag::SubsampledExt`], then `max_lod` must be zero
+    ///  - If `flags` includes [`VkSamplerCreateFlag::ImageProcessingQcom`], then `max_lod` must be
+    ///    zero
     pub max_lod: c_float,
 
-    /// borderColor is a VkBorderColor value specifying the predefined border color to use.
+    /// `border_color` is a [`VkBorderColor`] value specifying the predefined border color to use.
     ///
     /// # Valid Usage
-    ///  - If any of addressModeU, addressModeV or addressModeW are VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER, borderColor must be a valid VkBorderColor value
-    ///  - If borderColor is one of VK_BORDER_COLOR_FLOAT_CUSTOM_EXT or VK_BORDER_COLOR_INT_CUSTOM_EXT, then a VkSamplerCustomBorderColorCreateInfoEXT must be included in the `next` chain
-    ///  - If the customBorderColors feature is not enabled, borderColor must not be VK_BORDER_COLOR_FLOAT_CUSTOM_EXT or VK_BORDER_COLOR_INT_CUSTOM_EXT
-    ///  - If borderColor is one of VK_BORDER_COLOR_FLOAT_CUSTOM_EXT or VK_BORDER_COLOR_INT_CUSTOM_EXT, and VkSamplerCustomBorderColorCreateInfoEXT::format is not VK_FORMAT_UNDEFINED, VkSamplerCustomBorderColorCreateInfoEXT::customBorderColor must be within the range of values representable in format
-    ///  - If flags includes VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM, and if addressModeU or addressModeV is VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER, then borderColor must be VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK
+    ///  - If any of `address_mode_u`, `address_mode_v` or `address_mode_w` are
+    ///    [`VkSamplerAddressMode::ClampToBorder`], `border_color` must be a valid
+    ///    [`VkBorderColor`] value
+    ///  - If `border_color` is one of [`VkBorderColor::FloatCustomExt`] or
+    ///    [`VkBorderColor::IntCustomExt`], then a [`VkSamplerCustomBorderColorCreateInfoExt`] must
+    ///    be included in the `next` chain
+    ///  - If the `custom_border_colors` feature is not enabled, `border_color` must not be
+    ///    [`VkBorderColor::FloatCustomExt`] or [`VkBorderColor::IntCustomExt`]
+    ///  - If `border_color` is one of [`VkBorderColor::FloatCustomExt`] or
+    ///    [`VkBorderColor::IntCustomExt`], and [`VkSamplerCustomBorderColorCreateInfoExt::format`]
+    ///    is not [`VkFormat::Undefined`],
+    ///    [`VkSamplerCustomBorderColorCreateInfoExt::custom_border_color`] must be within the
+    ///    range of values representable in `format`
+    ///  - If `flags` includes [`VkSamplerCreateFlag::ImageProcessingQcom`], and if
+    ///    `address_mode_u` or `address_mode_v` is [`VkSamplerAddressMode::ClampToBorder`], then
+    ///    `border_color` must be [`VkBorderColor::FloatTransparentBlack`]
     pub border_color: VkBorderColor,
 
-    /// unnormalizedCoordinates controls whether to use unnormalized or normalized texel coordinates to address texels of the image. When unnormalizedCoordinates is [`VK_TRUE`], the range of the image coordinates used to lookup the texel is in the range of zero to the image size in each dimension. When unnormalizedCoordinates is VK_FALSE, the range of image coordinates is zero to one.
+    /// `unnormalized_coordinates` controls whether to use unnormalized or normalized texel
+    /// coordinates to address texels of the image. When `unnormalized_coordinates` is [`VK_TRUE`],
+    /// the range of the image coordinates used to lookup the texel is in the range of zero to the
+    /// image size in each dimension. When `unnormalized_coordinates` is [`VK_FALSE`], the range of
+    /// image coordinates is zero to one.
     ///
-    /// When unnormalizedCoordinates is [`VK_TRUE`], images the sampler is used with in the shader have the following requirements:
-    ///  - The viewType must be either VK_IMAGE_VIEW_TYPE_1D or VK_IMAGE_VIEW_TYPE_2D.
+    /// When `unnormalized_coordinates` is [`VK_TRUE`], images the sampler is used with in the
+    /// shader have the following requirements:
+    ///  - The `view_type` must be either [`VkImageViewType::_1d`] or [`VkImageViewType::_2d`].
     ///  - The image view must have a single layer and a single mip level.
-    ///  - When unnormalizedCoordinates is [`VK_TRUE`], image built-in functions in the shader that use the sampler have the following requirements:
-    ///  - The functions must not use projection.
-    ///  - The functions must not use offsets.
+    ///  - When `unnormalized_coordinates` is [`VK_TRUE`], image built-in functions in the shader
+    ///    that use the sampler have the following requirements:
+    ///    - The functions must not use projection.
+    ///    - The functions must not use offsets.
     ///
     /// # Valid Usage
-    ///  - If sampler Y′CBCR conversion is enabled, unnormalizedCoordinates must be VK_FALSE
-    ///  - If flags includes VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT, then unnormalizedCoordinates must be VK_FALSE
+    ///  - If sampler Y′CBCR conversion is enabled, `unnormalized_coordinates` must be [`VK_FALSE`]
+    ///  - If `flags` includes [`VkSamplerCreateFlag::SubsampledExt`], then
+    ///    `unnormalized_coordinates` must be [`VK_FALSE`]
     pub unnormalized_coordinates: VkBool32,
 }
 

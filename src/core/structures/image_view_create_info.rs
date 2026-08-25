@@ -7,8 +7,9 @@ use std::{os::raw::c_void, ptr::null};
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    VK_FALSE, VK_NULL_HANDLE, VK_TRUE, VK_VERSION_1_0, VkComponentSwizzle, VkDeviceMemory,
-    VkImageAspectFlag, VkImageUsageFlag, VkImageView, VkImageViewCreateFlag, VkSampleCountFlag,
+    VK_FALSE, VK_NULL_HANDLE, VK_REMAINING_ARRAY_LAYERS, VK_TRUE, VK_VERSION_1_0,
+    VkComponentSwizzle, VkDeviceMemory, VkImageAspectFlag, VkImageUsageFlag, VkImageView,
+    VkImageViewCreateFlag, VkSampleCountFlag,
 };
 
 /// Structure specifying parameters of a newly created image view
@@ -486,7 +487,7 @@ impl NextChain for VkImageViewCreateInfo {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }

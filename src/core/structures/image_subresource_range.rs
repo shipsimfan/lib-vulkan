@@ -2,7 +2,7 @@ use crate::VkImageAspectFlags;
 
 // rustdoc imports
 #[allow(unused_imports)]
-use crate::{VK_VERSION_1_0, VkImageAspectFlag, VkImageView};
+use crate::{VK_REMAINING_ARRAY_LAYERS, VK_VERSION_1_0, VkImageAspectFlag, VkImageView};
 
 /// Structure specifying an image subresource range
 ///

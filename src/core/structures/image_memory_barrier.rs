@@ -7,8 +7,8 @@ use std::{ffi::c_void, ptr::null};
 // rustdoc imports
 #[allow(unused_imports)]
 use crate::{
-    VK_VERSION_1_0, VkAccessFlag, VkApplicationInfo, VkDependencyFlag, VkImageAspectFlag,
-    VkImageUsageFlag, VkInstance, VkSharingMode,
+    VK_REMAINING_ARRAY_LAYERS, VK_VERSION_1_0, VkAccessFlag, VkApplicationInfo, VkDependencyFlag,
+    VkImageAspectFlag, VkImageUsageFlag, VkInstance, VkSharingMode,
 };
 
 /// Structure specifying the parameters of an image memory barrier
@@ -361,7 +361,7 @@ impl NextChain for VkImageMemoryBarrier {
     fn next(&self) -> *const c_void {
         self.next
     }
-    
+
     fn as_ptr(&self) -> *const c_void {
         (self as *const Self).cast()
     }
