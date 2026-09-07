@@ -33,6 +33,16 @@ macro_rules! vk_define_handle {
             pub const fn is_null(&self) -> bool {
                 self.0.is_null()
             }
+
+            /// Get the underlying pointer
+            pub const fn get(&self) -> *mut ::std::ffi::c_void {
+                self.0
+            }
+
+            /// Get the underlying handle as a [`u64`]
+            pub fn as_u64(&self) -> u64 {
+                self.0 as _
+            }
         }
 
         unsafe impl Send for $object {}
@@ -53,5 +63,17 @@ macro_rules! vk_define_handle {
         }
 
         impl Eq for $object {}
+
+        const impl Into<*mut ::std::ffi::c_void> for $object {
+            fn into(self) -> *mut ::std::ffi::c_void {
+                self.0
+            }
+        }
+
+        impl Into<u64> for $object {
+            fn into(self) -> u64 {
+                self.0 as _
+            }
+        }
     };
 }

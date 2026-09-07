@@ -52,6 +52,18 @@ macro_rules! vk_define_non_dispatchable_handle {
             pub const fn is_null(&self) -> bool {
                 self.0 == 0
             }
+
+            /// Get the underlying handle as a [`u64`]
+            #[cfg(target_pointer_width = "64")]
+            pub fn as_u64(&self) -> u64 {
+                self.0 as _
+            }
+
+            /// Get the underlying handle as a [`u64`]
+            #[cfg(not(target_pointer_width = "64"))]
+            pub fn as_u64(&self) -> u64 {
+                self.0
+            }
         }
 
         unsafe impl Send for $object {}
@@ -72,5 +84,19 @@ macro_rules! vk_define_non_dispatchable_handle {
         }
 
         impl Eq for $object {}
+
+        #[cfg(target_pointer_width = "64")]
+        impl Into<u64> for $object {
+            fn into(self) -> u64 {
+                self.0 as _
+            }
+        }
+
+        #[cfg(not(target_pointer_width = "64"))]
+        impl Into<u64> for $object {
+            fn into(self) -> u64 {
+                self.0
+            }
+        }
     };
 }
