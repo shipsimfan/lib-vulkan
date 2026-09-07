@@ -1,4 +1,4 @@
-use crate::{VkCommandBuffer, ext_debug_utils::VkDebugUtilsLabelExt};
+use crate::VkCommandBuffer;
 use std::ffi::CStr;
 
 // rustdoc imports
@@ -49,10 +49,7 @@ use crate::{
 ///    externally synchronized
 ///
 /// Provided by [`ext_debug_utils`]
-pub type VkCmdEndDebugUtilsLabelExt = unsafe extern "system" fn(
-    command_buffer: VkCommandBuffer,
-    label_info: *const VkDebugUtilsLabelExt,
-);
+pub type VkCmdEndDebugUtilsLabelExt = unsafe extern "system" fn(command_buffer: VkCommandBuffer);
 
 /// The name of [`VkCmdEndDebugUtilsLabelExt`]
 pub const VK_CMD_END_DEBUG_UTILS_LABEL_EXT: &CStr = c"vkCmdEndDebugUtilsLabelEXT";
