@@ -8,7 +8,6 @@ use crate::VK_VERSION_1_0;
 #[repr(C)]
 #[non_exhaustive]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-#[allow(missing_docs)]
 pub enum VkImageType {
     /// [`VkImageType::_1d`] specifies a one-dimensional image.
     _1d = 0,

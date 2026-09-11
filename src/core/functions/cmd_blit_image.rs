@@ -155,11 +155,11 @@ use crate::{
 ///    `src_subresource.layer_count` and `dst_subresource.layer_count` must each be 1
 ///  - If the `maintenance8` feature is enabled, `dst_image` is [`VkImageType::_3d`], and
 ///    `src_image` is not of type [`VkImageType::_3d`], then for each element of `regions`, the
-///    absolute difference of the z member of each member of `dst_offsets must equal
+///    absolute difference of the z member of each member of `dst_offsets` must equal
 ///    `src_subresource.layer_count`
 ///  - If the `maintenance8` feature is enabled, `src_image` is [`VkImageType::_3d`], and
 ///    `dst_image` is not of type [`VkImageType::_3d`], then for each element of `regions`, the
-///    absolute difference of the z member of each member of `src_offsets must equal
+///    absolute difference of the z member of each member of `src_offsets` must equal
 ///    `dst_subresource.layer_count`
 ///  - If the `maintenance8` feature is not enabled and either `src_image` or `dst_image` is of
 ///    type [`VkImageType::_3d`], then for each element of `regions`,

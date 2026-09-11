@@ -342,20 +342,20 @@ pub struct VkImageViewCreateInfo {
     ///  - If `image` has an QNX Screen external format, `format` must be [`VkFormat::Undefined`]
     ///  - If the `shading_rate_image` feature is enabled, and `image` was created with the
     ///    [`VkImageUsageFlag::ShadingRateImageNv`] usage flag set, `format` must be
-    ///    [`VkFormat::R8UInt`]
+    ///    [`VkFormat::R8Uint`]
     ///  - If the `invocation_mask` feature is enabled, and `image` was created with the
     ///    [`VkImageUsageFlag::InvocationMaskHuawei`] usage flag set, `format` must be
-    ///    [`VkFormat::R8UInt`]
+    ///    [`VkFormat::R8Uint`]
     ///  - If the [`khr_portability_subset`] extension is enabled, and
     ///    [`VkPhysicalDevicePortabilitySubsetFeaturesKHR::image_view_format_reinterpretation`] is
     ///    [`VK_FALSE`], the [`VkFormat`] in `format` must not contain a different number of
     ///    components, or a different number of bits in each component, than the format of the
     ///    [`VkImage`] in `image`
     ///  - If Vulkan 1.3 is not supported and the `ycbcr2_plane444_formats` feature is not enabled,
-    ///    `format` must not be [`VkFormat::G8B8R8_2Plane444UNorm`],
-    ///    [`VkFormat::G10X6B10X6R10X6_2Plane444UNorm3Pack16`],
-    ///    [`VkFormat::G12X4B12X4R12X4_2Plane444UNorm3Pack16`], or
-    ///    [`VkFormat::G16B16R16_2Plane444UNorm`]
+    ///    `format` must not be [`VkFormat::G8B8R8_2Plane444Unorm`],
+    ///    [`VkFormat::G10X6B10X6R10X6_2Plane444Unorm3Pack16`],
+    ///    [`VkFormat::G12X4B12X4R12X4_2Plane444Unorm3Pack16`], or
+    ///    [`VkFormat::G16B16R16_2Plane444Unorm`]
     ///
     /// # Valid Usage (Implicit)
     ///  - `format` must be a valid [`VkFormat`] value

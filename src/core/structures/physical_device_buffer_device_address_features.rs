@@ -21,7 +21,6 @@ use crate::{
 ///
 /// Provided by [`VK_VERSION_1_2`]
 #[repr(C)]
-#[allow(missing_docs)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VkPhysicalDeviceBufferDeviceAddressFeatures {
     /// `r#type` is a [`VkStructureType`] value identifying this structure.

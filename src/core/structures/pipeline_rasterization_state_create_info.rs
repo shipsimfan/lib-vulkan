@@ -41,7 +41,7 @@ pub struct VkPipelineRasterizationStateCreateInfo {
     ///    [`VkPipelineRasterizationProvokingVertexStateCreateInfoExt`],
     ///    [`VkPipelineRasterizationStateRasterizationOrderAmd`], or
     ///    [`VkPipelineRasterizationStateStreamCreateInfoExt`]
-    ///  - The ``r#type` value of each structure in the `next` chain must be unique
+    ///  - The `r#type` value of each structure in the `next` chain must be unique
     pub next: *const c_void,
 
     /// `flags` is reserved for future use.
