@@ -382,7 +382,7 @@ use std::ptr::null;
 ///    pass that has tile shading enabled
 ///  - If any element of `command_buffers` was recorded with
 ///    [`VkTileShadingFlag::RenderPassPerTileExecutionQcom`] included in
-///    [`VkRenderPassTileShadingCreateInfoQcom::flags, per-tile execution model must be enabled
+///    [`VkRenderPassTileShadingCreateInfoQcom::flags`], per-tile execution model must be enabled
 ///  - If this command is not being recorded into a render pass instance, the
 ///    [`VkRenderPassTileShadingCreateInfoQcom::tile_apron_size`] that was recorded into all
 ///    elements of `command_buffers` must equal (0,0)
